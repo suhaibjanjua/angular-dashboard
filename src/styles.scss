@@ -1,0 +1,127 @@
+@use '@angular/material' as mat;
+
+// Custom theme configuration
+$theme: mat.define-theme((
+  color: (
+    theme-type: light,
+    primary: mat.$violet-palette,
+    tertiary: mat.$violet-palette,
+  ),
+  typography: (
+    brand-family: 'Open Sans',
+    bold-weight: 600
+  )
+));
+
+// Apply the theme
+:root {
+  @include mat.all-component-themes($theme);
+}
+
+// SCSS Variables - Clean Design System
+$primary-color: #6c4bb6; // Purple Primary
+$primary-color-dark: #5c3f9d; // Darker Purple
+$secondary-color: #ffffff; // Pure white background
+$accent-color: #f8f9fa; // Light gray background
+$background-color: #f8f9fa; // Light background
+$sidebar-color: #6c4bb6; // Purple sidebar
+$text-color: #212121; // Dark text
+$text-light: #fff; // White text for dark backgrounds
+$border-color: #e0e0e0;
+$font-family: 'Open Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+$font-weight-light: 300;
+$font-weight-regular: 400;
+$font-weight-medium: 500;
+$font-weight-semibold: 600;
+$font-weight-bold: 700;
+$spacing-xs: 0.25rem;
+$spacing-sm: 0.5rem;
+$spacing-md: 1rem;
+$spacing-lg: 2rem;
+
+// Global body styles
+html {
+  box-sizing: border-box;
+  overflow-x: hidden;
+}
+
+*, 
+*::before, 
+*::after {
+  box-sizing: inherit;
+}
+
+body {
+  font-family: $font-family !important;
+  background: $background-color;
+  color: $text-color;
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  width: 100%;
+  max-width: 100%;
+  font-size: 14px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+// Enhanced typography for all elements
+* {
+  font-family: $font-family !important;
+}
+
+// Ensure Material Icons display properly
+.material-icons {
+  font-family: 'Material Icons' !important;
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  display: inline-block;
+  white-space: nowrap;
+  word-wrap: normal;
+  direction: ltr;
+  -webkit-font-feature-settings: 'liga';
+  font-feature-settings: 'liga';
+  -webkit-font-smoothing: antialiased;
+}
+
+// Sidebar Styling (Enhanced for Black and Yellow theme)
+.mat-drawer {
+  background-color: $sidebar-color !important;
+  
+  .mat-list-item {
+    color: $text-light !important;
+    
+    &:hover {
+      background-color: rgba(108, 75, 182, 0.1) !important;
+      color: $primary-color !important;
+    }
+    
+    &.active {
+      background-color: $primary-color !important;
+      color: $text-light !important;
+    }
+  }
+  
+  .mat-icon {
+    color: $text-light !important;
+  }
+}
+
+// Material toolbar customization
+.mat-toolbar {
+  background-color: $background-color !important;
+  color: $text-color !important;
+  border-bottom: 1px solid $border-color !important;
+}
+
+// Material button styling
+.mat-raised-button.mat-primary {
+  background-color: $primary-color !important;
+  color: $secondary-color !important;
+}
