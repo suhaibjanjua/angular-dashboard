@@ -1,0 +1,21 @@
+.notification-bell {
+  font-size: 26px;
+  color: #6c4bb6;
+  position: relative;
+}
+.notification-badge {
+  position: absolute;
+  top: -6px;
+  right: -10px;
+  background: #6c4bb6;
+  color: #fff;
+  border-radius: 50%;
+  font-size: 12px;
+  width: 18px;
+  height: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  z-index: 1;
+}
