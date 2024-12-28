@@ -1,0 +1,7 @@
+@use '../../styles/variables.scss' as vars;
+.search-bar {
+  display: flex;
+  gap: vars.$spacing-sm;
+  align-items: center;
+  width: 100%;
+}

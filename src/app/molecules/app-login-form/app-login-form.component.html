@@ -1,0 +1,27 @@
+<form class="login-form">
+  <div class="login-form-title">
+    SIGN IN TO YOU ACCOUNT
+  </div>
+  <div class="login-form-subtitle">
+    Login Details
+  </div>
+  <app-input
+    type="text"
+    placeholder="Please enter registered email"
+    icon="person"
+    [(value)]="username"
+  ></app-input>
+  <app-input
+    type="password"
+    placeholder="Please enter your password"
+    icon="lock"
+    [(value)]="password"
+  ></app-input>
+  <div class="login-form-links">
+    <app-link href="#" label="Forgot password?" color="#6c4bb6"></app-link>
+  </div>
+  <app-button label="LOGIN" color="#6c4bb6" (buttonClick)="onLogin()"></app-button>
+  <div class="login-form-signup">
+    Don’t have account? <app-link href="#" label="Singup" color="#6c4bb6"></app-link>
+  </div>
+</form>

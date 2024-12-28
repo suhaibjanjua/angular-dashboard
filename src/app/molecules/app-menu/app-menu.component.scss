@@ -1,0 +1,6 @@
+@use '../../styles/variables.scss' as vars;
+.app-menu {
+  display: flex;
+  gap: vars.$spacing-md;
+  align-items: center;
+}
