@@ -1,0 +1,12 @@
+.login-layout {
+  display: flex;
+  height: 100vh;
+}
+.login-left {
+  flex: 1 1 50%;
+  min-width: 0;
+}
+.login-right {
+  flex: 1 1 50%;
+  min-width: 0;
+}
