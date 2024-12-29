@@ -1,0 +1,9 @@
+<div class="app-card">
+  <div class="card-image" *ngIf="image">
+    <img [src]="image" alt="{{ title }}" />
+  </div>
+  <div class="card-content">
+    <h3>{{ title }}</h3>
+    <p>{{ description }}</p>
+  </div>
+</div>

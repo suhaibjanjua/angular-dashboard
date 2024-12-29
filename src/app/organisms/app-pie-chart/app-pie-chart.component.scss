@@ -1,0 +1,33 @@
+.pie-chart-section {
+  background: white;
+  border-radius: 8px;
+  padding: 24px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.pie-chart-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: #6c4bb6;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.pie-chart-graph {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 250px;
+  width: 100%;
+  max-width: 350px;
+}
+
+.pie-chart-graph canvas {
+  max-height: 250px !important;
+  max-width: 350px !important;
+}

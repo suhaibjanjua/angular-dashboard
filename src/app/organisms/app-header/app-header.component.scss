@@ -1,0 +1,47 @@
+@use '../../styles/variables.scss' as vars;
+.collapse-btn {
+  background: none;
+  border: none;
+  padding: 0 8px 0 0;
+  margin-right: 8px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+.app-header {
+  position: sticky;
+  top: 0;
+  width: 100%;
+  max-width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #fff;
+  color: #212121;
+  padding: 0 0 0 16px;
+  height: 64px;
+  z-index: 100;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  box-sizing: border-box;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+
+.vertical-divider {
+  width: 2px;
+  height: 32px;
+  background: #FFC107; // Yellow divider
+  margin: 0 24px;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding-right: 16px;
+  flex-shrink: 0;
+}

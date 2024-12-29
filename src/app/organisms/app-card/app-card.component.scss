@@ -1,0 +1,23 @@
+@use '../../styles/variables.scss' as vars;
+.app-card {
+  background: vars.$secondary-color;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  padding: vars.$spacing-md;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 200px;
+  transition: box-shadow 0.2s;
+  &:hover {
+    box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+  }
+  .card-image img {
+    max-width: 100%;
+    border-radius: 6px;
+  margin-bottom: vars.$spacing-sm;
+  }
+  .card-content {
+    text-align: center;
+  }
+}

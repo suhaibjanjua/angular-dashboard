@@ -1,0 +1,19 @@
+<nav class="sidebar" [class.collapsed]="collapsed">
+  <!-- Sidebar header removed: logo and collapse button now in top header -->
+  <ul class="sidebar-menu">
+    <li *ngFor="let item of menu" [routerLink]="item.route" routerLinkActive="active">
+      <mat-icon class="menu-icon">{{ item.icon }}</mat-icon>
+      <span *ngIf="!collapsed" class="menu-label">{{ item.label }}</span>
+    </li>
+  </ul>
+  
+  <!-- Branding at bottom of sidebar -->
+  <div class="sidebar-footer" *ngIf="!collapsed">
+    <div class="sidebar-brand">
+      <img src="assets/angular-dashboard-logo.png" alt="Brand Logo" class="brand-logo" />
+    </div>
+    <div class="sidebar-divider"></div>
+    <div class="sidebar-version">Version 2.0.0</div>
+    <div class="sidebar-copyright">&copy; 2025 - Suhaib Janjua</div>
+  </div>
+</nav>

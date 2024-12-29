@@ -1,0 +1,50 @@
+@use '../../styles/variables.scss' as vars;
+
+.app-footer {
+  height: 48px !important;
+  min-height: 48px;
+  background: #6c4bb6 !important;
+  color: white !important;
+  font-size: 0.875rem;
+  
+  .footer-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  
+  .footer-logo {
+    height: 24px;
+    vertical-align: middle;
+  }
+  
+  .footer-company {
+    font-weight: 600;
+    font-size: 1rem;
+  }
+  
+  .footer-desc {
+    font-size: 0.875rem;
+    color: rgba(255, 255, 255, 0.8);
+  }
+  
+  .footer-spacer {
+    flex: 1 1 auto;
+  }
+  
+  .footer-right {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  
+  .footer-version,
+  .footer-copyright {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 0.75rem;
+  }
+  
+  mat-divider {
+    border-color: rgba(255, 255, 255, 0.3);
+  }
+}
