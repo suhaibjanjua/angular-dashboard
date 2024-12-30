@@ -1,0 +1,8 @@
+@use '../../styles/variables.scss' as vars;
+.home-page {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: vars.$spacing-lg 0;
+}
