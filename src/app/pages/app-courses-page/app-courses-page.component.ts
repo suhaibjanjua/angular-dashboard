@@ -1,0 +1,284 @@
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { MatCardModule } from '@angular/material/card';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule, MatPaginator, PageEvent } from '@angular/material/paginator';
+import { MatChipsModule } from '@angular/material/chips';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatSortModule, MatSort } from '@angular/material/sort';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { HttpClientModule } from '@angular/common/http';
+
+import { CourseService } from '../../services/course.service';
+import { 
+  Course, 
+  CourseStatus, 
+  CourseCategory, 
+  CrudAction,
+  MaterialColor 
+} from '../../models/course.models';
+
+@Component({
+  selector: 'app-courses-page',
+  standalone: true,
+  imports: [
+    CommonModule, 
+    MatCardModule, 
+    MatButtonModule, 
+    MatIconModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatChipsModule,
+    MatTooltipModule,
+    MatProgressBarModule,
+    MatSortModule,
+    MatProgressSpinnerModule,
+    HttpClientModule
+  ],
+  template: `
+    <div class="page-container">
+      <div class="page-header">
+        <div class="header-content">
+          <div>
+            <h1 class="page-title">Courses</h1>
+            <p class="page-subtitle">Manage course curriculum and content</p>
+          </div>
+          <div class="header-actions">
+            <button mat-flat-button color="primary" (click)="createNewCourse()">
+              <mat-icon>add</mat-icon>
+              Create Course
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <mat-card class="content-card">
+        <mat-card-content>
+          <div class="loading-container" *ngIf="loading">
+            <mat-spinner diameter="50"></mat-spinner>
+            <p>Loading courses...</p>
+          </div>
+
+          <div class="table-container" *ngIf="!loading">
+            <table mat-table [dataSource]="courses" class="courses-table" matSort (matSortChange)="onSortChange($event)">
+              <!-- Course Title Column -->
+              <ng-container matColumnDef="title">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Course</th>
+                <td mat-cell *matCellDef="let course">
+                  <div class="course-info">
+                    <strong>{{course.title}}</strong>
+                    <div class="course-code">{{course.code}}</div>
+                  </div>
+                </td>
+              </ng-container>
+
+              <!-- Instructor Column -->
+              <ng-container matColumnDef="instructor">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Instructor</th>
+                <td mat-cell *matCellDef="let course">{{course.instructor}}</td>
+              </ng-container>
+
+              <!-- Category Column -->
+              <ng-container matColumnDef="category">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Category</th>
+                <td mat-cell *matCellDef="let course">
+                  <mat-chip [color]="getCategoryColor(course.category)" selected size="small">
+                    {{course.category}}
+                  </mat-chip>
+                </td>
+              </ng-container>
+
+              <!-- Credits Column -->
+              <ng-container matColumnDef="credits">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Credits</th>
+                <td mat-cell *matCellDef="let course">
+                  <div class="credits-info">
+                    <mat-icon>school</mat-icon>
+                    {{course.credits}}
+                  </div>
+                </td>
+              </ng-container>
+
+              <!-- Enrollment Column -->
+              <ng-container matColumnDef="enrollment">
+                <th mat-header-cell *matHeaderCellDef>Enrollment</th>
+                <td mat-cell *matCellDef="let course">
+                  <div class="enrollment-info">
+                    <div class="enrollment-numbers">{{course.enrolled}} / {{course.capacity}}</div>
+                    <mat-progress-bar 
+                      mode="determinate" 
+                      [value]="getEnrollmentPercentage(course)"
+                      class="enrollment-progress">
+                    </mat-progress-bar>
+                  </div>
+                </td>
+              </ng-container>
+
+              <!-- Progress Column -->
+              <ng-container matColumnDef="progress">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Progress</th>
+                <td mat-cell *matCellDef="let course">
+                  <div class="progress-info">
+                    <span class="progress-text">{{course.progress}}%</span>
+                    <mat-progress-bar 
+                      mode="determinate" 
+                      [value]="course.progress"
+                      [color]="getProgressColor(course.progress)"
+                      class="course-progress">
+                    </mat-progress-bar>
+                  </div>
+                </td>
+              </ng-container>
+
+              <!-- Duration Column -->
+              <ng-container matColumnDef="duration">
+                <th mat-header-cell *matHeaderCellDef>Duration</th>
+                <td mat-cell *matCellDef="let course">
+                  <div class="duration-info">
+                    <div>{{course.duration}}</div>
+                    <div class="date-range">{{course.startDate}} - {{course.endDate}}</div>
+                  </div>
+                </td>
+              </ng-container>
+
+              <!-- Status Column -->
+              <ng-container matColumnDef="status">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Status</th>
+                <td mat-cell *matCellDef="let course">
+                  <mat-chip [color]="getStatusColor(course.status)" selected>
+                    {{course.status}}
+                  </mat-chip>
+                </td>
+              </ng-container>
+
+              <!-- Actions Column -->
+              <ng-container matColumnDef="actions">
+                <th mat-header-cell *matHeaderCellDef>Actions</th>
+                <td mat-cell *matCellDef="let course">
+                  <div class="action-buttons">
+                    <button mat-icon-button matTooltip="View Details" (click)="handleAction('view', course)">
+                      <mat-icon>school</mat-icon>
+                    </button>
+                    <button mat-icon-button matTooltip="Edit Course" (click)="handleAction('update', course)"
+                            *ngIf="course.status !== 'Completed'">
+                      <mat-icon>tune</mat-icon>
+                    </button>
+                    <button mat-icon-button matTooltip="Manage Content" (click)="handleAction('manage_content', course)">
+                      <mat-icon>library_books</mat-icon>
+                    </button>
+                    <button mat-icon-button matTooltip="View Analytics" (click)="handleAction('view_analytics', course)">
+                      <mat-icon>analytics</mat-icon>
+                    </button>
+                    <button mat-icon-button matTooltip="More Options" (click)="handleAction('delete', course)"
+                            *ngIf="course.status === 'Draft'">
+                      <mat-icon>more_vert</mat-icon>
+                    </button>
+                  </div>
+                </td>
+              </ng-container>
+
+              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+          </div>
+          
+          <mat-paginator 
+            #paginator
+            [length]="totalCourses"
+            [pageSize]="pageSize"
+            [pageSizeOptions]="pageSizeOptions"
+            [pageIndex]="currentPage - 1"
+            (page)="onPageChange($event)"
+            showFirstLastButtons>
+          </mat-paginator>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  `,
+  styleUrl: './app-courses-page.component.scss'
+})
+export class AppCoursesPageComponent implements OnInit {
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
+
+  displayedColumns: string[] = ['title', 'instructor', 'category', 'credits', 'enrollment', 'progress', 'duration', 'status', 'actions'];
+  
+  courses: Course[] = [];
+  loading = true;
+  totalCourses = 0;
+  currentPage = 1;
+  pageSize = 10;
+  pageSizeOptions = [5, 10, 20, 50];
+  sortBy = '';
+  sortDirection: 'asc' | 'desc' = 'asc';
+
+  constructor(private courseService: CourseService) {}
+
+  ngOnInit(): void {
+    this.loadCourses();
+  }
+
+  loadCourses(): void {
+    this.loading = true;
+    this.courseService.getCourses(this.currentPage, this.pageSize, this.sortBy, this.sortDirection)
+      .subscribe({
+        next: (response) => {
+          this.courses = response.data;
+          this.totalCourses = response.total;
+          this.loading = false;
+        },
+        error: (error) => {
+          console.error('Error loading courses:', error);
+          this.loading = false;
+        }
+      });
+  }
+
+  onPageChange(event: PageEvent): void {
+    this.currentPage = event.pageIndex + 1;
+    this.pageSize = event.pageSize;
+    this.loadCourses();
+  }
+
+  onSortChange(event: any): void {
+    this.sortBy = event.active;
+    this.sortDirection = event.direction || 'asc';
+    this.currentPage = 1; // Reset to first page when sorting
+    this.loadCourses();
+  }
+
+  handleAction(action: string, course: Course): void {
+    const crudAction = action as CrudAction;
+    this.courseService.handleCrudAction(crudAction, course);
+    
+    // Reload data if needed (e.g., after delete)
+    if (crudAction === CrudAction.DELETE) {
+      setTimeout(() => this.loadCourses(), 1500);
+    }
+  }
+
+  createNewCourse(): void {
+    console.log('Creating new course...');
+    // In a real app, this would open a form dialog or navigate to create page
+    // this.router.navigate(['/courses/create']);
+  }
+
+  getEnrollmentPercentage(course: Course): number {
+    return course.capacity > 0 ? (course.enrolled / course.capacity) * 100 : 0;
+  }
+
+  getStatusColor(status: CourseStatus): MaterialColor | undefined {
+    return this.courseService.getStatusColor(status);
+  }
+
+  getCategoryColor(category: CourseCategory): MaterialColor | undefined {
+    return this.courseService.getCategoryColor(category);
+  }
+
+  getProgressColor(progress: number): MaterialColor {
+    return this.courseService.getProgressColor(progress);
+  }
+}
