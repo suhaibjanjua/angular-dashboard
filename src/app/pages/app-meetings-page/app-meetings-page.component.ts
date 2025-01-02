@@ -1,0 +1,246 @@
+import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { MatCardModule } from '@angular/material/card';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatChipsModule } from '@angular/material/chips';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatBadgeModule } from '@angular/material/badge';
+import { MeetingData, MeetingType, MeetingStatus } from '../../models';
+
+@Component({
+  selector: 'app-meetings-page',
+  standalone: true,
+  imports: [
+    CommonModule, 
+    MatCardModule, 
+    MatButtonModule, 
+    MatIconModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatChipsModule,
+    MatTooltipModule,
+    MatBadgeModule
+  ],
+  template: `
+    <div class="page-container">
+      <div class="page-header">
+        <div class="header-content">
+          <div>
+            <h1 class="page-title">Meetings</h1>
+            <p class="page-subtitle">Schedule and manage virtual and in-person meetings</p>
+          </div>
+          <div class="header-actions">
+            <button mat-flat-button color="primary">
+              <mat-icon>add</mat-icon>
+              Schedule Meeting
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <mat-card class="content-card">
+        <mat-card-content>
+          <div class="table-container">
+            <table mat-table [dataSource]="meetings" class="meetings-table">
+              <!-- Meeting Title Column -->
+              <ng-container matColumnDef="title">
+                <th mat-header-cell *matHeaderCellDef>Meeting</th>
+                <td mat-cell *matCellDef="let meeting">
+                  <div class="meeting-info">
+                    <strong>{{meeting.title}}</strong>
+                    <div class="meeting-type">
+                      <mat-chip [color]="getTypeColor(meeting.type)" selected size="small">
+                        {{meeting.type}}
+                      </mat-chip>
+                    </div>
+                  </div>
+                </td>
+              </ng-container>
+
+              <!-- Organizer Column -->
+              <ng-container matColumnDef="organizer">
+                <th mat-header-cell *matHeaderCellDef>Organizer</th>
+                <td mat-cell *matCellDef="let meeting">{{meeting.organizer}}</td>
+              </ng-container>
+
+              <!-- Date & Time Column -->
+              <ng-container matColumnDef="dateTime">
+                <th mat-header-cell *matHeaderCellDef>Date & Time</th>
+                <td mat-cell *matCellDef="let meeting">
+                  <div class="datetime-info">
+                    <div>{{meeting.dateTime}}</div>
+                    <div class="duration">{{meeting.duration}} min</div>
+                  </div>
+                </td>
+              </ng-container>
+
+              <!-- Participants Column -->
+              <ng-container matColumnDef="participants">
+                <th mat-header-cell *matHeaderCellDef>Participants</th>
+                <td mat-cell *matCellDef="let meeting">
+                  <div class="participants-info">
+                    <mat-icon matBadge="{{meeting.participants}}" matBadgeColor="primary">
+                      people
+                    </mat-icon>
+                    <span class="participant-count">{{meeting.participants}} / {{meeting.maxParticipants}}</span>
+                  </div>
+                </td>
+              </ng-container>
+
+              <!-- Location Column -->
+              <ng-container matColumnDef="location">
+                <th mat-header-cell *matHeaderCellDef>Location</th>
+                <td mat-cell *matCellDef="let meeting">
+                  <div class="location-info">
+                    <mat-icon class="location-icon">
+                      {{meeting.meetingUrl ? 'videocam' : 'location_on'}}
+                    </mat-icon>
+                    {{meeting.location}}
+                  </div>
+                </td>
+              </ng-container>
+
+              <!-- Status Column -->
+              <ng-container matColumnDef="status">
+                <th mat-header-cell *matHeaderCellDef>Status</th>
+                <td mat-cell *matCellDef="let meeting">
+                  <mat-chip [color]="getStatusColor(meeting.status)" selected>
+                    {{meeting.status}}
+                  </mat-chip>
+                </td>
+              </ng-container>
+
+              <!-- Actions Column -->
+              <ng-container matColumnDef="actions">
+                <th mat-header-cell *matHeaderCellDef>Actions</th>
+                <td mat-cell *matCellDef="let meeting">
+                  <div class="action-buttons">
+                    <button mat-icon-button matTooltip="Join Meeting" 
+                            *ngIf="meeting.status === 'In Progress'">
+                      <mat-icon>videocam</mat-icon>
+                    </button>
+                    <button mat-icon-button matTooltip="View Details">
+                      <mat-icon>event</mat-icon>
+                    </button>
+                    <button mat-icon-button matTooltip="Edit Meeting"
+                            *ngIf="meeting.status !== 'Completed'">
+                      <mat-icon>edit_calendar</mat-icon>
+                    </button>
+                    <button mat-icon-button matTooltip="Copy Meeting Link"
+                            *ngIf="meeting.meetingUrl">
+                      <mat-icon>content_copy</mat-icon>
+                    </button>
+                    <button mat-icon-button matTooltip="More Options">
+                      <mat-icon>more_vert</mat-icon>
+                    </button>
+                  </div>
+                </td>
+              </ng-container>
+
+              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+          </div>
+          
+          <mat-paginator 
+            [pageSizeOptions]="[5, 10, 20]" 
+            showFirstLastButtons>
+          </mat-paginator>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  `,
+  styleUrl: './app-meetings-page.component.scss'
+})
+export class AppMeetingsPageComponent {
+  displayedColumns: string[] = ['title', 'organizer', 'dateTime', 'participants', 'location', 'status', 'actions'];
+  
+  meetings: MeetingData[] = [
+    {
+      id: 1,
+      title: 'Weekly Team Standup',
+      type: 'Discussion',
+      organizer: 'Sarah Johnson',
+      dateTime: 'Today, 10:00 AM',
+      duration: 30,
+      participants: 8,
+      maxParticipants: 12,
+      status: 'In Progress',
+      location: 'Google Meet',
+      meetingUrl: 'https://meet.google.com/abc-xyz'
+    },
+    {
+      id: 2,
+      title: 'Advanced Mathematics Final Exam',
+      type: 'Exam',
+      organizer: 'Dr. Michael Chen',
+      dateTime: 'Tomorrow, 2:00 PM',
+      duration: 120,
+      participants: 25,
+      maxParticipants: 30,
+      status: 'Scheduled',
+      location: 'Room 201',
+    },
+    {
+      id: 3,
+      title: 'Project Presentation',
+      type: 'Presentation',
+      organizer: 'Emily Davis',
+      dateTime: 'Dec 20, 11:00 AM',
+      duration: 60,
+      participants: 15,
+      maxParticipants: 20,
+      status: 'Scheduled',
+      location: 'Zoom',
+      meetingUrl: 'https://zoom.us/j/123456789'
+    },
+    {
+      id: 4,
+      title: 'Physics Lab Session',
+      type: 'Workshop',
+      organizer: 'Prof. James Wilson',
+      dateTime: 'Dec 18, 3:00 PM',
+      duration: 180,
+      participants: 12,
+      maxParticipants: 16,
+      status: 'Completed',
+      location: 'Physics Lab A'
+    },
+    {
+      id: 5,
+      title: 'Literature Discussion Group',
+      type: 'Discussion',
+      organizer: 'Dr. Lisa Anderson',
+      dateTime: 'Dec 22, 1:00 PM',
+      duration: 90,
+      participants: 18,
+      maxParticipants: 25,
+      status: 'Scheduled',
+      location: 'Library Conference Room'
+    }
+  ];
+
+  getStatusColor(status: string): 'primary' | 'accent' | 'warn' | undefined {
+    switch (status) {
+      case 'In Progress': return 'primary';
+      case 'Scheduled': return 'accent';
+      case 'Completed': return undefined;
+      case 'Cancelled': return 'warn';
+      default: return undefined;
+    }
+  }
+
+  getTypeColor(type: string): 'primary' | 'accent' | 'warn' | undefined {
+    switch (type) {
+      case 'Lecture': return 'primary';
+      case 'Discussion': return 'accent';
+      case 'Presentation': return 'primary';
+      case 'Exam': return 'warn';
+      case 'Workshop': return 'accent';
+      default: return undefined;
+    }
+  }
+}

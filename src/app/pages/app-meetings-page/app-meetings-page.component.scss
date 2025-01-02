@@ -1,0 +1,205 @@
+.page-container {
+  padding: 24px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.page-header {
+  margin-bottom: 24px;
+}
+
+.header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.page-title {
+  font-size: 28px;
+  font-weight: 600;
+  color: #333;
+  margin: 0 0 8px 0;
+}
+
+.page-subtitle {
+  font-size: 16px;
+  color: #666;
+  margin: 0;
+}
+
+.header-actions {
+  display: flex;
+  gap: 12px;
+}
+
+.content-card {
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  border-radius: 12px;
+  background: #ffffff;
+}
+
+.table-container {
+  overflow-x: auto;
+  margin-bottom: 16px;
+  background: #ffffff;
+  border-radius: 8px;
+}
+
+.meetings-table {
+  width: 100%;
+  min-width: 700px;
+  background: #ffffff !important;
+  
+  // Header styling
+  .mat-mdc-header-row {
+    background: #f8f9fa;
+    
+    .mat-mdc-header-cell {
+      background: #f8f9fa;
+      color: #333;
+      font-weight: 600;
+      font-size: 14px;
+      padding: 16px 12px;
+      border-bottom: 2px solid #e0e0e0;
+    }
+  }
+  
+  // Row styling
+  .mat-mdc-row {
+    background: #ffffff;
+    border-bottom: 1px solid #f0f0f0;
+    transition: background-color 0.2s ease;
+    
+    &:hover {
+      background: #f9f9f9;
+    }
+    
+    .mat-mdc-cell {
+      background: inherit;
+      padding: 16px 12px;
+      font-size: 14px;
+      color: #333;
+    }
+  }
+}
+
+.meeting-info {
+  .meeting-type {
+    margin-top: 4px;
+  }
+}
+
+.datetime-info {
+  .duration {
+    font-size: 0.875rem;
+    color: #666;
+    margin-top: 2px;
+  }
+}
+
+.participants-info {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  
+  .participant-count {
+    font-size: 0.875rem;
+    color: #666;
+  }
+}
+
+.location-info {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  
+  .location-icon {
+    font-size: 18px;
+    color: #666;
+  }
+}
+
+.action-buttons {
+  display: flex;
+  gap: 2px;
+  align-items: center;
+  justify-content: flex-start;
+  
+  .mat-mdc-icon-button {
+    width: 32px;
+    height: 32px;
+    line-height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 6px;
+    transition: all 0.2s ease;
+    
+    &:hover {
+      background: rgba(103, 58, 183, 0.08);
+      transform: translateY(-1px);
+    }
+    
+    .mat-icon {
+      font-size: 18px;
+      width: 18px;
+      height: 18px;
+      color: #666;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    &:hover .mat-icon {
+      color: #673ab7;
+    }
+  }
+}
+
+mat-chip {
+  font-size: 0.75rem;
+  min-height: 24px;
+  line-height: 24px;
+}
+
+// Badge styling
+mat-icon[matBadge] {
+  font-size: 20px;
+}
+
+@media (max-width: 768px) {
+  .page-container {
+    padding: 16px;
+  }
+  
+  .header-content {
+    flex-direction: column;
+    gap: 16px;
+    align-items: stretch;
+  }
+  
+  .page-title {
+    font-size: 24px;
+  }
+  
+  .meetings-table {
+    min-width: 700px;
+  }
+  
+  .participants-info {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+  }
+}
+
+// Paginator styling
+.mat-mdc-paginator {
+  background: #ffffff;
+  border-top: 1px solid #e0e0e0;
+  border-radius: 0 0 12px 12px;
+  
+  .mat-mdc-paginator-container {
+    padding: 12px 16px;
+  }
+}
