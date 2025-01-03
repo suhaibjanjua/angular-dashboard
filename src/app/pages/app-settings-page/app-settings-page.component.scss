@@ -1,0 +1,208 @@
+@use '../../styles/variables.scss' as vars;
+
+.settings-page {
+  padding: 24px;
+  max-width: 1200px;
+  margin: 0 auto;
+  background: #f5f5f5;
+  min-height: 100vh;
+
+  .page-header {
+    margin-bottom: 32px;
+    text-align: center;
+
+    h1 {
+      font-size: 2rem;
+      font-weight: 600;
+      color: vars.$primary-purple;
+      margin: 0 0 8px 0;
+    }
+
+    .page-subtitle {
+      font-size: 1rem;
+      color: #666;
+      margin: 0;
+    }
+  }
+
+  .settings-content {
+    display: grid;
+    gap: 24px;
+    margin-bottom: 32px;
+
+    @media (min-width: 768px) {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    @media (min-width: 1024px) {
+      grid-template-columns: 1fr 1fr 1fr;
+    }
+
+    .notifications-card,
+    .preferences-card,
+    .privacy-card {
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      transition: transform 0.2s ease;
+
+      &:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+      }
+
+      mat-card-header {
+        padding: 20px 20px 0 20px;
+
+        mat-card-title {
+          display: flex;
+          align-items: center;
+          gap: 8px;
+          font-size: 1.25rem;
+          font-weight: 600;
+          color: vars.$primary-purple;
+
+          mat-icon {
+            color: vars.$primary-purple;
+          }
+        }
+      }
+
+      mat-card-content {
+        padding: 20px;
+      }
+
+      .setting-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 16px 0;
+        border-bottom: 1px solid #eee;
+
+        &:last-child {
+          border-bottom: none;
+        }
+
+        .setting-info {
+          flex: 1;
+
+          h3 {
+            font-size: 1rem;
+            font-weight: 500;
+            margin: 0 0 4px 0;
+            color: #333;
+          }
+
+          p {
+            font-size: 0.875rem;
+            color: #666;
+            margin: 0;
+          }
+        }
+
+        mat-slide-toggle {
+          margin-left: 16px;
+        }
+
+        .language-select,
+        .theme-select,
+        .timezone-select {
+          min-width: 150px;
+          margin-left: 16px;
+        }
+
+        button {
+          margin-left: 16px;
+        }
+      }
+    }
+
+    .privacy-card {
+      @media (min-width: 1024px) {
+        grid-column: span 1;
+      }
+    }
+  }
+
+  .settings-actions {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    padding: 20px 0;
+
+    button {
+      min-width: 140px;
+      height: 44px;
+      border-radius: 8px;
+      font-weight: 500;
+      text-transform: none;
+
+      mat-icon {
+        margin-right: 8px;
+      }
+    }
+  }
+}
+
+// Material Design customizations
+::ng-deep {
+  .settings-page {
+    .mat-mdc-slide-toggle {
+      --mdc-switch-selected-track-color: #{vars.$primary-purple};
+      --mdc-switch-selected-handle-color: #{vars.$primary-purple};
+      --mdc-switch-selected-hover-handle-color: #{vars.$primary-purple};
+      --mdc-switch-selected-focus-handle-color: #{vars.$primary-purple};
+      --mdc-switch-selected-pressed-handle-color: #{vars.$primary-purple};
+    }
+
+    .mat-mdc-form-field {
+      .mat-mdc-select-arrow {
+        color: vars.$primary-purple;
+      }
+    }
+
+    .mat-mdc-button.mat-accent {
+      --mdc-filled-button-container-color: #{vars.$accent-light};
+      --mdc-filled-button-label-text-color: #{vars.$primary-purple};
+    }
+
+    .mat-mdc-raised-button.mat-primary {
+      --mdc-filled-button-container-color: #{vars.$primary-purple};
+      --mdc-filled-button-label-text-color: white;
+    }
+  }
+}
+
+// Responsive design
+@media (max-width: 767px) {
+  .settings-page {
+    padding: 16px;
+
+    .settings-content {
+      grid-template-columns: 1fr;
+    }
+
+    .setting-item {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 12px;
+
+      mat-slide-toggle,
+      .language-select,
+      .theme-select,
+      .timezone-select,
+      button {
+        margin-left: 0;
+        align-self: flex-end;
+      }
+    }
+
+    .settings-actions {
+      flex-direction: column;
+
+      button {
+        width: 100%;
+      }
+    }
+  }
+}
