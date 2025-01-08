@@ -1,0 +1,57 @@
+.attendance-overview-card {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background: #ffffff !important;
+
+  mat-card-header {
+    padding-bottom: 16px;
+    
+    mat-card-title {
+      font-size: 16px;
+      font-weight: 600;
+      color: #333;
+    }
+  }
+
+  mat-card-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    
+    .chart-container {
+      flex: 1;
+      min-height: 200px;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .stats-summary {
+      display: flex;
+      justify-content: space-around;
+      margin-top: 16px;
+      padding-top: 16px;
+      border-top: 1px solid #f0f0f0;
+      
+      .stat {
+        text-align: center;
+        
+        .value {
+          display: block;
+          font-size: 18px;
+          font-weight: 600;
+          color: #333;
+        }
+        
+        .label {
+          display: block;
+          font-size: 12px;
+          color: #666;
+          margin-top: 4px;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,257 @@
+.learning-progress-card {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+
+  mat-card-header {
+    padding-bottom: 16px;
+    
+    mat-card-title {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 18px;
+      font-weight: 600;
+      color: #333;
+      
+      .progress-badge {
+        background: linear-gradient(135deg, #6c4bb6, #8e44ad);
+        color: white;
+        padding: 4px 12px;
+        border-radius: 12px;
+        font-size: 12px;
+        font-weight: 600;
+      }
+    }
+  }
+
+  mat-card-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    
+    .stats-overview {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+      gap: 16px;
+      margin-bottom: 24px;
+      
+      .stat-item {
+        display: flex;
+        align-items: center;
+        padding: 12px;
+        background-color: #f8f9fa;
+        border-radius: 8px;
+        border-left: 3px solid #6c4bb6;
+        
+        mat-icon {
+          font-size: 24px;
+          width: 24px;
+          height: 24px;
+          color: #6c4bb6;
+          margin-right: 12px;
+        }
+        
+        .stat-content {
+          display: flex;
+          flex-direction: column;
+          
+          .stat-value {
+            font-size: 20px;
+            font-weight: 700;
+            color: #333;
+            line-height: 1;
+          }
+          
+          .stat-label {
+            font-size: 11px;
+            color: #666;
+            text-transform: uppercase;
+            margin-top: 2px;
+          }
+        }
+      }
+    }
+    
+    .course-progress-list {
+      flex: 1;
+      margin-bottom: 20px;
+      
+      h3 {
+        font-size: 16px;
+        font-weight: 600;
+        color: #333;
+        margin-bottom: 16px;
+        padding-bottom: 8px;
+        border-bottom: 2px solid #f0f0f0;
+      }
+      
+      .course-item {
+        margin-bottom: 20px;
+        padding: 16px;
+        background-color: #fafafa;
+        border-radius: 8px;
+        border: 1px solid #e0e0e0;
+        
+        .course-header {
+          display: flex;
+          justify-content: space-between;
+          align-items: flex-start;
+          margin-bottom: 12px;
+          
+          .course-info {
+            flex: 1;
+            
+            .course-name {
+              font-size: 15px;
+              font-weight: 600;
+              color: #333;
+              margin: 0 0 4px 0;
+            }
+            
+            .course-meta {
+              display: flex;
+              align-items: center;
+              gap: 12px;
+              
+              .instructor {
+                font-size: 12px;
+                color: #666;
+              }
+              
+              .difficulty {
+                font-size: 10px;
+                padding: 2px 6px;
+                border-radius: 10px;
+                text-transform: uppercase;
+                font-weight: 600;
+                
+                &.beginner {
+                  background-color: #e8f5e8;
+                  color: #4caf50;
+                }
+                
+                &.intermediate {
+                  background-color: #fff3e0;
+                  color: #ff9800;
+                }
+                
+                &.advanced {
+                  background-color: #ffebee;
+                  color: #f44336;
+                }
+              }
+            }
+          }
+          
+          .course-stats {
+            text-align: right;
+            
+            .progress-text {
+              display: block;
+              font-size: 13px;
+              color: #333;
+              font-weight: 600;
+            }
+            
+            .time-spent {
+              display: block;
+              font-size: 11px;
+              color: #666;
+              margin-top: 2px;
+            }
+          }
+        }
+        
+        .progress-section {
+          .progress-labels {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 4px;
+            
+            .progress-percent {
+              font-size: 13px;
+              font-weight: 600;
+              color: #333;
+            }
+            
+            .last-accessed {
+              font-size: 11px;
+              color: #999;
+            }
+          }
+          
+          mat-progress-bar {
+            height: 8px;
+            border-radius: 4px;
+            
+            &.high-progress ::ng-deep .mat-progress-bar-fill::after {
+              background-color: #4caf50;
+            }
+            
+            &.medium-progress ::ng-deep .mat-progress-bar-fill::after {
+              background-color: #ff9800;
+            }
+            
+            &.low-progress ::ng-deep .mat-progress-bar-fill::after {
+              background-color: #f44336;
+            }
+          }
+        }
+      }
+    }
+    
+    .achievement-summary {
+      padding-top: 16px;
+      border-top: 1px solid #e0e0e0;
+      
+      .achievement-item {
+        display: flex;
+        align-items: center;
+        margin-bottom: 8px;
+        
+        &:last-child {
+          margin-bottom: 0;
+        }
+        
+        .achievement-icon {
+          font-size: 16px;
+          width: 16px;
+          height: 16px;
+          color: #6c4bb6;
+          margin-right: 8px;
+        }
+        
+        .achievement-text {
+          font-size: 13px;
+          color: #333;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .learning-progress-card {
+    mat-card-content {
+      .stats-overview {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      
+      .course-progress-list {
+        .course-item {
+          .course-header {
+            flex-direction: column;
+            align-items: flex-start;
+            
+            .course-stats {
+              text-align: left;
+              margin-top: 8px;
+            }
+          }
+        }
+      }
+    }
+  }
+}

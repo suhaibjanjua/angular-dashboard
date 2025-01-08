@@ -1,0 +1,111 @@
+.system-health-card {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+
+  mat-card-header {
+    padding-bottom: 16px;
+    
+    mat-card-title {
+      font-size: 18px;
+      font-weight: 600;
+      color: #333;
+    }
+  }
+
+  mat-card-content {
+    flex: 1;
+    
+    .health-overview {
+      .health-score {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 24px;
+        
+        .score-circle {
+          width: 120px;
+          height: 120px;
+          border-radius: 50%;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          border: 6px solid;
+          
+          &.excellent { border-color: #4caf50; }
+          &.good { border-color: #8bc34a; }
+          &.warning { border-color: #ff9800; }
+          &.critical { border-color: #f44336; }
+          
+          .score {
+            font-size: 32px;
+            font-weight: 700;
+            color: #333;
+          }
+          
+          .score-label {
+            font-size: 12px;
+            color: #666;
+          }
+        }
+      }
+      
+      .health-metrics {
+        .metric {
+          margin-bottom: 16px;
+          
+          .metric-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 8px;
+            
+            mat-icon {
+              font-size: 20px;
+              width: 20px;
+              height: 20px;
+              margin-right: 8px;
+              
+              &.excellent { color: #4caf50; }
+              &.good { color: #8bc34a; }
+              &.warning { color: #ff9800; }
+              &.critical { color: #f44336; }
+            }
+            
+            .metric-name {
+              flex: 1;
+              font-size: 14px;
+              color: #333;
+            }
+            
+            .metric-value {
+              font-size: 14px;
+              font-weight: 600;
+              
+              &.excellent { color: #4caf50; }
+              &.good { color: #8bc34a; }
+              &.warning { color: #ff9800; }
+              &.critical { color: #f44336; }
+            }
+          }
+          
+          .metric-bar {
+            height: 6px;
+            background: #f0f0f0;
+            border-radius: 3px;
+            overflow: hidden;
+            
+            .metric-fill {
+              height: 100%;
+              transition: width 0.3s ease;
+              
+              &.excellent { background: #4caf50; }
+              &.good { background: #8bc34a; }
+              &.warning { background: #ff9800; }
+              &.critical { background: #f44336; }
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,65 @@
+.device-analytics-card {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+
+  mat-card-header {
+    padding-bottom: 16px;
+    
+    mat-card-title {
+      font-size: 18px;
+      font-weight: 600;
+      color: #333;
+    }
+  }
+
+  mat-card-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    
+    .chart-container {
+      flex: 1;
+      min-height: 200px;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .device-stats {
+      margin-top: 16px;
+      padding-top: 16px;
+      border-top: 1px solid #f0f0f0;
+      
+      .device-stat {
+        display: flex;
+        align-items: center;
+        margin-bottom: 8px;
+        
+        &:last-child {
+          margin-bottom: 0;
+        }
+        
+        .device-color {
+          width: 12px;
+          height: 12px;
+          border-radius: 50%;
+          margin-right: 8px;
+        }
+        
+        .device-name {
+          flex: 1;
+          font-size: 14px;
+          color: #333;
+        }
+        
+        .device-percentage {
+          font-size: 14px;
+          font-weight: 600;
+          color: #666;
+        }
+      }
+    }
+  }
+}

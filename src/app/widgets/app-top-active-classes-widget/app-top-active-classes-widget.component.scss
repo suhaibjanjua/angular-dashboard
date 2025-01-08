@@ -1,0 +1,88 @@
+.top-classes-card {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+
+  mat-card-header {
+    padding-bottom: 16px;
+    
+    mat-card-title {
+      font-size: 18px;
+      font-weight: 600;
+      color: #333;
+    }
+  }
+
+  mat-card-content {
+    flex: 1;
+    
+    .classes-list {
+      .class-item {
+        display: flex;
+        align-items: center;
+        padding: 12px 0;
+        border-bottom: 1px solid #f0f0f0;
+        
+        &:last-child {
+          border-bottom: none;
+        }
+        
+        .rank {
+          width: 30px;
+          height: 30px;
+          border-radius: 50%;
+          background: #6c4bb6;
+          color: white;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-weight: 600;
+          font-size: 14px;
+          margin-right: 12px;
+        }
+        
+        .class-info {
+          flex: 1;
+          
+          .class-name {
+            font-size: 16px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 4px;
+          }
+          
+          .class-details {
+            display: flex;
+            gap: 16px;
+            
+            .instructor {
+              font-size: 12px;
+              color: #666;
+            }
+            
+            .students {
+              font-size: 12px;
+              color: #666;
+            }
+          }
+        }
+        
+        .class-stats {
+          text-align: right;
+          
+          .engagement {
+            font-size: 18px;
+            font-weight: 600;
+            color: #4caf50;
+            margin-bottom: 2px;
+          }
+          
+          .duration {
+            font-size: 12px;
+            color: #666;
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,28 @@
+::ng-deep .mat-mdc-menu-panel {
+  background: #ffffff !important;
+  border-radius: 8px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+}
+
+::ng-deep .mat-mdc-menu-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 14px;
+  color: #333;
+
+  mat-icon {
+    font-size: 20px;
+    width: 20px;
+    height: 20px;
+    color: #666;
+  }
+
+  &:hover {
+    background-color: rgba(108, 75, 182, 0.08);
+    
+    mat-icon {
+      color: #6c4bb6;
+    }
+  }
+}
