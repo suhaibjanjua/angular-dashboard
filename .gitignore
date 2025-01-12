@@ -1,0 +1,40 @@
+# dependencies
+/node_modules
+
+# build outputs
+/dist
+/build
+.angular/cache # Angular CLI cache directory
+.angular
+
+# editor/IDE specific files
+.vscode # VS Code settings
+.idea # IntelliJ/WebStorm settings
+*.iml # IntelliJ module files
+
+# log files
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# OS generated files
+.DS_Store # macOS
+Thumbs.db # Windows
+ehthumbs.db # Windows
+.directory # Linux
+
+# environment variables
+.env
+.env.*.local
+
+# other
+coverage/ # Test coverage reports
+e2e/ # End-to-end test artifacts (if not part of the main codebase)
+
+# project documentation and prompt files
+PROMPT*
+prompt*
+*prompt*
+*.prompt
+prompt.*
+PROMPT.*
