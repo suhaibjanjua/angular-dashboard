@@ -15,7 +15,6 @@ export const routes: Routes = [
 			{ path: 'dashboard', loadComponent: () => import('./pages/app-dashboard-page/app-dashboard-page.component').then(m => m.AppDashboardPageComponent) },
 			{ path: 'users', loadComponent: () => import('./pages/app-users-page/app-users-page.component').then(m => m.AppUsersPageComponent) },
 			{ path: 'documents', loadComponent: () => import('./pages/app-documents-page/app-documents-page.component').then(m => m.AppDocumentsPageComponent) },
-			{ path: 'templates', loadComponent: () => import('./pages/app-documents-page/app-documents-page.component').then(m => m.AppDocumentsPageComponent) }, // Placeholder
 			{ path: 'gap-analysis', loadComponent: () => import('./pages/app-reports-page/app-reports-page.component').then(m => m.AppReportsPageComponent) }, // Placeholder
 			{ path: 'threats', loadComponent: () => import('./pages/app-reports-page/app-reports-page.component').then(m => m.AppReportsPageComponent) }, // Placeholder
 			{ path: 'supplier', loadComponent: () => import('./pages/app-users-page/app-users-page.component').then(m => m.AppUsersPageComponent) }, // Placeholder
