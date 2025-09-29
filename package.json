@@ -1,6 +1,29 @@
 {
   "name": "angular-dashboard",
   "version": "3.0.0",
+  "description": "Modern Angular 19 dashboard application with comprehensive analytics, user management, and data visualization features. Built with Material Design, TypeScript, and Chart.js for enterprise-grade dashboard solutions.",
+  "author": "Suhaib Janjua <suhaib.janjua@gmail.com>",
+  "license": "MIT",
+  "homepage": "https://github.com/suhaibjanjua/angular-dashboard#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/suhaibjanjua/angular-dashboard.git"
+  },
+  "bugs": {
+    "url": "https://github.com/suhaibjanjua/angular-dashboard/issues"
+  },
+  "keywords": [
+    "angular",
+    "dashboard",
+    "typescript",
+    "material-design",
+    "analytics",
+    "data-visualization",
+    "charts",
+    "admin-panel",
+    "enterprise",
+    "standalone-components"
+  ],
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
