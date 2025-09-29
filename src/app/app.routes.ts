@@ -15,7 +15,6 @@ export const routes: Routes = [
 			{ path: 'dashboard', loadComponent: () => import('./pages/app-dashboard-page/app-dashboard-page.component').then(m => m.AppDashboardPageComponent) },
 			{ path: 'users', loadComponent: () => import('./pages/app-users-page/app-users-page.component').then(m => m.AppUsersPageComponent) },
 			{ path: 'documents', loadComponent: () => import('./pages/app-documents-page/app-documents-page.component').then(m => m.AppDocumentsPageComponent) },
-			{ path: 'asset-ratings', loadComponent: () => import('./pages/app-reports-page/app-reports-page.component').then(m => m.AppReportsPageComponent) }, // Placeholder
 			{ path: 'risk-treatments', loadComponent: () => import('./pages/app-reports-page/app-reports-page.component').then(m => m.AppReportsPageComponent) }, // Placeholder
 			{ path: 'courses', loadComponent: () => import('./pages/app-courses-page/app-courses-page.component').then(m => m.AppCoursesPageComponent) },
 			{ path: 'classes', loadComponent: () => import('./pages/app-classes-page/app-classes-page.component').then(m => m.AppClassesPageComponent) },
