@@ -1,6 +1,9 @@
 // Course-related models and enums
 import { GeneralStatus, MaterialColor } from './common.models';
 
+// Re-export MaterialColor for components
+export { MaterialColor };
+
 // Course status specific to courses domain
 export enum CourseStatus {
   ACTIVE = GeneralStatus.ACTIVE,

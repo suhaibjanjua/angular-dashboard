@@ -38,6 +38,7 @@ export interface MeetingData {
   status: MeetingStatus;
   location?: string;
   description?: string;
+  meetingUrl?: string;
 }
 
 // Meeting CRUD operations

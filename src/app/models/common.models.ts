@@ -94,7 +94,9 @@ export enum MeetingType {
   TUTORIAL = 'Tutorial',
   OFFICE_HOURS = 'Office Hours',
   EXAM = 'Exam',
-  CONFERENCE = 'Conference'
+  CONFERENCE = 'Conference',
+  DISCUSSION = 'Discussion',
+  PRESENTATION = 'Presentation'
 }
 
 // Icon mappings for various statuses

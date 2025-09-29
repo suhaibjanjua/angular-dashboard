@@ -192,6 +192,9 @@ import { Report, ReportStatus, ReportType, ReportCategory, ExportFormat, ReportS
 export class AppReportsPageComponent {
   displayedColumns: string[] = ['title', 'category', 'generatedBy', 'period', 'format', 'status', 'downloads', 'actions'];
   
+  // Make enums available in template
+  ReportStatus = ReportStatus;
+  
   reports: Report[] = [
     {
       id: 1,

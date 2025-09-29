@@ -162,84 +162,84 @@ export class AppMeetingsPageComponent {
     {
       id: 1,
       title: 'Weekly Team Standup',
-      type: 'Discussion',
+      type: MeetingType.DISCUSSION,
       organizer: 'Sarah Johnson',
       dateTime: 'Today, 10:00 AM',
       duration: 30,
       participants: 8,
       maxParticipants: 12,
-      status: 'In Progress',
+      status: MeetingStatus.IN_PROGRESS,
       location: 'Google Meet',
       meetingUrl: 'https://meet.google.com/abc-xyz'
     },
     {
       id: 2,
       title: 'Advanced Mathematics Final Exam',
-      type: 'Exam',
+      type: MeetingType.EXAM,
       organizer: 'Dr. Michael Chen',
       dateTime: 'Tomorrow, 2:00 PM',
       duration: 120,
       participants: 25,
       maxParticipants: 30,
-      status: 'Scheduled',
+      status: MeetingStatus.SCHEDULED,
       location: 'Room 201',
     },
     {
       id: 3,
       title: 'Project Presentation',
-      type: 'Presentation',
+      type: MeetingType.PRESENTATION,
       organizer: 'Emily Davis',
       dateTime: 'Dec 20, 11:00 AM',
       duration: 60,
       participants: 15,
       maxParticipants: 20,
-      status: 'Scheduled',
+      status: MeetingStatus.SCHEDULED,
       location: 'Zoom',
       meetingUrl: 'https://zoom.us/j/123456789'
     },
     {
       id: 4,
       title: 'Physics Lab Session',
-      type: 'Workshop',
+      type: MeetingType.WORKSHOP,
       organizer: 'Prof. James Wilson',
       dateTime: 'Dec 18, 3:00 PM',
       duration: 180,
       participants: 12,
       maxParticipants: 16,
-      status: 'Completed',
+      status: MeetingStatus.COMPLETED,
       location: 'Physics Lab A'
     },
     {
       id: 5,
       title: 'Literature Discussion Group',
-      type: 'Discussion',
+      type: MeetingType.DISCUSSION,
       organizer: 'Dr. Lisa Anderson',
       dateTime: 'Dec 22, 1:00 PM',
       duration: 90,
       participants: 18,
       maxParticipants: 25,
-      status: 'Scheduled',
+      status: MeetingStatus.SCHEDULED,
       location: 'Library Conference Room'
     }
   ];
 
-  getStatusColor(status: string): 'primary' | 'accent' | 'warn' | undefined {
+  getStatusColor(status: MeetingStatus): 'primary' | 'accent' | 'warn' | undefined {
     switch (status) {
-      case 'In Progress': return 'primary';
-      case 'Scheduled': return 'accent';
-      case 'Completed': return undefined;
-      case 'Cancelled': return 'warn';
+      case MeetingStatus.IN_PROGRESS: return 'primary';
+      case MeetingStatus.SCHEDULED: return 'accent';
+      case MeetingStatus.COMPLETED: return undefined;
+      case MeetingStatus.CANCELLED: return 'warn';
       default: return undefined;
     }
   }
 
-  getTypeColor(type: string): 'primary' | 'accent' | 'warn' | undefined {
+  getTypeColor(type: MeetingType): 'primary' | 'accent' | 'warn' | undefined {
     switch (type) {
-      case 'Lecture': return 'primary';
-      case 'Discussion': return 'accent';
-      case 'Presentation': return 'primary';
-      case 'Exam': return 'warn';
-      case 'Workshop': return 'accent';
+      case MeetingType.LECTURE: return 'primary';
+      case MeetingType.DISCUSSION: return 'accent';
+      case MeetingType.PRESENTATION: return 'primary';
+      case MeetingType.EXAM: return 'warn';
+      case MeetingType.WORKSHOP: return 'accent';
       default: return undefined;
     }
   }

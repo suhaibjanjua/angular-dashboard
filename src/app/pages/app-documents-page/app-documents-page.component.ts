@@ -172,32 +172,32 @@ export class AppDocumentsPageComponent implements OnInit {
       {
         id: 1,
         name: 'Course Syllabus - Mathematics.pdf',
-        type: 'PDF',
+        type: DocumentType.PDF,
         size: 2457600,
         owner: 'Dr. Sarah Johnson',
         lastModified: new Date(Date.now() - 2 * 60 * 60 * 1000),
         createdAt: new Date('2024-01-15'),
-        status: 'Published'
+        status: DocumentStatus.PUBLISHED
       },
       {
         id: 2,
         name: 'Assignment Template.docx',
-        type: 'DOC',
+        type: DocumentType.DOCX,
         size: 1024000,
         owner: 'Prof. Michael Brown',
         lastModified: new Date(Date.now() - 24 * 60 * 60 * 1000),
         createdAt: new Date('2024-02-01'),
-        status: 'Published'
+        status: DocumentStatus.PUBLISHED
       },
       {
         id: 3,
         name: 'Grade Sheet Template.xlsx',
-        type: 'XLS',
+        type: DocumentType.XLSX,
         size: 512000,
         owner: 'Admin User',
         lastModified: new Date(Date.now() - 3 * 24 * 60 * 60 * 1000),
         createdAt: new Date('2024-01-20'),
-        status: 'Draft'
+        status: DocumentStatus.DRAFT
       }
     ];
     this.filteredDocuments = [...this.documents];
