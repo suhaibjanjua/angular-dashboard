@@ -63,11 +63,11 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
             </div>
           </mat-card-content>
           <mat-card-actions align="end">
-            <button mat-button color="accent" (click)="cancel()">
+            <button mat-stroked-button (click)="cancel()">
               <mat-icon>cancel</mat-icon>
               Cancel
             </button>
-            <button mat-raised-button color="primary" (click)="saveProfile()">
+            <button mat-flat-button color="primary" (click)="saveProfile()">
               <mat-icon>save</mat-icon>
               Save Changes
             </button>
@@ -89,11 +89,11 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
                 </div>
               </div>
               <div class="avatar-actions">
-                <button mat-raised-button color="primary" (click)="uploadAvatar()">
+                <button mat-flat-button color="primary" (click)="uploadAvatar()">
                   <mat-icon>upload</mat-icon>
                   Upload New Photo
                 </button>
-                <button mat-button color="warn" (click)="removeAvatar()">
+                <button mat-stroked-button color="warn" (click)="removeAvatar()">
                   <mat-icon>delete</mat-icon>
                   Remove Photo
                 </button>
