@@ -125,8 +125,8 @@ import { Document, DocumentType, DocumentStatus } from '../../models';
                       <mat-icon>more_vert</mat-icon>
                     </button>
                   </div>
-                  <mat-menu #menu="matMenu">
-                    <button mat-menu-item (click)="deleteDocument(doc)" class="delete-action">
+                  <mat-menu #menu="matMenu" class="documents-dropdown">
+                    <button mat-menu-item (click)="deleteDocument(doc)" class="danger-item">
                       <mat-icon>delete_outline</mat-icon>
                       <span>Delete</span>
                     </button>

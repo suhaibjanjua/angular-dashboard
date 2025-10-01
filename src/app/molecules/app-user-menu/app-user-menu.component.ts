@@ -55,7 +55,7 @@ import { Router } from '@angular/router';
           <span>Delete Your Account</span>
         </button>
         
-        <button mat-menu-item (click)="logout()" class="logout-item">
+        <button mat-menu-item (click)="logout()" class="danger-item">
           <mat-icon>logout</mat-icon>
           <span>Logout</span>
         </button>

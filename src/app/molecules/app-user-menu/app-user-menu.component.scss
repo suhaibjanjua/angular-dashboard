@@ -116,20 +116,6 @@
         }
       }
     }
-    
-    &.logout-item {
-      border-top: 1px solid #f0f0f0;
-      margin-top: 4px;
-      
-      &:hover {
-        background-color: rgba(244, 67, 54, 0.08);
-        color: #f44336;
-        
-        mat-icon {
-          color: #f44336;
-        }
-      }
-    }
   }
   
   .mat-mdc-menu-divider {

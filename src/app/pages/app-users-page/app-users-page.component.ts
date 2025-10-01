@@ -122,7 +122,7 @@ import { User, UserStatus, UserRole, UserStatusColorMap, UserRoleColorMap, UserS
                   <button mat-icon-button [matMenuTriggerFor]="menu" class="action-menu" matTooltip="More Actions">
                     <mat-icon>more_vert</mat-icon>
                   </button>
-                  <mat-menu #menu="matMenu">
+                  <mat-menu #menu="matMenu" class="users-list-dropdown">
                     <button mat-menu-item (click)="editUser(user)">
                       <mat-icon>manage_accounts</mat-icon>
                       <span>Edit User</span>
@@ -136,7 +136,7 @@ import { User, UserStatus, UserRole, UserStatusColorMap, UserRoleColorMap, UserS
                       <span>Reset Password</span>
                     </button>
                     <mat-divider></mat-divider>
-                    <button mat-menu-item (click)="deleteUser(user)">
+                    <button mat-menu-item (click)="deleteUser(user)" class="danger-item">
                       <mat-icon>person_remove</mat-icon>
                       <span>Remove User</span>
                     </button>
