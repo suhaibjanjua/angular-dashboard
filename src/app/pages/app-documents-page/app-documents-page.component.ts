@@ -10,9 +10,10 @@ import { MatCardModule } from '@angular/material/card';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatDividerModule } from '@angular/material/divider';
-import { FormsModule } from '@angular/forms';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Document, DocumentType, DocumentStatus } from '../../models';
 import { AppSearchBarComponent } from "../../molecules/app-search-bar/app-search-bar.component";
+import { debounceTime, Subject } from 'rxjs';
 
 @Component({
   selector: 'app-documents-page',
@@ -30,8 +31,9 @@ import { AppSearchBarComponent } from "../../molecules/app-search-bar/app-search
     MatMenuModule,
     MatDividerModule,
     FormsModule,
-    AppSearchBarComponent
-],
+    AppSearchBarComponent,
+    ReactiveFormsModule
+  ],
   template: `
     <div class="page-container">
       <div class="page-header">
@@ -42,7 +44,13 @@ import { AppSearchBarComponent } from "../../molecules/app-search-bar/app-search
       <mat-card class="content-card">
         <mat-card-header>
           <div class="table-header">
-            <app-search-bar [label]="'Search documents...'" [placeholder]="'Search by name, type, or owner'" (search)="applyFilter($event)"></app-search-bar>
+            <form [formGroup]="form">
+              <app-search-bar
+                formControlName="searchTerm"
+                [label]="'Search documents...'"
+                [placeholder]="'Search by name, type, or owner'">
+              </app-search-bar>
+            </form>
             
             <div class="action-buttons">
               <button mat-flat-button color="primary" (click)="uploadDocument()">
@@ -155,8 +163,25 @@ export class AppDocumentsPageComponent implements OnInit {
   filteredDocuments: Document[] = [];
   displayedColumns: string[] = ['name', 'owner', 'status', 'lastModified', 'actions'];
 
+  form = new FormGroup({
+    searchTerm: new FormControl('')
+  });
+
+  private destroy$ = new Subject<void>();
+
   ngOnInit() {
     this.loadDocuments();
+
+    this.form.get('searchTerm')?.valueChanges
+      .pipe(debounceTime(300))
+      .subscribe(value => {
+        this.applyFilter(value ?? '');
+      });
+  }
+
+  ngOnDestroy() {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 
   loadDocuments() {
@@ -197,7 +222,7 @@ export class AppDocumentsPageComponent implements OnInit {
 
   applyFilter(value: string) {
     const filterValue = value.toLowerCase();
-    this.filteredDocuments = this.documents.filter(doc => 
+    this.filteredDocuments = this.documents.filter(doc =>
       doc.name.toLowerCase().includes(filterValue) ||
       doc.type.toLowerCase().includes(filterValue) ||
       doc.owner.toLowerCase().includes(filterValue)
@@ -265,11 +290,11 @@ export class AppDocumentsPageComponent implements OnInit {
     const diff = now.getTime() - date.getTime();
     const hours = Math.floor(diff / (1000 * 60 * 60));
     const days = Math.floor(hours / 24);
-    
+
     if (hours < 1) return 'Just now';
     if (hours < 24) return `${hours}h ago`;
     if (days < 30) return `${days}d ago`;
-    
+
     return date.toLocaleDateString();
   }
 }

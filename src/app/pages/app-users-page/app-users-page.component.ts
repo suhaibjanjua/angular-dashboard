@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
@@ -12,9 +12,10 @@ import { MatDialogModule, MatDialog } from '@angular/material/dialog';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatDividerModule } from '@angular/material/divider';
-import { FormsModule } from '@angular/forms';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { User, UserStatus, UserRole, UserStatusColorMap, UserRoleColorMap, UserStatusCssClassMap, UserRoleCssClassMap, StatusIconMap, MaterialColor } from '../../models';
 import { AppSearchBarComponent } from '../../molecules/app-search-bar/app-search-bar.component';
+import { debounceTime, Subject } from 'rxjs';
 
 @Component({
   selector: 'app-users-page',
@@ -34,7 +35,8 @@ import { AppSearchBarComponent } from '../../molecules/app-search-bar/app-search
     MatMenuModule,
     MatDividerModule,
     FormsModule,
-    AppSearchBarComponent
+    AppSearchBarComponent,
+    ReactiveFormsModule
   ],
   template: `
     <div class="page-container">
@@ -46,7 +48,13 @@ import { AppSearchBarComponent } from '../../molecules/app-search-bar/app-search
       <mat-card class="content-card">
         <mat-card-header>
           <div class="table-header">
-            <app-search-bar [label]="'Search users...'" [placeholder]="'Search by name, email, or role'" (search)="applyFilter($event)"></app-search-bar>
+            <form [formGroup]="form">
+              <app-search-bar
+                formControlName="searchTerm"
+                [label]="'Search users...'"
+                [placeholder]="'Search by name, email, or role'">
+              </app-search-bar>
+            </form>
             
             <div class="action-buttons">
               <button mat-flat-button color="primary" (click)="addUser()">
@@ -162,15 +170,32 @@ import { AppSearchBarComponent } from '../../molecules/app-search-bar/app-search
   `,
   styleUrl: './app-users-page.component.scss'
 })
-export class AppUsersPageComponent implements OnInit {
+export class AppUsersPageComponent implements OnInit, OnDestroy {
   users: User[] = [];
   filteredUsers: User[] = [];
   displayedColumns: string[] = ['name', 'role', 'status', 'lastLogin', 'actions'];
 
-  constructor(private dialog: MatDialog) {}
+  form = new FormGroup({
+    searchTerm: new FormControl('')
+  });
+
+  private destroy$ = new Subject<void>();
+
+  constructor(private dialog: MatDialog) { }
 
   ngOnInit() {
     this.loadUsers();
+
+    this.form.get('searchTerm')?.valueChanges
+      .pipe(debounceTime(300))
+      .subscribe(value => {
+        this.applyFilter(value ?? '');
+      });
+  }
+
+  ngOnDestroy() {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 
   loadUsers() {
@@ -232,7 +257,7 @@ export class AppUsersPageComponent implements OnInit {
 
   applyFilter(value: string) {
     const filterValue = value.toLowerCase();
-    this.filteredUsers = this.users.filter(user => 
+    this.filteredUsers = this.users.filter(user =>
       user.firstName.toLowerCase().includes(filterValue) ||
       user.lastName.toLowerCase().includes(filterValue) ||
       user.email.toLowerCase().includes(filterValue) ||
