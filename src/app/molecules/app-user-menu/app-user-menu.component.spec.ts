@@ -30,8 +30,8 @@ describe('AppUserMenuComponent', () => {
 
   it('should display user information', () => {
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('.user-avatar')?.textContent).toContain('JS');
-    expect(compiled.querySelector('.user-name')?.textContent).toContain('John Smith');
+    expect(compiled.querySelector('.user-avatar')?.textContent).toContain('SJ');
+    expect(compiled.querySelector('.user-name')?.textContent).toContain('Suhaib Janjua');
     expect(compiled.querySelector('.user-role')?.textContent).toContain('Administrator');
   });
 

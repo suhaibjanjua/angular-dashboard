@@ -13,9 +13,9 @@ import { Router } from '@angular/router';
     <div class="user-menu">
       <button mat-button [matMenuTriggerFor]="userMenu" class="user-button">
         <div class="user-info">
-          <div class="user-avatar">JS</div>
+          <div class="user-avatar">SJ</div>
           <div class="user-details">
-            <span class="user-name">John Smith</span>
+            <span class="user-name">Suhaib Janjua</span>
             <span class="user-role">Administrator</span>
           </div>
           <mat-icon class="dropdown-icon">keyboard_arrow_down</mat-icon>

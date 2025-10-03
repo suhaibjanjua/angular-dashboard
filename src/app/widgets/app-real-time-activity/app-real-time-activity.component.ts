@@ -45,7 +45,7 @@ export class AppRealTimeActivityComponent implements OnInit, OnDestroy {
   activitiesCount = 247;
   
   recentActivities = [
-    { time: '2 sec ago', text: 'John Smith joined Math 101', icon: 'person_add', type: 'success' },
+    { time: '2 sec ago', text: 'Suhaib Janjua joined Math 101', icon: 'person_add', type: 'success' },
     { time: '15 sec ago', text: 'New assignment submitted in Physics', icon: 'assignment', type: 'info' },
     { time: '32 sec ago', text: 'Sarah Johnson started screen sharing', icon: 'screen_share', type: 'info' },
     { time: '1 min ago', text: 'Breakout room created in Biology Lab', icon: 'group_work', type: 'success' },
