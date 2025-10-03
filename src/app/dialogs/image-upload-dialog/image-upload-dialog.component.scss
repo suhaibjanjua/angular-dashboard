@@ -1,0 +1,143 @@
+$lightgray: #ababab;
+
+.mat-mdc-card-header {
+    justify-content: center;
+    text-align: center;
+}
+
+.mat-mdc-card-title {
+    font-size: 1.2rem;
+    line-height: 1.5rem;
+}
+
+.mat-mdc-card-subtitle {
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+    color: $lightgray;
+}
+
+.upload-container {
+    max-height: 100vh;
+    overflow: hidden;
+    //   padding: 16px;
+
+    .upload-card {
+        width: 500px;
+        margin: auto;
+        position: relative;
+        padding: 16px;
+
+        .close-button {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+        }
+
+        .upload-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 24px;
+            padding: 16px;
+
+            .upload-icon-backdrop {
+                width: 128px;
+                height: 128px;
+                border: 1px solid $lightgray;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                border-radius: 50%;
+
+                .upload-icon-container {
+                    width: 48px;
+                    height: 48px;
+                    border: 1px dashed $lightgray;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    border-radius: 50%;
+
+                    .upload-icon {
+                        font-size: 24px;
+                        color: $lightgray;
+                    }
+                }
+            }
+
+            .upload-actions {
+                display: flex;
+                gap: 16px;
+                justify-content: center;
+            }
+        }
+    }
+
+    .image-preview {
+        width: 500px;
+        height: 500px;
+        margin: auto;
+        position: relative;
+        padding: 16px;
+
+        .preview-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 16px;
+        }
+
+        .action-buttons {
+            position: absolute;
+            bottom: 30px;
+            display: flex;
+            gap: 12px;
+            left: 50%;
+            transform: translateX(-50%);
+
+            .close-button {
+                background-color: $lightgray;
+                color: white;
+            }
+
+            .save-button {
+                background-color: #1cc172;
+                color: white;
+            }
+        }
+    }
+
+    .camera-preview {
+        width: 500px;
+        height: 500px;
+        margin: auto;
+        position: relative;
+
+        .camera-video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 1rem;
+            background-color: black;
+        }
+
+        .capture-button {
+            position: absolute;
+            bottom: 16px;
+        }
+
+        .action-buttons {
+            position: absolute;
+            bottom: 16px;
+            display: flex;
+            gap: 12px;
+            left: 50%;
+            transform: translateX(-50%);
+
+            .capture-button {
+                background-color: #7d00fa;
+                color: white;
+            }
+        }
+    }
+}

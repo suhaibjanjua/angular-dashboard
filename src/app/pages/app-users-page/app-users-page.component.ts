@@ -118,7 +118,7 @@ import { User, UserStatus, UserRole, UserStatusColorMap, UserRoleColorMap, UserS
               <!-- Actions Column -->
               <ng-container matColumnDef="actions">
                 <th mat-header-cell *matHeaderCellDef>Actions</th>
-                <td mat-cell *matCellDef="let user" class="action-buttons">
+                <td mat-cell *matCellDef="let user">
                   <button mat-icon-button [matMenuTriggerFor]="menu" class="action-menu" matTooltip="More Actions">
                     <mat-icon>more_vert</mat-icon>
                   </button>
