@@ -20,6 +20,7 @@ export const routes: Routes = [
 			{ path: 'meetings', loadComponent: () => import('./pages/app-meetings-page/app-meetings-page.component').then(m => m.AppMeetingsPageComponent) },
 			{ path: 'reports', loadComponent: () => import('./pages/app-reports-page/app-reports-page.component').then(m => m.AppReportsPageComponent) },
 			{ path: 'calendar', loadComponent: () => import('./pages/app-full-calendar/app-full-calendar.component').then(m => m.AppFullCalendarComponent) },
+			{ path: 'notifications', loadComponent: () => import('./pages/app-notifications-page/app-notifications-page.component').then(m => m.AppNotificationsPageComponent) },
 			// User menu pages
 			{ path: 'profile', loadComponent: () => import('./pages/app-profile-page/app-profile-page.component').then(m => m.AppProfilePageComponent) },
 			{ path: 'change-password', loadComponent: () => import('./pages/app-change-password-page/app-change-password-page.component').then(m => m.AppChangePasswordPageComponent) },
