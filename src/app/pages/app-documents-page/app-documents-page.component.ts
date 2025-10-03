@@ -12,6 +12,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatDividerModule } from '@angular/material/divider';
 import { FormsModule } from '@angular/forms';
 import { Document, DocumentType, DocumentStatus } from '../../models';
+import { AppSearchBarComponent } from "../../molecules/app-search-bar/app-search-bar.component";
 
 @Component({
   selector: 'app-documents-page',
@@ -28,8 +29,9 @@ import { Document, DocumentType, DocumentStatus } from '../../models';
     MatChipsModule,
     MatMenuModule,
     MatDividerModule,
-    FormsModule
-  ],
+    FormsModule,
+    AppSearchBarComponent
+],
   template: `
     <div class="page-container">
       <div class="page-header">
@@ -40,16 +42,7 @@ import { Document, DocumentType, DocumentStatus } from '../../models';
       <mat-card class="content-card">
         <mat-card-header>
           <div class="table-header">
-            <div class="search-section">
-              <mat-form-field appearance="outline" class="search-field">
-                <mat-label>Search documents...</mat-label>
-                <input matInput 
-                       [(ngModel)]="searchTerm" 
-                       (input)="applyFilter()"
-                       placeholder="Search by name, type, or owner">
-                <mat-icon matSuffix>search</mat-icon>
-              </mat-form-field>
-            </div>
+            <app-search-bar (search)="applyFilter($event)"></app-search-bar>
             
             <div class="action-buttons">
               <button mat-flat-button color="primary" (click)="uploadDocument()">
@@ -160,7 +153,6 @@ import { Document, DocumentType, DocumentStatus } from '../../models';
 export class AppDocumentsPageComponent implements OnInit {
   documents: Document[] = [];
   filteredDocuments: Document[] = [];
-  searchTerm: string = '';
   displayedColumns: string[] = ['name', 'owner', 'status', 'lastModified', 'actions'];
 
   ngOnInit() {
@@ -203,8 +195,8 @@ export class AppDocumentsPageComponent implements OnInit {
     this.filteredDocuments = [...this.documents];
   }
 
-  applyFilter() {
-    const filterValue = this.searchTerm.toLowerCase();
+  applyFilter(value: string) {
+    const filterValue = value.toLowerCase();
     this.filteredDocuments = this.documents.filter(doc => 
       doc.name.toLowerCase().includes(filterValue) ||
       doc.type.toLowerCase().includes(filterValue) ||

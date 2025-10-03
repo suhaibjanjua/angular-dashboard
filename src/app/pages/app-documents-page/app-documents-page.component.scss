@@ -44,22 +44,9 @@
   margin-bottom: 24px;
   gap: 16px;
   
-  .search-section {
-    flex: 1;
-    max-width: 400px;
-    
-    .search-field {
-      width: 100%;
-      
-      .mat-mdc-form-field-subscript-wrapper {
-        display: none;
-      }
-    }
-  }
-  
   .action-buttons {
     display: flex;
-    gap: 2px;
+    gap: 12px;
     align-items: center;
     justify-content: flex-start;
     
