@@ -37,7 +37,7 @@ import { Report, ReportStatus, ReportType, ReportCategory, ExportFormat, ReportS
               <mat-icon>add</mat-icon>
               Generate Report
             </button>
-            <mat-menu #newReportMenu="matMenu">
+            <mat-menu #newReportMenu="matMenu" class="reports-dropdown">
               <button mat-menu-item>
                 <mat-icon>school</mat-icon>
                 <span>Academic Report</span>
@@ -156,7 +156,7 @@ import { Report, ReportStatus, ReportType, ReportCategory, ExportFormat, ReportS
                     <button mat-icon-button matTooltip="More Options" [matMenuTriggerFor]="actionMenu">
                       <mat-icon>more_vert</mat-icon>
                     </button>
-                    <mat-menu #actionMenu="matMenu">
+                    <mat-menu #actionMenu="matMenu" class="reports-dropdown">
                       <button mat-menu-item>
                         <mat-icon>refresh</mat-icon>
                         <span>Regenerate</span>
@@ -165,7 +165,7 @@ import { Report, ReportStatus, ReportType, ReportCategory, ExportFormat, ReportS
                         <mat-icon>schedule</mat-icon>
                         <span>Schedule</span>
                       </button>
-                      <button mat-menu-item>
+                      <button mat-menu-item class="danger-item">
                         <mat-icon>delete_outline</mat-icon>
                         <span>Delete</span>
                       </button>

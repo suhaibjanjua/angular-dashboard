@@ -14,6 +14,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatDividerModule } from '@angular/material/divider';
 import { FormsModule } from '@angular/forms';
 import { User, UserStatus, UserRole, UserStatusColorMap, UserRoleColorMap, UserStatusCssClassMap, UserRoleCssClassMap, StatusIconMap, MaterialColor } from '../../models';
+import { AppSearchBarComponent } from '../../molecules/app-search-bar/app-search-bar.component';
 
 @Component({
   selector: 'app-users-page',
@@ -32,7 +33,8 @@ import { User, UserStatus, UserRole, UserStatusColorMap, UserRoleColorMap, UserS
     MatSnackBarModule,
     MatMenuModule,
     MatDividerModule,
-    FormsModule
+    FormsModule,
+    AppSearchBarComponent
   ],
   template: `
     <div class="page-container">
@@ -44,16 +46,7 @@ import { User, UserStatus, UserRole, UserStatusColorMap, UserRoleColorMap, UserS
       <mat-card class="content-card">
         <mat-card-header>
           <div class="table-header">
-            <div class="search-section">
-              <mat-form-field appearance="outline" class="search-field">
-                <mat-label>Search users...</mat-label>
-                <input matInput 
-                       [(ngModel)]="searchTerm" 
-                       (input)="applyFilter()"
-                       placeholder="Search by name, email, or role">
-                <mat-icon matSuffix>search</mat-icon>
-              </mat-form-field>
-            </div>
+            <app-search-bar [label]="'Search users...'" [placeholder]="'Search by name, email, or role'" (search)="applyFilter($event)"></app-search-bar>
             
             <div class="action-buttons">
               <button mat-flat-button color="primary" (click)="addUser()">
@@ -118,11 +111,11 @@ import { User, UserStatus, UserRole, UserStatusColorMap, UserRoleColorMap, UserS
               <!-- Actions Column -->
               <ng-container matColumnDef="actions">
                 <th mat-header-cell *matHeaderCellDef>Actions</th>
-                <td mat-cell *matCellDef="let user" class="action-buttons">
+                <td mat-cell *matCellDef="let user">
                   <button mat-icon-button [matMenuTriggerFor]="menu" class="action-menu" matTooltip="More Actions">
                     <mat-icon>more_vert</mat-icon>
                   </button>
-                  <mat-menu #menu="matMenu">
+                  <mat-menu #menu="matMenu" class="users-list-dropdown">
                     <button mat-menu-item (click)="editUser(user)">
                       <mat-icon>manage_accounts</mat-icon>
                       <span>Edit User</span>
@@ -136,7 +129,7 @@ import { User, UserStatus, UserRole, UserStatusColorMap, UserRoleColorMap, UserS
                       <span>Reset Password</span>
                     </button>
                     <mat-divider></mat-divider>
-                    <button mat-menu-item (click)="deleteUser(user)">
+                    <button mat-menu-item (click)="deleteUser(user)" class="danger-item">
                       <mat-icon>person_remove</mat-icon>
                       <span>Remove User</span>
                     </button>
@@ -172,7 +165,6 @@ import { User, UserStatus, UserRole, UserStatusColorMap, UserRoleColorMap, UserS
 export class AppUsersPageComponent implements OnInit {
   users: User[] = [];
   filteredUsers: User[] = [];
-  searchTerm: string = '';
   displayedColumns: string[] = ['name', 'role', 'status', 'lastLogin', 'actions'];
 
   constructor(private dialog: MatDialog) {}
@@ -238,8 +230,8 @@ export class AppUsersPageComponent implements OnInit {
     this.filteredUsers = [...this.users];
   }
 
-  applyFilter() {
-    const filterValue = this.searchTerm.toLowerCase();
+  applyFilter(value: string) {
+    const filterValue = value.toLowerCase();
     this.filteredUsers = this.users.filter(user => 
       user.firstName.toLowerCase().includes(filterValue) ||
       user.lastName.toLowerCase().includes(filterValue) ||

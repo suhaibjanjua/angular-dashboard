@@ -1,7 +1,21 @@
 @use '../../styles/variables.scss' as vars;
+
 .search-bar {
   display: flex;
   gap: vars.$spacing-sm;
   align-items: center;
   width: 100%;
+}
+
+.search-section {
+  flex: 1;
+  max-width: 400px;
+
+  .search-field {
+    width: 100%;
+
+    .mat-mdc-form-field-subscript-wrapper {
+      display: none;
+    }
+  }
 }

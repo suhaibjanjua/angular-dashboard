@@ -1,0 +1,81 @@
+<div class="upload-container" (drop)="onDrop($event)" (dragover)="allowDrop($event)">
+    <ng-container *ngIf="!imageSrc && !isCameraActive">
+        <mat-card class="upload-card">
+            <mat-card-header>
+                <mat-card-title>Drag and drop your photo here</mat-card-title>
+                <mat-card-subtitle>(JPEG or PNG, min size 500x500)</mat-card-subtitle>
+                <button mat-icon-button class="close-button" (click)="closeModal()" matTooltip="Close">
+                    <mat-icon>close</mat-icon>
+                </button>
+            </mat-card-header>
+
+            <mat-card-content class="upload-content">
+                <div class="upload-icon-backdrop">
+                    <div class="upload-icon-container">
+                        <mat-icon class="upload-icon" fontIcon="cloud_upload" aria-hidden="false"
+                            aria-label="Upload icon"></mat-icon>
+                    </div>
+                </div>
+
+                <div class="upload-actions">
+                    <input type="file" accept="image/png, image/jpeg" hidden (change)="handleFileInput($event)"
+                        #avatarUploadInput />
+
+                    <button mat-stroked-button color="primary" (click)="avatarUploadInput.click()">
+                        <mat-icon>file_upload</mat-icon>
+                        Upload a photo
+                    </button>
+
+                    <button mat-flat-button color="accent" (click)="startCamera()">
+                        <mat-icon>photo_camera</mat-icon>
+                        Take a selfie
+                    </button>
+                </div>
+            </mat-card-content>
+        </mat-card>
+    </ng-container>
+
+    <ng-container *ngIf="imageSrc">
+        <div class="image-preview">
+            <ng-container *ngIf="croppedSrc; else cropperBlock">
+                <img [src]="croppedSrc" class="preview-img" />
+                <div class="action-buttons">
+                    <button mat-icon-button class="close-button" (click)="cancelImage()" matTooltip="Cancel">
+                        <mat-icon>close</mat-icon>
+                    </button>
+                    <button mat-icon-button class="save-button" (click)="sendImageToMainModal()" matTooltip="Confirm">
+                        <mat-icon>check</mat-icon>
+                    </button>
+                </div>
+            </ng-container>
+
+            <ng-template #cropperBlock>
+                <image-cropper [imageURL]="imageSrc" [imageChangedEvent]="imageChangedEvent"
+                    [maintainAspectRatio]="true" [aspectRatio]="1" format="png" (imageCropped)="imageCropped($event)"
+                    (imageLoaded)="imageLoaded($event)" (cropperReady)="cropperReady()"
+                    (loadImageFailed)="loadImageFailed()">
+                </image-cropper>
+
+                <div class="action-buttons">
+                    <button mat-icon-button class="close-button" (click)="cancelImage()" matTooltip="Cancel">
+                        <mat-icon>close</mat-icon>
+                    </button>
+                    <button mat-icon-button class="save-button" (click)="saveImage()" matTooltip="Save">
+                        <mat-icon>check</mat-icon>
+                    </button>
+                </div>
+            </ng-template>
+        </div>
+    </ng-container>
+
+    <ng-container *ngIf="isCameraActive && !imageSrc">
+        <div class="camera-preview">
+            <video #videoElement class="camera-video"></video>
+            <div class="action-buttons">
+                <button mat-icon-button class="capture-button" (click)="captureImage()" matTooltip="Capture">
+                    <mat-icon>camera</mat-icon>
+                </button>
+            </div>
+        </div>
+    </ng-container>
+</div>

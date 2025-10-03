@@ -1,19 +1,21 @@
 .page-container {
   padding: 24px;
-  max-width: 1400px;
-  margin: 0 auto;
 }
 
 .page-header {
+  background: white;
+  padding: 24px;
+  border-radius: 12px;
   margin-bottom: 24px;
-  
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+
   .page-title {
     font-size: 28px;
     font-weight: 600;
     color: #333;
     margin: 0 0 8px 0;
   }
-  
+
   .page-subtitle {
     font-size: 16px;
     color: #666;
@@ -42,22 +44,9 @@
   margin-bottom: 24px;
   gap: 16px;
   
-  .search-section {
-    flex: 1;
-    max-width: 400px;
-    
-    .search-field {
-      width: 100%;
-      
-      .mat-mdc-form-field-subscript-wrapper {
-        display: none;
-      }
-    }
-  }
-  
   .action-buttons {
     display: flex;
-    gap: 2px;
+    gap: 12px;
     align-items: center;
     justify-content: flex-start;
     
@@ -228,20 +217,61 @@
 }
 
 // Menu styles
-::ng-deep .mat-mdc-menu-panel {
-  min-width: 180px;
-  background: #ffffff !important;
-  border-radius: 8px;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
-}
+::ng-deep .documents-dropdown {
+  margin-top: 8px;
 
-::ng-deep .mat-mdc-menu-item {
-  .mat-icon {
-    color: #666;
+  .mat-mdc-menu-panel {
+    background: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
   }
-  
-  &:hover .mat-icon {
-    color: #6c4bb6;
+
+  .mat-mdc-menu-content {
+    padding: 8px 0;
+    min-width: 200px;
+    background: #ffffff;
+  }
+
+  .mat-mdc-menu-item {
+    height: 48px;
+    padding: 0 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 14px;
+    color: #333;
+
+    mat-icon {
+      font-size: 20px;
+      width: 20px;
+      height: 20px;
+      color: #666;
+    }
+
+    &:hover {
+      background-color: rgba(108, 75, 182, 0.08);
+
+      mat-icon {
+        color: #6c4bb6;
+      }
+    }
+
+    &.danger-item {
+      &:hover {
+        background-color: rgba(244, 67, 54, 0.08);
+        color: #f44336;
+
+        mat-icon {
+          color: #f44336;
+        }
+      }
+    }
+  }
+
+  .mat-mdc-menu-divider {
+    margin: 8px 0;
+    background-color: #e0e0e0;
+    height: 1px;
   }
 }
 

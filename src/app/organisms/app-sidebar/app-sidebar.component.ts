@@ -25,7 +25,8 @@ export class AppSidebarComponent {
     { label: 'Courses', icon: 'school', route: '/courses' },
     { label: 'Classes', icon: 'class', route: '/classes' },
     { label: 'Meetings', icon: 'video_call', route: '/meetings' },
-    { label: 'Reports', icon: 'assessment', route: '/reports' }
+    { label: 'Reports', icon: 'assessment', route: '/reports' },
+    { label: 'Calendar', icon: 'calendar_month', route: '/calendar' }
   ];
 
   toggleSidebar() {

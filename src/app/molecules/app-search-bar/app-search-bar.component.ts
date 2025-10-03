@@ -1,17 +1,19 @@
-import { Component, Output, EventEmitter } from '@angular/core';
-import { AppSearchInputComponent } from '../../atoms/app-search-input/app-search-input.component';
-import { AppButtonComponent } from '../../atoms/app-button/app-button.component';
+import { Component, Output, EventEmitter, Input } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { MatFormField, MatInputModule, MatLabel } from '@angular/material/input';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-search-bar',
   standalone: true,
-  imports: [AppSearchInputComponent, AppButtonComponent, FormsModule],
+  imports: [FormsModule, MatLabel, MatFormField, MatIconModule, MatInputModule],
   templateUrl: './app-search-bar.component.html',
   styleUrls: ['./app-search-bar.component.scss']
 })
 export class AppSearchBarComponent {
   searchValue: string = '';
+  @Input() label: string = 'Search...';
+  @Input() placeholder: string = 'Type to search...';
   @Output() search = new EventEmitter<string>();
 
   onSearch() {
