@@ -1,0 +1,467 @@
+[
+  {
+    "id": "calendar",
+    "name": "Calendar Integration",
+    "description": "Connect and synchronize with external calendar services",
+    "icon": "event",
+    "order": 1,
+    "features": [
+      {
+        "id": "outlook-calendar",
+        "name": "Outlook Calendar Integration",
+        "description": "Sync events, meetings, and appointments with Microsoft Outlook calendar. Automatic two-way synchronization keeps your schedules aligned.",
+        "enabled": false,
+        "icon": "event",
+        "children": [
+          {
+            "id": "outlook-auto-sync",
+            "name": "Auto Sync Events",
+            "description": "Automatically sync new events from Outlook to your dashboard",
+            "enabled": false,
+            "icon": "sync",
+            "parentId": "outlook-calendar"
+          }
+        ]
+      },
+      {
+        "id": "google-calendar",
+        "name": "Google Calendar Integration",
+        "description": "Connect with Google Calendar for seamless event management and scheduling across all your Google services.",
+        "enabled": true,
+        "icon": "event",
+        
+        "children": [
+          {
+            "id": "google-auto-sync",
+            "name": "Auto Sync Events",
+            "description": "Automatically sync new events from Google Calendar",
+            "enabled": true,
+            "icon": "sync",
+            
+            "parentId": "google-calendar"
+          },
+          {
+            "id": "google-smart-scheduling",
+            "name": "Smart Scheduling",
+            "description": "AI-powered scheduling suggestions based on availability",
+            "enabled": false,
+            "icon": "schedule",
+            
+            "parentId": "google-calendar"
+          }
+        ]
+      },
+      {
+        "id": "apple-calendar",
+        "name": "Apple Calendar Integration",
+        "description": "Sync with Apple Calendar and iCloud for seamless integration across all Apple devices.",
+        "enabled": false,
+        "icon": "event",
+        
+      }
+    ]
+  },
+  {
+    "id": "storage",
+    "name": "External Storage",
+    "description": "Connect with cloud storage providers for file management",
+    "icon": "cloud_upload",
+    "order": 2,
+    "features": [
+      {
+        "id": "google-drive",
+        "name": "Google Drive Integration",
+        "description": "Access, upload, and manage files directly from Google Drive. Seamless integration with Google Workspace.",
+        "enabled": true,
+        "icon": "cloud",
+        
+        "children": [
+          {
+            "id": "gdrive-auto-backup",
+            "name": "Auto Backup Documents",
+            "description": "Automatically backup important documents to Google Drive",
+            "enabled": false,
+            "icon": "backup",
+            
+            "parentId": "google-drive"
+          },
+          {
+            "id": "gdrive-collaboration",
+            "name": "Real-time Collaboration",
+            "description": "Enable real-time document collaboration through Google Drive",
+            "enabled": true,
+            "icon": "group_work",
+            
+            "parentId": "google-drive"
+          }
+        ]
+      },
+      {
+        "id": "onedrive",
+        "name": "OneDrive Integration",
+        "description": "Connect with Microsoft OneDrive for file storage and sharing. Perfect integration with Office 365.",
+        "enabled": false,
+        "icon": "cloud",
+        
+        "children": [
+          {
+            "id": "onedrive-office365",
+            "name": "Office 365 Integration",
+            "description": "Deep integration with Office 365 applications and services",
+            "enabled": false,
+            "icon": "work",
+            
+            "parentId": "onedrive"
+          }
+        ]
+      },
+      {
+        "id": "dropbox",
+        "name": "Dropbox Integration",
+        "description": "Secure file storage and sharing with Dropbox. Enhanced team collaboration features.",
+        "enabled": false,
+        "icon": "cloud",
+        
+        "children": [
+          {
+            "id": "dropbox-smart-sync",
+            "name": "Smart Sync",
+            "description": "Automatically sync files based on usage patterns",
+            "enabled": false,
+            "icon": "sync_alt",
+            
+            "parentId": "dropbox"
+          }
+        ]
+      },
+      {
+        "id": "aws-s3",
+        "name": "Amazon S3 Integration",
+        "description": "Enterprise-grade storage with Amazon S3. Scalable and secure cloud storage solution.",
+        "enabled": false,
+        "icon": "cloud",
+        
+      }
+    ]
+  },
+  {
+    "id": "communication",
+    "name": "Communication Tools",
+    "description": "Integrate with messaging and communication platforms",
+    "icon": "chat",
+    "order": 3,
+    "features": [
+      {
+        "id": "teams-integration",
+        "name": "Microsoft Teams Integration",
+        "description": "Connect with Microsoft Teams for seamless communication and collaboration.",
+        "enabled": false,
+        "icon": "groups",
+        
+        "children": [
+          {
+            "id": "teams-notifications",
+            "name": "Teams Notifications",
+            "description": "Receive dashboard notifications in Microsoft Teams",
+            "enabled": false,
+            "icon": "notifications",
+            
+            "parentId": "teams-integration"
+          },
+          {
+            "id": "teams-bot",
+            "name": "Dashboard Bot",
+            "description": "Interactive bot for dashboard operations within Teams",
+            "enabled": false,
+            "icon": "smart_toy",
+            
+            "parentId": "teams-integration"
+          }
+        ]
+      },
+      {
+        "id": "slack-integration",
+        "name": "Slack Integration",
+        "description": "Enhance team productivity with Slack integration and automated notifications.",
+        "enabled": true,
+        "icon": "tag",
+        
+        "children": [
+          {
+            "id": "slack-commands",
+            "name": "Slash Commands",
+            "description": "Use dashboard features directly from Slack with slash commands",
+            "enabled": true,
+            "icon": "terminal",
+            
+            "parentId": "slack-integration"
+          },
+          {
+            "id": "slack-workflows",
+            "name": "Automated Workflows",
+            "description": "Create automated workflows between dashboard and Slack",
+            "enabled": false,
+            "icon": "automation",
+            
+            "parentId": "slack-integration"
+          }
+        ]
+      },
+      {
+        "id": "discord-integration",
+        "name": "Discord Integration",
+        "description": "Connect with Discord for community and team communication.",
+        "enabled": false,
+        "icon": "forum",
+        
+      }
+    ]
+  },
+  {
+    "id": "analytics",
+    "name": "Advanced Analytics",
+    "description": "Enhanced reporting and analytics capabilities",
+    "icon": "analytics",
+    "order": 4,
+    "features": [
+      {
+        "id": "custom-reports",
+        "name": "Custom Report Builder",
+        "description": "Create personalized reports with drag-and-drop interface and custom metrics.",
+        "enabled": false,
+        "icon": "assessment",
+        
+        "children": [
+          {
+            "id": "report-scheduling",
+            "name": "Scheduled Reports",
+            "description": "Automatically generate and send reports on schedule",
+            "enabled": false,
+            "icon": "schedule_send",
+            
+            "parentId": "custom-reports"
+          },
+          {
+            "id": "report-ai",
+            "name": "AI Insights",
+            "description": "Get AI-powered insights and recommendations in reports",
+            "enabled": false,
+            "icon": "psychology",
+            
+            "parentId": "custom-reports"
+          }
+        ]
+      },
+      {
+        "id": "real-time-analytics",
+        "name": "Real-time Analytics",
+        "description": "Live data streaming and real-time dashboard updates for immediate insights.",
+        "enabled": true,
+        "icon": "speed",
+        
+      },
+      {
+        "id": "predictive-analytics",
+        "name": "Predictive Analytics",
+        "description": "Machine learning powered predictions and trend analysis.",
+        "enabled": false,
+        "icon": "trending_up",
+        
+      }
+    ]
+  },
+  {
+    "id": "security",
+    "name": "Security & Compliance",
+    "description": "Advanced security features and compliance tools",
+    "icon": "security",
+    "order": 5,
+    "features": [
+      {
+        "id": "two-factor-auth",
+        "name": "Two-Factor Authentication",
+        "description": "Enhanced security with SMS, email, or authenticator app-based 2FA.",
+        "enabled": true,
+        "icon": "verified_user",
+        
+        "children": [
+          {
+            "id": "backup-codes",
+            "name": "Backup Recovery Codes",
+            "description": "Generate backup codes for account recovery",
+            "enabled": true,
+            "icon": "vpn_key",
+            
+            "parentId": "two-factor-auth"
+          },
+          {
+            "id": "hardware-keys",
+            "name": "Hardware Security Keys",
+            "description": "Support for FIDO2 hardware security keys",
+            "enabled": false,
+            "icon": "key",
+            
+            "parentId": "two-factor-auth"
+          }
+        ]
+      },
+      {
+        "id": "audit-logs",
+        "name": "Audit Logging",
+        "description": "Comprehensive activity logging for security and compliance requirements.",
+        "enabled": false,
+        "icon": "history",
+        
+      },
+      {
+        "id": "gdpr-compliance",
+        "name": "GDPR Compliance Tools",
+        "description": "Data privacy tools and automated compliance reporting for GDPR.",
+        "enabled": false,
+        "icon": "gavel",
+        
+      }
+    ]
+  },
+  {
+    "id": "notifications",
+    "name": "Smart Notifications",
+    "description": "Intelligent notification system and delivery options",
+    "icon": "notifications_active",
+    "order": 6,
+    "features": [
+      {
+        "id": "email-notifications",
+        "name": "Email Notifications",
+        "description": "Customizable email notifications for important events and updates.",
+        "enabled": true,
+        "icon": "mail",
+        
+        "children": [
+          {
+            "id": "email-digest",
+            "name": "Daily Digest",
+            "description": "Receive daily summary emails of important activities",
+            "enabled": false,
+            "icon": "summarize",
+            
+            "parentId": "email-notifications"
+          },
+          {
+            "id": "email-templates",
+            "name": "Custom Email Templates",
+            "description": "Create branded email notification templates",
+            "enabled": false,
+            "icon": "design_services",
+            
+            "parentId": "email-notifications"
+          }
+        ]
+      },
+      {
+        "id": "push-notifications",
+        "name": "Push Notifications",
+        "description": "Real-time browser push notifications for instant updates.",
+        "enabled": true,
+        "icon": "notifications",
+        
+      },
+      {
+        "id": "smart-filtering",
+        "name": "Smart Notification Filtering",
+        "description": "AI-powered notification filtering to reduce noise and highlight important messages.",
+        "enabled": false,
+        "icon": "filter_alt",
+        
+      }
+    ]
+  },
+  {
+    "id": "automation",
+    "name": "Workflow Automation",
+    "description": "Automate repetitive tasks and create custom workflows",
+    "icon": "precision_manufacturing",
+    "order": 7,
+    "features": [
+      {
+        "id": "zapier-integration",
+        "name": "Zapier Integration",
+        "description": "Connect with 5000+ apps through Zapier for unlimited automation possibilities.",
+        "enabled": false,
+        "icon": "hub",
+        
+      },
+      {
+        "id": "custom-workflows",
+        "name": "Custom Workflow Builder",
+        "description": "Visual workflow builder for creating custom automation sequences.",
+        "enabled": false,
+        "icon": "account_tree",
+        
+        "children": [
+          {
+            "id": "workflow-templates",
+            "name": "Workflow Templates",
+            "description": "Pre-built workflow templates for common use cases",
+            "enabled": false,
+            "icon": "content_copy",
+            
+            "parentId": "custom-workflows"
+          }
+        ]
+      },
+      {
+        "id": "scheduled-tasks",
+        "name": "Scheduled Task Automation",
+        "description": "Automate recurring tasks with flexible scheduling options.",
+        "enabled": true,
+        "icon": "schedule",
+        
+      }
+    ]
+  },
+  {
+    "id": "customization",
+    "name": "UI Customization",
+    "description": "Personalize the interface and user experience",
+    "icon": "palette",
+    "order": 8,
+    "features": [
+      {
+        "id": "custom-themes",
+        "name": "Custom Theme Builder",
+        "description": "Create and customize your own color themes and branding.",
+        "enabled": false,
+        "icon": "brush",
+        
+        "children": [
+          {
+            "id": "theme-sharing",
+            "name": "Theme Sharing",
+            "description": "Share custom themes with team members",
+            "enabled": false,
+            "icon": "share",
+            
+            "parentId": "custom-themes"
+          }
+        ]
+      },
+      {
+        "id": "dashboard-layouts",
+        "name": "Custom Dashboard Layouts",
+        "description": "Drag-and-drop dashboard customization with widget positioning.",
+        "enabled": true,
+        "icon": "dashboard_customize",
+        
+      },
+      {
+        "id": "white-labeling",
+        "name": "White Label Branding",
+        "description": "Complete white-label customization for enterprise deployments.",
+        "enabled": false,
+        "icon": "branding_watermark",
+        
+      }
+    ]
+  }
+]

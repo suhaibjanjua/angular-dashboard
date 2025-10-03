@@ -1,0 +1,245 @@
+.feature-toggle-container {
+  position: relative;
+  padding: 20px;
+  border-radius: 12px;
+  background: #ffffff;
+  border: 1px solid #e0e0e0;
+  margin-bottom: 16px;
+  transition: all 0.2s ease;
+  
+  &:hover {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    border-color: #6c4bb6;
+  }
+  
+  &.disabled {
+    opacity: 0.6;
+    background: #fafafa;
+  }
+}
+
+.feature-header {
+  .feature-info {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-bottom: 12px;
+    
+    .feature-title {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex: 1;
+      
+      .feature-icon {
+        font-size: 24px;
+        width: 24px;
+        height: 24px;
+      }
+      
+      .feature-name {
+        font-size: 16px;
+        font-weight: 600;
+        color: #333;
+        flex: 1;
+      }
+      
+      .premium-chip {
+        background: linear-gradient(135deg, #ff9800, #f57c00);
+        color: white;
+        font-size: 11px;
+        height: 24px;
+        
+        mat-icon {
+          color: white !important;
+          font-size: 14px !important;
+        }
+      }
+    }
+    
+    .feature-toggle {
+      flex-shrink: 0;
+      margin-left: 16px;
+      
+      ::ng-deep .mat-mdc-slide-toggle {
+        --mdc-switch-selected-track-color: #6c4bb6;
+        --mdc-switch-selected-handle-color: #6c4bb6;
+        --mdc-switch-unselected-track-color: #e0e0e0;
+        --mdc-switch-unselected-handle-color: #fff;
+      }
+    }
+  }
+  
+  .feature-description {
+    margin: 0;
+    font-size: 14px;
+    color: #666;
+    line-height: 1.5;
+    padding-left: 36px;
+  }
+}
+
+.child-features {
+  margin-top: 20px;
+  padding-left: 20px;
+  border-left: 2px solid #e8e3ff;
+  
+  .child-feature {
+    padding: 16px;
+    background: #fafafa;
+    border-radius: 8px;
+    margin-bottom: 12px;
+    transition: all 0.2s ease;
+    
+    &:last-child {
+      margin-bottom: 0;
+    }
+    
+    &:hover {
+      background: #f5f5f5;
+    }
+    
+    &.premium {
+      background: linear-gradient(135deg, rgba(255, 152, 0, 0.05), rgba(245, 124, 0, 0.05));
+      border-left: 3px solid #ff9800;
+    }
+    
+    &.disabled {
+      opacity: 0.5;
+      background: #f0f0f0;
+    }
+    
+    .child-header {
+      .child-info {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        margin-bottom: 8px;
+        
+        .child-title {
+          display: flex;
+          align-items: center;
+          gap: 8px;
+          flex: 1;
+          
+          .child-icon {
+            font-size: 20px;
+            width: 20px;
+            height: 20px;
+            color: #666;
+          }
+          
+          .child-name {
+            font-size: 14px;
+            font-weight: 500;
+            color: #333;
+            flex: 1;
+          }
+          
+          .premium-chip.small {
+            background: linear-gradient(135deg, #ff9800, #f57c00);
+            color: white;
+            font-size: 10px;
+            height: 20px;
+            
+            mat-icon {
+              color: white !important;
+              font-size: 12px !important;
+            }
+          }
+        }
+        
+        .child-toggle {
+          flex-shrink: 0;
+          margin-left: 12px;
+          
+          ::ng-deep .mat-mdc-slide-toggle {
+            --mdc-switch-selected-track-color: #6c4bb6;
+            --mdc-switch-selected-handle-color: #6c4bb6;
+            --mdc-switch-unselected-track-color: #e0e0e0;
+            --mdc-switch-unselected-handle-color: #fff;
+            transform: scale(0.8);
+          }
+        }
+      }
+      
+      .child-description {
+        margin: 0;
+        font-size: 12px;
+        color: #666;
+        line-height: 1.4;
+        padding-left: 28px;
+      }
+    }
+  }
+}
+
+// Responsive design
+@media (max-width: 768px) {
+  .feature-toggle-container {
+    padding: 16px;
+  }
+  
+  .feature-header {
+    .feature-info {
+      flex-direction: column;
+      gap: 12px;
+      
+      .feature-toggle {
+        align-self: flex-end;
+        margin-left: 0;
+      }
+    }
+    
+    .feature-description {
+      padding-left: 0;
+    }
+  }
+  
+  .child-features {
+    padding-left: 12px;
+    
+    .child-feature {
+      padding: 12px;
+      
+      .child-header {
+        .child-info {
+          flex-direction: column;
+          gap: 8px;
+          
+          .child-toggle {
+            align-self: flex-end;
+            margin-left: 0;
+          }
+        }
+        
+        .child-description {
+          padding-left: 0;
+        }
+      }
+    }
+  }
+}
+
+// Animation for toggles
+::ng-deep .mat-mdc-slide-toggle .mdc-switch {
+  transition: all 0.3s ease;
+}
+
+// Premium feature styling
+.premium-chip {
+  mat-icon {
+    animation: sparkle 2s ease-in-out infinite;
+  }
+}
+
+@keyframes sparkle {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.1);
+    opacity: 0.8;
+  }
+}
