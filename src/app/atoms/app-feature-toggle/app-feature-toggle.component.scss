@@ -1,5 +1,7 @@
 .feature-toggle-container {
   position: relative;
+  width: auto;
+  max-width: 100%;
   padding: 20px;
   border-radius: 12px;
   background: #ffffff;
@@ -23,6 +25,7 @@
     display: flex;
     align-items: flex-start;
     justify-content: space-between;
+    width: 100%;
     margin-bottom: 12px;
     
     .feature-title {
@@ -30,11 +33,13 @@
       align-items: center;
       gap: 12px;
       flex: 1;
+      width: auto;
       
       .feature-icon {
         font-size: 24px;
         width: 24px;
         height: 24px;
+        flex-shrink: 0;
       }
       
       .feature-name {
@@ -42,6 +47,8 @@
         font-weight: 600;
         color: #333;
         flex: 1;
+        width: auto;
+        word-wrap: break-word;
       }
       
       .premium-chip {
@@ -76,6 +83,105 @@
     color: #666;
     line-height: 1.5;
     padding-left: 36px;
+    width: 100%;
+    max-width: 100%;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+  }
+}
+
+// Accordion styles for features with children
+.feature-accordion {
+  background: #ffffff !important;
+  border: 1px solid #e0e0e0;
+  border-radius: 12px;
+  box-shadow: none !important;
+  
+  &:hover {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08) !important;
+    border-color: #6c4bb6;
+  }
+  
+  &.mat-expanded {
+    margin: 0;
+  }
+  
+  ::ng-deep .mat-expansion-panel-body {
+    padding: 0 20px 20px 20px;
+  }
+}
+
+.feature-accordion-header {
+  padding: 20px !important;
+  
+  .feature-info-accordion {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    width: 100%;
+    margin-bottom: 12px;
+    
+    .feature-title {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex: 1;
+      width: auto;
+      
+      .feature-icon {
+        font-size: 24px;
+        width: 24px;
+        height: 24px;
+        flex-shrink: 0;
+      }
+      
+      .feature-name {
+        font-size: 16px;
+        font-weight: 600;
+        color: #333;
+        flex: 1;
+        width: auto;
+        word-wrap: break-word;
+      }
+      
+      .expand-icon {
+        font-size: 20px;
+        width: 20px;
+        height: 20px;
+        color: #666;
+        margin-left: 8px;
+        transition: transform 0.3s ease;
+        flex-shrink: 0;
+        
+        &.expanded {
+          transform: rotate(180deg);
+        }
+      }
+    }
+    
+    .feature-toggle {
+      flex-shrink: 0;
+      margin-left: 16px;
+      
+      ::ng-deep .mat-mdc-slide-toggle {
+        --mdc-switch-selected-track-color: #6c4bb6;
+        --mdc-switch-selected-handle-color: #6c4bb6;
+        --mdc-switch-unselected-track-color: #e0e0e0;
+        --mdc-switch-unselected-handle-color: #fff;
+      }
+    }
+  }
+  
+  .feature-description {
+    margin: 0;
+    font-size: 14px;
+    color: #666;
+    line-height: 1.5;
+    padding-left: 36px;
+    width: 100%;
+    max-width: 100%;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
   }
 }
 
@@ -83,6 +189,7 @@
   margin-top: 20px;
   padding-left: 20px;
   border-left: 2px solid #e8e3ff;
+  width: 100%;
   
   .child-feature {
     padding: 16px;
@@ -90,6 +197,8 @@
     border-radius: 8px;
     margin-bottom: 12px;
     transition: all 0.2s ease;
+    width: 100%;
+    max-width: 100%;
     
     &:last-child {
       margin-bottom: 0;
@@ -114,6 +223,7 @@
         display: flex;
         align-items: flex-start;
         justify-content: space-between;
+        width: 100%;
         margin-bottom: 8px;
         
         .child-title {
@@ -121,12 +231,14 @@
           align-items: center;
           gap: 8px;
           flex: 1;
+          width: auto;
           
           .child-icon {
             font-size: 20px;
             width: 20px;
             height: 20px;
             color: #666;
+            flex-shrink: 0;
           }
           
           .child-name {
@@ -134,6 +246,8 @@
             font-weight: 500;
             color: #333;
             flex: 1;
+            width: auto;
+            word-wrap: break-word;
           }
           
           .premium-chip.small {
@@ -169,6 +283,10 @@
         color: #666;
         line-height: 1.4;
         padding-left: 28px;
+        width: 100%;
+        max-width: 100%;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
       }
     }
   }
@@ -178,12 +296,14 @@
 @media (max-width: 768px) {
   .feature-toggle-container {
     padding: 16px;
+    width: 100%;
   }
   
   .feature-header {
     .feature-info {
       flex-direction: column;
       gap: 12px;
+      width: 100%;
       
       .feature-toggle {
         align-self: flex-end;
@@ -193,19 +313,50 @@
     
     .feature-description {
       padding-left: 0;
+      width: 100%;
+    }
+  }
+  
+  .feature-accordion-header {
+    padding: 16px !important;
+    
+    .feature-info-accordion {
+      flex-direction: column;
+      gap: 12px;
+      width: 100%;
+      
+      .feature-title {
+        width: 100%;
+        
+        .expand-icon {
+          margin-left: auto;
+        }
+      }\n      
+      .feature-toggle {
+        align-self: flex-end;
+        margin-left: 0;
+      }
+    }
+    
+    .feature-description {
+      padding-left: 0;
+      width: 100%;
     }
   }
   
   .child-features {
     padding-left: 12px;
+    width: 100%;
     
     .child-feature {
       padding: 12px;
+      width: 100%;
       
       .child-header {
         .child-info {
           flex-direction: column;
           gap: 8px;
+          width: 100%;
           
           .child-toggle {
             align-self: flex-end;
@@ -215,6 +366,7 @@
         
         .child-description {
           padding-left: 0;
+          width: 100%;
         }
       }
     }

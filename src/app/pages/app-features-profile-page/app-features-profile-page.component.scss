@@ -113,6 +113,8 @@
 
 .main-content {
   flex: 1;
+  width: 100%;
+  max-width: 100%;
   min-height: 500px;
   background: #ffffff;
   border-radius: 12px;
@@ -194,6 +196,8 @@
 // Features List
 .features-list {
   flex: 1;
+  width: 100%;
+  max-width: 100%;
   padding: 0 24px 24px 24px;
 }
 
