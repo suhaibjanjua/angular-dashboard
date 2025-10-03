@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ImageUploadDialogComponent } from './image-upload-dialog.component';
 
 describe('ImageUploadDialogComponent', () => {
@@ -8,7 +8,20 @@ describe('ImageUploadDialogComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ImageUploadDialogComponent]
+      imports: [ImageUploadDialogComponent],
+      providers: [
+        {
+          provide: MatDialogRef,
+          useValue: {
+            close: jasmine.createSpy('close'),
+            afterClosed: () => ({ subscribe: () => {} })
+          }
+        },
+        {
+          provide: MAT_DIALOG_DATA,
+          useValue: {}
+        }
+      ]
     })
     .compileComponents();
 
