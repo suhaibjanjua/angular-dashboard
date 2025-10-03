@@ -1,21 +1,26 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDividerModule } from '@angular/material/divider';
 import { Router } from '@angular/router';
+import { LoggedInUserService } from '../../services/logged-in-user.service';
+import { AppUserAvatarComponent } from '../../atoms/app-user-avatar/app-user-avatar.component';
 
 @Component({
   selector: 'app-user-menu',
   standalone: true,
-  imports: [MatMenuModule, MatButtonModule, MatIconModule, MatDividerModule],
+  imports: [MatMenuModule, MatButtonModule, MatIconModule, MatDividerModule, AppUserAvatarComponent],
   template: `
     <div class="user-menu">
       <button mat-button [matMenuTriggerFor]="userMenu" class="user-button">
         <div class="user-info">
-          <div class="user-avatar">JS</div>
+          <!-- <div class="user-avatar">JS</div> -->
+          <div class="user-avatar">
+            <app-user-avatar [src]="loggedInUserService.image()" [fullName]="loggedInUserService.fullName()" />
+          </div>
           <div class="user-details">
-            <span class="user-name">John Smith</span>
+            <span class="user-name">{{loggedInUserService.fullName()}}</span>
             <span class="user-role">Administrator</span>
           </div>
           <mat-icon class="dropdown-icon">keyboard_arrow_down</mat-icon>
@@ -65,7 +70,8 @@ import { Router } from '@angular/router';
   styleUrl: './app-user-menu.component.scss'
 })
 export class AppUserMenuComponent {
-  constructor(private router: Router) {}
+  readonly loggedInUserService = inject(LoggedInUserService);
+  readonly router = inject(Router);
 
   navigateToProfile() {
     console.log('Navigate to profile');
