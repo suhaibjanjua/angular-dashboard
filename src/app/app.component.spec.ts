@@ -14,10 +14,10 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have the 'atomic-angular-sample' title`, () => {
+  it(`should have the 'angular-dashboard' title`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
-    expect(app.title).toEqual('atomic-angular-sample');
+    expect(app.title).toEqual('angular-dashboard');
   });
 
   it('should render router-outlet', () => {
