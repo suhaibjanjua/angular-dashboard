@@ -6,5 +6,6 @@ export * from './report.models';   // Report, ReportStatus, ReportStatusColorMap
 export * from './class.models';    // ClassStatus, ClassStatusColorMap, ClassData
 export * from './document.models'; // DocumentStatus, DocumentStatusColorMap, Document
 export * from './meeting.models';  // MeetingStatus, MeetingType, MeetingStatusColorMap, MeetingData
+export * from './notification.models'; // Notification, NotificationType, NotificationPriority, NotificationStatus
 export * from './widget.models';   // TimeRange, WidgetType, PerformanceMetric, ActivityItem
 export * from './dashboard.models'; // ApiResponse, PaginationParams, FilterParams, DashboardConfig, etc.

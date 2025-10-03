@@ -1,2 +1,139 @@
-<span class="material-icons notification-bell">notifications</span>
-<span class="notification-badge">10</span>
+<button 
+  mat-icon-button 
+  [matMenuTriggerFor]="notificationMenu"
+  (menuOpened)="onMenuOpened()"
+  (menuClosed)="onMenuClosed()"
+  class="notification-button"
+  [matTooltip]="unreadCount > 0 ? unreadCount + ' unread notifications' : 'No new notifications'"
+  matTooltipPosition="below">
+  <mat-icon 
+    [matBadge]="unreadCount" 
+    [matBadgeHidden]="unreadCount === 0"
+    matBadgeColor="warn"
+    matBadgeSize="small"
+    class="notification-icon"
+    [class.has-notifications]="unreadCount > 0">
+    notifications
+  </mat-icon>
+</button>
+
+<mat-menu #notificationMenu="matMenu" class="notification-menu" xPosition="before">
+  <!-- Header -->
+  <div class="notification-header">
+    <div class="notification-title">
+      <mat-icon>notifications</mat-icon>
+      <span>Notifications</span>
+      <span class="unread-count" *ngIf="unreadCount > 0">({{ unreadCount }})</span>
+    </div>
+    <div class="notification-actions">
+      <button 
+        mat-icon-button 
+        matTooltip="Mark all as read"
+        (click)="markAllAsRead()"
+        [disabled]="unreadCount === 0 || loading">
+        <mat-icon>done_all</mat-icon>
+      </button>
+      <button 
+        mat-icon-button 
+        matTooltip="View all notifications"
+        (click)="viewAllNotifications()">
+        <mat-icon>open_in_new</mat-icon>
+      </button>
+    </div>
+  </div>
+
+  <mat-divider></mat-divider>
+
+  <!-- Loading State -->
+  <div class="notification-loading" *ngIf="loading">
+    <mat-spinner diameter="24"></mat-spinner>
+    <span>Loading notifications...</span>
+  </div>
+
+  <!-- Notifications List -->
+  <div class="notification-list" *ngIf="!loading">
+    <!-- No notifications -->
+    <div class="no-notifications" *ngIf="notifications.length === 0">
+      <mat-icon>notifications_none</mat-icon>
+      <span>No notifications yet</span>
+    </div>
+
+    <!-- Notification items -->
+    <div 
+      *ngFor="let notification of notifications; trackBy: trackByNotificationId"
+      class="notification-item"
+      [class.unread]="notification.status === NotificationStatus.UNREAD"
+      [class.high-priority]="notification.priority === NotificationPriority.HIGH || notification.priority === NotificationPriority.URGENT"
+      (click)="onNotificationClick(notification)">
+      
+      <!-- Notification Icon -->
+      <div class="notification-item-icon">
+        <mat-icon 
+          [style.color]="getNotificationColor(notification)"
+          [matTooltip]="notification.priority + ' priority'">
+          {{ getNotificationIcon(notification) }}
+        </mat-icon>
+      </div>
+
+      <!-- Notification Content -->
+      <div class="notification-item-content">
+        <div class="notification-item-header">
+          <h4 class="notification-item-title">{{ notification.title }}</h4>
+          <span class="notification-item-time">{{ formatTimestamp(notification.timestamp) }}</span>
+        </div>
+        
+        <p class="notification-item-message">{{ notification.message }}</p>
+        
+        <div class="notification-item-footer" *ngIf="notification.userName || notification.actionLabel">
+          <span class="notification-item-user" *ngIf="notification.userName">
+            <mat-icon class="user-icon">person</mat-icon>
+            {{ notification.userName }}
+          </span>
+          <span class="notification-item-action" *ngIf="notification.actionLabel">
+            {{ notification.actionLabel }}
+          </span>
+        </div>
+
+        <!-- Priority indicator -->
+        <mat-chip 
+          *ngIf="notification.priority === NotificationPriority.URGENT || notification.priority === NotificationPriority.HIGH"
+          class="priority-chip"
+          [style.background-color]="NotificationPriorityColors[notification.priority]"
+          [style.color]="'white'">
+          <mat-icon matChipAvatar>{{ getPriorityIcon(notification.priority) }}</mat-icon>
+          {{ notification.priority.toUpperCase() }}
+        </mat-chip>
+      </div>
+
+      <!-- Action buttons -->
+      <div class="notification-item-actions">
+        <button 
+          *ngIf="notification.status === NotificationStatus.UNREAD"
+          mat-icon-button 
+          matTooltip="Mark as read"
+          (click)="markAsRead(notification, $event)"
+          class="action-button read-button">
+          <mat-icon>done</mat-icon>
+        </button>
+        
+        <button 
+          mat-icon-button 
+          matTooltip="Delete notification"
+          (click)="deleteNotification(notification, $event)"
+          class="action-button delete-button">
+          <mat-icon>close</mat-icon>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <mat-divider *ngIf="!loading && notifications.length > 0"></mat-divider>
+
+  <!-- Footer -->
+  <div class="notification-footer" *ngIf="!loading && notifications.length > 0">
+    <button mat-button (click)="viewAllNotifications()" class="view-all-button">
+      <mat-icon>list</mat-icon>
+      View All Notifications
+    </button>
+  </div>
+</mat-menu>
