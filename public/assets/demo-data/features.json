@@ -2,7 +2,7 @@
   {
     "id": "calendar",
     "name": "Calendar Integration",
-    "description": "Connect and synchronize with external calendar services",
+    "description": "Connect and synchronize with external calendar services for seamless scheduling",
     "icon": "event",
     "order": 1,
     "features": [
@@ -20,6 +20,14 @@
             "enabled": false,
             "icon": "sync",
             "parentId": "outlook-calendar"
+          },
+          {
+            "id": "outlook-meeting-rooms",
+            "name": "Meeting Room Booking",
+            "description": "Book and manage Outlook meeting rooms directly from the dashboard",
+            "enabled": false,
+            "icon": "meeting_room",
+            "parentId": "outlook-calendar"
           }
         ]
       },
@@ -29,7 +37,6 @@
         "description": "Connect with Google Calendar for seamless event management and scheduling across all your Google services.",
         "enabled": true,
         "icon": "event",
-        
         "children": [
           {
             "id": "google-auto-sync",
@@ -37,7 +44,6 @@
             "description": "Automatically sync new events from Google Calendar",
             "enabled": true,
             "icon": "sync",
-            
             "parentId": "google-calendar"
           },
           {
@@ -46,7 +52,6 @@
             "description": "AI-powered scheduling suggestions based on availability",
             "enabled": false,
             "icon": "schedule",
-            
             "parentId": "google-calendar"
           }
         ]
@@ -54,413 +59,1185 @@
       {
         "id": "apple-calendar",
         "name": "Apple Calendar Integration",
-        "description": "Sync with Apple Calendar and iCloud for seamless integration across all Apple devices.",
+        "description": "Integrate with Apple Calendar for macOS and iOS synchronization",
         "enabled": false,
-        "icon": "event",
-        
+        "icon": "event"
       }
     ]
   },
   {
     "id": "storage",
-    "name": "External Storage",
-    "description": "Connect with cloud storage providers for file management",
-    "icon": "cloud_upload",
+    "name": "Cloud Storage",
+    "description": "Connect to various cloud storage providers for file management and backup",
+    "icon": "cloud",
     "order": 2,
     "features": [
       {
         "id": "google-drive",
         "name": "Google Drive Integration",
-        "description": "Access, upload, and manage files directly from Google Drive. Seamless integration with Google Workspace.",
+        "description": "Access, upload, and manage files directly from Google Drive within your dashboard.",
         "enabled": true,
-        "icon": "cloud",
-        
+        "icon": "folder",
         "children": [
           {
-            "id": "gdrive-auto-backup",
-            "name": "Auto Backup Documents",
-            "description": "Automatically backup important documents to Google Drive",
-            "enabled": false,
+            "id": "drive-auto-backup",
+            "name": "Auto Backup",
+            "description": "Automatically backup important files to Google Drive",
+            "enabled": true,
             "icon": "backup",
-            
             "parentId": "google-drive"
           },
           {
-            "id": "gdrive-collaboration",
-            "name": "Real-time Collaboration",
-            "description": "Enable real-time document collaboration through Google Drive",
-            "enabled": true,
-            "icon": "group_work",
-            
-            "parentId": "google-drive"
-          }
-        ]
-      },
-      {
-        "id": "onedrive",
-        "name": "OneDrive Integration",
-        "description": "Connect with Microsoft OneDrive for file storage and sharing. Perfect integration with Office 365.",
-        "enabled": false,
-        "icon": "cloud",
-        
-        "children": [
-          {
-            "id": "onedrive-office365",
-            "name": "Office 365 Integration",
-            "description": "Deep integration with Office 365 applications and services",
+            "id": "drive-real-time-sync",
+            "name": "Real-time Sync",
+            "description": "Sync changes in real-time between local and Google Drive",
             "enabled": false,
-            "icon": "work",
-            
-            "parentId": "onedrive"
+            "icon": "sync",
+            "parentId": "google-drive"
           }
         ]
       },
       {
         "id": "dropbox",
         "name": "Dropbox Integration",
-        "description": "Secure file storage and sharing with Dropbox. Enhanced team collaboration features.",
+        "description": "Connect with Dropbox for seamless file sharing and collaboration",
         "enabled": false,
-        "icon": "cloud",
-        
+        "icon": "folder",
         "children": [
           {
             "id": "dropbox-smart-sync",
             "name": "Smart Sync",
-            "description": "Automatically sync files based on usage patterns",
+            "description": "Intelligently sync only needed files to save local storage",
             "enabled": false,
             "icon": "sync_alt",
-            
             "parentId": "dropbox"
           }
         ]
       },
       {
-        "id": "aws-s3",
-        "name": "Amazon S3 Integration",
-        "description": "Enterprise-grade storage with Amazon S3. Scalable and secure cloud storage solution.",
+        "id": "onedrive",
+        "name": "OneDrive Integration",
+        "description": "Microsoft OneDrive integration for Office 365 workflows",
         "enabled": false,
-        "icon": "cloud",
-        
+        "icon": "folder"
+      },
+      {
+        "id": "amazon-s3",
+        "name": "Amazon S3 Integration",
+        "description": "Connect with Amazon S3 for scalable cloud storage solutions",
+        "enabled": false,
+        "icon": "cloud_upload"
       }
     ]
   },
   {
     "id": "communication",
     "name": "Communication Tools",
-    "description": "Integrate with messaging and communication platforms",
+    "description": "Integrate with messaging and collaboration platforms",
     "icon": "chat",
     "order": 3,
     "features": [
       {
-        "id": "teams-integration",
-        "name": "Microsoft Teams Integration",
-        "description": "Connect with Microsoft Teams for seamless communication and collaboration.",
-        "enabled": false,
-        "icon": "groups",
-        
+        "id": "slack",
+        "name": "Slack Integration",
+        "description": "Connect with Slack for team communication and notifications within your dashboard workflow.",
+        "enabled": true,
+        "icon": "chat",
         "children": [
           {
-            "id": "teams-notifications",
-            "name": "Teams Notifications",
-            "description": "Receive dashboard notifications in Microsoft Teams",
-            "enabled": false,
+            "id": "slack-notifications",
+            "name": "Dashboard Notifications",
+            "description": "Send dashboard alerts and updates to Slack channels",
+            "enabled": true,
             "icon": "notifications",
-            
-            "parentId": "teams-integration"
+            "parentId": "slack"
           },
           {
-            "id": "teams-bot",
-            "name": "Dashboard Bot",
-            "description": "Interactive bot for dashboard operations within Teams",
+            "id": "slack-bot-commands",
+            "name": "Bot Commands",
+            "description": "Control dashboard features via Slack bot commands",
             "enabled": false,
             "icon": "smart_toy",
-            
-            "parentId": "teams-integration"
+            "parentId": "slack"
           }
         ]
       },
       {
-        "id": "slack-integration",
-        "name": "Slack Integration",
-        "description": "Enhance team productivity with Slack integration and automated notifications.",
-        "enabled": true,
-        "icon": "tag",
-        
+        "id": "microsoft-teams",
+        "name": "Microsoft Teams Integration",
+        "description": "Integrate with Microsoft Teams for enterprise collaboration",
+        "enabled": false,
+        "icon": "groups",
         "children": [
           {
-            "id": "slack-commands",
-            "name": "Slash Commands",
-            "description": "Use dashboard features directly from Slack with slash commands",
-            "enabled": true,
-            "icon": "terminal",
-            
-            "parentId": "slack-integration"
-          },
-          {
-            "id": "slack-workflows",
-            "name": "Automated Workflows",
-            "description": "Create automated workflows between dashboard and Slack",
+            "id": "teams-meetings",
+            "name": "Teams Meeting Integration",
+            "description": "Create and manage Teams meetings from the dashboard",
             "enabled": false,
-            "icon": "automation",
-            
-            "parentId": "slack-integration"
+            "icon": "video_call",
+            "parentId": "microsoft-teams"
           }
         ]
       },
       {
-        "id": "discord-integration",
+        "id": "discord",
         "name": "Discord Integration",
-        "description": "Connect with Discord for community and team communication.",
+        "description": "Connect with Discord servers for community management",
         "enabled": false,
-        "icon": "forum",
-        
+        "icon": "forum"
+      },
+      {
+        "id": "zoom",
+        "name": "Zoom Integration",
+        "description": "Schedule and manage Zoom meetings directly from your dashboard",
+        "enabled": false,
+        "icon": "videocam"
       }
     ]
   },
   {
     "id": "analytics",
-    "name": "Advanced Analytics",
-    "description": "Enhanced reporting and analytics capabilities",
+    "name": "Analytics & Reporting",
+    "description": "Advanced analytics and reporting tools for data insights",
     "icon": "analytics",
     "order": 4,
     "features": [
       {
-        "id": "custom-reports",
-        "name": "Custom Report Builder",
-        "description": "Create personalized reports with drag-and-drop interface and custom metrics.",
-        "enabled": false,
-        "icon": "assessment",
-        
+        "id": "google-analytics",
+        "name": "Google Analytics",
+        "description": "Integrate Google Analytics for web traffic and user behavior analysis",
+        "enabled": true,
+        "icon": "trending_up",
         "children": [
           {
-            "id": "report-scheduling",
-            "name": "Scheduled Reports",
-            "description": "Automatically generate and send reports on schedule",
-            "enabled": false,
-            "icon": "schedule_send",
-            
-            "parentId": "custom-reports"
+            "id": "ga-real-time",
+            "name": "Real-time Dashboard",
+            "description": "Display real-time visitor data on your dashboard",
+            "enabled": true,
+            "icon": "speed",
+            "parentId": "google-analytics"
           },
           {
-            "id": "report-ai",
-            "name": "AI Insights",
-            "description": "Get AI-powered insights and recommendations in reports",
+            "id": "ga-custom-reports",
+            "name": "Custom Reports",
+            "description": "Create and schedule custom analytics reports",
             "enabled": false,
-            "icon": "psychology",
-            
-            "parentId": "custom-reports"
+            "icon": "assessment",
+            "parentId": "google-analytics"
           }
         ]
       },
       {
-        "id": "real-time-analytics",
-        "name": "Real-time Analytics",
-        "description": "Live data streaming and real-time dashboard updates for immediate insights.",
-        "enabled": true,
-        "icon": "speed",
-        
+        "id": "mixpanel",
+        "name": "Mixpanel Analytics",
+        "description": "Advanced event tracking and user analytics with Mixpanel",
+        "enabled": false,
+        "icon": "track_changes"
       },
       {
-        "id": "predictive-analytics",
-        "name": "Predictive Analytics",
-        "description": "Machine learning powered predictions and trend analysis.",
+        "id": "tableau",
+        "name": "Tableau Integration",
+        "description": "Embed Tableau dashboards and visualizations",
         "enabled": false,
-        "icon": "trending_up",
-        
+        "icon": "bar_chart"
+      },
+      {
+        "id": "power-bi",
+        "name": "Microsoft Power BI",
+        "description": "Integrate with Microsoft Power BI for business intelligence",
+        "enabled": false,
+        "icon": "analytics"
       }
     ]
   },
   {
     "id": "security",
-    "name": "Security & Compliance",
-    "description": "Advanced security features and compliance tools",
+    "name": "Security & Privacy",
+    "description": "Security features and privacy controls for data protection",
     "icon": "security",
     "order": 5,
     "features": [
       {
         "id": "two-factor-auth",
         "name": "Two-Factor Authentication",
-        "description": "Enhanced security with SMS, email, or authenticator app-based 2FA.",
+        "description": "Enable 2FA for enhanced account security using authenticator apps or SMS",
         "enabled": true,
-        "icon": "verified_user",
-        
+        "icon": "security",
         "children": [
           {
-            "id": "backup-codes",
-            "name": "Backup Recovery Codes",
-            "description": "Generate backup codes for account recovery",
+            "id": "2fa-sms",
+            "name": "SMS Authentication",
+            "description": "Receive 2FA codes via SMS messages",
             "enabled": true,
-            "icon": "vpn_key",
-            
+            "icon": "sms",
             "parentId": "two-factor-auth"
           },
           {
-            "id": "hardware-keys",
-            "name": "Hardware Security Keys",
-            "description": "Support for FIDO2 hardware security keys",
+            "id": "2fa-app",
+            "name": "Authenticator App",
+            "description": "Use authenticator apps like Google Authenticator",
             "enabled": false,
-            "icon": "key",
-            
+            "icon": "smartphone",
             "parentId": "two-factor-auth"
           }
         ]
+      },
+      {
+        "id": "sso",
+        "name": "Single Sign-On (SSO)",
+        "description": "Enable SSO with corporate identity providers",
+        "enabled": false,
+        "icon": "login",
+        "children": [
+          {
+            "id": "saml-sso",
+            "name": "SAML SSO",
+            "description": "SAML-based single sign-on integration",
+            "enabled": false,
+            "icon": "verified_user",
+            "parentId": "sso"
+          },
+          {
+            "id": "oauth-sso",
+            "name": "OAuth SSO",
+            "description": "OAuth-based single sign-on with popular providers",
+            "enabled": false,
+            "icon": "key",
+            "parentId": "sso"
+          }
+        ]
+      },
+      {
+        "id": "data-encryption",
+        "name": "Advanced Data Encryption",
+        "description": "End-to-end encryption for sensitive data",
+        "enabled": false,
+        "icon": "enhanced_encryption"
       },
       {
         "id": "audit-logs",
-        "name": "Audit Logging",
-        "description": "Comprehensive activity logging for security and compliance requirements.",
-        "enabled": false,
-        "icon": "history",
-        
-      },
-      {
-        "id": "gdpr-compliance",
-        "name": "GDPR Compliance Tools",
-        "description": "Data privacy tools and automated compliance reporting for GDPR.",
-        "enabled": false,
-        "icon": "gavel",
-        
-      }
-    ]
-  },
-  {
-    "id": "notifications",
-    "name": "Smart Notifications",
-    "description": "Intelligent notification system and delivery options",
-    "icon": "notifications_active",
-    "order": 6,
-    "features": [
-      {
-        "id": "email-notifications",
-        "name": "Email Notifications",
-        "description": "Customizable email notifications for important events and updates.",
+        "name": "Security Audit Logs",
+        "description": "Comprehensive logging of all security-related activities",
         "enabled": true,
-        "icon": "mail",
-        
-        "children": [
-          {
-            "id": "email-digest",
-            "name": "Daily Digest",
-            "description": "Receive daily summary emails of important activities",
-            "enabled": false,
-            "icon": "summarize",
-            
-            "parentId": "email-notifications"
-          },
-          {
-            "id": "email-templates",
-            "name": "Custom Email Templates",
-            "description": "Create branded email notification templates",
-            "enabled": false,
-            "icon": "design_services",
-            
-            "parentId": "email-notifications"
-          }
-        ]
-      },
-      {
-        "id": "push-notifications",
-        "name": "Push Notifications",
-        "description": "Real-time browser push notifications for instant updates.",
-        "enabled": true,
-        "icon": "notifications",
-        
-      },
-      {
-        "id": "smart-filtering",
-        "name": "Smart Notification Filtering",
-        "description": "AI-powered notification filtering to reduce noise and highlight important messages.",
-        "enabled": false,
-        "icon": "filter_alt",
-        
+        "icon": "history"
       }
     ]
   },
   {
     "id": "automation",
-    "name": "Workflow Automation",
-    "description": "Automate repetitive tasks and create custom workflows",
-    "icon": "precision_manufacturing",
-    "order": 7,
+    "name": "Automation & Workflows",
+    "description": "Automated workflows and process management tools",
+    "icon": "automation",
+    "order": 6,
     "features": [
       {
-        "id": "zapier-integration",
+        "id": "zapier",
         "name": "Zapier Integration",
-        "description": "Connect with 5000+ apps through Zapier for unlimited automation possibilities.",
+        "description": "Connect with Zapier for automated workflows between apps",
         "enabled": false,
-        "icon": "hub",
-        
-      },
-      {
-        "id": "custom-workflows",
-        "name": "Custom Workflow Builder",
-        "description": "Visual workflow builder for creating custom automation sequences.",
-        "enabled": false,
-        "icon": "account_tree",
-        
+        "icon": "route",
         "children": [
           {
-            "id": "workflow-templates",
-            "name": "Workflow Templates",
-            "description": "Pre-built workflow templates for common use cases",
+            "id": "zapier-triggers",
+            "name": "Custom Triggers",
+            "description": "Create custom triggers for dashboard events",
             "enabled": false,
-            "icon": "content_copy",
-            
-            "parentId": "custom-workflows"
+            "icon": "play_arrow",
+            "parentId": "zapier"
+          },
+          {
+            "id": "zapier-actions",
+            "name": "Custom Actions",
+            "description": "Define custom actions that can be triggered by external events",
+            "enabled": false,
+            "icon": "settings",
+            "parentId": "zapier"
           }
         ]
       },
       {
-        "id": "scheduled-tasks",
-        "name": "Scheduled Task Automation",
-        "description": "Automate recurring tasks with flexible scheduling options.",
+        "id": "ifttt",
+        "name": "IFTTT Integration",
+        "description": "If This Then That automation service integration",
+        "enabled": false,
+        "icon": "hub"
+      },
+      {
+        "id": "custom-webhooks",
+        "name": "Custom Webhooks",
+        "description": "Create custom webhook endpoints for integrations",
         "enabled": true,
-        "icon": "schedule",
-        
+        "icon": "webhook"
+      },
+      {
+        "id": "scheduled-tasks",
+        "name": "Scheduled Tasks",
+        "description": "Set up automated tasks that run on a schedule",
+        "enabled": true,
+        "icon": "schedule"
+      }
+    ]
+  },
+  {
+    "id": "ai-ml",
+    "name": "AI & Machine Learning",
+    "description": "Artificial intelligence and machine learning capabilities",
+    "icon": "psychology",
+    "order": 7,
+    "features": [
+      {
+        "id": "openai",
+        "name": "OpenAI Integration",
+        "description": "Integrate with OpenAI for AI-powered features and content generation",
+        "enabled": false,
+        "icon": "smart_toy",
+        "children": [
+          {
+            "id": "ai-content-generation",
+            "name": "Content Generation",
+            "description": "AI-powered content and report generation",
+            "enabled": false,
+            "icon": "edit_note",
+            "parentId": "openai"
+          },
+          {
+            "id": "ai-data-insights",
+            "name": "Data Insights",
+            "description": "AI analysis of your dashboard data for insights",
+            "enabled": false,
+            "icon": "insights",
+            "parentId": "openai"
+          },
+          {
+            "id": "ai-chatbot",
+            "name": "AI Assistant Chatbot",
+            "description": "Intelligent chatbot for user support and queries",
+            "enabled": false,
+            "icon": "chat",
+            "parentId": "openai"
+          }
+        ]
+      },
+      {
+        "id": "predictive-analytics",
+        "name": "Predictive Analytics",
+        "description": "Machine learning models for predictive insights",
+        "enabled": false,
+        "icon": "trending_up"
+      },
+      {
+        "id": "natural-language-processing",
+        "name": "Natural Language Processing",
+        "description": "NLP capabilities for text analysis and processing",
+        "enabled": false,
+        "icon": "record_voice_over"
+      },
+      {
+        "id": "computer-vision",
+        "name": "Computer Vision",
+        "description": "AI-powered image and video analysis capabilities",
+        "enabled": false,
+        "icon": "visibility"
+      }
+    ]
+  },
+  {
+    "id": "crm",
+    "name": "CRM Integration",
+    "description": "Customer relationship management system integrations",
+    "icon": "people",
+    "order": 8,
+    "features": [
+      {
+        "id": "salesforce",
+        "name": "Salesforce Integration",
+        "description": "Connect with Salesforce CRM for customer data and sales pipeline management",
+        "enabled": false,
+        "icon": "business",
+        "children": [
+          {
+            "id": "salesforce-leads",
+            "name": "Lead Management",
+            "description": "Manage Salesforce leads from your dashboard",
+            "enabled": false,
+            "icon": "person_add",
+            "parentId": "salesforce"
+          },
+          {
+            "id": "salesforce-reports",
+            "name": "Sales Reports",
+            "description": "Display Salesforce reports and metrics",
+            "enabled": false,
+            "icon": "assessment",
+            "parentId": "salesforce"
+          }
+        ]
+      },
+      {
+        "id": "hubspot",
+        "name": "HubSpot Integration",
+        "description": "Integrate with HubSpot for inbound marketing and sales",
+        "enabled": false,
+        "icon": "hub"
+      },
+      {
+        "id": "pipedrive",
+        "name": "Pipedrive Integration",
+        "description": "Connect with Pipedrive for sales pipeline management",
+        "enabled": false,
+        "icon": "timeline"
+      },
+      {
+        "id": "zendesk",
+        "name": "Zendesk Integration",
+        "description": "Customer support and ticketing system integration",
+        "enabled": false,
+        "icon": "support"
+      }
+    ]
+  },
+  {
+    "id": "payment",
+    "name": "Payment Processing",
+    "description": "Payment gateway and financial transaction integrations",
+    "icon": "payment",
+    "order": 9,
+    "features": [
+      {
+        "id": "stripe",
+        "name": "Stripe Integration",
+        "description": "Process payments and manage subscriptions with Stripe",
+        "enabled": false,
+        "icon": "credit_card",
+        "children": [
+          {
+            "id": "stripe-subscriptions",
+            "name": "Subscription Management",
+            "description": "Manage recurring subscriptions and billing",
+            "enabled": false,
+            "icon": "subscriptions",
+            "parentId": "stripe"
+          },
+          {
+            "id": "stripe-analytics",
+            "name": "Payment Analytics",
+            "description": "View payment trends and revenue analytics",
+            "enabled": false,
+            "icon": "analytics",
+            "parentId": "stripe"
+          }
+        ]
+      },
+      {
+        "id": "paypal",
+        "name": "PayPal Integration",
+        "description": "Accept PayPal payments and manage transactions",
+        "enabled": false,
+        "icon": "account_balance_wallet"
+      },
+      {
+        "id": "square",
+        "name": "Square Integration",
+        "description": "Point-of-sale and payment processing with Square",
+        "enabled": false,
+        "icon": "point_of_sale"
+      }
+    ]
+  },
+  {
+    "id": "social-media",
+    "name": "Social Media",
+    "description": "Social media platform integrations for marketing and engagement",
+    "icon": "share",
+    "order": 10,
+    "features": [
+      {
+        "id": "twitter",
+        "name": "Twitter/X Integration",
+        "description": "Manage Twitter posts and monitor social engagement",
+        "enabled": false,
+        "icon": "share",
+        "children": [
+          {
+            "id": "twitter-auto-post",
+            "name": "Auto Posting",
+            "description": "Automatically post updates to Twitter",
+            "enabled": false,
+            "icon": "schedule_send",
+            "parentId": "twitter"
+          },
+          {
+            "id": "twitter-analytics",
+            "name": "Twitter Analytics",
+            "description": "View Twitter engagement and reach metrics",
+            "enabled": false,
+            "icon": "trending_up",
+            "parentId": "twitter"
+          }
+        ]
+      },
+      {
+        "id": "linkedin",
+        "name": "LinkedIn Integration",
+        "description": "Professional networking and business content sharing",
+        "enabled": false,
+        "icon": "work"
+      },
+      {
+        "id": "instagram",
+        "name": "Instagram Integration",
+        "description": "Visual content management and Instagram business tools",
+        "enabled": false,
+        "icon": "photo_camera"
+      },
+      {
+        "id": "facebook",
+        "name": "Facebook Integration",
+        "description": "Facebook page management and social media marketing",
+        "enabled": false,
+        "icon": "facebook"
+      }
+    ]
+  },
+  {
+    "id": "project-management",
+    "name": "Project Management",
+    "description": "Project management and task tracking tool integrations",
+    "icon": "task",
+    "order": 11,
+    "features": [
+      {
+        "id": "jira",
+        "name": "Jira Integration",
+        "description": "Integrate with Atlassian Jira for issue tracking and project management",
+        "enabled": true,
+        "icon": "bug_report",
+        "children": [
+          {
+            "id": "jira-dashboard",
+            "name": "Jira Dashboard",
+            "description": "Display Jira tickets and sprints on your dashboard",
+            "enabled": true,
+            "icon": "dashboard",
+            "parentId": "jira"
+          },
+          {
+            "id": "jira-notifications",
+            "name": "Real-time Notifications",
+            "description": "Receive notifications for Jira ticket updates",
+            "enabled": false,
+            "icon": "notifications",
+            "parentId": "jira"
+          }
+        ]
+      },
+      {
+        "id": "trello",
+        "name": "Trello Integration",
+        "description": "Connect with Trello boards for visual project management",
+        "enabled": false,
+        "icon": "view_kanban"
+      },
+      {
+        "id": "asana",
+        "name": "Asana Integration",
+        "description": "Task management and team collaboration with Asana",
+        "enabled": false,
+        "icon": "task_alt"
+      },
+      {
+        "id": "monday",
+        "name": "Monday.com Integration",
+        "description": "Work operating system for project and team management",
+        "enabled": false,
+        "icon": "calendar_view_week"
+      }
+    ]
+  },
+  {
+    "id": "email",
+    "name": "Email Integration",
+    "description": "Email service integrations for communication and marketing",
+    "icon": "email",
+    "order": 12,
+    "features": [
+      {
+        "id": "gmail",
+        "name": "Gmail Integration",
+        "description": "Connect with Gmail for email management and notifications",
+        "enabled": true,
+        "icon": "email",
+        "children": [
+          {
+            "id": "gmail-notifications",
+            "name": "Email Notifications",
+            "description": "Send dashboard alerts via Gmail",
+            "enabled": true,
+            "icon": "notification_important",
+            "parentId": "gmail"
+          },
+          {
+            "id": "gmail-templates",
+            "name": "Email Templates",
+            "description": "Create and manage email templates",
+            "enabled": false,
+            "icon": "mail_outline",
+            "parentId": "gmail"
+          }
+        ]
+      },
+      {
+        "id": "outlook-email",
+        "name": "Outlook Email",
+        "description": "Microsoft Outlook email integration",
+        "enabled": false,
+        "icon": "email"
+      },
+      {
+        "id": "mailchimp",
+        "name": "Mailchimp Integration",
+        "description": "Email marketing campaigns and audience management",
+        "enabled": false,
+        "icon": "campaign"
+      },
+      {
+        "id": "sendgrid",
+        "name": "SendGrid Integration",
+        "description": "Transactional email service for reliable email delivery",
+        "enabled": false,
+        "icon": "send"
+      }
+    ]
+  },
+  {
+    "id": "development",
+    "name": "Development Tools",
+    "description": "Developer tools and version control integrations",
+    "icon": "code",
+    "order": 13,
+    "features": [
+      {
+        "id": "github",
+        "name": "GitHub Integration",
+        "description": "Connect with GitHub repositories for code management and CI/CD",
+        "enabled": true,
+        "icon": "code",
+        "children": [
+          {
+            "id": "github-repos",
+            "name": "Repository Dashboard",
+            "description": "View repository statistics and recent commits",
+            "enabled": true,
+            "icon": "source",
+            "parentId": "github"
+          },
+          {
+            "id": "github-actions",
+            "name": "GitHub Actions",
+            "description": "Monitor CI/CD pipeline status and builds",
+            "enabled": false,
+            "icon": "build",
+            "parentId": "github"
+          },
+          {
+            "id": "github-issues",
+            "name": "Issue Tracking",
+            "description": "Track and manage GitHub issues from your dashboard",
+            "enabled": false,
+            "icon": "bug_report",
+            "parentId": "github"
+          }
+        ]
+      },
+      {
+        "id": "gitlab",
+        "name": "GitLab Integration",
+        "description": "GitLab repository and DevOps platform integration",
+        "enabled": false,
+        "icon": "code"
+      },
+      {
+        "id": "docker",
+        "name": "Docker Integration",
+        "description": "Container management and Docker registry integration",
+        "enabled": false,
+        "icon": "developer_board"
+      },
+      {
+        "id": "jenkins",
+        "name": "Jenkins Integration",
+        "description": "Continuous integration and deployment with Jenkins",
+        "enabled": false,
+        "icon": "build_circle"
+      }
+    ]
+  },
+  {
+    "id": "monitoring",
+    "name": "Monitoring & Alerts",
+    "description": "System monitoring and alerting service integrations",
+    "icon": "monitoring",
+    "order": 14,
+    "features": [
+      {
+        "id": "datadog",
+        "name": "Datadog Integration",
+        "description": "Infrastructure monitoring and application performance tracking",
+        "enabled": false,
+        "icon": "monitor_heart",
+        "children": [
+          {
+            "id": "datadog-alerts",
+            "name": "Custom Alerts",
+            "description": "Set up custom monitoring alerts and thresholds",
+            "enabled": false,
+            "icon": "warning",
+            "parentId": "datadog"
+          },
+          {
+            "id": "datadog-dashboards",
+            "name": "Embedded Dashboards",
+            "description": "Embed Datadog monitoring dashboards",
+            "enabled": false,
+            "icon": "dashboard",
+            "parentId": "datadog"
+          }
+        ]
+      },
+      {
+        "id": "new-relic",
+        "name": "New Relic Integration",
+        "description": "Application performance monitoring and observability",
+        "enabled": false,
+        "icon": "speed"
+      },
+      {
+        "id": "pingdom",
+        "name": "Pingdom Integration",
+        "description": "Website uptime monitoring and performance tracking",
+        "enabled": false,
+        "icon": "network_ping"
+      },
+      {
+        "id": "sentry",
+        "name": "Sentry Integration",
+        "description": "Error tracking and performance monitoring for applications",
+        "enabled": false,
+        "icon": "error_outline"
+      }
+    ]
+  },
+  {
+    "id": "e-commerce",
+    "name": "E-commerce",
+    "description": "E-commerce platform integrations for online business management",
+    "icon": "shopping_cart",
+    "order": 15,
+    "features": [
+      {
+        "id": "shopify",
+        "name": "Shopify Integration",
+        "description": "Connect with Shopify store for sales and inventory management",
+        "enabled": false,
+        "icon": "store",
+        "children": [
+          {
+            "id": "shopify-orders",
+            "name": "Order Management",
+            "description": "View and manage Shopify orders from dashboard",
+            "enabled": false,
+            "icon": "shopping_bag",
+            "parentId": "shopify"
+          },
+          {
+            "id": "shopify-inventory",
+            "name": "Inventory Tracking",
+            "description": "Monitor inventory levels and stock alerts",
+            "enabled": false,
+            "icon": "inventory",
+            "parentId": "shopify"
+          }
+        ]
+      },
+      {
+        "id": "woocommerce",
+        "name": "WooCommerce Integration",
+        "description": "WordPress e-commerce plugin integration",
+        "enabled": false,
+        "icon": "storefront"
+      },
+      {
+        "id": "amazon-seller",
+        "name": "Amazon Seller Central",
+        "description": "Amazon marketplace seller tools and analytics",
+        "enabled": false,
+        "icon": "local_shipping"
+      },
+      {
+        "id": "etsy",
+        "name": "Etsy Integration",
+        "description": "Handmade and vintage marketplace integration",
+        "enabled": false,
+        "icon": "handyman"
+      }
+    ]
+  },
+  {
+    "id": "backup-recovery",
+    "name": "Backup & Recovery",
+    "description": "Data backup and disaster recovery solutions",
+    "icon": "backup",
+    "order": 16,
+    "features": [
+      {
+        "id": "automated-backups",
+        "name": "Automated Backups",
+        "description": "Schedule automatic backups of dashboard data and configurations",
+        "enabled": true,
+        "icon": "backup",
+        "children": [
+          {
+            "id": "daily-backups",
+            "name": "Daily Backups",
+            "description": "Perform daily incremental backups",
+            "enabled": true,
+            "icon": "schedule",
+            "parentId": "automated-backups"
+          },
+          {
+            "id": "cloud-backup",
+            "name": "Cloud Backup Storage",
+            "description": "Store backups in secure cloud storage",
+            "enabled": false,
+            "icon": "cloud_upload",
+            "parentId": "automated-backups"
+          }
+        ]
+      },
+      {
+        "id": "point-in-time-recovery",
+        "name": "Point-in-Time Recovery",
+        "description": "Restore data to any specific point in time",
+        "enabled": false,
+        "icon": "restore"
+      },
+      {
+        "id": "disaster-recovery",
+        "name": "Disaster Recovery Plan",
+        "description": "Comprehensive disaster recovery and business continuity",
+        "enabled": false,
+        "icon": "emergency"
+      }
+    ]
+  },
+  {
+    "id": "api-management",
+    "name": "API Management",
+    "description": "API gateway and management tools for integrations",
+    "icon": "api",
+    "order": 17,
+    "features": [
+      {
+        "id": "rest-api",
+        "name": "REST API Access",
+        "description": "Full REST API access to dashboard data and functions",
+        "enabled": true,
+        "icon": "api",
+        "children": [
+          {
+            "id": "api-authentication",
+            "name": "API Authentication",
+            "description": "Secure API access with token-based authentication",
+            "enabled": true,
+            "icon": "key",
+            "parentId": "rest-api"
+          },
+          {
+            "id": "api-rate-limiting",
+            "name": "Rate Limiting",
+            "description": "Control API usage with rate limiting and quotas",
+            "enabled": false,
+            "icon": "speed",
+            "parentId": "rest-api"
+          }
+        ]
+      },
+      {
+        "id": "graphql-api",
+        "name": "GraphQL API",
+        "description": "GraphQL endpoint for flexible data querying",
+        "enabled": false,
+        "icon": "query_stats"
+      },
+      {
+        "id": "webhook-management",
+        "name": "Webhook Management",
+        "description": "Manage incoming and outgoing webhooks",
+        "enabled": true,
+        "icon": "webhook"
+      }
+    ]
+  },
+  {
+    "id": "mobile",
+    "name": "Mobile Features",
+    "description": "Mobile-specific features and native app integrations",
+    "icon": "phone_android",
+    "order": 18,
+    "features": [
+      {
+        "id": "pwa",
+        "name": "Progressive Web App",
+        "description": "Install dashboard as a Progressive Web App for offline access",
+        "enabled": true,
+        "icon": "install_mobile",
+        "children": [
+          {
+            "id": "offline-mode",
+            "name": "Offline Mode",
+            "description": "Access dashboard features without internet connection",
+            "enabled": true,
+            "icon": "offline_bolt",
+            "parentId": "pwa"
+          },
+          {
+            "id": "push-notifications",
+            "name": "Push Notifications",
+            "description": "Receive push notifications on mobile devices",
+            "enabled": false,
+            "icon": "notifications_active",
+            "parentId": "pwa"
+          }
+        ]
+      },
+      {
+        "id": "mobile-app",
+        "name": "Native Mobile App",
+        "description": "Companion mobile app for iOS and Android",
+        "enabled": false,
+        "icon": "smartphone"
+      },
+      {
+        "id": "qr-code-access",
+        "name": "QR Code Access",
+        "description": "Quick access via QR code scanning",
+        "enabled": false,
+        "icon": "qr_code"
+      }
+    ]
+  },
+  {
+    "id": "accessibility",
+    "name": "Accessibility",
+    "description": "Accessibility features for inclusive user experience",
+    "icon": "accessibility",
+    "order": 19,
+    "features": [
+      {
+        "id": "screen-reader",
+        "name": "Screen Reader Support",
+        "description": "Enhanced screen reader compatibility and ARIA labels",
+        "enabled": true,
+        "icon": "record_voice_over",
+        "children": [
+          {
+            "id": "aria-labels",
+            "name": "ARIA Labels",
+            "description": "Comprehensive ARIA labeling for all interface elements",
+            "enabled": true,
+            "icon": "label",
+            "parentId": "screen-reader"
+          }
+        ]
+      },
+      {
+        "id": "high-contrast",
+        "name": "High Contrast Mode",
+        "description": "High contrast theme for better visibility",
+        "enabled": false,
+        "icon": "contrast"
+      },
+      {
+        "id": "keyboard-navigation",
+        "name": "Keyboard Navigation",
+        "description": "Full keyboard navigation support",
+        "enabled": true,
+        "icon": "keyboard"
+      },
+      {
+        "id": "text-to-speech",
+        "name": "Text-to-Speech",
+        "description": "Convert dashboard content to spoken audio",
+        "enabled": false,
+        "icon": "record_voice_over"
       }
     ]
   },
   {
     "id": "customization",
-    "name": "UI Customization",
-    "description": "Personalize the interface and user experience",
-    "icon": "palette",
-    "order": 8,
+    "name": "Customization",
+    "description": "Dashboard customization and personalization options",
+    "icon": "tune",
+    "order": 20,
     "features": [
       {
         "id": "custom-themes",
-        "name": "Custom Theme Builder",
-        "description": "Create and customize your own color themes and branding.",
-        "enabled": false,
-        "icon": "brush",
-        
+        "name": "Custom Themes",
+        "description": "Create and apply custom color themes and layouts",
+        "enabled": true,
+        "icon": "palette",
         "children": [
           {
-            "id": "theme-sharing",
-            "name": "Theme Sharing",
-            "description": "Share custom themes with team members",
+            "id": "dark-mode",
+            "name": "Dark Mode",
+            "description": "Switch to dark theme for reduced eye strain",
+            "enabled": true,
+            "icon": "dark_mode",
+            "parentId": "custom-themes"
+          },
+          {
+            "id": "custom-css",
+            "name": "Custom CSS",
+            "description": "Apply custom CSS styles to personalize appearance",
             "enabled": false,
-            "icon": "share",
-            
+            "icon": "css",
             "parentId": "custom-themes"
           }
         ]
       },
       {
-        "id": "dashboard-layouts",
-        "name": "Custom Dashboard Layouts",
-        "description": "Drag-and-drop dashboard customization with widget positioning.",
+        "id": "widget-customization",
+        "name": "Widget Customization",
+        "description": "Customize and arrange dashboard widgets",
         "enabled": true,
-        "icon": "dashboard_customize",
-        
+        "icon": "widgets",
+        "children": [
+          {
+            "id": "drag-drop-widgets",
+            "name": "Drag & Drop Widgets",
+            "description": "Rearrange widgets with drag and drop functionality",
+            "enabled": true,
+            "icon": "open_with",
+            "parentId": "widget-customization"
+          }
+        ]
       },
       {
-        "id": "white-labeling",
-        "name": "White Label Branding",
-        "description": "Complete white-label customization for enterprise deployments.",
+        "id": "custom-branding",
+        "name": "Custom Branding",
+        "description": "Add your company logo and branding elements",
         "enabled": false,
-        "icon": "branding_watermark",
-        
+        "icon": "branding_watermark"
+      }
+    ]
+  },
+  {
+    "id": "notifications",
+    "name": "Notifications & Alerts",
+    "description": "Advanced notification systems and alert management",
+    "icon": "notifications",
+    "order": 21,
+    "features": [
+      {
+        "id": "push-notifications-system",
+        "name": "Push Notification System",
+        "description": "Browser and mobile push notifications for important events",
+        "enabled": true,
+        "icon": "notifications",
+        "children": [
+          {
+            "id": "browser-notifications",
+            "name": "Browser Notifications",
+            "description": "Desktop browser notifications",
+            "enabled": true,
+            "icon": "desktop_windows",
+            "parentId": "push-notifications-system"
+          },
+          {
+            "id": "mobile-push-notifications",
+            "name": "Mobile Push Notifications",
+            "description": "Push notifications to mobile devices",
+            "enabled": false,
+            "icon": "smartphone",
+            "parentId": "push-notifications-system"
+          }
+        ]
+      },
+      {
+        "id": "email-alerts",
+        "name": "Email Alert System",
+        "description": "Send important alerts and updates via email",
+        "enabled": true,
+        "icon": "email"
+      },
+      {
+        "id": "sms-alerts",
+        "name": "SMS Alert System",
+        "description": "Critical alerts delivered via SMS text messages",
+        "enabled": false,
+        "icon": "sms"
+      },
+      {
+        "id": "webhook-notifications",
+        "name": "Webhook Notifications",
+        "description": "Send notifications to external systems via webhooks",
+        "enabled": false,
+        "icon": "webhook"
+      }
+    ]
+  },
+  {
+    "id": "productivity",
+    "name": "Productivity Tools",
+    "description": "Tools and integrations to boost productivity and efficiency",
+    "icon": "trending_up",
+    "order": 22,
+    "features": [
+      {
+        "id": "time-tracking",
+        "name": "Time Tracking System",
+        "description": "Track time spent on tasks and projects within the dashboard",
+        "enabled": false,
+        "icon": "schedule",
+        "children": [
+          {
+            "id": "pomodoro-timer",
+            "name": "Pomodoro Timer",
+            "description": "Built-in Pomodoro technique timer for focused work sessions",
+            "enabled": false,
+            "icon": "timer",
+            "parentId": "time-tracking"
+          },
+          {
+            "id": "time-reports",
+            "name": "Time Tracking Reports",
+            "description": "Generate detailed time tracking reports and analytics",
+            "enabled": false,
+            "icon": "assessment",
+            "parentId": "time-tracking"
+          }
+        ]
+      },
+      {
+        "id": "note-taking",
+        "name": "Note Taking System",
+        "description": "Integrated note-taking and documentation system",
+        "enabled": true,
+        "icon": "note"
+      },
+      {
+        "id": "task-management",
+        "name": "Built-in Task Management",
+        "description": "Native task and to-do list management system",
+        "enabled": true,
+        "icon": "checklist"
+      },
+      {
+        "id": "calendar-scheduling",
+        "name": "Integrated Calendar & Scheduling",
+        "description": "Built-in calendar with appointment scheduling capabilities",
+        "enabled": true,
+        "icon": "calendar_today"
       }
     ]
   }
