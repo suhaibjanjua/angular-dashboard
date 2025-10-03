@@ -1,4 +1,13 @@
-<div class="notification-container">
+<div class="notification-container" [matMenuTriggerFor]="notificationsMenu">
     <span class="material-icons notification-bell">notifications</span>
-    <span class="notification-badge">10</span>
+    <span class="notification-badge" *ngIf="unreadCount() > 0">{{ unreadCount() }}</span>
 </div>
+
+<mat-menu #notificationsMenu="matMenu" class="notification-dropdown" xPosition="before">
+    <ng-container *ngFor="let notif of notifications(); trackBy: trackById">
+        <button mat-menu-item (click)="markAsRead(notif.id)">
+            <mat-icon>{{ notif.read ? 'done' : 'notifications' }}</mat-icon>
+            <span>{{ notif.message }}<br/><span class="timestamp">{{ notif.timestamp | date:'short' }}</span></span>
+        </button>
+    </ng-container>
+</mat-menu>
