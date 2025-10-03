@@ -55,19 +55,6 @@
   margin-bottom: 24px;
   gap: 16px;
   
-  .search-section {
-    flex: 1;
-    max-width: 400px;
-    
-    .search-field {
-      width: 100%;
-      
-      .mat-mdc-form-field-subscript-wrapper {
-        display: none;
-      }
-    }
-  }
-  
   .action-buttons {
     display: flex;
     gap: 12px;
@@ -319,10 +306,6 @@
     flex-direction: column;
     align-items: stretch;
     gap: 16px;
-    
-    .search-section {
-      max-width: none;
-    }
     
     .action-buttons {
       justify-content: stretch;

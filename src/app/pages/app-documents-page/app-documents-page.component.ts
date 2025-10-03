@@ -42,7 +42,7 @@ import { AppSearchBarComponent } from "../../molecules/app-search-bar/app-search
       <mat-card class="content-card">
         <mat-card-header>
           <div class="table-header">
-            <app-search-bar (search)="applyFilter($event)"></app-search-bar>
+            <app-search-bar [label]="'Search documents...'" [placeholder]="'Search by name, type, or owner'" (search)="applyFilter($event)"></app-search-bar>
             
             <div class="action-buttons">
               <button mat-flat-button color="primary" (click)="uploadDocument()">
