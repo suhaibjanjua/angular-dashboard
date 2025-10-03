@@ -1,1 +1,6 @@
-<div class="user-avatar">IM</div>
+<div class="avatar">
+    <img *ngIf="src; else initialsBlock" [src]="src" alt="Avatar" />
+    <ng-template #initialsBlock>
+        <span class="initials">{{ initials }}</span>
+    </ng-template>
+</div>
