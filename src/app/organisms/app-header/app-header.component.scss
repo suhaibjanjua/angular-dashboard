@@ -16,12 +16,13 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background: #fff;
-  color: #212121;
+  background: var(--color-surface);
+  color: var(--color-text);
   padding: 0 0 0 16px;
   height: 64px;
   z-index: 100;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  box-shadow: var(--shadow-md);
+  border-bottom: 1px solid var(--color-border);
   box-sizing: border-box;
 }
 
