@@ -41,14 +41,15 @@
     .notifications-card,
     .preferences-card,
     .privacy-card {
-      background: white;
+      background: var(--color-surface);
       border-radius: 12px;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      box-shadow: var(--shadow-md);
+      border: 1px solid var(--color-border);
       transition: transform 0.2s ease;
 
       &:hover {
         transform: translateY(-2px);
-        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+        box-shadow: var(--shadow-lg);
       }
 
       mat-card-header {
@@ -60,10 +61,10 @@
           gap: 8px;
           font-size: 1.25rem;
           font-weight: 600;
-          color: vars.$primary-purple;
+          color: var(--color-primary);
 
           mat-icon {
-            color: vars.$primary-purple;
+            color: var(--color-primary);
           }
         }
       }
@@ -77,7 +78,7 @@
         justify-content: space-between;
         align-items: center;
         padding: 16px 0;
-        border-bottom: 1px solid #eee;
+        border-bottom: 1px solid var(--color-border);
 
         &:last-child {
           border-bottom: none;
@@ -148,27 +149,27 @@
 ::ng-deep {
   .settings-page {
     .mat-mdc-slide-toggle {
-      --mdc-switch-selected-track-color: #{vars.$primary-purple};
-      --mdc-switch-selected-handle-color: #{vars.$primary-purple};
-      --mdc-switch-selected-hover-handle-color: #{vars.$primary-purple};
-      --mdc-switch-selected-focus-handle-color: #{vars.$primary-purple};
-      --mdc-switch-selected-pressed-handle-color: #{vars.$primary-purple};
+      --mdc-switch-selected-track-color: var(--color-primary);
+      --mdc-switch-selected-handle-color: var(--color-primary);
+      --mdc-switch-selected-hover-handle-color: var(--color-primary);
+      --mdc-switch-selected-focus-handle-color: var(--color-primary);
+      --mdc-switch-selected-pressed-handle-color: var(--color-primary);
     }
 
     .mat-mdc-form-field {
       .mat-mdc-select-arrow {
-        color: vars.$primary-purple;
+        color: var(--color-primary);
       }
     }
 
     .mat-mdc-button.mat-accent {
-      --mdc-filled-button-container-color: #{vars.$accent-light};
-      --mdc-filled-button-label-text-color: #{vars.$primary-purple};
+      --mdc-filled-button-container-color: var(--color-secondary);
+      --mdc-filled-button-label-text-color: var(--color-primary);
     }
 
     .mat-mdc-raised-button.mat-primary {
-      --mdc-filled-button-container-color: #{vars.$primary-purple};
-      --mdc-filled-button-label-text-color: white;
+      --mdc-filled-button-container-color: var(--color-primary);
+      --mdc-filled-button-label-text-color: var(--color-text-light);
     }
   }
 }
