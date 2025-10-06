@@ -5,12 +5,11 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatDividerModule } from '@angular/material/divider';
 import { Router } from '@angular/router';
 import { LoggedInUserService } from '../../services/logged-in-user.service';
-import { AppUserAvatarComponent } from '../../atoms/app-user-avatar/app-user-avatar.component';
 
 @Component({
   selector: 'app-user-menu',
   standalone: true,
-  imports: [MatMenuModule, MatButtonModule, MatIconModule, MatDividerModule, AppUserAvatarComponent],
+  imports: [MatMenuModule, MatButtonModule, MatIconModule, MatDividerModule],
   template: `
     <div class="user-menu">
       <button mat-button [matMenuTriggerFor]="userMenu" class="user-button">

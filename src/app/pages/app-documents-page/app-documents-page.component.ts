@@ -13,6 +13,7 @@ import { MatDividerModule } from '@angular/material/divider';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Document, DocumentType, DocumentStatus } from '../../models';
 import { AppSearchBarComponent } from "../../molecules/app-search-bar/app-search-bar.component";
+import { Subject, debounceTime } from 'rxjs';
 
 @Component({
   selector: 'app-documents-page',

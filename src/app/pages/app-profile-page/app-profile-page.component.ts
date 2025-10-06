@@ -1,13 +1,15 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { CommonModule } from '@angular/common';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { ImageUploadDialogComponent } from '../../dialogs/image-upload-dialog/image-upload-dialog.component';
+import { AppUserAvatarComponent } from '../../atoms/app-user-avatar/app-user-avatar.component';
+import { LoggedInUserService } from '../../services/logged-in-user.service';
 
 @Component({
   selector: 'app-profile-page',
@@ -87,13 +89,7 @@ import { ImageUploadDialogComponent } from '../../dialogs/image-upload-dialog/im
           <mat-card-content>
             <div class="avatar-section">
               <div class="current-avatar">
-                <div class="avatar-placeholder">
-                  @if(userPicture) {
-                  <img [src]="userPicture" alt="Avatar">
-                  } @else {
-                  {{ profile.firstName.charAt(0) }}{{ profile.lastName.charAt(0) }}
-                  }
-                </div>
+                <app-user-avatar [src]="loggedInUserService.image()" [fullName]="loggedInUserService.fullName()" />
               </div>
 
               <div class="avatar-actions">
@@ -114,17 +110,23 @@ import { ImageUploadDialogComponent } from '../../dialogs/image-upload-dialog/im
   `,
   styleUrls: ['./app-profile-page.component.scss']
 })
-export class AppProfilePageComponent {
+export class AppProfilePageComponent implements OnInit {
   readonly dialog = inject(MatDialog);
+  readonly loggedInUserService = inject(LoggedInUserService);
+  private fb = inject(FormBuilder);
 
-  userPicture: string | null = null;
+  form = this.fb.group({
+    firstName: this.fb.control<string>('', [Validators.required]),
+    lastName: this.fb.control<string>('', [Validators.required]),
+    email: this.fb.control<string>('', [Validators.required, Validators.email]),
+    phone: this.fb.control<string>('', [Validators.required]),
+  });
 
-  profile = {
-    firstName: 'John',
-    lastName: 'Smith',
-    email: 'john.smith@company.com',
-    phone: '+1 (555) 123-4567'
-  };
+
+  ngOnInit() {
+    const user = this.loggedInUserService.snapshot;
+    if (user) this.form.patchValue(user);
+  }
 
   saveProfile() {
     console.log('Saving profile:', this.loggedInUserService.snapshot);
@@ -166,7 +168,9 @@ export class AppProfilePageComponent {
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         console.log('Avatar uploaded:', result);
-        this.userPicture = result;
+        this.loggedInUserService.updateUser({
+          avatar: result
+        });
       }
     });
   }
@@ -174,6 +178,8 @@ export class AppProfilePageComponent {
   removeAvatar() {
     console.log('Removing avatar');
     // Implement avatar removal logic
-    this.userPicture = null;
+    this.loggedInUserService.updateUser({
+      avatar: undefined
+    });
   }
 }
