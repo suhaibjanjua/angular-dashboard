@@ -59,9 +59,9 @@ describe('AppProfilePageComponent', () => {
   });
 
   it('should initialize with correct profile values', () => {
-    expect(component.profile.firstName).toBe('John');
-    expect(component.profile.lastName).toBe('Smith');
-    expect(component.profile.email).toBe('john.smith@company.com');
+    expect(component.profile.firstName).toBe('Suhaib');
+    expect(component.profile.lastName).toBe('JANJUA');
+    expect(component.profile.email).toBe('suhaib.janjua@gmail.com');
     expect(component.profile.phone).toBe('+1 (555) 123-4567');
   });
 

@@ -181,9 +181,9 @@ export class AppUsersPageComponent implements OnInit, OnDestroy {
     this.users = [
       {
         id: 1,
-        firstName: 'John',
-        lastName: 'Smith',
-        email: 'john.smith@company.com',
+        firstName: 'Suhaib',
+        lastName: 'JANJUA',
+        email: 'suhaib.janjua@gmail.com',
         role: UserRole.ADMIN,
         status: UserStatus.ACTIVE,
         lastLogin: '2 hours ago',

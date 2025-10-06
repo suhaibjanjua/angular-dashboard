@@ -60,17 +60,17 @@
     }
     
     &.active {
-      background: #f3f0ff;
-      border-right: 4px solid #6c4bb6;
+      background: var(--color-surface-selected);
+      border-right: 4px solid var(--color-primary);
       
       .category-content {
         .category-header {
           .category-icon {
-            color: #6c4bb6;
+            color: var(--color-primary);
           }
           
           .category-name {
-            color: #6c4bb6;
+            color: var(--color-primary);
             font-weight: 600;
           }
           

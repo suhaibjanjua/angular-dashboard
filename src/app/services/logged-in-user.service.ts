@@ -5,9 +5,9 @@ import { LoggedInUser } from '../models/logged-in-user.model';
 export class LoggedInUserService {
   private user = signal<LoggedInUser | null>({
     id: 'user-001',
-    firstName: 'John',
-    lastName: 'Smith',
-    email: 'john.smith@company.com',
+    firstName: 'Suhaib',
+    lastName: 'JANJUA',
+    email: 'suhaib.janjua@gmail.com',
     phone: '+1 (555) 123-4567',
     role: 'admin',
     avatar: ''

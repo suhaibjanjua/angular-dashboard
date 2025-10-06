@@ -4,19 +4,19 @@
   max-width: 100%;
   padding: 20px;
   border-radius: 12px;
-  background: #ffffff;
-  border: 1px solid #e0e0e0;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
   margin-bottom: 16px;
   transition: all 0.2s ease;
   
   &:hover {
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-    border-color: #6c4bb6;
+    box-shadow: var(--shadow-md);
+    border-color: var(--color-primary);
   }
   
   &.disabled {
     opacity: 0.6;
-    background: #fafafa;
+    background: var(--color-background);
   }
 }
 
@@ -86,7 +86,7 @@
   .feature-description {
     margin: 0;
     font-size: 14px;
-    color: #666;
+    color: var(--color-text-secondary);
     line-height: 1.5;
     padding-left: 36px;
     width: 100%;
@@ -98,14 +98,14 @@
 
 // Accordion styles for features with children
 .feature-accordion {
-  background: #ffffff !important;
-  border: 1px solid #e0e0e0;
+  background: var(--color-surface) !important;
+  border: 1px solid var(--color-border);
   border-radius: 12px;
   box-shadow: none !important;
   
   &:hover {
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08) !important;
-    border-color: #6c4bb6;
+    box-shadow: var(--shadow-md) !important;
+    border-color: var(--color-primary);
   }
   
   &.mat-expanded {
@@ -148,7 +148,7 @@
       .feature-name {
         font-size: 16px;
         font-weight: 600;
-        color: #333;
+        color: var(--color-text);
         flex: 1;
         width: auto;
         min-width: 0;
@@ -161,7 +161,7 @@
         font-size: 20px;
         width: 20px;
         height: 20px;
-        color: #666;
+        color: var(--color-text-secondary);
         margin-left: 8px;
         transition: transform 0.3s ease;
         flex-shrink: 0;
@@ -191,7 +191,7 @@
   .feature-description {
     margin: 0;
     font-size: 14px;
-    color: #666;
+    color: var(--color-text-secondary);
     line-height: 1.5;
     padding-left: 36px;
     padding-right: 68px;
@@ -213,7 +213,7 @@
   
   .child-feature {
     padding: 16px;
-    background: #fafafa;
+    background: var(--color-background);
     border-radius: 8px;
     margin-bottom: 12px;
     transition: all 0.2s ease;
@@ -226,7 +226,7 @@
     }
     
     &:hover {
-      background: #f5f5f5;
+      background: var(--color-hover);
     }
     
     &.premium {
@@ -236,7 +236,7 @@
     
     &.disabled {
       opacity: 0.5;
-      background: #f0f0f0;
+      background: var(--color-surface-disabled);
     }
     
     .child-header {
@@ -261,14 +261,14 @@
             font-size: 18px;
             width: 18px;
             height: 18px;
-            color: #666;
+            color: var(--color-text-secondary);
             flex-shrink: 0;
           }
           
           .child-name {
             font-size: 14px;
             font-weight: 500;
-            color: #333;
+            color: var(--color-text);
             flex: 1;
             width: auto;
             min-width: 0;
@@ -310,7 +310,7 @@
       .child-description {
         margin: 0;
         font-size: 12px;
-        color: #666;
+        color: var(--color-text-secondary);
         line-height: 1.4;
         padding-left: 26px;
         padding-right: 56px;
