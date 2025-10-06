@@ -11,7 +11,7 @@ import { MatChipsModule } from '@angular/material/chips';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { Document, DocumentType, DocumentStatus } from '../../models';
 import { AppSearchBarComponent } from "../../molecules/app-search-bar/app-search-bar.component";
-import { Subject, debounceTime } from 'rxjs';
+import { Subject, debounceTime, distinctUntilChanged, takeUntil } from 'rxjs';
 import { ActionMenuItem } from '../../models/action.menu.model';
 import { AppActionMenuComponent } from '../../molecules/app-action-menu/app-action-menu.component';
 
@@ -151,7 +151,7 @@ export class AppDocumentsPageComponent implements OnInit {
     this.loadDocuments();
 
     this.form.get('searchTerm')?.valueChanges
-      .pipe(debounceTime(300))
+      .pipe(debounceTime(300), distinctUntilChanged(), takeUntil(this.destroy$))
       .subscribe(value => {
         this.applyFilter(value ?? '');
       });

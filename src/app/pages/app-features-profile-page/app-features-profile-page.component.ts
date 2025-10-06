@@ -1,5 +1,5 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Component, OnInit, OnDestroy, inject } from '@angular/core';
+import { NgFor, NgIf } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
@@ -9,25 +9,24 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSnackBarModule, MatSnackBar } from '@angular/material/snack-bar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatChipsModule } from '@angular/material/chips';
-import { FormsModule } from '@angular/forms';
+import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { Subject, takeUntil, debounceTime, distinctUntilChanged } from 'rxjs';
 import { AppHeaderTitleComponent } from '../../molecules/app-header-title/app-header-title.component';
 import { AppCategorySidebarComponent } from '../../molecules/app-category-sidebar/app-category-sidebar.component';
 import { AppFeatureToggleComponent } from '../../atoms/app-feature-toggle/app-feature-toggle.component';
-import { 
-  FeatureCategory, 
-  Feature, 
-  FeatureProfile, 
-  FeatureToggleEvent 
+import {
+  FeatureCategory,
+  Feature,
+  FeatureProfile,
+  FeatureToggleEvent
 } from '../../models/feature.models';
 import { FeatureService } from '../../services/feature.service';
+import { AppSearchBarComponent } from '../../molecules/app-search-bar/app-search-bar.component';
 
 @Component({
   selector: 'app-features-profile-page',
   standalone: true,
   imports: [
-    CommonModule,
-    FormsModule,
     MatCardModule,
     MatIconModule,
     MatButtonModule,
@@ -39,41 +38,42 @@ import { FeatureService } from '../../services/feature.service';
     MatChipsModule,
     AppHeaderTitleComponent,
     AppCategorySidebarComponent,
-    AppFeatureToggleComponent
+    AppFeatureToggleComponent,
+    AppSearchBarComponent,
+    ReactiveFormsModule,
+    NgIf,
+    NgFor
   ],
   templateUrl: './app-features-profile-page.component.html',
   styleUrls: ['./app-features-profile-page.component.scss']
 })
 export class AppFeaturesProfilePageComponent implements OnInit, OnDestroy {
-  
+  private readonly featureService = inject(FeatureService);
+  private readonly snackBar = inject(MatSnackBar);
+
   categories: FeatureCategory[] = [];
   selectedCategory: FeatureCategory | null = null;
   featureProfile: FeatureProfile | null = null;
   loading = false;
   searchQuery = '';
   filteredFeatures: Feature[] = [];
-  
-  private destroy$ = new Subject<void>();
-  private searchSubject = new Subject<string>();
 
-  constructor(
-    private featureService: FeatureService,
-    private snackBar: MatSnackBar
-  ) {
-    // Setup search debouncing
-    this.searchSubject.pipe(
-      debounceTime(300),
-      distinctUntilChanged(),
-      takeUntil(this.destroy$)
-    ).subscribe(query => {
-      this.searchQuery = query;
-      this.filterFeatures();
-    });
-  }
+  private destroy$ = new Subject<void>();
+
+  form = new FormGroup({
+    searchTerm: new FormControl('')
+  });
 
   ngOnInit(): void {
     this.loadFeatures();
     this.subscribeToFeatureProfile();
+
+    this.form.get('searchTerm')?.valueChanges
+      .pipe(debounceTime(300), distinctUntilChanged(), takeUntil(this.destroy$))
+      .subscribe(value => {
+        this.searchQuery = value ?? '';
+        this.filterFeatures();
+      });
   }
 
   ngOnDestroy(): void {
@@ -117,34 +117,25 @@ export class AppFeaturesProfilePageComponent implements OnInit, OnDestroy {
     }
   }
 
-  onSearchInput(event: Event): void {
-    const target = event.target as HTMLInputElement;
-    this.searchSubject.next(target?.value || '');
-  }
-
-  onSearchChange(query: string): void {
-    this.searchSubject.next(query);
-  }
-
   private filterFeatures(): void {
     if (!this.selectedCategory) return;
-    
+
     if (!this.searchQuery.trim()) {
       this.filteredFeatures = [...this.selectedCategory.features];
       return;
     }
-    
+
     const searchTerm = this.searchQuery.toLowerCase();
     this.filteredFeatures = this.selectedCategory.features.filter(feature => {
-      const featureMatches = 
+      const featureMatches =
         feature.name.toLowerCase().includes(searchTerm) ||
         feature.description.toLowerCase().includes(searchTerm);
-      
+
       const childMatches = feature.children?.some(child =>
         child.name.toLowerCase().includes(searchTerm) ||
         child.description.toLowerCase().includes(searchTerm)
       );
-      
+
       return featureMatches || childMatches;
     });
   }
@@ -173,15 +164,15 @@ export class AppFeaturesProfilePageComponent implements OnInit, OnDestroy {
 
   private getFeatureName(event: FeatureToggleEvent): string {
     if (!this.selectedCategory) return 'Feature';
-    
+
     const feature = this.selectedCategory.features.find(f => f.id === (event.parentId || event.featureId));
     if (!feature) return 'Feature';
-    
+
     if (event.isChild && feature.children) {
       const child = feature.children.find(c => c.id === event.featureId);
       return child?.name || 'Feature';
     }
-    
+
     return feature.name;
   }
 
@@ -200,7 +191,7 @@ export class AppFeaturesProfilePageComponent implements OnInit, OnDestroy {
         link.click();
         document.body.removeChild(link);
         window.URL.revokeObjectURL(url);
-        
+
         this.snackBar.open('Configuration exported successfully', 'Close', {
           duration: 3000,
           horizontalPosition: 'right',
@@ -253,6 +244,7 @@ export class AppFeaturesProfilePageComponent implements OnInit, OnDestroy {
 
   clearSearch(): void {
     this.searchQuery = '';
+    this.form.get('searchTerm')?.setValue('');
     this.filterFeatures();
   }
 
@@ -263,8 +255,6 @@ export class AppFeaturesProfilePageComponent implements OnInit, OnDestroy {
   getTotalFeatureCount(): number {
     return this.featureProfile?.totalFeatures || 0;
   }
-
-  
 
   trackByFeatureId(index: number, feature: Feature): string {
     return feature.id;

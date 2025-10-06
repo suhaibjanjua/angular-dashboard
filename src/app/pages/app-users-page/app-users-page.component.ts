@@ -10,7 +10,7 @@ import { MatChipsModule } from '@angular/material/chips';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { User, UserStatus, UserRole, UserStatusCssClassMap, UserRoleCssClassMap, StatusIconMap } from '../../models';
 import { AppSearchBarComponent } from '../../molecules/app-search-bar/app-search-bar.component';
-import { debounceTime, Subject } from 'rxjs';
+import { debounceTime, distinctUntilChanged, Subject, takeUntil } from 'rxjs';
 import { AppUserAvatarComponent } from '../../atoms/app-user-avatar/app-user-avatar.component';
 import { ActionMenuItem } from '../../models/action.menu.model';
 import { AppActionMenuComponent } from '../../molecules/app-action-menu/app-action-menu.component';
@@ -165,7 +165,7 @@ export class AppUsersPageComponent implements OnInit, OnDestroy {
     this.loadUsers();
 
     this.form.get('searchTerm')?.valueChanges
-      .pipe(debounceTime(300))
+      .pipe(debounceTime(300), distinctUntilChanged(), takeUntil(this.destroy$))
       .subscribe(value => {
         this.applyFilter(value ?? '');
       });
