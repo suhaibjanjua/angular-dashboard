@@ -55,10 +55,10 @@
           gap: 8px;
           font-size: 1.25rem;
           font-weight: 600;
-          color: vars.$primary-purple;
+          color: var(--color-primary);
 
           mat-icon {
-            color: vars.$primary-purple;
+            color: var(--color-primary);
           }
         }
       }
@@ -102,17 +102,17 @@
             padding: 16px;
             cursor: pointer;
             transition: all 0.2s ease;
-            background: white;
+            background: var(--color-surface);
 
             &:hover {
-              border-color: vars.$primary-purple;
+              border-color: var(--color-primary);
               transform: translateY(-2px);
               box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
             }
 
             &.selected {
-              border-color: vars.$primary-purple;
-              background: rgba(vars.$primary-purple, 0.05);
+              border-color: var(--color-primary);
+              background: rgba(var(--color-primary), 0.05);
             }
 
             .theme-info {
@@ -137,7 +137,7 @@
               position: absolute;
               top: 8px;
               right: 8px;
-              color: vars.$primary-purple;
+              color: var(--color-primary);
               font-size: 20px;
             }
           }
@@ -222,7 +222,7 @@
         }
 
         mat-icon {
-          color: vars.$primary-purple;
+          color: var(--color-primary);
           margin-top: 2px;
         }
 
@@ -297,20 +297,20 @@
 
   // Light theme preview
   &.light {
-    background: #ffffff;
+    background: var(--color-surface);
     color: var(--color-text);
 
     .preview-header {
-      background: #FFFFFF;
+      background: var(--color-surface);
       color: var(--color-text);
 
       mat-icon {
-        color: vars.$primary-purple;
+        color: var(--color-primary);
       }
     }
 
     .preview-sidebar {
-      background: #FFFFFF;
+      background: var(--color-surface);
     }
 
     .preview-card {
@@ -348,7 +348,7 @@
     color: var(--color-text);
 
     .preview-header {
-      background: vars.$primary-purple;
+      background: var(--color-primary);
       color: #ffffff;
 
       mat-icon {
@@ -393,20 +393,20 @@
 ::ng-deep {
   .theme-page {
     .mat-mdc-slide-toggle {
-      --mdc-switch-selected-track-color: #{vars.$primary-purple};
-      --mdc-switch-selected-handle-color: #{vars.$primary-purple};
-      --mdc-switch-selected-hover-handle-color: #{vars.$primary-purple};
-      --mdc-switch-selected-focus-handle-color: #{vars.$primary-purple};
-      --mdc-switch-selected-pressed-handle-color: #{vars.$primary-purple};
+      --mdc-switch-selected-track-color: var(--color-primary);
+      --mdc-switch-selected-handle-color: var(--color-primary);
+      --mdc-switch-selected-hover-handle-color: var(--color-primary);
+      --mdc-switch-selected-focus-handle-color: var(--color-primary);
+      --mdc-switch-selected-pressed-handle-color: var(--color-primary);
     }
 
     .mat-mdc-button.mat-accent {
-      --mdc-filled-button-container-color: #{vars.$accent-light};
-      --mdc-filled-button-label-text-color: #{vars.$primary-purple};
+      --mdc-filled-button-container-color: var(--color-secondary);
+      --mdc-filled-button-label-text-color: var(--color-primary);
     }
 
     .mat-mdc-raised-button.mat-primary {
-      --mdc-filled-button-container-color: #{vars.$primary-purple};
+      --mdc-filled-button-container-color: var(--color-primary);
       --mdc-filled-button-label-text-color: white;
     }
   }
