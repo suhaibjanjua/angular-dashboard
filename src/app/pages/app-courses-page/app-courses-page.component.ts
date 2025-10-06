@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, NgIf } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
@@ -10,7 +10,6 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatSortModule, MatSort } from '@angular/material/sort';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { HttpClientModule } from '@angular/common/http';
 
 import { CourseService } from '../../services/course.service';
 import { 
@@ -20,12 +19,13 @@ import {
   CrudAction,
   MaterialColor 
 } from '../../models/course.models';
+import { ActionMenuItem } from '../../models/action.menu.model';
+import { AppActionMenuComponent } from '../../molecules/app-action-menu/app-action-menu.component';
 
 @Component({
   selector: 'app-courses-page',
   standalone: true,
   imports: [
-    CommonModule, 
     MatCardModule, 
     MatButtonModule, 
     MatIconModule,
@@ -36,7 +36,8 @@ import {
     MatProgressBarModule,
     MatSortModule,
     MatProgressSpinnerModule,
-    HttpClientModule
+    AppActionMenuComponent,
+    NgIf
   ],
   template: `
     <div class="page-container">
@@ -158,25 +159,7 @@ import {
               <ng-container matColumnDef="actions">
                 <th mat-header-cell *matHeaderCellDef>Actions</th>
                 <td mat-cell *matCellDef="let course">
-                  <div class="action-buttons">
-                    <button mat-icon-button matTooltip="View Details" (click)="handleAction('view', course)">
-                      <mat-icon>school</mat-icon>
-                    </button>
-                    <button mat-icon-button matTooltip="Edit Course" (click)="handleAction('update', course)"
-                            *ngIf="course.status !== 'Completed'">
-                      <mat-icon>tune</mat-icon>
-                    </button>
-                    <button mat-icon-button matTooltip="Manage Content" (click)="handleAction('manage_content', course)">
-                      <mat-icon>library_books</mat-icon>
-                    </button>
-                    <button mat-icon-button matTooltip="View Analytics" (click)="handleAction('view_analytics', course)">
-                      <mat-icon>analytics</mat-icon>
-                    </button>
-                    <button mat-icon-button matTooltip="More Options" (click)="handleAction('delete', course)"
-                            *ngIf="course.status === 'Draft'">
-                      <mat-icon>more_vert</mat-icon>
-                    </button>
-                  </div>
+                  <app-app-action-menu [actions]="getCoursesActions(course)"></app-app-action-menu>
                 </td>
               </ng-container>
 
@@ -214,6 +197,8 @@ export class AppCoursesPageComponent implements OnInit {
   pageSizeOptions = [5, 10, 20, 50];
   sortBy = '';
   sortDirection: 'asc' | 'desc' = 'asc';
+
+  courseActionsMap = new Map<Course, ActionMenuItem[]>();
 
   constructor(private courseService: CourseService) {}
 
@@ -264,6 +249,43 @@ export class AppCoursesPageComponent implements OnInit {
     console.log('Creating new course...');
     // In a real app, this would open a form dialog or navigate to create page
     // this.router.navigate(['/courses/create']);
+  }
+
+  getCoursesActions(course: Course): ActionMenuItem[] {
+    if (!this.courseActionsMap.has(course)) {
+      console.log('Generating actions for course:', course.title);
+      this.courseActionsMap.set(course, [
+        {
+          label: 'Edit course',
+          icon: 'tune',
+          callback: () => this.handleAction('update', course)
+        },
+        {
+          label: 'View details',
+          icon: 'school',
+          callback: () => this.handleAction('view', course)
+        },
+        {
+          label: 'View analytics',
+          icon: 'analytics',
+          callback: () => this.handleAction('view_analytics', course)
+        },
+        {
+          label: 'Manage Content',
+          icon: 'library_books',
+          callback: () => this.handleAction('manage_content', course)
+        },
+        {
+          dividerBefore: true,
+          label: 'Delete',
+          icon: 'delete_outline',
+          callback: () => this.handleAction('delete', course),
+          danger: true,
+          disabled: course.status !== 'Draft'
+        }
+      ]);
+    }
+    return this.courseActionsMap.get(course)!;
   }
 
   getEnrollmentPercentage(course: Course): number {

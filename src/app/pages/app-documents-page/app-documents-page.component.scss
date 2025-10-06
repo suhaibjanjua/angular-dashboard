@@ -131,14 +131,6 @@
         background: #f9f9f9 !important;
       }
     }
-    
-    .action-menu {
-      color: #666;
-      
-      &:hover {
-        color: #6c4bb6;
-      }
-    }
   }
 }
 
@@ -214,65 +206,6 @@
 ::ng-deep .status-archived {
   background-color: rgba(158, 158, 158, 0.1) !important;
   color: #9e9e9e !important;
-}
-
-// Menu styles
-::ng-deep .documents-dropdown {
-  margin-top: 8px;
-
-  .mat-mdc-menu-panel {
-    background: #ffffff;
-    border-radius: 8px;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
-  }
-
-  .mat-mdc-menu-content {
-    padding: 8px 0;
-    min-width: 200px;
-    background: #ffffff;
-  }
-
-  .mat-mdc-menu-item {
-    height: 48px;
-    padding: 0 16px;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    font-size: 14px;
-    color: #333;
-
-    mat-icon {
-      font-size: 20px;
-      width: 20px;
-      height: 20px;
-      color: #666;
-    }
-
-    &:hover {
-      background-color: rgba(108, 75, 182, 0.08);
-
-      mat-icon {
-        color: #6c4bb6;
-      }
-    }
-
-    &.danger-item {
-      &:hover {
-        background-color: rgba(244, 67, 54, 0.08);
-        color: #f44336;
-
-        mat-icon {
-          color: #f44336;
-        }
-      }
-    }
-  }
-
-  .mat-mdc-menu-divider {
-    margin: 8px 0;
-    background-color: #e0e0e0;
-    height: 1px;
-  }
 }
 
 // Paginator styling
