@@ -26,7 +26,7 @@
       gap: 8px;
       font-size: 18px;
       font-weight: 600;
-      color: #333;
+      color: var(--color-text);
 
       mat-icon {
         color: #6c4bb6;
@@ -55,7 +55,7 @@
 
   .search-field {
     .mat-mdc-form-field-icon-prefix mat-icon {
-      color: #666;
+      color: var(--color-text-secondary);
     }
   }
 
@@ -91,7 +91,7 @@
 // Results Summary
 .results-summary {
   margin-bottom: 16px;
-  color: #666;
+  color: var(--color-text-secondary);
   font-size: 14px;
 }
 
@@ -114,7 +114,7 @@
     align-items: center;
     justify-content: center;
     padding: 40px;
-    color: #666;
+    color: var(--color-text-secondary);
 
     mat-spinner {
       margin-bottom: 16px;
@@ -139,7 +139,7 @@
     justify-content: center;
     padding: 40px;
     text-align: center;
-    color: #666;
+    color: var(--color-text-secondary);
 
     mat-icon {
       font-size: 64px;
@@ -154,7 +154,7 @@
       margin: 0 0 8px 0;
       font-size: 20px;
       font-weight: 500;
-      color: #333;
+      color: var(--color-text);
     }
 
     p {
@@ -258,7 +258,7 @@
   .notification-title {
     font-size: 16px;
     font-weight: 600;
-    color: #333;
+    color: var(--color-text);
     margin: 0;
     line-height: 1.4;
     flex: 1;
@@ -272,7 +272,7 @@
 
     .notification-time {
       font-size: 12px;
-      color: #666;
+      color: var(--color-text-secondary);
       white-space: nowrap;
     }
 
@@ -308,7 +308,7 @@
     display: flex;
     align-items: center;
     gap: 6px;
-    color: #666;
+    color: var(--color-text-secondary);
 
     .user-icon {
       font-size: 16px;
@@ -340,11 +340,11 @@
   .type-chip {
     height: 28px;
     background: #f0f0f0;
-    color: #666;
+    color: var(--color-text-secondary);
     font-size: 12px;
 
     mat-icon {
-      color: #666 !important;
+      color: var(--color-text-secondary) !important;
       font-size: 16px !important;
       width: 16px !important;
       height: 16px !important;
@@ -376,10 +376,10 @@
 
     &.status-archived {
       background: #f0f0f0;
-      color: #666;
+      color: var(--color-text-secondary);
 
       mat-icon {
-        color: #666 !important;
+        color: var(--color-text-secondary) !important;
       }
     }
 
@@ -431,7 +431,7 @@
     }
 
     &.delete-button {
-      color: #f44336;
+      color: var(--color-error);
 
       &:hover {
         background-color: rgba(244, 67, 54, 0.1);

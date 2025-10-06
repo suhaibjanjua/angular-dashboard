@@ -40,7 +40,7 @@ import { ThemeService, Theme } from '../../services/theme.service';
       </button>
 
       <!-- Submenu with all available themes -->
-      <mat-menu #themeMenu="matMenu" class="theme-submenu">
+      <mat-menu #themeMenu="matMenu" class="theme-submenu" panelClass="theme-submenu-panel">
         <div class="theme-header">
           <span class="theme-title">Choose Theme</span>
         </div>

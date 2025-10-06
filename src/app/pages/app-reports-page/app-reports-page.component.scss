@@ -61,7 +61,7 @@
     
     .mat-mdc-header-cell {
       background: #FFFFFF;
-      color: #333;
+      color: var(--color-text);
       font-weight: 600;
       font-size: 14px;
       padding: 16px 12px;
@@ -83,7 +83,7 @@
       background: inherit;
       padding: 16px 12px;
       font-size: 14px;
-      color: #333;
+      color: var(--color-text);
     }
   }
 }
@@ -97,7 +97,7 @@
 .period-info {
   .generated-date {
     font-size: 0.75rem;
-    color: #666;
+    color: var(--color-text-secondary);
     margin-top: 2px;
   }
 }
@@ -109,7 +109,7 @@
   
   .format-icon {
     font-size: 20px;
-    color: #666;
+    color: var(--color-text-secondary);
   }
   
   .file-size {
@@ -126,7 +126,7 @@
   
   mat-icon {
     font-size: 18px;
-    color: #666;
+    color: var(--color-text-secondary);
   }
 }
 
@@ -155,7 +155,7 @@
       font-size: 18px;
       width: 18px;
       height: 18px;
-      color: #666;
+      color: var(--color-text-secondary);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -252,13 +252,13 @@ mat-chip {
     align-items: center;
     gap: 12px;
     font-size: 14px;
-    color: #333;
+    color: var(--color-text);
 
     mat-icon {
       font-size: 20px;
       width: 20px;
       height: 20px;
-      color: #666;
+      color: var(--color-text-secondary);
     }
 
     &:hover {
@@ -272,10 +272,10 @@ mat-chip {
     &.danger-item {
       &:hover {
         background-color: rgba(244, 67, 54, 0.08);
-        color: #f44336;
+        color: var(--color-error);
 
         mat-icon {
-          color: #f44336;
+          color: var(--color-error);
         }
       }
     }
