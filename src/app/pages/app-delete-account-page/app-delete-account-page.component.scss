@@ -107,9 +107,9 @@
             align-items: flex-start;
             gap: 12px;
             padding: 16px;
-            background: #fff5f5;
+            background: var(--color-background);
             border-radius: 8px;
-            border: 1px solid #ffebee;
+            border: 1px solid var(--color-border);
 
             mat-icon {
               color: var(--color-error);
@@ -156,12 +156,12 @@
             align-items: flex-start;
             gap: 12px;
             padding: 16px;
-            background: #f0f8ff;
+            background: var(--color-background);
             border-radius: 8px;
-            border: 1px solid #e3f2fd;
+            border: 1px solid var(--color-border);
 
             mat-icon {
-              color: vars.$primary-purple;
+              color: var(--color-primary);
               margin-top: 2px;
             }
 
@@ -172,7 +172,7 @@
                 font-size: 0.95rem;
                 font-weight: 500;
                 margin: 0 0 4px 0;
-                color: vars.$primary-purple;
+                color: var(--color-primary);
               }
 
               p {
@@ -212,15 +212,15 @@
         }
 
         .deletion-timeline {
-          background: #fff8e1;
+          background: var(--color-background);
           padding: 16px;
           border-radius: 8px;
-          border: 1px solid #ffecb3;
+          border: 1px solid var(--color-border);
 
           h4 {
             font-size: 1rem;
             font-weight: 500;
-            color: #f57c00;
+            color: var(--color-warning);
             margin: 0 0 12px 0;
           }
 
@@ -236,15 +236,15 @@
               justify-content: center;
               width: 24px;
               height: 24px;
-              background: #f57c00;
-              color: white;
+              background: var(--color-warning);
+              color: var(--color-text-light);
               border-radius: 50%;
               font-size: 0.875rem;
               font-weight: 500;
             }
 
             span:last-child {
-              color: #e65100;
+              color: var(--color-warning);
               font-weight: 500;
             }
           }
@@ -277,18 +277,18 @@
 ::ng-deep {
   .delete-account-page {
     .mat-mdc-button.mat-accent {
-      --mdc-filled-button-container-color: #{vars.$accent-light};
-      --mdc-filled-button-label-text-color: #{vars.$primary-purple};
+      --mdc-filled-button-container-color: var(--color-secondary);
+      --mdc-filled-button-label-text-color: var(--color-primary);
     }
 
     .mat-mdc-raised-button.mat-warn {
       --mdc-filled-button-container-color: var(--color-error);
-      --mdc-filled-button-label-text-color: white;
+      --mdc-filled-button-label-text-color: var(--color-text-light);
     }
 
     .mat-mdc-stroked-button.mat-primary {
-      --mdc-outlined-button-outline-color: #{vars.$primary-purple};
-      --mdc-outlined-button-label-text-color: #{vars.$primary-purple};
+      --mdc-outlined-button-outline-color: var(--color-primary);
+      --mdc-outlined-button-label-text-color: var(--color-primary);
     }
   }
 }
