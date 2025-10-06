@@ -17,6 +17,8 @@ import { User, UserStatus, UserRole, UserStatusColorMap, UserRoleColorMap, UserS
 import { AppSearchBarComponent } from '../../molecules/app-search-bar/app-search-bar.component';
 import { debounceTime, Subject } from 'rxjs';
 import { AppUserAvatarComponent } from '../../atoms/app-user-avatar/app-user-avatar.component';
+import { ActionMenuItem } from '../../models/action.menu.model';
+import { AppActionMenuComponent } from '../../molecules/app-action-menu/app-action-menu.component';
 
 @Component({
   selector: 'app-users-page',
@@ -38,7 +40,8 @@ import { AppUserAvatarComponent } from '../../atoms/app-user-avatar/app-user-ava
     FormsModule,
     AppSearchBarComponent,
     ReactiveFormsModule,
-    AppUserAvatarComponent
+    AppUserAvatarComponent,
+    AppActionMenuComponent
   ],
   template: `
     <div class="page-container">
@@ -80,7 +83,6 @@ import { AppUserAvatarComponent } from '../../atoms/app-user-avatar/app-user-ava
                 <th mat-header-cell *matHeaderCellDef mat-sort-header>Name</th>
                 <td mat-cell *matCellDef="let user">
                   <div class="user-info">
-                    <!-- <div class="user-avatar">{{getInitials(user.firstName, user.lastName)}}</div> -->
                     <div class="user-avatar">
                       <app-user-avatar [src]="user.avatar" [fullName]="user.firstName + ' ' + user.lastName" />
                     </div>
@@ -125,28 +127,7 @@ import { AppUserAvatarComponent } from '../../atoms/app-user-avatar/app-user-ava
               <ng-container matColumnDef="actions">
                 <th mat-header-cell *matHeaderCellDef>Actions</th>
                 <td mat-cell *matCellDef="let user">
-                  <button mat-icon-button [matMenuTriggerFor]="menu" class="action-menu" matTooltip="More Actions">
-                    <mat-icon>more_vert</mat-icon>
-                  </button>
-                  <mat-menu #menu="matMenu" class="users-list-dropdown">
-                    <button mat-menu-item (click)="editUser(user)">
-                      <mat-icon>manage_accounts</mat-icon>
-                      <span>Edit User</span>
-                    </button>
-                    <button mat-menu-item (click)="viewUser(user)">
-                      <mat-icon>account_circle</mat-icon>
-                      <span>View Profile</span>
-                    </button>
-                    <button mat-menu-item (click)="resetPassword(user)">
-                      <mat-icon>vpn_key</mat-icon>
-                      <span>Reset Password</span>
-                    </button>
-                    <mat-divider></mat-divider>
-                    <button mat-menu-item (click)="deleteUser(user)" class="danger-item">
-                      <mat-icon>person_remove</mat-icon>
-                      <span>Remove User</span>
-                    </button>
-                  </mat-menu>
+                  <app-app-action-menu [actions]="getUserActions(user)"></app-app-action-menu>
                 </td>
               </ng-container>
 
@@ -185,6 +166,8 @@ export class AppUsersPageComponent implements OnInit, OnDestroy {
   });
 
   private destroy$ = new Subject<void>();
+  
+  userActionsMap = new Map<User, ActionMenuItem[]>();
 
   constructor(private dialog: MatDialog) { }
 
@@ -269,6 +252,40 @@ export class AppUsersPageComponent implements OnInit, OnDestroy {
       user.role.toLowerCase().includes(filterValue)
     );
   }
+
+  getUserActions(user: User): ActionMenuItem[] {
+    if (!this.userActionsMap.has(user)) {
+      console.log('Generating actions for user:', user);
+      this.userActionsMap.set(user, [
+        {
+          label: 'Edit User',
+          icon: 'manage_accounts',
+          callback: () => this.editUser(user)
+        },
+        {
+          label: 'View Profile',
+          icon: 'account_circle',
+          callback: () => this.viewUser(user)
+        },
+        {
+          label: 'Reset Password',
+          icon: 'vpn_key',
+          callback: () => this.resetPassword(user)
+        },
+        {
+          dividerBefore: true,
+          label: 'Remove User',
+          icon: 'person_remove',
+          callback: () => this.deleteUser(user),
+          danger: true,
+          tooltip: user.role === 'Admin' ? 'Cannot remove an Admin user' : '',
+          disabled: user.role === 'Admin'
+        }
+      ]);
+    }
+    return this.userActionsMap.get(user)!;
+  }
+
 
   addUser() {
     console.log('Add new user');

@@ -1,0 +1,14 @@
+<button mat-icon-button [matMenuTriggerFor]="menu" class="action-menu">
+    <mat-icon>more_vert</mat-icon>
+</button>
+
+<mat-menu #menu="matMenu" class="action-menu-dropdown">
+    <ng-container *ngFor="let action of actions">
+        <mat-divider *ngIf="action.dividerBefore"></mat-divider>
+        <button mat-menu-item (click)="action.callback()" [disabled]="action.disabled" [matTooltip]="action.tooltip"
+            [ngClass]="{'danger-item': action.danger, 'disabled-item': action.disabled}">
+            <mat-icon>{{ action.icon }}</mat-icon>
+            <span>{{ action.label }}</span>
+        </button>
+    </ng-container>
+</mat-menu>
