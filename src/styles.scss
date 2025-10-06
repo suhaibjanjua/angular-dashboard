@@ -19,6 +19,8 @@
   --color-surface: #f8fafc;
   --color-surface-hover: #f1f5f9;
   --color-surface-selected: #e2e8f0;
+  --color-surface-disabled: #f1f5f9;
+  --color-hover: #f1f5f9;
   
   --color-text: #1a202c;
   --color-text-light: #ffffff;
@@ -60,7 +62,9 @@
   --color-background: #202123;
   --color-surface: #2E3033;
   --color-surface-hover: #36373B;
-  --color-surface-selected: #404040;
+  --color-surface-selected: #36373B;
+  --color-surface-disabled: #404040;
+  --color-hover: #36373B;
   
   --color-text: #ffffff;
   --color-text-light: #ffffff;

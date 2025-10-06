@@ -2,9 +2,9 @@
   "data": [
     {
       "id": 1,
-      "firstName": "John",
-      "lastName": "Smith",
-      "email": "john.smith@university.edu",
+      "firstName": "Suhaib",
+      "lastName": "JANJUA",
+      "email": "suhaib.janjua@gmail.com",
       "role": "Admin",
       "status": "Active",
       "lastLogin": "2024-12-26T10:30:00Z",
