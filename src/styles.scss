@@ -57,9 +57,9 @@
   --color-secondary: #fbbf24;
   --color-accent: #a78bfa;
   
-  --color-background: #0a0a0a;
-  --color-surface: #1a1a1a;
-  --color-surface-hover: #2d2d2d;
+  --color-background: #202123;
+  --color-surface: #2E3033;
+  --color-surface-hover: #36373B;
   --color-surface-selected: #404040;
   
   --color-text: #ffffff;
@@ -67,13 +67,13 @@
   --color-text-secondary: #b3b3b3;
   --color-text-muted: #808080;
   
-  --color-sidebar: #000000;
-  --color-sidebar-hover: #1a1a1a;
+  --color-sidebar: #1a1a1a;
+  --color-sidebar-hover: #2E3033;
   --color-sidebar-active: #8b5cf6;
   
-  --color-border: #333333;
-  --color-border-light: #404040;
-  --color-border-dark: #1a1a1a;
+  --color-border: #404040;
+  --color-border-light: #505050;
+  --color-border-dark: #2E3033;
   
   --color-success: #22c55e;
   --color-warning: #fbbf24;
@@ -288,9 +288,19 @@ body {
   // Ensure all page content gets dark background
   .page-content,
   .main-content,
-  .content-wrapper {
+  .content-wrapper,
+  .page-container,
+  .dashboard-page {
     background-color: var(--color-background) !important;
     color: var(--color-text) !important;
+  }
+  
+  // Style all page headers
+  .page-header,
+  .dashboard-header {
+    background-color: var(--color-surface) !important;
+    color: var(--color-text) !important;
+    border: 1px solid var(--color-border) !important;
   }
   
   // Style all tiles, widgets, and cards
@@ -299,7 +309,12 @@ body {
   .card,
   .dashboard-card,
   .feature-card,
-  .stats-card {
+  .stats-card,
+  .content-card,
+  .widget-container,
+  .notification-card,
+  .theme-selector-card,
+  .theme-info-card {
     background-color: var(--color-surface) !important;
     color: var(--color-text) !important;
     border: 1px solid var(--color-border) !important;
@@ -307,6 +322,92 @@ body {
   
   // Style all text elements
   h1, h2, h3, h4, h5, h6 {
+    color: var(--color-text) !important;
+  }
+  
+  p, span, div {
+    color: var(--color-text) !important;
+  }
+  
+  .page-title {
+    color: var(--color-text) !important;
+  }
+  
+  .page-subtitle {
+    color: var(--color-text-secondary) !important;
+  }
+  
+  // Style all tables
+  .mat-mdc-table,
+  .courses-table,
+  .classes-table,
+  .documents-table {
+    background-color: var(--color-surface) !important;
+    color: var(--color-text) !important;
+  }
+  
+  .mat-mdc-header-row {
+    background-color: var(--color-surface) !important;
+    
+    .mat-mdc-header-cell {
+      background-color: var(--color-surface) !important;
+      color: var(--color-text) !important;
+      border-bottom-color: var(--color-border) !important;
+    }
+  }
+  
+  .mat-mdc-row {
+    background-color: var(--color-surface) !important;
+    border-bottom-color: var(--color-border-light) !important;
+    
+    &:hover {
+      background-color: var(--color-surface-hover) !important;
+    }
+    
+    .mat-mdc-cell {
+      background-color: inherit !important;
+      color: var(--color-text) !important;
+    }
+  }
+  
+  // Style all form elements
+  .mat-mdc-form-field {
+    .mat-mdc-text-field-wrapper {
+      background-color: var(--color-surface) !important;
+    }
+    
+    .mat-mdc-form-field-label {
+      color: var(--color-text-secondary) !important;
+    }
+    
+    input, textarea {
+      color: var(--color-text) !important;
+    }
+  }
+  
+  // Style all paginators
+  .mat-mdc-paginator {
+    background-color: var(--color-surface) !important;
+    color: var(--color-text) !important;
+    border-top-color: var(--color-border) !important;
+  }
+  
+  // Style all widget cards and stat items
+  .stat-item,
+  .class-item,
+  .course-item,
+  .metric-item,
+  .health-overview,
+  .stats-overview,
+  .chart-container {
+    background-color: var(--color-surface) !important;
+    color: var(--color-text) !important;
+  }
+  
+  // Style loading containers and empty states
+  .loading-container,
+  .empty-state {
+    background-color: var(--color-surface) !important;
     color: var(--color-text) !important;
   }
   
