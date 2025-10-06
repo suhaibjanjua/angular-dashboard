@@ -1,32 +1,35 @@
 .page-container {
   padding: 24px;
+  background: var(--color-background);
 }
 
 .page-header {
-  background: white;
+  background: var(--color-surface);
   padding: 24px;
   border-radius: 12px;
   margin-bottom: 24px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--shadow-md);
+  border: 1px solid var(--color-border);
 
   .page-title {
     font-size: 28px;
     font-weight: 600;
-    color: #333;
+    color: var(--color-text);
     margin: 0 0 8px 0;
   }
 
   .page-subtitle {
     font-size: 16px;
-    color: #666;
+    color: var(--color-text-secondary);
     margin: 0;
   }
 }
 
 .content-card {
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--shadow-md);
   border-radius: 12px;
-  background: #ffffff;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
   
   .mat-mdc-card-header {
     padding: 24px 24px 0 24px;
@@ -210,8 +213,9 @@
 
 // Paginator styling
 .mat-mdc-paginator {
-  background: #ffffff;
-  border-top: 1px solid #e0e0e0;
+  background: var(--color-surface);
+  color: var(--color-text);
+  border-top: 1px solid var(--color-border);
   border-radius: 0 0 12px 12px;
   
   .mat-mdc-paginator-container {
