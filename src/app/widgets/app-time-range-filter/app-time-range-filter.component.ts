@@ -1,23 +1,21 @@
 import { Component } from '@angular/core';
+import { NgForOf } from '@angular/common';
 import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import { DashboardService } from '../../services/dashboard.service';
-import { TimeRange } from '../../models/dashboard.models';
+import { TimeRange, TimeRangeLabels } from '../../models/widget.models';
 
 @Component({
   selector: 'app-time-range-filter',
   standalone: true,
-  imports: [MatSelectModule, MatButtonModule, MatIconModule, MatMenuModule],
+  imports: [NgForOf, MatSelectModule, MatButtonModule, MatIconModule, MatMenuModule],
   template: `<div class="time-range-filter">
     <mat-select [(value)]="selectedTimeRange" placeholder="Time Range">
-      <mat-option value="Today">Today</mat-option>
-      <mat-option value="Yesterday">Yesterday</mat-option>
-      <mat-option value="This Week">This Week</mat-option>
-      <mat-option value="This Month">This Month</mat-option>
-      <mat-option value="Last Month">Last Month</mat-option>
-      <mat-option value="Last 3 Months">Last 3 Months</mat-option>
+      <mat-option *ngFor="let option of timeRangeOptions" [value]="option.value">
+        {{ option.label }}
+      </mat-option>
     </mat-select>
     <button mat-raised-button color="primary" [matMenuTriggerFor]="exportMenu">
       <mat-icon>file_download</mat-icon>
@@ -37,12 +35,22 @@ import { TimeRange } from '../../models/dashboard.models';
   styleUrls: ['./app-time-range-filter.component.scss']
 })
 export class AppTimeRangeFilterComponent {
-  selectedTimeRange: TimeRange = 'This Week';
+  selectedTimeRange: TimeRange = TimeRange.LAST_7_DAYS;
+  
+  timeRangeOptions = [
+    { value: TimeRange.TODAY, label: TimeRangeLabels[TimeRange.TODAY] },
+    { value: TimeRange.YESTERDAY, label: TimeRangeLabels[TimeRange.YESTERDAY] },
+    { value: TimeRange.LAST_7_DAYS, label: TimeRangeLabels[TimeRange.LAST_7_DAYS] },
+    { value: TimeRange.LAST_30_DAYS, label: TimeRangeLabels[TimeRange.LAST_30_DAYS] },
+    { value: TimeRange.THIS_MONTH, label: TimeRangeLabels[TimeRange.THIS_MONTH] },
+    { value: TimeRange.LAST_MONTH, label: TimeRangeLabels[TimeRange.LAST_MONTH] },
+    { value: TimeRange.LAST_90_DAYS, label: TimeRangeLabels[TimeRange.LAST_90_DAYS] }
+  ];
 
   constructor(private dashboardService: DashboardService) {}
 
   exportData(format: 'csv' | 'excel') {
-    this.dashboardService.exportData(format, this.selectedTimeRange).subscribe(blob => {
+    this.dashboardService.exportData(format, this.selectedTimeRange).subscribe((blob: Blob) => {
       const url = window.URL.createObjectURL(blob);
       const link = document.createElement('a');
       link.href = url;

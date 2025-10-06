@@ -6,7 +6,7 @@
   min-height: 100vh;
   width: 100%;
   max-width: 100%;
-  background: #f8f9fa; // Light background
+  background: #FFFFFF; // White background
 }
 
 .app-main-area {
@@ -28,7 +28,7 @@
 .main-content {
   flex: 1;
   padding: vars.$spacing-lg;
-  background: #f8f9fa; // Light background
+  background: #FFFFFF; // White background
   min-height: 0;
   overflow-y: auto;
   overflow-x: hidden;

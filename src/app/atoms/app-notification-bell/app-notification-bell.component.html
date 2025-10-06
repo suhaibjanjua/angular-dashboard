@@ -1,13 +1,29 @@
-<div class="notification-container" [matMenuTriggerFor]="notificationsMenu">
-    <span class="material-icons notification-bell">notifications</span>
-    <span class="notification-badge" *ngIf="unreadCount() > 0">{{ unreadCount() }}</span>
+<div class="notification-bell-container">
+  <button 
+    mat-icon-button 
+    (click)="toggleDropdown()"
+    class="notification-button"
+    [matTooltip]="unreadCount > 0 ? unreadCount + ' unread notifications' : 'No new notifications'"
+    matTooltipPosition="below">
+    <mat-icon 
+      [matBadge]="unreadCount" 
+      [matBadgeHidden]="unreadCount === 0"
+      matBadgeColor="warn"
+      matBadgeSize="small"
+      class="notification-icon"
+      [class.has-notifications]="unreadCount > 0">
+      notifications
+    </mat-icon>
+  </button>
+
+  <app-notification-dropdown 
+    *ngIf="isDropdownOpen"
+    (close)="closeDropdown()">
+  </app-notification-dropdown>
 </div>
 
-<mat-menu #notificationsMenu="matMenu" class="notification-dropdown" xPosition="before">
-    <ng-container *ngFor="let notif of notifications(); trackBy: trackById">
-        <button mat-menu-item (click)="markAsRead(notif.id)">
-            <mat-icon>{{ notif.read ? 'done' : 'notifications' }}</mat-icon>
-            <span>{{ notif.message }}<br/><span class="timestamp">{{ notif.timestamp | date:'short' }}</span></span>
-        </button>
-    </ng-container>
-</mat-menu>
+<div 
+  class="notification-backdrop" 
+  *ngIf="isDropdownOpen"
+  (click)="closeDropdown()">
+</div>

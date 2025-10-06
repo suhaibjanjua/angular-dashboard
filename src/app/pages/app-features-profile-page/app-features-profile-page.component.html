@@ -1,0 +1,143 @@
+<app-header-title 
+  title="Features Profile" 
+  subtitle="Configure and manage your dashboard features and integrations">
+</app-header-title>
+
+<div class="features-page-container">
+  <!-- Summary Stats -->
+  <div class="stats-header">
+    <mat-card class="stat-card enabled">
+      <mat-card-content>
+        <div class="stat-content">
+          <mat-icon class="stat-icon">check_circle</mat-icon>
+          <div class="stat-info">
+            <h3>{{ getEnabledFeatureCount() }}</h3>
+            <p>Enabled Features</p>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="stat-card total">
+      <mat-card-content>
+        <div class="stat-content">
+          <mat-icon class="stat-icon">widgets</mat-icon>
+          <div class="stat-info">
+            <h3>{{ getTotalFeatureCount() }}</h3>
+            <p>Total Features</p>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+
+
+    <mat-card class="stat-card actions">
+      <mat-card-content>
+        <div class="action-buttons">
+          <button 
+            mat-raised-button 
+            color="primary" 
+            (click)="onExportConfiguration()"
+            matTooltip="Export current feature configuration">
+            <mat-icon>file_download</mat-icon>
+            Export
+          </button>
+          <button 
+            mat-raised-button 
+            (click)="onImportConfiguration()"
+            matTooltip="Import feature configuration from file">
+            <mat-icon>file_upload</mat-icon>
+            Import
+          </button>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+  <!-- Main Content -->
+  <div class="features-content">
+    <!-- Left Sidebar -->
+    <div class="sidebar-container">
+      <app-category-sidebar
+        [categories]="categories"
+        [selectedCategoryId]="selectedCategory?.id || null"
+        [totalEnabled]="getEnabledFeatureCount()"
+        (categorySelect)="onCategorySelect($event)">
+      </app-category-sidebar>
+    </div>
+
+    <!-- Right Content -->
+    <div class="content-container">
+      <!-- Loading State -->
+      <div class="loading-container" *ngIf="loading">
+        <mat-spinner diameter="40"></mat-spinner>
+        <p>Loading features...</p>
+      </div>
+
+      <!-- Category Header -->
+      <div class="category-header" *ngIf="selectedCategory && !loading">
+        <div class="category-info">
+          <div class="category-title">
+            <mat-icon class="category-icon">{{ selectedCategory.icon }}</mat-icon>
+            <h2>{{ selectedCategory.name }}</h2>
+          </div>
+          <p class="category-description">{{ selectedCategory.description }}</p>
+        </div>
+
+        <!-- Search Bar -->
+        <div class="search-container">
+          <mat-form-field appearance="outline" class="search-field">
+            <mat-label>Search features...</mat-label>
+            <mat-icon matPrefix>search</mat-icon>
+            <input 
+              matInput 
+              [value]="searchQuery"
+              (input)="onSearchInput($event)"
+              placeholder="Search by name or description">
+            <button 
+              *ngIf="searchQuery" 
+              matSuffix 
+              mat-icon-button 
+              (click)="clearSearch()"
+              matTooltip="Clear search">
+              <mat-icon>clear</mat-icon>
+            </button>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <!-- Features List -->
+      <div class="features-list" *ngIf="selectedCategory && !loading">
+        <!-- No Results -->
+        <div class="no-results" *ngIf="filteredFeatures.length === 0 && searchQuery">
+          <mat-icon>search_off</mat-icon>
+          <h3>No features found</h3>
+          <p>Try adjusting your search terms or browse different categories.</p>
+          <button mat-button (click)="clearSearch()">
+            <mat-icon>refresh</mat-icon>
+            Clear Search
+          </button>
+        </div>
+
+        <!-- Feature Items -->
+        <app-feature-toggle
+          *ngFor="let feature of filteredFeatures; trackBy: trackByFeatureId"
+          [feature]="feature"
+          [categoryId]="selectedCategory.id"
+          [iconColor]="'#6c4bb6'"
+          (toggle)="onFeatureToggle($event)">
+        </app-feature-toggle>
+      </div>
+
+      <!-- Empty State -->
+      <div class="empty-state" *ngIf="!selectedCategory && !loading">
+        <mat-icon>tune</mat-icon>
+        <h3>Select a Category</h3>
+        <p>Choose a feature category from the sidebar to configure your dashboard features.</p>
+      </div>
+    </div>
+  </div>
+
+
+</div>

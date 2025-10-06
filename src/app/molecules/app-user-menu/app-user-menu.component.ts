@@ -15,12 +15,9 @@ import { AppUserAvatarComponent } from '../../atoms/app-user-avatar/app-user-ava
     <div class="user-menu">
       <button mat-button [matMenuTriggerFor]="userMenu" class="user-button">
         <div class="user-info">
-          <!-- <div class="user-avatar">JS</div> -->
-          <div class="user-avatar">
-            <app-user-avatar [src]="loggedInUserService.image()" [fullName]="loggedInUserService.fullName()" />
-          </div>
+          <div class="user-avatar">SJ</div>
           <div class="user-details">
-            <span class="user-name">{{loggedInUserService.fullName()}}</span>
+            <span class="user-name">Suhaib Janjua</span>
             <span class="user-role">Administrator</span>
           </div>
           <mat-icon class="dropdown-icon">keyboard_arrow_down</mat-icon>

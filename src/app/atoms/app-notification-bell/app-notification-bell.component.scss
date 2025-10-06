@@ -1,78 +1,45 @@
-.notification-container {
+.notification-bell-container {
   position: relative;
   display: inline-block;
 }
-.notification-bell {
-  font-size: 26px;
-  color: #6c4bb6;
-  position: relative;
-  user-select: none;
-}
-.notification-badge {
-  position: absolute;
-  top: -6px;
-  right: -10px;
-  background: #6c4bb6;
-  color: #fff;
-  border-radius: 50%;
-  font-size: 12px;
-  width: 18px;
-  height: 18px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: bold;
-  z-index: 1;
-  user-select: none;
-}
-::ng-deep .notification-dropdown {
-  margin-top: 8px;
-  
-  .mat-mdc-menu-panel {
-    background: #ffffff;
-    border-radius: 8px;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
-  }
-  
-  .mat-mdc-menu-content {
-    padding: 8px 0;
-    min-width: 200px;
-    background: #ffffff;
-  }
-  
-  .mat-mdc-menu-item {
-    height: 48px;
-    padding: 0 16px;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    font-size: 14px;
-    color: #333;
-    
-    mat-icon {
-      font-size: 20px;
-      width: 20px;
-      height: 20px;
-      color: #666;
-    }
 
-    .timestamp {
-      font-size: 12px;
-      color: #ababab;
-    }
+.notification-button {
+  position: relative;
+  transition: all 0.3s ease;
+
+  &:hover {
+    background-color: rgba(108, 75, 182, 0.1);
+  }
+
+  .notification-icon {
+    color: #666;
+    transition: all 0.3s ease;
     
-    &:hover {
-      background-color: rgba(108, 75, 182, 0.08);
-      
-      mat-icon {
-        color: #6c4bb6;
-      }
+    &.has-notifications {
+      color: #6c4bb6;
+      animation: pulse 2s infinite;
     }
   }
-  
-  .mat-mdc-menu-divider {
-    margin: 8px 0;
-    background-color: #e0e0e0;
-    height: 1px;
+}
+
+.notification-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 999;
+  background: transparent;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
   }
 }

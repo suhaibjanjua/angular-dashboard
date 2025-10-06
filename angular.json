@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "atomic-dashboard": {
+    "angular-dashboard": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/atomic-dashboard",
+            "outputPath": "dist/angular-dashboard",
             "index": "src/index.html",
             "browser": "src/main.ts",
             "polyfills": [
@@ -65,10 +65,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "atomic-dashboard:build:production"
+              "buildTarget": "angular-dashboard:build:production"
             },
             "development": {
-              "buildTarget": "atomic-dashboard:build:development"
+              "buildTarget": "angular-dashboard:build:development"
             }
           },
           "defaultConfiguration": "development"

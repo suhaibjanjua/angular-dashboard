@@ -72,7 +72,7 @@ export class AppRecentActivitiesComponent implements OnInit, OnDestroy {
         timestamp: new Date(Date.now() - 2 * 60 * 1000),
         type: 'login',
         message: 'User logged in successfully',
-        user: 'John Smith'
+        user: 'Suhaib Janjua'
       },
       {
         id: '2',

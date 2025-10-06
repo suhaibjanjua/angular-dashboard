@@ -125,9 +125,11 @@ import { AppUserAvatarComponent } from '../../atoms/app-user-avatar/app-user-ava
               <ng-container matColumnDef="actions">
                 <th mat-header-cell *matHeaderCellDef>Actions</th>
                 <td mat-cell *matCellDef="let user">
+                <td mat-cell *matCellDef="let user">
                   <button mat-icon-button [matMenuTriggerFor]="menu" class="action-menu" matTooltip="More Actions">
                     <mat-icon>more_vert</mat-icon>
                   </button>
+                  <mat-menu #menu="matMenu" class="users-list-dropdown">
                   <mat-menu #menu="matMenu" class="users-list-dropdown">
                     <button mat-menu-item (click)="editUser(user)">
                       <mat-icon>manage_accounts</mat-icon>
@@ -142,6 +144,7 @@ import { AppUserAvatarComponent } from '../../atoms/app-user-avatar/app-user-ava
                       <span>Reset Password</span>
                     </button>
                     <mat-divider></mat-divider>
+                    <button mat-menu-item (click)="deleteUser(user)" class="danger-item">
                     <button mat-menu-item (click)="deleteUser(user)" class="danger-item">
                       <mat-icon>person_remove</mat-icon>
                       <span>Remove User</span>

@@ -1,5 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { ActivatedRoute } from '@angular/router';
 import { AppSidebarComponent } from './app-sidebar.component';
 
 describe('AppSidebarComponent', () => {
@@ -8,7 +9,16 @@ describe('AppSidebarComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [AppSidebarComponent, NoopAnimationsModule]
+      imports: [AppSidebarComponent, NoopAnimationsModule],
+      providers: [
+        {
+          provide: ActivatedRoute,
+          useValue: {
+            snapshot: { params: {} },
+            queryParams: { subscribe: () => {} }
+          }
+        }
+      ]
     }).compileComponents();
 
     fixture = TestBed.createComponent(AppSidebarComponent);
@@ -62,8 +72,8 @@ describe('AppSidebarComponent', () => {
 
   it('should contain Dashboard menu item', () => {
     const compiled = fixture.nativeElement as HTMLElement;
-    const dashboardLink = compiled.querySelector('a[href="/dashboard"]');
-    expect(dashboardLink).toBeTruthy();
+    const dashboardItem = compiled.querySelector('li[ng-reflect-router-link="/dashboard"]');
+    expect(dashboardItem).toBeTruthy();
   });
 
   it('should have Material Design icons', () => {

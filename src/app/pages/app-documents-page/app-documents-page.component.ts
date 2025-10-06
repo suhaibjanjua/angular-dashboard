@@ -13,7 +13,6 @@ import { MatDividerModule } from '@angular/material/divider';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Document, DocumentType, DocumentStatus } from '../../models';
 import { AppSearchBarComponent } from "../../molecules/app-search-bar/app-search-bar.component";
-import { debounceTime, Subject } from 'rxjs';
 
 @Component({
   selector: 'app-documents-page',
@@ -31,9 +30,8 @@ import { debounceTime, Subject } from 'rxjs';
     MatMenuModule,
     MatDividerModule,
     FormsModule,
-    AppSearchBarComponent,
-    ReactiveFormsModule
-  ],
+    AppSearchBarComponent
+],
   template: `
     <div class="page-container">
       <div class="page-header">
@@ -44,13 +42,7 @@ import { debounceTime, Subject } from 'rxjs';
       <mat-card class="content-card">
         <mat-card-header>
           <div class="table-header">
-            <form [formGroup]="form">
-              <app-search-bar
-                formControlName="searchTerm"
-                [label]="'Search documents...'"
-                [placeholder]="'Search by name, type, or owner'">
-              </app-search-bar>
-            </form>
+            <app-search-bar [label]="'Search documents...'" [placeholder]="'Search by name, type, or owner'" (search)="applyFilter($event)"></app-search-bar>
             
             <div class="action-buttons">
               <button mat-flat-button color="primary" (click)="uploadDocument()">
@@ -222,7 +214,7 @@ export class AppDocumentsPageComponent implements OnInit {
 
   applyFilter(value: string) {
     const filterValue = value.toLowerCase();
-    this.filteredDocuments = this.documents.filter(doc =>
+    this.filteredDocuments = this.documents.filter(doc => 
       doc.name.toLowerCase().includes(filterValue) ||
       doc.type.toLowerCase().includes(filterValue) ||
       doc.owner.toLowerCase().includes(filterValue)

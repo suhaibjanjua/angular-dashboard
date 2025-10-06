@@ -1,0 +1,233 @@
+{
+  "data": [
+    {
+      "id": "n001",
+      "title": "New Assignment Available",
+      "message": "Advanced JavaScript Concepts assignment has been posted and is due next Friday.",
+      "type": "assignment",
+      "priority": "high",
+      "status": "unread",
+      "timestamp": "2025-10-03T16:30:00.000Z",
+      "createdAt": "2025-10-03T16:30:00.000Z",
+      "icon": "assignment",
+      "iconColor": "#f44336",
+      "actionUrl": "/courses/js-advanced/assignments/001",
+      "actionLabel": "View Assignment",
+      "userName": "Prof. Sarah Johnson",
+      "userAvatar": "assets/avatars/sarah-johnson.jpg",
+      "metadata": {
+        "courseId": "js-advanced",
+        "courseName": "Advanced JavaScript Concepts",
+        "assignmentId": "001",
+        "assignmentName": "React Hooks and State Management"
+      }
+    },
+    {
+      "id": "n002",
+      "title": "Meeting Reminder",
+      "message": "Weekly team standup meeting starts in 15 minutes. Join via the meeting link.",
+      "type": "meeting",
+      "priority": "urgent",
+      "status": "unread",
+      "timestamp": "2025-10-03T16:15:00.000Z",
+      "createdAt": "2025-10-03T16:15:00.000Z",
+      "icon": "videocam",
+      "iconColor": "#e91e63",
+      "actionUrl": "/meetings/weekly-standup",
+      "actionLabel": "Join Meeting",
+      "userName": "Project Manager",
+      "metadata": {
+        "meetingId": "weekly-standup",
+        "meetingName": "Weekly Team Standup"
+      }
+    },
+    {
+      "id": "n003",
+      "title": "Course Enrollment Confirmed",
+      "message": "You have successfully enrolled in Data Structures and Algorithms course.",
+      "type": "course",
+      "priority": "medium",
+      "status": "unread",
+      "timestamp": "2025-10-03T15:45:00.000Z",
+      "createdAt": "2025-10-03T15:45:00.000Z",
+      "icon": "school",
+      "iconColor": "#ff9800",
+      "actionUrl": "/courses/data-structures",
+      "actionLabel": "View Course",
+      "userName": "Registration System",
+      "metadata": {
+        "courseId": "data-structures",
+        "courseName": "Data Structures and Algorithms"
+      }
+    },
+    {
+      "id": "n004",
+      "title": "Security Alert",
+      "message": "Unusual login activity detected from a new device. Please verify if this was you.",
+      "type": "security",
+      "priority": "urgent",
+      "status": "unread",
+      "timestamp": "2025-10-03T14:30:00.000Z",
+      "createdAt": "2025-10-03T14:30:00.000Z",
+      "icon": "security",
+      "iconColor": "#e91e63",
+      "actionUrl": "/profile/security",
+      "actionLabel": "Review Activity",
+      "userName": "Security System"
+    },
+    {
+      "id": "n005",
+      "title": "New Message Received",
+      "message": "You have a new message from Dr. Michael Chen regarding your project proposal.",
+      "type": "message",
+      "priority": "medium",
+      "status": "unread",
+      "timestamp": "2025-10-03T13:20:00.000Z",
+      "createdAt": "2025-10-03T13:20:00.000Z",
+      "icon": "mail",
+      "iconColor": "#ff9800",
+      "actionUrl": "/messages/dr-michael-chen",
+      "actionLabel": "Read Message",
+      "userName": "Dr. Michael Chen",
+      "userAvatar": "assets/avatars/michael-chen.jpg"
+    },
+    {
+      "id": "n006",
+      "title": "System Maintenance Scheduled",
+      "message": "Scheduled maintenance will occur tonight from 11 PM to 2 AM. Services may be temporarily unavailable.",
+      "type": "system",
+      "priority": "medium",
+      "status": "read",
+      "timestamp": "2025-10-03T12:00:00.000Z",
+      "createdAt": "2025-10-03T12:00:00.000Z",
+      "readAt": "2025-10-03T12:15:00.000Z",
+      "icon": "build",
+      "iconColor": "#ff9800",
+      "actionUrl": "/system/maintenance",
+      "actionLabel": "View Details",
+      "userName": "System Administrator"
+    },
+    {
+      "id": "n007",
+      "title": "Grade Published",
+      "message": "Your grade for Database Design Midterm has been published. Check your course dashboard.",
+      "type": "course",
+      "priority": "medium",
+      "status": "read",
+      "timestamp": "2025-10-03T11:30:00.000Z",
+      "createdAt": "2025-10-03T11:30:00.000Z",
+      "readAt": "2025-10-03T11:45:00.000Z",
+      "icon": "grade",
+      "iconColor": "#4caf50",
+      "actionUrl": "/courses/database-design/grades",
+      "actionLabel": "View Grade",
+      "userName": "Prof. Lisa Wang",
+      "userAvatar": "assets/avatars/lisa-wang.jpg",
+      "metadata": {
+        "courseId": "database-design",
+        "courseName": "Database Design"
+      }
+    },
+    {
+      "id": "n008",
+      "title": "Reminder: Assignment Due Soon",
+      "message": "Machine Learning Project Report is due in 2 days. Don't forget to submit on time.",
+      "type": "reminder",
+      "priority": "high",
+      "status": "unread",
+      "timestamp": "2025-10-03T10:00:00.000Z",
+      "createdAt": "2025-10-03T10:00:00.000Z",
+      "icon": "schedule",
+      "iconColor": "#f44336",
+      "actionUrl": "/courses/machine-learning/assignments/project-report",
+      "actionLabel": "Submit Assignment",
+      "userName": "Course System",
+      "metadata": {
+        "courseId": "machine-learning",
+        "courseName": "Machine Learning Fundamentals",
+        "assignmentId": "project-report",
+        "assignmentName": "Final Project Report"
+      }
+    },
+    {
+      "id": "n009",
+      "title": "New Feature Announcement",
+      "message": "We've added real-time collaboration tools to your course workspaces. Check them out!",
+      "type": "announcement",
+      "priority": "low",
+      "status": "read",
+      "timestamp": "2025-10-03T09:15:00.000Z",
+      "createdAt": "2025-10-03T09:15:00.000Z",
+      "readAt": "2025-10-03T09:30:00.000Z",
+      "icon": "campaign",
+      "iconColor": "#4caf50",
+      "actionUrl": "/features/collaboration-tools",
+      "actionLabel": "Explore Features",
+      "userName": "Product Team"
+    },
+    {
+      "id": "n010",
+      "title": "Document Shared",
+      "message": "Emma Thompson shared 'Project Guidelines 2025.pdf' with you in the Software Engineering course.",
+      "type": "user",
+      "priority": "low",
+      "status": "read",
+      "timestamp": "2025-10-03T08:45:00.000Z",
+      "createdAt": "2025-10-03T08:45:00.000Z",
+      "readAt": "2025-10-03T08:50:00.000Z",
+      "icon": "share",
+      "iconColor": "#4caf50",
+      "actionUrl": "/documents/project-guidelines-2025",
+      "actionLabel": "View Document",
+      "userName": "Emma Thompson",
+      "userAvatar": "assets/avatars/emma-thompson.jpg",
+      "metadata": {
+        "courseId": "software-engineering",
+        "courseName": "Software Engineering",
+        "documentId": "project-guidelines-2025",
+        "documentName": "Project Guidelines 2025.pdf"
+      }
+    },
+    {
+      "id": "n011",
+      "title": "Weekly Report Ready",
+      "message": "Your weekly attendance and performance report for October 1-7 is now available.",
+      "type": "update",
+      "priority": "low",
+      "status": "read",
+      "timestamp": "2025-10-03T08:00:00.000Z",
+      "createdAt": "2025-10-03T08:00:00.000Z",
+      "readAt": "2025-10-03T08:05:00.000Z",
+      "icon": "analytics",
+      "iconColor": "#4caf50",
+      "actionUrl": "/reports/weekly/2025-w40",
+      "actionLabel": "View Report",
+      "userName": "Analytics System",
+      "metadata": {
+        "reportId": "2025-w40",
+        "reportName": "Weekly Performance Report - Week 40"
+      }
+    },
+    {
+      "id": "n012",
+      "title": "Class Schedule Change",
+      "message": "Introduction to AI class has been moved from Room 301 to Room 205 for today's session.",
+      "type": "course",
+      "priority": "high",
+      "status": "unread",
+      "timestamp": "2025-10-03T07:30:00.000Z",
+      "createdAt": "2025-10-03T07:30:00.000Z",
+      "icon": "event",
+      "iconColor": "#f44336",
+      "actionUrl": "/courses/intro-ai/schedule",
+      "actionLabel": "View Schedule",
+      "userName": "Academic Office",
+      "metadata": {
+        "courseId": "intro-ai",
+        "courseName": "Introduction to Artificial Intelligence"
+      }
+    }
+  ],
+  "total": 12,
+  "unread": 6
+}
