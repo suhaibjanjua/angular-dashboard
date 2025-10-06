@@ -26,7 +26,8 @@
     align-items: flex-start;
     justify-content: space-between;
     width: 100%;
-    margin-bottom: 12px;
+    margin-bottom: 16px;
+    min-height: 48px;
     
     .feature-title {
       display: flex;
@@ -34,6 +35,8 @@
       gap: 12px;
       flex: 1;
       width: auto;
+      min-width: 0; // Allow text to shrink
+      margin-right: 16px; // Ensure gap from toggle
       
       .feature-icon {
         font-size: 24px;
@@ -48,7 +51,10 @@
         color: #333;
         flex: 1;
         width: auto;
+        min-width: 0;
         word-wrap: break-word;
+        overflow-wrap: break-word;
+        hyphens: auto;
       }
       
       .premium-chip {
@@ -113,13 +119,15 @@
 
 .feature-accordion-header {
   padding: 20px !important;
+  min-height: 60px;
   
   .feature-info-accordion {
     display: flex;
     align-items: flex-start;
     justify-content: space-between;
     width: 100%;
-    margin-bottom: 12px;
+    margin-bottom: 16px;
+    min-height: 48px;
     
     .feature-title {
       display: flex;
@@ -127,6 +135,8 @@
       gap: 12px;
       flex: 1;
       width: auto;
+      min-width: 0;
+      margin-right: 16px;
       
       .feature-icon {
         font-size: 24px;
@@ -141,7 +151,10 @@
         color: #333;
         flex: 1;
         width: auto;
+        min-width: 0;
         word-wrap: break-word;
+        overflow-wrap: break-word;
+        hyphens: auto;
       }
       
       .expand-icon {
@@ -161,7 +174,10 @@
     
     .feature-toggle {
       flex-shrink: 0;
-      margin-left: 16px;
+      width: 52px;
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
       
       ::ng-deep .mat-mdc-slide-toggle {
         --mdc-switch-selected-track-color: #6c4bb6;
@@ -178,18 +194,22 @@
     color: #666;
     line-height: 1.5;
     padding-left: 36px;
+    padding-right: 68px;
     width: 100%;
-    max-width: 100%;
+    max-width: calc(100% - 68px);
     word-wrap: break-word;
     overflow-wrap: break-word;
+    hyphens: auto;
   }
 }
 
 .child-features {
   margin-top: 20px;
   padding-left: 20px;
+  padding-right: 0;
   border-left: 2px solid #e8e3ff;
-  width: 100%;
+  width: calc(100% - 20px);
+  max-width: calc(100% - 20px);
   
   .child-feature {
     padding: 16px;
@@ -199,6 +219,7 @@
     transition: all 0.2s ease;
     width: 100%;
     max-width: 100%;
+    box-sizing: border-box;
     
     &:last-child {
       margin-bottom: 0;
@@ -224,7 +245,8 @@
         align-items: flex-start;
         justify-content: space-between;
         width: 100%;
-        margin-bottom: 8px;
+        margin-bottom: 12px;
+        min-height: 40px;
         
         .child-title {
           display: flex;
@@ -232,11 +254,13 @@
           gap: 8px;
           flex: 1;
           width: auto;
+          min-width: 0;
+          margin-right: 12px;
           
           .child-icon {
-            font-size: 20px;
-            width: 20px;
-            height: 20px;
+            font-size: 18px;
+            width: 18px;
+            height: 18px;
             color: #666;
             flex-shrink: 0;
           }
@@ -247,7 +271,10 @@
             color: #333;
             flex: 1;
             width: auto;
+            min-width: 0;
             word-wrap: break-word;
+            overflow-wrap: break-word;
+            hyphens: auto;
           }
           
           .premium-chip.small {
@@ -265,14 +292,17 @@
         
         .child-toggle {
           flex-shrink: 0;
-          margin-left: 12px;
+          width: 44px;
+          display: flex;
+          justify-content: flex-end;
+          align-items: center;
           
           ::ng-deep .mat-mdc-slide-toggle {
             --mdc-switch-selected-track-color: #6c4bb6;
             --mdc-switch-selected-handle-color: #6c4bb6;
             --mdc-switch-unselected-track-color: #e0e0e0;
             --mdc-switch-unselected-handle-color: #fff;
-            transform: scale(0.8);
+            transform: scale(0.85);
           }
         }
       }
@@ -282,11 +312,13 @@
         font-size: 12px;
         color: #666;
         line-height: 1.4;
-        padding-left: 28px;
+        padding-left: 26px;
+        padding-right: 56px;
         width: 100%;
-        max-width: 100%;
+        max-width: calc(100% - 56px);
         word-wrap: break-word;
         overflow-wrap: break-word;
+        hyphens: auto;
       }
     }
   }
@@ -304,16 +336,23 @@
       flex-direction: column;
       gap: 12px;
       width: 100%;
+      min-height: auto;
+      
+      .feature-title {
+        margin-right: 0;
+      }
       
       .feature-toggle {
         align-self: flex-end;
-        margin-left: 0;
+        width: auto;
       }
     }
     
     .feature-description {
       padding-left: 0;
+      padding-right: 0;
       width: 100%;
+      max-width: 100%;
     }
   }
   
@@ -324,29 +363,35 @@
       flex-direction: column;
       gap: 12px;
       width: 100%;
+      min-height: auto;
       
       .feature-title {
         width: 100%;
+        margin-right: 0;
         
         .expand-icon {
           margin-left: auto;
         }
-      }\n      
+      }
+      
       .feature-toggle {
         align-self: flex-end;
-        margin-left: 0;
+        width: auto;
       }
     }
     
     .feature-description {
       padding-left: 0;
+      padding-right: 0;
       width: 100%;
+      max-width: 100%;
     }
   }
   
   .child-features {
     padding-left: 12px;
-    width: 100%;
+    width: calc(100% - 12px);
+    max-width: calc(100% - 12px);
     
     .child-feature {
       padding: 12px;
@@ -357,16 +402,23 @@
           flex-direction: column;
           gap: 8px;
           width: 100%;
+          min-height: auto;
+          
+          .child-title {
+            margin-right: 0;
+          }
           
           .child-toggle {
             align-self: flex-end;
-            margin-left: 0;
+            width: auto;
           }
         }
         
         .child-description {
           padding-left: 0;
+          padding-right: 0;
           width: 100%;
+          max-width: 100%;
         }
       }
     }
