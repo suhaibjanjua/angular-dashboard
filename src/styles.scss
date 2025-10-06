@@ -1,5 +1,91 @@
 @use '@angular/material' as mat;
 
+// Import Google Fonts
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/icon?family=Material+Icons');
+
+// CSS Custom Properties (Theme Variables)
+:root {
+  // Default (Light) Theme Colors
+  --color-primary: #6c4bb6;
+  --color-primary-light: #8b5cf6;
+  --color-primary-dark: #5b21b6;
+  --color-primary-subtle: #f3f0ff;
+  
+  --color-secondary: #f4d03f;
+  --color-accent: #8b5cf6;
+  
+  --color-background: #ffffff;
+  --color-surface: #f8fafc;
+  --color-surface-hover: #f1f5f9;
+  --color-surface-selected: #e2e8f0;
+  
+  --color-text: #1a202c;
+  --color-text-light: #ffffff;
+  --color-text-secondary: #64748b;
+  --color-text-muted: #94a3b8;
+  
+  --color-sidebar: #2d3748;
+  --color-sidebar-hover: #4a5568;
+  --color-sidebar-active: #6c4bb6;
+  
+  --color-border: #e2e8f0;
+  --color-border-light: #f1f5f9;
+  --color-border-dark: #cbd5e1;
+  
+  --color-success: #10b981;
+  --color-warning: #f59e0b;
+  --color-error: #ef4444;
+  --color-info: #3b82f6;
+  
+  // Shadows
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  
+  // Typography
+  --font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+// Dark Theme Override
+[data-theme="dark"] {
+  --color-primary: #8b5cf6;
+  --color-primary-light: #a78bfa;
+  --color-primary-dark: #7c3aed;
+  --color-primary-subtle: rgba(139, 92, 246, 0.15);
+  
+  --color-secondary: #fbbf24;
+  --color-accent: #a78bfa;
+  
+  --color-background: #0a0a0a;
+  --color-surface: #1a1a1a;
+  --color-surface-hover: #2d2d2d;
+  --color-surface-selected: #404040;
+  
+  --color-text: #ffffff;
+  --color-text-light: #ffffff;
+  --color-text-secondary: #b3b3b3;
+  --color-text-muted: #808080;
+  
+  --color-sidebar: #000000;
+  --color-sidebar-hover: #1a1a1a;
+  --color-sidebar-active: #8b5cf6;
+  
+  --color-border: #333333;
+  --color-border-light: #404040;
+  --color-border-dark: #1a1a1a;
+  
+  --color-success: #22c55e;
+  --color-warning: #fbbf24;
+  --color-error: #f87171;
+  --color-info: #60a5fa;
+  
+  // Shadows for dark theme
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.6);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.7), 0 2px 4px -1px rgba(0, 0, 0, 0.6);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.8), 0 4px 6px -2px rgba(0, 0, 0, 0.7);
+}
+
 // Custom theme configuration
 $theme: mat.define-theme((
   color: (
@@ -18,17 +104,17 @@ $theme: mat.define-theme((
   @include mat.all-component-themes($theme);
 }
 
-// SCSS Variables - Clean Design System
-$primary-color: #6c4bb6; // Purple Primary
-$primary-color-dark: #5c3f9d; // Darker Purple
-$secondary-color: #ffffff; // Pure white background
-$accent-color: #FFFFFF; // White background
-$background-color: #FFFFFF; // White background
-$sidebar-color: #6c4bb6; // Purple sidebar
-$text-color: #212121; // Dark text
-$text-light: #fff; // White text for dark backgrounds
-$border-color: #e0e0e0;
-$font-family: 'Open Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+// Legacy SCSS Variables (for backward compatibility)
+$primary-color: var(--color-primary);
+$primary-color-dark: var(--color-primary-dark);
+$secondary-color: var(--color-secondary);
+$accent-color: var(--color-accent);
+$background-color: var(--color-background);
+$sidebar-color: var(--color-sidebar);
+$text-color: var(--color-text);
+$text-light: var(--color-text-light);
+$border-color: var(--color-border);
+$font-family: var(--font-family);
 $font-weight-light: 300;
 $font-weight-regular: 400;
 $font-weight-medium: 500;
@@ -52,9 +138,9 @@ html {
 }
 
 body {
-  font-family: $font-family !important;
-  background: $background-color;
-  color: $text-color;
+  font-family: var(--font-family) !important;
+  background: var(--color-background);
+  color: var(--color-text);
   margin: 0;
   padding: 0;
   min-height: 100vh;
@@ -65,11 +151,12 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 // Enhanced typography for all elements
 * {
-  font-family: $font-family !important;
+  font-family: var(--font-family) !important;
 }
 
 // Ensure Material Icons display properly
@@ -90,38 +177,151 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-// Sidebar Styling (Enhanced for Black and Yellow theme)
+// Sidebar Styling with Theme Support
 .mat-drawer {
-  background-color: $sidebar-color !important;
+  background-color: var(--color-sidebar) !important;
+  transition: background-color 0.3s ease;
   
   .mat-list-item {
-    color: $text-light !important;
+    color: var(--color-text-light) !important;
+    transition: background-color 0.2s ease, color 0.2s ease;
     
     &:hover {
-      background-color: rgba(108, 75, 182, 0.1) !important;
-      color: $primary-color !important;
+      background-color: var(--color-sidebar-hover) !important;
+      color: var(--color-primary) !important;
     }
     
     &.active {
-      background-color: $primary-color !important;
-      color: $text-light !important;
+      background-color: var(--color-sidebar-active) !important;
+      color: var(--color-text-light) !important;
     }
   }
   
   .mat-icon {
-    color: $text-light !important;
+    color: var(--color-text-light) !important;
+    transition: color 0.2s ease;
   }
 }
 
 // Material toolbar customization
 .mat-toolbar {
-  background-color: $background-color !important;
-  color: $text-color !important;
-  border-bottom: 1px solid $border-color !important;
+  background-color: var(--color-background) !important;
+  color: var(--color-text) !important;
+  border-bottom: 1px solid var(--color-border) !important;
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
 }
 
 // Material button styling
 .mat-raised-button.mat-primary {
-  background-color: $primary-color !important;
-  color: $secondary-color !important;
+  background-color: var(--color-primary) !important;
+  color: var(--color-text-light) !important;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+// Additional Material component theme overrides
+.mat-card {
+  background-color: var(--color-surface) !important;
+  color: var(--color-text) !important;
+  border: 1px solid var(--color-border);
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+.mat-menu-panel {
+  background-color: var(--color-surface) !important;
+  border: 1px solid var(--color-border);
+  box-shadow: var(--shadow-lg);
+}
+
+.mat-menu-item {
+  color: var(--color-text) !important;
+  
+  &:hover {
+    background-color: var(--color-surface-hover) !important;
+  }
+}
+
+.mat-divider {
+  border-top-color: var(--color-border) !important;
+}
+
+// Additional dark theme visibility improvements
+[data-theme="dark"] {
+  .mat-card {
+    background-color: var(--color-surface) !important;
+    border-color: var(--color-border) !important;
+  }
+  
+  .mat-toolbar {
+    background-color: var(--color-surface) !important;
+    border-bottom-color: var(--color-border) !important;
+  }
+  
+  .mat-drawer {
+    background-color: var(--color-sidebar) !important;
+  }
+  
+  .mat-drawer-container {
+    background-color: var(--color-background) !important;
+    color: var(--color-text) !important;
+  }
+  
+  .mat-expansion-panel {
+    background-color: var(--color-surface) !important;
+    color: var(--color-text) !important;
+    border: 1px solid var(--color-border) !important;
+  }
+  
+  .mat-expansion-panel-header {
+    background-color: var(--color-surface) !important;
+    color: var(--color-text) !important;
+    
+    &:hover {
+      background-color: var(--color-surface-hover) !important;
+    }
+  }
+  
+  .mat-expansion-panel-body {
+    background-color: var(--color-surface) !important;
+    color: var(--color-text) !important;
+  }
+  
+  // Ensure all page content gets dark background
+  .page-content,
+  .main-content,
+  .content-wrapper {
+    background-color: var(--color-background) !important;
+    color: var(--color-text) !important;
+  }
+  
+  // Style all tiles, widgets, and cards
+  .tile,
+  .widget,
+  .card,
+  .dashboard-card,
+  .feature-card,
+  .stats-card {
+    background-color: var(--color-surface) !important;
+    color: var(--color-text) !important;
+    border: 1px solid var(--color-border) !important;
+  }
+  
+  // Style all text elements
+  h1, h2, h3, h4, h5, h6 {
+    color: var(--color-text) !important;
+  }
+  
+  p, span, div {
+    color: var(--color-text) !important;
+  }
+  
+  // Style form elements
+  .mat-form-field {
+    .mat-form-field-label {
+      color: var(--color-text-secondary) !important;
+    }
+    
+    .mat-input-element {
+      color: var(--color-text) !important;
+    }
+  }
 }
