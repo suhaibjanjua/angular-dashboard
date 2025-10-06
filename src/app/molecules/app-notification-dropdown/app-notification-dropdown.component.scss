@@ -4,10 +4,10 @@
   right: 0;
   width: 400px;
   max-height: 500px;
-  background: #FFFFFF;
+  background: var(--color-surface);
   border-radius: 12px;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
-  border: 1px solid #e0e0e0;
+  box-shadow: var(--shadow-lg);
+  border: 1px solid var(--color-border);
   z-index: 1000;
   overflow: hidden;
 
@@ -22,8 +22,8 @@
   align-items: center;
   justify-content: space-between;
   padding: 16px 20px;
-  background: #FFFFFF;
-  border-bottom: 1px solid #e0e0e0;
+  background: var(--color-surface);
+  border-bottom: 1px solid var(--color-border);
 
   .notification-title {
     display: flex;
@@ -31,7 +31,7 @@
     gap: 8px;
     font-weight: 600;
     font-size: 16px;
-    color: #333;
+    color: var(--color-text);
 
     mat-icon {
       color: #6c4bb6;
