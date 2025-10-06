@@ -5,18 +5,21 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatDividerModule } from '@angular/material/divider';
 import { Router } from '@angular/router';
 import { LoggedInUserService } from '../../services/logged-in-user.service';
+import { AppUserAvatarComponent } from '../../atoms/app-user-avatar/app-user-avatar.component';
 
 @Component({
   selector: 'app-user-menu',
   standalone: true,
-  imports: [MatMenuModule, MatButtonModule, MatIconModule, MatDividerModule],
+  imports: [MatMenuModule, MatButtonModule, MatIconModule, MatDividerModule, AppUserAvatarComponent],
   template: `
     <div class="user-menu">
       <button mat-button [matMenuTriggerFor]="userMenu" class="user-button">
         <div class="user-info">
-          <div class="user-avatar">SJ</div>
+          <div class="user-avatar">
+            <app-user-avatar [src]="loggedInUserService.image()" [fullName]="loggedInUserService.fullName()" />
+          </div>
           <div class="user-details">
-            <span class="user-name">Suhaib Janjua</span>
+            <span class="user-name">{{loggedInUserService.fullName()}}</span>
             <span class="user-role">Administrator</span>
           </div>
           <mat-icon class="dropdown-icon">keyboard_arrow_down</mat-icon>

@@ -31,7 +31,8 @@ import { Subject, debounceTime } from 'rxjs';
     MatMenuModule,
     MatDividerModule,
     FormsModule,
-    AppSearchBarComponent
+    AppSearchBarComponent,
+    ReactiveFormsModule
 ],
   template: `
     <div class="page-container">
@@ -43,7 +44,13 @@ import { Subject, debounceTime } from 'rxjs';
       <mat-card class="content-card">
         <mat-card-header>
           <div class="table-header">
-            <app-search-bar [label]="'Search documents...'" [placeholder]="'Search by name, type, or owner'" (search)="applyFilter($event)"></app-search-bar>
+            <form [formGroup]="form">
+              <app-search-bar
+                formControlName="searchTerm"
+                [label]="'Search documents...'"
+                [placeholder]="'Search by name, type, or owner'">
+              </app-search-bar>
+            </form>
             
             <div class="action-buttons">
               <button mat-flat-button color="primary" (click)="uploadDocument()">
