@@ -72,12 +72,12 @@
 
 .table-container {
   margin-bottom: 16px;
-  background: #ffffff;
+  background: var(--color-surface);
   border-radius: 8px;
   
   .users-table {
     width: 100%;
-    background: #ffffff !important;
+    background: var(--color-surface) !important;
     
     // Header styling
     .mat-mdc-header-row {
@@ -95,7 +95,7 @@
     
     // Row styling
     .mat-mdc-row {
-      background: #ffffff;
+      background: var(--color-surface);
       border-bottom: 1px solid #f0f0f0;
       transition: background-color 0.2s ease;
       
@@ -263,7 +263,7 @@
 
 // Paginator styling
 .mat-mdc-paginator {
-  background: #ffffff;
+  background: var(--color-surface);
   border-top: 1px solid #e0e0e0;
   border-radius: 0 0 12px 12px;
   

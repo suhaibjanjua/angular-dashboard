@@ -46,21 +46,21 @@
 .table-container {
   overflow-x: auto;
   margin-bottom: 16px;
-  background: #ffffff;
+  background: var(--color-surface);
   border-radius: 8px;
 }
 
 .reports-table {
   width: 100%;
   min-width: 800px;
-  background: #ffffff !important;
+  background: var(--color-surface) !important;
   
   // Header styling
   .mat-mdc-header-row {
-    background: #FFFFFF;
+    background: var(--color-surface);
     
     .mat-mdc-header-cell {
-      background: #FFFFFF;
+      background: var(--color-surface);
       color: var(--color-text);
       font-weight: 600;
       font-size: 14px;
@@ -71,7 +71,7 @@
   
   // Row styling
   .mat-mdc-row {
-    background: #ffffff;
+    background: var(--color-surface);
     border-bottom: 1px solid #f0f0f0;
     transition: background-color 0.2s ease;
     
@@ -176,7 +176,7 @@ mat-chip {
 // Menu specific styling
 .mat-menu-panel {
   min-width: 180px;
-  background: #ffffff !important;
+  background: var(--color-surface) !important;
   border-radius: 8px;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
 }
@@ -220,7 +220,7 @@ mat-chip {
 
 // Paginator styling
 .mat-mdc-paginator {
-  background: #ffffff;
+  background: var(--color-surface);
   border-top: 1px solid #e0e0e0;
   border-radius: 0 0 12px 12px;
   
@@ -234,7 +234,7 @@ mat-chip {
   margin-top: 8px;
 
   .mat-mdc-menu-panel {
-    background: #ffffff;
+    background: var(--color-surface);
     border-radius: 8px;
     box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
   }
@@ -242,7 +242,7 @@ mat-chip {
   .mat-mdc-menu-content {
     padding: 8px 0;
     min-width: 200px;
-    background: #ffffff;
+    background: var(--color-surface);
   }
 
   .mat-mdc-menu-item {
