@@ -22,6 +22,7 @@ export const routes: Routes = [
 			{ path: 'calendar', loadComponent: () => import('./pages/app-full-calendar/app-full-calendar.component').then(m => m.AppFullCalendarComponent) },
 			{ path: 'notifications', loadComponent: () => import('./pages/app-notifications-page/app-notifications-page.component').then(m => m.AppNotificationsPageComponent) },
 			{ path: 'features-profile', loadComponent: () => import('./pages/app-features-profile-page/app-features-profile-page.component').then(m => m.AppFeaturesProfilePageComponent) },
+			{ path: 'theme-demo', loadComponent: () => import('./pages/app-theme-demo/app-theme-demo.component').then(m => m.AppThemeDemoComponent) },
 			// User menu pages
 			{ path: 'profile', loadComponent: () => import('./pages/app-profile-page/app-profile-page.component').then(m => m.AppProfilePageComponent) },
 			{ path: 'change-password', loadComponent: () => import('./pages/app-change-password-page/app-change-password-page.component').then(m => m.AppChangePasswordPageComponent) },
