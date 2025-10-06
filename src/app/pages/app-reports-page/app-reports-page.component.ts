@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
@@ -9,12 +8,13 @@ import { MatChipsModule } from '@angular/material/chips';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatMenuModule } from '@angular/material/menu';
 import { Report, ReportStatus, ReportType, ReportCategory, ExportFormat, ReportStatusColorMap, ReportTypeColorMap, ReportCategoryColorMap, ReportFormatIconMap } from '../../models';
+import { ActionMenuItem } from '../../models/action.menu.model';
+import { AppActionMenuComponent } from '../../molecules/app-action-menu/app-action-menu.component';
 
 @Component({
   selector: 'app-reports-page',
   standalone: true,
   imports: [
-    CommonModule, 
     MatCardModule, 
     MatButtonModule, 
     MatIconModule,
@@ -22,7 +22,8 @@ import { Report, ReportStatus, ReportType, ReportCategory, ExportFormat, ReportS
     MatPaginatorModule,
     MatChipsModule,
     MatTooltipModule,
-    MatMenuModule
+    MatMenuModule,
+    AppActionMenuComponent
   ],
   template: `
     <div class="page-container">
@@ -142,35 +143,7 @@ import { Report, ReportStatus, ReportType, ReportCategory, ExportFormat, ReportS
               <ng-container matColumnDef="actions">
                 <th mat-header-cell *matHeaderCellDef>Actions</th>
                 <td mat-cell *matCellDef="let report">
-                  <div class="action-buttons">
-                    <button mat-icon-button matTooltip="Download Report"
-                            *ngIf="report.status === ReportStatus.GENERATED">
-                      <mat-icon>file_download</mat-icon>
-                    </button>
-                    <button mat-icon-button matTooltip="View Report">
-                      <mat-icon>assessment</mat-icon>
-                    </button>
-                    <button mat-icon-button matTooltip="Share Report">
-                      <mat-icon>ios_share</mat-icon>
-                    </button>
-                    <button mat-icon-button matTooltip="More Options" [matMenuTriggerFor]="actionMenu">
-                      <mat-icon>more_vert</mat-icon>
-                    </button>
-                    <mat-menu #actionMenu="matMenu" class="reports-dropdown">
-                      <button mat-menu-item>
-                        <mat-icon>refresh</mat-icon>
-                        <span>Regenerate</span>
-                      </button>
-                      <button mat-menu-item>
-                        <mat-icon>schedule</mat-icon>
-                        <span>Schedule</span>
-                      </button>
-                      <button mat-menu-item class="danger-item">
-                        <mat-icon>delete_outline</mat-icon>
-                        <span>Delete</span>
-                      </button>
-                    </mat-menu>
-                  </div>
+                  <app-app-action-menu [actions]="getReportsActions(report)"></app-app-action-menu>
                 </td>
               </ng-container>
 
@@ -194,6 +167,7 @@ export class AppReportsPageComponent {
   
   // Make enums available in template
   ReportStatus = ReportStatus;
+  reportActionsMap = new Map<Report, ActionMenuItem[]>();
   
   reports: Report[] = [
     {
@@ -294,4 +268,47 @@ export class AppReportsPageComponent {
     }
     return ReportFormatIconMap[format as ExportFormat] || 'description';
   }
+
+  getReportsActions(report: Report): ActionMenuItem[] {
+    if (!this.reportActionsMap.has(report)) {
+      console.log('Generating actions for report:', report.title);
+      this.reportActionsMap.set(report, [
+        {
+          label: 'View',
+          icon: 'assessment',
+          callback: () => console.log('View report', report)
+        },
+        {
+          label: 'Regenerate',
+          icon: 'refresh',
+          callback: () => console.log('Regenerate report', report)
+        },
+        {
+          label: 'Schedule',
+          icon: 'schedule',
+          callback: () => console.log('Schedule report', report)
+        },
+        {
+          label: 'Share',
+          icon: 'ios_share',
+          callback: () => console.log('Share report', report)
+        },
+        {
+          label: 'Download',
+          icon: 'file_download',
+          callback: () => console.log('Download report', report),
+          disabled: report.status !== ReportStatus.GENERATED
+        },
+        {
+          dividerBefore: true,
+          label: 'Delete',
+          icon: 'delete_outline',
+          callback: () => console.log('Delete report', report),
+          danger: true
+        }
+      ]);
+    }
+    return this.reportActionsMap.get(report)!;
+  }
+
 }

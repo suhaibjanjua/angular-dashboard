@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
@@ -8,19 +7,21 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { ClassData, ClassStatus, ClassStatusColorMap } from '../../models';
+import { ActionMenuItem } from '../../models/action.menu.model';
+import { AppActionMenuComponent } from '../../molecules/app-action-menu/app-action-menu.component';
 
 @Component({
   selector: 'app-classes-page',
   standalone: true,
   imports: [
-    CommonModule, 
     MatCardModule, 
     MatButtonModule, 
     MatIconModule,
     MatTableModule,
     MatPaginatorModule,
     MatChipsModule,
-    MatTooltipModule
+    MatTooltipModule,
+    AppActionMenuComponent
   ],
   template: `
     <div class="page-container">
@@ -105,20 +106,7 @@ import { ClassData, ClassStatus, ClassStatusColorMap } from '../../models';
               <ng-container matColumnDef="actions">
                 <th mat-header-cell *matHeaderCellDef>Actions</th>
                 <td mat-cell *matCellDef="let class">
-                  <div class="action-buttons">
-                    <button mat-icon-button matTooltip="View Details">
-                      <mat-icon>groups</mat-icon>
-                    </button>
-                    <button mat-icon-button matTooltip="Edit Class">
-                      <mat-icon>edit_calendar</mat-icon>
-                    </button>
-                    <button mat-icon-button matTooltip="Manage Attendance">
-                      <mat-icon>how_to_reg</mat-icon>
-                    </button>
-                    <button mat-icon-button matTooltip="More Options">
-                      <mat-icon>more_vert</mat-icon>
-                    </button>
-                  </div>
+                  <app-app-action-menu [actions]="getCoursesActions(class)"></app-app-action-menu>
                 </td>
               </ng-container>
 
@@ -139,6 +127,8 @@ import { ClassData, ClassStatus, ClassStatusColorMap } from '../../models';
 })
 export class AppClassesPageComponent {
   displayedColumns: string[] = ['name', 'instructor', 'time', 'enrollment', 'room', 'status', 'actions'];
+
+  classActionsMap = new Map<ClassData, ActionMenuItem[]>();
   
   classes: ClassData[] = [
     {
@@ -206,4 +196,41 @@ export class AppClassesPageComponent {
   getStatusColor(status: ClassStatus): 'primary' | 'accent' | 'warn' | undefined {
     return ClassStatusColorMap[status];
   }
+
+  getCoursesActions(classData: ClassData): ActionMenuItem[] {
+    if (!this.classActionsMap.has(classData)) {
+      console.log('Generating actions for class:', classData.name);
+      this.classActionsMap.set(classData, [
+        {
+          label: 'Edit class',
+          icon: 'edit_calendar',
+          callback: () => console.log('Edit class', classData)
+        },
+        {
+          label: 'View details',
+          icon: 'groups',
+          callback: () => console.log('View details', classData)
+        },
+        {
+          label: 'View analytics',
+          icon: 'analytics',
+          callback: () => console.log('View analytics', classData)
+        },
+        {
+          label: 'Manage Attendance',
+          icon: 'how_to_reg',
+          callback: () => console.log('Manage Attendance', classData)
+        },
+        {
+          dividerBefore: true,
+          label: 'Delete',
+          icon: 'delete_outline',
+          callback: () => console.log('Delete', classData),
+          danger: true
+        }
+      ]);
+    }
+    return this.classActionsMap.get(classData)!;
+  }
+
 }

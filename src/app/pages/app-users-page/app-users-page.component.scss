@@ -78,10 +78,10 @@
     
     // Header styling
     .mat-mdc-header-row {
-      background: #FFFFFF;
+      background: #f8f9fa;
       
       .mat-mdc-header-cell {
-        background: #FFFFFF;
+        background: #f8f9fa;
         color: #333;
         font-weight: 600;
         font-size: 14px;
@@ -125,14 +125,7 @@
       .user-avatar {
         width: 40px;
         height: 40px;
-        border-radius: 50%;
-        background: linear-gradient(135deg, #6c4bb6, #8e44ad);
-        color: white;
-        display: flex;
-        align-items: center;
-        justify-content: center;
         font-size: 14px;
-        font-weight: 600;
       }
       
       .user-details {
@@ -148,14 +141,6 @@
           font-size: 12px;
           line-height: 1.2;
         }
-      }
-    }
-    
-    .action-menu {
-      color: #666;
-      
-      &:hover {
-        color: #6c4bb6;
       }
     }
     
@@ -236,65 +221,6 @@
 ::ng-deep .status-pending {
   background-color: rgba(255, 152, 0, 0.1) !important;
   color: #ff9800 !important;
-}
-
-// Menu styles
-::ng-deep .users-list-dropdown {
-  margin-top: 8px;
-
-  .mat-mdc-menu-panel {
-    background: #ffffff;
-    border-radius: 8px;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
-  }
-
-  .mat-mdc-menu-content {
-    padding: 8px 0;
-    min-width: 200px;
-    background: #ffffff;
-  }
-
-  .mat-mdc-menu-item {
-    height: 48px;
-    padding: 0 16px;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    font-size: 14px;
-    color: #333;
-
-    mat-icon {
-      font-size: 20px;
-      width: 20px;
-      height: 20px;
-      color: #666;
-    }
-
-    &:hover {
-      background-color: rgba(108, 75, 182, 0.08);
-
-      mat-icon {
-        color: #6c4bb6;
-      }
-    }
-
-    &.danger-item {
-      &:hover {
-        background-color: rgba(244, 67, 54, 0.08);
-        color: #f44336;
-
-        mat-icon {
-          color: #f44336;
-        }
-      }
-    }
-  }
-
-  .mat-mdc-menu-divider {
-    margin: 8px 0;
-    background-color: #e0e0e0;
-    height: 1px;
-  }
 }
 
 @media (max-width: 768px) {

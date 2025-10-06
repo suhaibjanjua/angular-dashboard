@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { NgClass, NgIf } from '@angular/common';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
@@ -8,17 +8,17 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatCardModule } from '@angular/material/card';
 import { MatChipsModule } from '@angular/material/chips';
-import { MatMenuModule } from '@angular/material/menu';
-import { MatDividerModule } from '@angular/material/divider';
-import { FormsModule } from '@angular/forms';
+import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { Document, DocumentType, DocumentStatus } from '../../models';
 import { AppSearchBarComponent } from "../../molecules/app-search-bar/app-search-bar.component";
+import { Subject, debounceTime, distinctUntilChanged, takeUntil } from 'rxjs';
+import { ActionMenuItem } from '../../models/action.menu.model';
+import { AppActionMenuComponent } from '../../molecules/app-action-menu/app-action-menu.component';
 
 @Component({
   selector: 'app-documents-page',
   standalone: true,
   imports: [
-    CommonModule,
     MatTableModule,
     MatPaginatorModule,
     MatSortModule,
@@ -27,10 +27,11 @@ import { AppSearchBarComponent } from "../../molecules/app-search-bar/app-search
     MatIconModule,
     MatCardModule,
     MatChipsModule,
-    MatMenuModule,
-    MatDividerModule,
-    FormsModule,
-    AppSearchBarComponent
+    AppSearchBarComponent,
+    ReactiveFormsModule,
+    AppActionMenuComponent,
+    NgClass,
+    NgIf
 ],
   template: `
     <div class="page-container">
@@ -42,7 +43,13 @@ import { AppSearchBarComponent } from "../../molecules/app-search-bar/app-search
       <mat-card class="content-card">
         <mat-card-header>
           <div class="table-header">
-            <app-search-bar [label]="'Search documents...'" [placeholder]="'Search by name, type, or owner'" (search)="applyFilter($event)"></app-search-bar>
+            <form [formGroup]="form">
+              <app-search-bar
+                formControlName="searchTerm"
+                [label]="'Search documents...'"
+                [placeholder]="'Search by name, type, or owner'">
+              </app-search-bar>
+            </form>
             
             <div class="action-buttons">
               <button mat-flat-button color="primary" (click)="uploadDocument()">
@@ -101,29 +108,7 @@ import { AppSearchBarComponent } from "../../molecules/app-search-bar/app-search
               <ng-container matColumnDef="actions">
                 <th mat-header-cell *matHeaderCellDef>Actions</th>
                 <td mat-cell *matCellDef="let doc">
-                  <div class="action-buttons">
-                    <button mat-icon-button matTooltip="Download" (click)="downloadDocument(doc)">
-                      <mat-icon>file_download</mat-icon>
-                    </button>
-                    <button mat-icon-button matTooltip="View Details">
-                      <mat-icon>description</mat-icon>
-                    </button>
-                    <button mat-icon-button matTooltip="Edit Document" (click)="editDocument(doc)">
-                      <mat-icon>edit_document</mat-icon>
-                    </button>
-                    <button mat-icon-button matTooltip="Share" (click)="shareDocument(doc)">
-                      <mat-icon>ios_share</mat-icon>
-                    </button>
-                    <button mat-icon-button matTooltip="More Options" [matMenuTriggerFor]="menu">
-                      <mat-icon>more_vert</mat-icon>
-                    </button>
-                  </div>
-                  <mat-menu #menu="matMenu" class="documents-dropdown">
-                    <button mat-menu-item (click)="deleteDocument(doc)" class="danger-item">
-                      <mat-icon>delete_outline</mat-icon>
-                      <span>Delete</span>
-                    </button>
-                  </mat-menu>
+                  <app-app-action-menu [actions]="getDocumentsActions(doc)"></app-app-action-menu>
                 </td>
               </ng-container>
 
@@ -155,8 +140,26 @@ export class AppDocumentsPageComponent implements OnInit {
   filteredDocuments: Document[] = [];
   displayedColumns: string[] = ['name', 'owner', 'status', 'lastModified', 'actions'];
 
+  form = new FormGroup({
+    searchTerm: new FormControl('')
+  });
+
+  private destroy$ = new Subject<void>();
+  documentActionsMap = new Map<Document, ActionMenuItem[]>();
+
   ngOnInit() {
     this.loadDocuments();
+
+    this.form.get('searchTerm')?.valueChanges
+      .pipe(debounceTime(300), distinctUntilChanged(), takeUntil(this.destroy$))
+      .subscribe(value => {
+        this.applyFilter(value ?? '');
+      });
+  }
+
+  ngOnDestroy() {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 
   loadDocuments() {
@@ -202,6 +205,42 @@ export class AppDocumentsPageComponent implements OnInit {
       doc.type.toLowerCase().includes(filterValue) ||
       doc.owner.toLowerCase().includes(filterValue)
     );
+  }
+
+  getDocumentsActions(document: Document): ActionMenuItem[] {
+    if (!this.documentActionsMap.has(document)) {
+      console.log('Generating actions for document:', document.name);
+      this.documentActionsMap.set(document, [
+        {
+          label: 'Edit',
+          icon: 'edit_document',
+          callback: () => this.editDocument(document)
+        },
+        {
+          label: 'View',
+          icon: 'description',
+          callback: () => console.log('View details for document:', document)
+        },
+        {
+          label: 'Share',
+          icon: 'ios_share',
+          callback: () => this.shareDocument(document)
+        },
+        {
+          label: 'Download',
+          icon: 'file_download',
+          callback: () => this.downloadDocument(document)
+        },
+        {
+          dividerBefore: true,
+          label: 'Delete',
+          icon: 'delete_outline',
+          callback: () => this.deleteDocument(document),
+          danger: true
+        }
+      ]);
+    }
+    return this.documentActionsMap.get(document)!;
   }
 
   uploadDocument() {
@@ -265,11 +304,11 @@ export class AppDocumentsPageComponent implements OnInit {
     const diff = now.getTime() - date.getTime();
     const hours = Math.floor(diff / (1000 * 60 * 60));
     const days = Math.floor(hours / 24);
-    
+
     if (hours < 1) return 'Just now';
     if (hours < 24) return `${hours}h ago`;
     if (days < 30) return `${days}d ago`;
-    
+
     return date.toLocaleDateString();
   }
 }

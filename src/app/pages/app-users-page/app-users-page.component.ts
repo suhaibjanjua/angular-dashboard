@@ -1,5 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
@@ -8,19 +7,19 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatCardModule } from '@angular/material/card';
 import { MatChipsModule } from '@angular/material/chips';
-import { MatDialogModule, MatDialog } from '@angular/material/dialog';
-import { MatSnackBarModule } from '@angular/material/snack-bar';
-import { MatMenuModule } from '@angular/material/menu';
-import { MatDividerModule } from '@angular/material/divider';
-import { FormsModule } from '@angular/forms';
-import { User, UserStatus, UserRole, UserStatusColorMap, UserRoleColorMap, UserStatusCssClassMap, UserRoleCssClassMap, StatusIconMap, MaterialColor } from '../../models';
+import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { User, UserStatus, UserRole, UserStatusCssClassMap, UserRoleCssClassMap, StatusIconMap } from '../../models';
 import { AppSearchBarComponent } from '../../molecules/app-search-bar/app-search-bar.component';
+import { debounceTime, distinctUntilChanged, Subject, takeUntil } from 'rxjs';
+import { AppUserAvatarComponent } from '../../atoms/app-user-avatar/app-user-avatar.component';
+import { ActionMenuItem } from '../../models/action.menu.model';
+import { AppActionMenuComponent } from '../../molecules/app-action-menu/app-action-menu.component';
+import { NgClass, NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-users-page',
   standalone: true,
   imports: [
-    CommonModule,
     MatTableModule,
     MatPaginatorModule,
     MatSortModule,
@@ -29,12 +28,12 @@ import { AppSearchBarComponent } from '../../molecules/app-search-bar/app-search
     MatIconModule,
     MatCardModule,
     MatChipsModule,
-    MatDialogModule,
-    MatSnackBarModule,
-    MatMenuModule,
-    MatDividerModule,
-    FormsModule,
-    AppSearchBarComponent
+    AppSearchBarComponent,
+    ReactiveFormsModule,
+    AppUserAvatarComponent,
+    AppActionMenuComponent,
+    NgClass,
+    NgIf
   ],
   template: `
     <div class="page-container">
@@ -46,7 +45,13 @@ import { AppSearchBarComponent } from '../../molecules/app-search-bar/app-search
       <mat-card class="content-card">
         <mat-card-header>
           <div class="table-header">
-            <app-search-bar [label]="'Search users...'" [placeholder]="'Search by name, email, or role'" (search)="applyFilter($event)"></app-search-bar>
+            <form [formGroup]="form">
+              <app-search-bar
+                formControlName="searchTerm"
+                [label]="'Search users...'"
+                [placeholder]="'Search by name, email, or role'">
+              </app-search-bar>
+            </form>
             
             <div class="action-buttons">
               <button mat-flat-button color="primary" (click)="addUser()">
@@ -70,7 +75,9 @@ import { AppSearchBarComponent } from '../../molecules/app-search-bar/app-search
                 <th mat-header-cell *matHeaderCellDef mat-sort-header>Name</th>
                 <td mat-cell *matCellDef="let user">
                   <div class="user-info">
-                    <div class="user-avatar">{{getInitials(user.firstName, user.lastName)}}</div>
+                    <div class="user-avatar">
+                      <app-user-avatar [src]="user.avatar" [fullName]="user.firstName + ' ' + user.lastName" />
+                    </div>
                     <div class="user-details">
                       <div class="user-name">{{user.firstName}} {{user.lastName}}</div>
                       <div class="user-email">{{user.email}}</div>
@@ -112,28 +119,7 @@ import { AppSearchBarComponent } from '../../molecules/app-search-bar/app-search
               <ng-container matColumnDef="actions">
                 <th mat-header-cell *matHeaderCellDef>Actions</th>
                 <td mat-cell *matCellDef="let user">
-                  <button mat-icon-button [matMenuTriggerFor]="menu" class="action-menu" matTooltip="More Actions">
-                    <mat-icon>more_vert</mat-icon>
-                  </button>
-                  <mat-menu #menu="matMenu" class="users-list-dropdown">
-                    <button mat-menu-item (click)="editUser(user)">
-                      <mat-icon>manage_accounts</mat-icon>
-                      <span>Edit User</span>
-                    </button>
-                    <button mat-menu-item (click)="viewUser(user)">
-                      <mat-icon>account_circle</mat-icon>
-                      <span>View Profile</span>
-                    </button>
-                    <button mat-menu-item (click)="resetPassword(user)">
-                      <mat-icon>vpn_key</mat-icon>
-                      <span>Reset Password</span>
-                    </button>
-                    <mat-divider></mat-divider>
-                    <button mat-menu-item (click)="deleteUser(user)" class="danger-item">
-                      <mat-icon>person_remove</mat-icon>
-                      <span>Remove User</span>
-                    </button>
-                  </mat-menu>
+                  <app-app-action-menu [actions]="getUserActions(user)"></app-app-action-menu>
                 </td>
               </ng-container>
 
@@ -162,15 +148,32 @@ import { AppSearchBarComponent } from '../../molecules/app-search-bar/app-search
   `,
   styleUrl: './app-users-page.component.scss'
 })
-export class AppUsersPageComponent implements OnInit {
+export class AppUsersPageComponent implements OnInit, OnDestroy {
   users: User[] = [];
   filteredUsers: User[] = [];
   displayedColumns: string[] = ['name', 'role', 'status', 'lastLogin', 'actions'];
 
-  constructor(private dialog: MatDialog) {}
+  form = new FormGroup({
+    searchTerm: new FormControl('')
+  });
+
+  private destroy$ = new Subject<void>();
+  
+  userActionsMap = new Map<User, ActionMenuItem[]>();
 
   ngOnInit() {
     this.loadUsers();
+
+    this.form.get('searchTerm')?.valueChanges
+      .pipe(debounceTime(300), distinctUntilChanged(), takeUntil(this.destroy$))
+      .subscribe(value => {
+        this.applyFilter(value ?? '');
+      });
+  }
+
+  ngOnDestroy() {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 
   loadUsers() {
@@ -232,13 +235,47 @@ export class AppUsersPageComponent implements OnInit {
 
   applyFilter(value: string) {
     const filterValue = value.toLowerCase();
-    this.filteredUsers = this.users.filter(user => 
+    this.filteredUsers = this.users.filter(user =>
       user.firstName.toLowerCase().includes(filterValue) ||
       user.lastName.toLowerCase().includes(filterValue) ||
       user.email.toLowerCase().includes(filterValue) ||
       user.role.toLowerCase().includes(filterValue)
     );
   }
+
+  getUserActions(user: User): ActionMenuItem[] {
+    if (!this.userActionsMap.has(user)) {
+      console.log('Generating actions for user:', user.firstName);
+      this.userActionsMap.set(user, [
+        {
+          label: 'Edit User',
+          icon: 'manage_accounts',
+          callback: () => this.editUser(user)
+        },
+        {
+          label: 'View Profile',
+          icon: 'account_circle',
+          callback: () => this.viewUser(user)
+        },
+        {
+          label: 'Reset Password',
+          icon: 'vpn_key',
+          callback: () => this.resetPassword(user)
+        },
+        {
+          dividerBefore: true,
+          label: 'Remove User',
+          icon: 'person_remove',
+          callback: () => this.deleteUser(user),
+          danger: true,
+          tooltip: user.role === 'Admin' ? 'Cannot remove an Admin user' : '',
+          disabled: user.role === 'Admin'
+        }
+      ]);
+    }
+    return this.userActionsMap.get(user)!;
+  }
+
 
   addUser() {
     console.log('Add new user');
@@ -268,10 +305,6 @@ export class AppUsersPageComponent implements OnInit {
   exportUsers() {
     console.log('Export users');
     // Export functionality
-  }
-
-  getInitials(firstName: string, lastName: string): string {
-    return (firstName.charAt(0) + lastName.charAt(0)).toUpperCase();
   }
 
   getRoleClass(role: UserRole): string {
