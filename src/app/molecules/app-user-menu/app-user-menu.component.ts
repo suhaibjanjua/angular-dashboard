@@ -6,11 +6,12 @@ import { MatDividerModule } from '@angular/material/divider';
 import { Router } from '@angular/router';
 import { LoggedInUserService } from '../../services/logged-in-user.service';
 import { AppUserAvatarComponent } from '../../atoms/app-user-avatar/app-user-avatar.component';
+import { AppThemeSwitcherComponent } from '../../atoms/app-theme-switcher/app-theme-switcher.component';
 
 @Component({
   selector: 'app-user-menu',
   standalone: true,
-  imports: [MatMenuModule, MatButtonModule, MatIconModule, MatDividerModule, AppUserAvatarComponent],
+  imports: [MatMenuModule, MatButtonModule, MatIconModule, MatDividerModule, AppUserAvatarComponent, AppThemeSwitcherComponent],
   template: `
     <div class="user-menu">
       <button mat-button [matMenuTriggerFor]="userMenu" class="user-button">
@@ -42,19 +43,19 @@ import { AppUserAvatarComponent } from '../../atoms/app-user-avatar/app-user-ava
           <span>Change Password</span>
         </button>
         
-        <button mat-menu-item (click)="selectLanguage()">
+        <button mat-menu-item (click)="selectLanguage()"> 
           <mat-icon>language</mat-icon>
           <span>Select Language</span>
         </button>
         
+        <app-theme-switcher mode="menu-item"></app-theme-switcher>
+        
         <button mat-menu-item (click)="changeTheme()">
-          <mat-icon>palette</mat-icon>
-          <span>Change Theme</span>
+          <mat-icon>settings</mat-icon>
+          <span>Theme Settings</span>
         </button>
         
-        <mat-divider></mat-divider>
-        
-        <button mat-menu-item (click)="deleteAccount()" class="danger-item">
+        <mat-divider></mat-divider>        <button mat-menu-item (click)="deleteAccount()" class="danger-item">
           <mat-icon>delete_forever</mat-icon>
           <span>Delete Your Account</span>
         </button>
@@ -92,8 +93,10 @@ export class AppUserMenuComponent {
     this.router.navigate(['/select-language']);
   }
 
+
+
   changeTheme() {
-    console.log('Navigate to theme selector');
+    console.log('Navigate to theme settings');
     this.router.navigate(['/change-theme']);
   }
 
