@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
@@ -9,12 +8,13 @@ import { MatChipsModule } from '@angular/material/chips';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatBadgeModule } from '@angular/material/badge';
 import { MeetingData, MeetingType, MeetingStatus } from '../../models';
+import { ActionMenuItem } from '../../models/action.menu.model';
+import { AppActionMenuComponent } from '../../molecules/app-action-menu/app-action-menu.component';
 
 @Component({
   selector: 'app-meetings-page',
   standalone: true,
   imports: [
-    CommonModule, 
     MatCardModule, 
     MatButtonModule, 
     MatIconModule,
@@ -22,7 +22,8 @@ import { MeetingData, MeetingType, MeetingStatus } from '../../models';
     MatPaginatorModule,
     MatChipsModule,
     MatTooltipModule,
-    MatBadgeModule
+    MatBadgeModule,
+    AppActionMenuComponent
   ],
   template: `
     <div class="page-container">
@@ -117,26 +118,7 @@ import { MeetingData, MeetingType, MeetingStatus } from '../../models';
               <ng-container matColumnDef="actions">
                 <th mat-header-cell *matHeaderCellDef>Actions</th>
                 <td mat-cell *matCellDef="let meeting">
-                  <div class="action-buttons">
-                    <button mat-icon-button matTooltip="Join Meeting" 
-                            *ngIf="meeting.status === 'In Progress'">
-                      <mat-icon>videocam</mat-icon>
-                    </button>
-                    <button mat-icon-button matTooltip="View Details">
-                      <mat-icon>event</mat-icon>
-                    </button>
-                    <button mat-icon-button matTooltip="Edit Meeting"
-                            *ngIf="meeting.status !== 'Completed'">
-                      <mat-icon>edit_calendar</mat-icon>
-                    </button>
-                    <button mat-icon-button matTooltip="Copy Meeting Link"
-                            *ngIf="meeting.meetingUrl">
-                      <mat-icon>content_copy</mat-icon>
-                    </button>
-                    <button mat-icon-button matTooltip="More Options">
-                      <mat-icon>more_vert</mat-icon>
-                    </button>
-                  </div>
+                  <app-app-action-menu [actions]="getMeetingActions(meeting)"></app-app-action-menu>
                 </td>
               </ng-container>
 
@@ -157,6 +139,8 @@ import { MeetingData, MeetingType, MeetingStatus } from '../../models';
 })
 export class AppMeetingsPageComponent {
   displayedColumns: string[] = ['title', 'organizer', 'dateTime', 'participants', 'location', 'status', 'actions'];
+
+  meetingActionsMap = new Map<MeetingData, ActionMenuItem[]>();
   
   meetings: MeetingData[] = [
     {
@@ -243,4 +227,49 @@ export class AppMeetingsPageComponent {
       default: return undefined;
     }
   }
+
+  getMeetingActions(meeting: MeetingData): ActionMenuItem[] {
+    if (!this.meetingActionsMap.has(meeting)) {
+      console.log('Generating actions for meeting:', meeting.title);
+      this.meetingActionsMap.set(meeting, [
+        {
+          label: 'Join Meeting',
+          icon: 'videocam',
+          callback: () => console.log('Join meeting', meeting),
+          disabled: meeting.status !== 'In Progress'
+        },
+        {
+          label: 'Edit meeting',
+          icon: 'edit_calendar',
+          callback: () => console.log('Edit meeting', meeting),
+          disabled: meeting.status === 'Completed'
+        },
+        {
+          label: 'View details',
+          icon: 'event',
+          callback: () => console.log('View details', meeting)
+        },
+        {
+          label: 'View analytics',
+          icon: 'analytics',
+          callback: () => console.log('View analytics', meeting)
+        },
+        {
+          label: 'Copy meeting link',
+          icon: 'content_copy',
+          callback: () => console.log('Copy meeting link', meeting),
+          disabled: !meeting.meetingUrl
+        },
+        {
+          dividerBefore: true,
+          label: 'Delete',
+          icon: 'delete_outline',
+          callback: () => console.log('Delete', meeting),
+          danger: true
+        }
+      ]);
+    }
+    return this.meetingActionsMap.get(meeting)!;
+  }
+
 }
