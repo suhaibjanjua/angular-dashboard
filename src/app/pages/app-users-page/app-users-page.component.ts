@@ -8,12 +8,9 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatCardModule } from '@angular/material/card';
 import { MatChipsModule } from '@angular/material/chips';
-import { MatDialogModule, MatDialog } from '@angular/material/dialog';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
-import { MatMenuModule } from '@angular/material/menu';
-import { MatDividerModule } from '@angular/material/divider';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { User, UserStatus, UserRole, UserStatusColorMap, UserRoleColorMap, UserStatusCssClassMap, UserRoleCssClassMap, StatusIconMap, MaterialColor } from '../../models';
+import { User, UserStatus, UserRole, UserStatusCssClassMap, UserRoleCssClassMap, StatusIconMap } from '../../models';
 import { AppSearchBarComponent } from '../../molecules/app-search-bar/app-search-bar.component';
 import { debounceTime, Subject } from 'rxjs';
 import { AppUserAvatarComponent } from '../../atoms/app-user-avatar/app-user-avatar.component';
@@ -33,10 +30,7 @@ import { AppActionMenuComponent } from '../../molecules/app-action-menu/app-acti
     MatIconModule,
     MatCardModule,
     MatChipsModule,
-    MatDialogModule,
     MatSnackBarModule,
-    MatMenuModule,
-    MatDividerModule,
     FormsModule,
     AppSearchBarComponent,
     ReactiveFormsModule,
@@ -168,8 +162,6 @@ export class AppUsersPageComponent implements OnInit, OnDestroy {
   private destroy$ = new Subject<void>();
   
   userActionsMap = new Map<User, ActionMenuItem[]>();
-
-  constructor(private dialog: MatDialog) { }
 
   ngOnInit() {
     this.loadUsers();
@@ -315,10 +307,6 @@ export class AppUsersPageComponent implements OnInit, OnDestroy {
   exportUsers() {
     console.log('Export users');
     // Export functionality
-  }
-
-  getInitials(firstName: string, lastName: string): string {
-    return (firstName.charAt(0) + lastName.charAt(0)).toUpperCase();
   }
 
   getRoleClass(role: UserRole): string {
