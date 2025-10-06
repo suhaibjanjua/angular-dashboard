@@ -1,25 +1,26 @@
 .dashboard-page {
   padding: 24px;
-  background: #FFFFFF;
+  background: var(--color-background);
   min-height: 100vh;
   
   .dashboard-header {
-    background: white;
+    background: var(--color-surface);
     padding: 24px;
     border-radius: 12px;
     margin-bottom: 24px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    box-shadow: var(--shadow-md);
+    border: 1px solid var(--color-border);
     
     h1 {
       font-size: 24px;
       font-weight: 600;
-      color: #333;
+      color: var(--color-text);
       margin: 0 0 8px 0;
     }
     
     .dashboard-subtitle {
       font-size: 14px;
-      color: #666;
+      color: var(--color-text-secondary);
       margin: 0 0 24px 0;
     }
   }
@@ -32,8 +33,9 @@
     .widget-container {
       min-height: 350px;
       border-radius: 12px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-      background: #ffffff !important;
+      box-shadow: var(--shadow-md);
+      background: var(--color-surface) !important;
+      border: 1px solid var(--color-border);
       overflow: hidden;
       
       &.large {
@@ -45,7 +47,7 @@
         height: 100%;
         margin: 0;
         box-shadow: none;
-        background: #ffffff !important;
+        background: var(--color-surface) !important;
         
         mat-card-content {
           padding: 24px;
