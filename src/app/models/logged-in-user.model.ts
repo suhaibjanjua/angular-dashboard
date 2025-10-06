@@ -5,7 +5,7 @@ export interface LoggedInUser {
   email: string;
   phone?: string;
   role: 'admin' | 'user' | 'guest';
-  image?: string;
+  avatar?: string;
   token?: string;
   permissions?: string[];
 }

@@ -10,7 +10,7 @@ export class LoggedInUserService {
     email: 'john.smith@company.com',
     phone: '+1 (555) 123-4567',
     role: 'admin',
-    image: ''
+    avatar: ''
   });
 
   readonly fullName = computed(() => {
@@ -18,7 +18,7 @@ export class LoggedInUserService {
     return u ? `${u.firstName} ${u.lastName}` : '';
   });
 
-  readonly image = computed(() => this.user()?.image ?? '');
+  readonly image = computed(() => this.user()?.avatar ?? '');
   readonly role = computed(() => this.user()?.role ?? 'guest');
   readonly email = computed(() => this.user()?.email ?? '');
   readonly phone = computed(() => this.user()?.phone ?? '');

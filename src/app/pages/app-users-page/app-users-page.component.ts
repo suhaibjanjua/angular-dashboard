@@ -16,6 +16,7 @@ import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angul
 import { User, UserStatus, UserRole, UserStatusColorMap, UserRoleColorMap, UserStatusCssClassMap, UserRoleCssClassMap, StatusIconMap, MaterialColor } from '../../models';
 import { AppSearchBarComponent } from '../../molecules/app-search-bar/app-search-bar.component';
 import { debounceTime, Subject } from 'rxjs';
+import { AppUserAvatarComponent } from '../../atoms/app-user-avatar/app-user-avatar.component';
 
 @Component({
   selector: 'app-users-page',
@@ -36,7 +37,8 @@ import { debounceTime, Subject } from 'rxjs';
     MatDividerModule,
     FormsModule,
     AppSearchBarComponent,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    AppUserAvatarComponent
   ],
   template: `
     <div class="page-container">
@@ -78,7 +80,10 @@ import { debounceTime, Subject } from 'rxjs';
                 <th mat-header-cell *matHeaderCellDef mat-sort-header>Name</th>
                 <td mat-cell *matCellDef="let user">
                   <div class="user-info">
-                    <div class="user-avatar">{{getInitials(user.firstName, user.lastName)}}</div>
+                    <!-- <div class="user-avatar">{{getInitials(user.firstName, user.lastName)}}</div> -->
+                    <div class="user-avatar">
+                      <app-user-avatar [src]="user.avatar" [fullName]="user.firstName + ' ' + user.lastName" />
+                    </div>
                     <div class="user-details">
                       <div class="user-name">{{user.firstName}} {{user.lastName}}</div>
                       <div class="user-email">{{user.email}}</div>

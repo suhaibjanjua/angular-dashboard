@@ -169,7 +169,7 @@ export class AppProfilePageComponent implements OnInit {
       if (result) {
         console.log('Avatar uploaded:', result);
         this.loggedInUserService.updateUser({
-          image: result
+          avatar: result
         });
       }
     });
@@ -179,7 +179,7 @@ export class AppProfilePageComponent implements OnInit {
     console.log('Removing avatar');
     // Implement avatar removal logic
     this.loggedInUserService.updateUser({
-      image: undefined
+      avatar: undefined
     });
   }
 }
