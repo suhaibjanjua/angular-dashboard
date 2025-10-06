@@ -13,7 +13,7 @@
 // Filters Card
 .filters-card {
   margin-bottom: 24px;
-  background: #ffffff;
+  background: var(--color-surface);
   border-radius: 12px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
 
@@ -105,7 +105,7 @@
 
 // Loading Card
 .loading-card {
-  background: #ffffff;
+  background: var(--color-surface);
   border-radius: 12px;
 
   .loading-content {
@@ -129,7 +129,7 @@
 
 // No Results Card
 .no-results-card {
-  background: #ffffff;
+  background: var(--color-surface);
   border-radius: 12px;
 
   .no-results-content {
@@ -173,7 +173,7 @@
 
 // Notification Card
 .notification-card {
-  background: #ffffff;
+  background: var(--color-surface);
   border-radius: 12px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
   cursor: pointer;
@@ -442,7 +442,7 @@
 
 // Pagination
 .notifications-paginator {
-  background: #ffffff;
+  background: var(--color-surface);
   border-radius: 12px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
   margin-top: 24px;
