@@ -327,7 +327,7 @@
     "id": "automation",
     "name": "Automation & Workflows",
     "description": "Automated workflows and process management tools",
-    "icon": "automation",
+    "icon": "polyline",
     "order": 6,
     "features": [
       {

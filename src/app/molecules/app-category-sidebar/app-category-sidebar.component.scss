@@ -37,11 +37,13 @@
     padding: 0;
     margin-bottom: 6px;
     border-radius: 0;
-    display: block;
     text-align: left;
     position: relative;
     transition: all 0.2s ease;
-    min-height: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    height: auto;
     
     &:hover {
       background: #f8f7ff;
@@ -85,7 +87,7 @@
     }
     
     .category-content {
-      padding: 18px 20px;
+      padding: 15px 18px;
       
       .category-header {
         display: flex;
@@ -116,9 +118,9 @@
           font-size: 11px;
           color: #666;
           background: #f0f0f0;
-          padding: 4px 8px;
+          padding: 3px 6px;
           border-radius: 12px;
-          min-width: 24px;
+          min-width: 22px;
           text-align: center;
           position: relative;
           font-weight: 500;
