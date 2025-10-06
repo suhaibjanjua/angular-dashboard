@@ -55,10 +55,10 @@
           gap: 8px;
           font-size: 1.25rem;
           font-weight: 600;
-          color: vars.$primary-purple;
+          color: var(--color-primary);
 
           mat-icon {
-            color: vars.$primary-purple;
+            color: var(--color-primary);
           }
         }
       }
@@ -72,7 +72,7 @@
       .current-language {
         margin-bottom: 24px;
         padding: 16px;
-        background: #FFFFFF;
+        background: var(--color-surface);
         border-radius: 8px;
 
         h3 {
@@ -88,10 +88,10 @@
           gap: 8px;
           font-size: 1.1rem;
           font-weight: 500;
-          color: vars.$primary-purple;
+          color: var(--color-primary);
 
           mat-icon {
-            color: vars.$primary-purple;
+            color: var(--color-primary);
           }
         }
       }
@@ -117,7 +117,7 @@
           padding: 8px 0;
 
           mat-icon {
-            color: vars.$primary-purple;
+            color: var(--color-primary);
           }
 
           .language-name {
@@ -151,7 +151,7 @@
             font-size: 0.95rem;
 
             strong {
-              color: vars.$primary-purple;
+              color: var(--color-primary);
             }
           }
         }
@@ -190,7 +190,7 @@
         }
 
         mat-icon {
-          color: vars.$primary-purple;
+          color: var(--color-primary);
           margin-top: 2px;
         }
 
@@ -221,17 +221,17 @@
   .language-page {
     .mat-mdc-form-field {
       .mat-mdc-select-arrow {
-        color: vars.$primary-purple;
+        color: var(--color-primary);
       }
     }
 
     .mat-mdc-button.mat-accent {
-      --mdc-filled-button-container-color: #{vars.$accent-light};
-      --mdc-filled-button-label-text-color: #{vars.$primary-purple};
+      --mdc-filled-button-container-color: var(--color-secondary);
+      --mdc-filled-button-label-text-color: var(--color-primary);
     }
 
     .mat-mdc-raised-button.mat-primary {
-      --mdc-filled-button-container-color: #{vars.$primary-purple};
+      --mdc-filled-button-container-color: var(--color-primary);
       --mdc-filled-button-label-text-color: white;
     }
 
