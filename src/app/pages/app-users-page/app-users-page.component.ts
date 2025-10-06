@@ -1,5 +1,4 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
@@ -8,20 +7,19 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatCardModule } from '@angular/material/card';
 import { MatChipsModule } from '@angular/material/chips';
-import { MatSnackBarModule } from '@angular/material/snack-bar';
-import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { User, UserStatus, UserRole, UserStatusCssClassMap, UserRoleCssClassMap, StatusIconMap } from '../../models';
 import { AppSearchBarComponent } from '../../molecules/app-search-bar/app-search-bar.component';
 import { debounceTime, Subject } from 'rxjs';
 import { AppUserAvatarComponent } from '../../atoms/app-user-avatar/app-user-avatar.component';
 import { ActionMenuItem } from '../../models/action.menu.model';
 import { AppActionMenuComponent } from '../../molecules/app-action-menu/app-action-menu.component';
+import { NgClass, NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-users-page',
   standalone: true,
   imports: [
-    CommonModule,
     MatTableModule,
     MatPaginatorModule,
     MatSortModule,
@@ -30,12 +28,12 @@ import { AppActionMenuComponent } from '../../molecules/app-action-menu/app-acti
     MatIconModule,
     MatCardModule,
     MatChipsModule,
-    MatSnackBarModule,
-    FormsModule,
     AppSearchBarComponent,
     ReactiveFormsModule,
     AppUserAvatarComponent,
-    AppActionMenuComponent
+    AppActionMenuComponent,
+    NgClass,
+    NgIf
   ],
   template: `
     <div class="page-container">
@@ -247,7 +245,7 @@ export class AppUsersPageComponent implements OnInit, OnDestroy {
 
   getUserActions(user: User): ActionMenuItem[] {
     if (!this.userActionsMap.has(user)) {
-      console.log('Generating actions for user:', user);
+      console.log('Generating actions for user:', user.firstName);
       this.userActionsMap.set(user, [
         {
           label: 'Edit User',
