@@ -2,6 +2,8 @@
   height: 100%;
   display: flex;
   flex-direction: column;
+  background: var(--color-surface);
+  color: var(--color-text);
 
   mat-card-header {
     padding-bottom: 16px;
@@ -12,7 +14,7 @@
       justify-content: space-between;
       font-size: 18px;
       font-weight: 600;
-      color: #333;
+      color: var(--color-text);
       
       .progress-badge {
         background: linear-gradient(135deg, #6c4bb6, #8e44ad);
@@ -86,14 +88,12 @@
         border-bottom: 2px solid #f0f0f0;
       }
       
-      .course-item {
-        margin-bottom: 20px;
-        padding: 16px;
-        background-color: #fafafa;
-        border-radius: 8px;
-        border: 1px solid #e0e0e0;
-        
-        .course-header {
+        .course-item {
+          margin-bottom: 20px;
+          padding: 16px;
+          background-color: var(--color-surface-hover);
+          border-radius: 8px;
+          border: 1px solid var(--color-border);        .course-header {
           display: flex;
           justify-content: space-between;
           align-items: flex-start;
@@ -105,7 +105,7 @@
             .course-name {
               font-size: 15px;
               font-weight: 600;
-              color: #333;
+              color: var(--color-text);
               margin: 0 0 4px 0;
             }
             
@@ -116,7 +116,7 @@
               
               .instructor {
                 font-size: 12px;
-                color: #666;
+                color: var(--color-text-secondary);
               }
               
               .difficulty {
@@ -150,14 +150,14 @@
             .progress-text {
               display: block;
               font-size: 13px;
-              color: #333;
+              color: var(--color-text);
               font-weight: 600;
             }
             
             .time-spent {
               display: block;
               font-size: 11px;
-              color: #666;
+              color: var(--color-text-secondary);
               margin-top: 2px;
             }
           }
