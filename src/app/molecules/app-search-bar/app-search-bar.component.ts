@@ -1,12 +1,12 @@
-import { Component, Output, EventEmitter, Input, forwardRef } from '@angular/core';
-import { FormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { MatFormField, MatInputModule, MatLabel } from '@angular/material/input';
+import { Component, Input, forwardRef } from '@angular/core';
+import { NG_VALUE_ACCESSOR } from '@angular/forms';
+import { MatFormField, MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-search-bar',
   standalone: true,
-  imports: [FormsModule, MatLabel, MatFormField, MatIconModule, MatInputModule],
+  imports: [MatFormField, MatInputModule, MatIconModule],
   templateUrl: './app-search-bar.component.html',
   styleUrls: ['./app-search-bar.component.scss'],
   providers: [
@@ -18,12 +18,31 @@ import { MatIconModule } from '@angular/material/icon';
   ]
 })
 export class AppSearchBarComponent {
-  searchValue: string = '';
-  @Input() label: string = 'Search...';
-  @Input() placeholder: string = 'Type to search...';
-  @Output() search = new EventEmitter<string>();
+  @Input() label = 'Search...';
+  @Input() placeholder = 'Type to search...';
 
-  onSearch() {
-    this.search.emit(this.searchValue);
+  value = '';
+  onChange = (value: string) => { };
+  onTouched = () => { };
+
+  // When the form initializes or updates, Angular calls
+  writeValue(value: string): void {
+    this.value = value;
   }
+
+  registerOnChange(fn: (value: string) => void): void {
+    this.onChange = fn;
+  }
+
+  registerOnTouched(fn: () => void): void {
+    this.onTouched = fn;
+  }
+
+
+  handleInput(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    this.value = input.value;
+    this.onChange(this.value);
+  }
+
 }
