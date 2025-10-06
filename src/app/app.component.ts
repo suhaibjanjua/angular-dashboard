@@ -1,6 +1,7 @@
 
-import { Component } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { ThemeService } from './services/theme.service';
 
 @Component({
   selector: 'app-root',
@@ -9,6 +10,13 @@ import { RouterModule } from '@angular/router';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'angular-dashboard';
+  
+  private readonly themeService = inject(ThemeService);
+
+  ngOnInit(): void {
+    // Initialize the theme service
+    this.themeService.initializeTheme();
+  }
 }
