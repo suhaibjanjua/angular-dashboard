@@ -206,7 +206,7 @@
 
 // No Results State
 .no-results {
-  background: #ffffff;
+  background: var(--color-surface);
   border-radius: 12px;
   border: 1px solid #e0e0e0;
   margin: 20px;
