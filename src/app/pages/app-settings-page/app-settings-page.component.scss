@@ -90,12 +90,12 @@
             font-size: 1rem;
             font-weight: 500;
             margin: 0 0 4px 0;
-            color: #333;
+            color: var(--color-text);
           }
 
           p {
             font-size: 0.875rem;
-            color: #666;
+            color: var(--color-text-secondary);
             margin: 0;
           }
         }

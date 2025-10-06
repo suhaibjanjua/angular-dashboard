@@ -1,23 +1,25 @@
 .profile-page {
   padding: 24px;
+  background: var(--color-background);
 
   .page-header {
-    background: white;
+    background: var(--color-surface);
     padding: 24px;
     border-radius: 12px;
     margin-bottom: 24px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    box-shadow: var(--shadow-md);
+    border: 1px solid var(--color-border);
     
     h1 {
       font-size: 24px;
       font-weight: 600;
-      color: #333;
+      color: var(--color-text);
       margin: 0 0 8px 0;
     }
     
     .page-subtitle {
       font-size: 14px;
-      color: #666;
+      color: var(--color-text-secondary);
       margin: 0;
     }
   }
@@ -34,9 +36,10 @@
 
   .profile-card,
   .avatar-card {
-    background: #ffffff !important;
+    background: var(--color-surface) !important;
     border-radius: 12px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    box-shadow: var(--shadow-md);
+    border: 1px solid var(--color-border);
 
     mat-card-header {
       padding: 24px 24px 0 24px;
@@ -44,13 +47,13 @@
       mat-card-title {
         font-size: 18px;
         font-weight: 600;
-        color: #333;
+        color: var(--color-text);
         display: flex;
         align-items: center;
         gap: 8px;
         
         mat-icon {
-          color: #6c4bb6;
+          color: var(--color-primary);
         }
       }
     }
@@ -113,10 +116,10 @@
     gap: 8px;
     
     &[color="primary"] {
-      background-color: #6c4bb6;
+      background-color: var(--color-primary);
       
       &:hover {
-        background-color: #5c3f9d;
+        background-color: var(--color-primary-dark);
       }
     }
   }

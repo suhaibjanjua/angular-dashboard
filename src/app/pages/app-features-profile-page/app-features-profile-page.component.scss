@@ -190,7 +190,7 @@
       max-width: 400px;
 
       .mat-mdc-form-field-icon-prefix mat-icon {
-        color: #666;
+        color: var(--color-text-secondary);
       }
     }
   }
@@ -216,7 +216,7 @@
   justify-content: center;
   padding: 60px 20px;
   text-align: center;
-  color: #666;
+  color: var(--color-text-secondary);
 
   mat-icon {
     font-size: 64px;
@@ -230,7 +230,7 @@
     margin: 0 0 8px 0;
     font-size: 20px;
     font-weight: 500;
-    color: #333;
+    color: var(--color-text);
   }
 
   p {

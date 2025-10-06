@@ -72,7 +72,7 @@
         font-size: 18px;
         width: 18px;
         height: 18px;
-        color: #666;
+        color: var(--color-text-secondary);
         display: flex;
         align-items: center;
         justify-content: center;
@@ -100,7 +100,7 @@
       
       .mat-mdc-header-cell {
         background: #FFFFFF;
-        color: #333;
+        color: var(--color-text);
         font-weight: 600;
         font-size: 14px;
         padding: 16px 12px;
@@ -122,7 +122,7 @@
         background: inherit;
         padding: 16px 12px;
         font-size: 14px;
-        color: #333;
+        color: var(--color-text);
       }
     }
     
@@ -147,7 +147,7 @@
     width: 32px;
     height: 32px;
     
-    &.file-type-pdf { color: #f44336; }
+    &.file-type-pdf { color: var(--color-error); }
     &.file-type-doc { color: #2196f3; }
     &.file-type-xls { color: #4caf50; }
     &.file-type-ppt { color: #ff9800; }
@@ -157,13 +157,13 @@
   .document-details {
     .document-name {
       font-weight: 600;
-      color: #333;
+      color: var(--color-text);
       font-size: 14px;
       line-height: 1.2;
     }
     
     .document-meta {
-      color: #666;
+      color: var(--color-text-secondary);
       font-size: 12px;
       line-height: 1.2;
     }
@@ -173,7 +173,7 @@
 .no-data {
   text-align: center;
   padding: 48px 24px;
-  color: #666;
+  color: var(--color-text-secondary);
   
   mat-icon {
     font-size: 48px;
