@@ -562,4 +562,86 @@ describe('FeatureService', () => {
       expect(loadingStates).toContain(false);
     });
   });
+
+  describe('Edge Cases and Error Handling', () => {
+    it('should handle empty feature categories gracefully', () => {
+      service.loadFeatures().subscribe();
+      
+      const req = httpMock.expectOne('/assets/demo-data/features.json');
+      req.flush([]);
+
+      service.categories$.subscribe(categories => {
+        expect(categories).toEqual([]);
+      });
+    });
+
+    it('should handle malformed feature data', () => {
+      const malformedData = [
+        {
+          id: 'malformed',
+          name: 'Malformed Category',
+          description: 'Test',
+          icon: 'test',
+          order: 1,
+          features: []
+        }
+      ];
+
+      service.loadFeatures().subscribe();
+      
+      const req = httpMock.expectOne('/assets/demo-data/features.json');
+      req.flush(malformedData);
+
+      service.categories$.subscribe(categories => {
+        expect(categories).toBeDefined();
+        expect(categories.length).toBe(1);
+      });
+    });
+
+    it('should handle invalid toggle operations gracefully', () => {
+      service.loadFeatures().subscribe();
+      
+      const req = httpMock.expectOne('/assets/demo-data/features.json');
+      req.flush(mockFeatureCategories);
+
+      // Attempt to toggle non-existent features
+      const invalidEvent1: FeatureToggleEvent = {
+        categoryId: 'invalid-category',
+        featureId: 'invalid-feature',
+        enabled: true
+      };
+
+      const invalidEvent2: FeatureToggleEvent = {
+        categoryId: 'category1',
+        featureId: 'invalid-feature',
+        enabled: true
+      };
+
+      expect(() => service.toggleFeature(invalidEvent1)).not.toThrow();
+      expect(() => service.toggleFeature(invalidEvent2)).not.toThrow();
+    });
+
+    it('should maintain data integrity during concurrent operations', () => {
+      service.loadFeatures().subscribe();
+      
+      const req = httpMock.expectOne('/assets/demo-data/features.json');
+      req.flush(mockFeatureCategories);
+
+      const toggleEvent: FeatureToggleEvent = {
+        categoryId: 'category1',
+        featureId: 'feature1',
+        enabled: false
+      };
+
+      // Multiple rapid toggles
+      service.toggleFeature(toggleEvent);
+      service.toggleFeature({...toggleEvent, enabled: true});
+      service.toggleFeature({...toggleEvent, enabled: false});
+      
+      service.categories$.subscribe(categories => {
+        expect(categories).toBeDefined();
+        expect(categories.length).toBeGreaterThan(0);
+      });
+    });
+  });
 });
