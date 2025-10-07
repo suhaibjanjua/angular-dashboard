@@ -112,13 +112,14 @@ describe('UserService', () => {
       req.flush(mockApiResponse);
     });
 
-    it('should filter users by search term', () => {
+    it('should filter users by search term', (done) => {
       service.getUsers(1, 10, undefined, undefined, 'john').subscribe(response => {
         expect(response.data.length).toBe(2); // John Doe and Bob Johnson
         expect(response.data.every(user => 
           user.firstName.toLowerCase().includes('john') || 
           user.lastName.toLowerCase().includes('john')
         )).toBe(true);
+        done();
       });
 
       const req = httpMock.expectOne('/assets/demo-data/users.json');
@@ -182,7 +183,7 @@ describe('UserService', () => {
   });
 
   describe('createUser', () => {
-    it('should create a new user', () => {
+    it('should create a new user', (done) => {
       const newUserData: UserFormData = {
         firstName: 'New',
         lastName: 'User',
@@ -200,6 +201,7 @@ describe('UserService', () => {
         expect(user.status).toBe(UserStatus.ACTIVE);
         expect(user.id).toBeDefined();
         expect(user.createdAt).toBeDefined();
+        done();
       });
 
       const req = httpMock.expectOne('/assets/demo-data/users.json');
