@@ -241,4 +241,67 @@ describe('CalendarService', () => {
       expect(console.log).toHaveBeenCalledWith('Event resized:', mockResizeArg.event);
     });
   });
+
+  describe('Service Robustness and Performance', () => {
+    it('should handle multiple concurrent requests gracefully', () => {
+      // Start multiple requests simultaneously
+      const request1 = service.loadCalendarEvents();
+      const request2 = service.loadCalendarEvents();
+      const request3 = service.loadCalendarEvents();
+
+      // All should be handled independently
+      request1.subscribe(response => {
+        expect(response).toBeDefined();
+      });
+
+      request2.subscribe(response => {
+        expect(response).toBeDefined();
+      });
+
+      request3.subscribe(response => {
+        expect(response).toBeDefined();
+      });
+
+      // Fulfill all requests
+      const requests = httpMock.match('/assets/demo-data/calendar-events.json');
+      expect(requests.length).toBe(3);
+      
+      requests.forEach(req => {
+        req.flush(mockCalendarResponse);
+      });
+    });
+
+    it('should maintain calendar options consistency', () => {
+      const options1 = service.getCalendarOptions();
+      const options2 = service.getCalendarOptions();
+      
+      // Options should be consistent between calls
+      expect(options1.initialView).toBe(options2.initialView);
+      expect(options1.selectable).toBe(options2.selectable);
+      expect(options1.editable).toBe(options2.editable);
+    });
+
+    it('should handle large event datasets efficiently', () => {
+      const largeDataset = {
+        data: Array.from({ length: 1000 }, (_, i) => ({
+          id: i.toString(),
+          title: `Event ${i}`,
+          start: `2024-01-${String(i % 28 + 1).padStart(2, '0')}T10:00:00`,
+          end: `2024-01-${String(i % 28 + 1).padStart(2, '0')}T11:00:00`,
+          backgroundColor: '#007bff'
+        })),
+        total: 1000,
+        startDate: '2024-01-01',
+        endDate: '2024-01-31'
+      };
+
+      service.loadCalendarEvents().subscribe(response => {
+        expect(response.data.length).toBe(1000);
+        expect(response.total).toBe(1000);
+      });
+
+      const req = httpMock.expectOne('/assets/demo-data/calendar-events.json');
+      req.flush(largeDataset);
+    });
+  });
 });
