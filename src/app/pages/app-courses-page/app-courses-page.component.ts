@@ -5,39 +5,39 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule, MatPaginator, PageEvent } from '@angular/material/paginator';
-import { MatChipsModule } from '@angular/material/chips';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatSortModule, MatSort } from '@angular/material/sort';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 import { CourseService } from '../../services/course.service';
-import { 
-  Course, 
-  CourseStatus, 
-  CourseCategory, 
+import {
+  Course,
+  CourseStatus,
+  CourseCategory,
   CrudAction,
-  MaterialColor 
+  MaterialColor
 } from '../../models/course.models';
 import { ActionMenuItem } from '../../models/action.menu.model';
 import { AppActionMenuComponent } from '../../molecules/app-action-menu/app-action-menu.component';
+import { AppChipSetComponent } from '../../molecules/app-chip-set/app-chip-set.component';
 
 @Component({
   selector: 'app-courses-page',
   standalone: true,
   imports: [
-    MatCardModule, 
-    MatButtonModule, 
+    MatCardModule,
+    MatButtonModule,
     MatIconModule,
     MatTableModule,
     MatPaginatorModule,
-    MatChipsModule,
     MatTooltipModule,
     MatProgressBarModule,
     MatSortModule,
     MatProgressSpinnerModule,
     AppActionMenuComponent,
-    NgIf
+    NgIf,
+    AppChipSetComponent
   ],
   template: `
     <div class="page-container">
@@ -86,9 +86,7 @@ import { AppActionMenuComponent } from '../../molecules/app-action-menu/app-acti
               <ng-container matColumnDef="category">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header>Category</th>
                 <td mat-cell *matCellDef="let course">
-                  <mat-chip [color]="getCategoryColor(course.category)" selected size="small">
-                    {{course.category}}
-                  </mat-chip>
+                  <app-app-chip-set [chipSet]="[{value: course.category}]"></app-app-chip-set>
                 </td>
               </ng-container>
 
@@ -149,9 +147,7 @@ import { AppActionMenuComponent } from '../../molecules/app-action-menu/app-acti
               <ng-container matColumnDef="status">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header>Status</th>
                 <td mat-cell *matCellDef="let course">
-                  <mat-chip [color]="getStatusColor(course.status)" selected>
-                    {{course.status}}
-                  </mat-chip>
+                  <app-app-chip-set [chipSet]="[{value: course.status}]"></app-app-chip-set>
                 </td>
               </ng-container>
 
@@ -188,7 +184,7 @@ export class AppCoursesPageComponent implements OnInit {
   @ViewChild(MatSort) sort!: MatSort;
 
   displayedColumns: string[] = ['title', 'instructor', 'category', 'credits', 'enrollment', 'progress', 'duration', 'status', 'actions'];
-  
+
   courses: Course[] = [];
   loading = true;
   totalCourses = 0;
@@ -200,7 +196,7 @@ export class AppCoursesPageComponent implements OnInit {
 
   courseActionsMap = new Map<Course, ActionMenuItem[]>();
 
-  constructor(private courseService: CourseService) {}
+  constructor(private courseService: CourseService) { }
 
   ngOnInit(): void {
     this.loadCourses();
@@ -238,7 +234,7 @@ export class AppCoursesPageComponent implements OnInit {
   handleAction(action: string, course: Course): void {
     const crudAction = action as CrudAction;
     this.courseService.handleCrudAction(crudAction, course);
-    
+
     // Reload data if needed (e.g., after delete)
     if (crudAction === CrudAction.DELETE) {
       setTimeout(() => this.loadCourses(), 1500);

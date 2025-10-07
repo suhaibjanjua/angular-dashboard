@@ -1,0 +1,15 @@
+// Status chip styles
+#app-chip-set::ng-deep .status-published {
+  background-color: rgba(76, 175, 80, 0.1) !important;
+  color: #4caf50 !important;
+}
+
+#app-chip-set::ng-deep .status-draft {
+  background-color: rgba(255, 152, 0, 0.1) !important;
+  color: #ff9800 !important;
+}
+
+#app-chip-set::ng-deep .status-archived {
+  background-color: rgba(158, 158, 158, 0.1) !important;
+  color: #9e9e9e !important;
+}

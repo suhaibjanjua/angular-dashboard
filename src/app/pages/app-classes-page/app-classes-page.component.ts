@@ -9,6 +9,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { ClassData, ClassStatus, ClassStatusColorMap } from '../../models';
 import { ActionMenuItem } from '../../models/action.menu.model';
 import { AppActionMenuComponent } from '../../molecules/app-action-menu/app-action-menu.component';
+import { AppChipSetComponent } from '../../molecules/app-chip-set/app-chip-set.component';
 
 @Component({
   selector: 'app-classes-page',
@@ -21,7 +22,8 @@ import { AppActionMenuComponent } from '../../molecules/app-action-menu/app-acti
     MatPaginatorModule,
     MatChipsModule,
     MatTooltipModule,
-    AppActionMenuComponent
+    AppActionMenuComponent,
+    AppChipSetComponent
   ],
   template: `
     <div class="page-container">
@@ -96,9 +98,7 @@ import { AppActionMenuComponent } from '../../molecules/app-action-menu/app-acti
               <ng-container matColumnDef="status">
                 <th mat-header-cell *matHeaderCellDef>Status</th>
                 <td mat-cell *matCellDef="let class">
-                  <mat-chip [color]="getStatusColor(class.status)" selected>
-                    {{class.status}}
-                  </mat-chip>
+                  <app-app-chip-set [chipSet]="[{value: class.status}]"></app-app-chip-set>
                 </td>
               </ng-container>
 
