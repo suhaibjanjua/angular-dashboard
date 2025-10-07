@@ -1,4 +1,4 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ImageUploadDialogComponent } from './image-upload-dialog.component';
@@ -305,18 +305,21 @@ describe('ImageUploadDialogComponent', () => {
   });
 
   describe('Error Handling and Edge Cases', () => {
-    it('should handle missing video element gracefully', async () => {
+    it('should handle missing video element gracefully', fakeAsync(() => {
       component.videoElement = undefined as any;
       
-      try {
-        await component.startCamera();
-        // If it succeeds, camera should remain inactive
+      let completed = false;
+      component.startCamera().then(() => {
         expect(component.isCameraActive).toBe(false);
-      } catch (error) {
-        // It's expected that this might throw an error
+        completed = true;
+      }).catch(() => {
         expect(component.isCameraActive).toBe(false);
-      }
-    });
+        completed = true;
+      });
+      
+      tick(1000); // Wait for async operations
+      expect(completed).toBe(true);
+    }));
 
     it('should handle camera capture without active camera', () => {
       component.isCameraActive = false;

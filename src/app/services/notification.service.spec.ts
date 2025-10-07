@@ -110,6 +110,10 @@ describe('NotificationService', () => {
       service.markAllAsRead().subscribe(result => {
         expect(result).toBe(true);
       });
+
+      const req = httpMock.expectOne('/assets/demo-data/notifications.json');
+      expect(req.request.method).toBe('GET');
+      req.flush(mockNotificationResponse);
     });
   });
 
@@ -118,6 +122,10 @@ describe('NotificationService', () => {
       service.deleteNotification('1').subscribe(result => {
         expect(result).toBe(true);
       });
+
+      const req = httpMock.expectOne('/assets/demo-data/notifications.json');
+      expect(req.request.method).toBe('GET');
+      req.flush(mockNotificationResponse);
     });
   });
 

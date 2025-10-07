@@ -12,8 +12,13 @@ describe('ThemeService', () => {
     documentElement = document.documentElement;
     body = document.body;
     
-    // Clear localStorage before each test
-    localStorage.clear();
+    // Clear localStorage before each test with error handling
+    try {
+      localStorage.clear();
+    } catch (e) {
+      // Handle storage quota exceeded or other localStorage errors
+      console.warn('localStorage.clear() failed:', e);
+    }
     
     // Clear any existing theme classes
     body.className = body.className.replace(/theme-\w+/g, '');
@@ -24,7 +29,12 @@ describe('ThemeService', () => {
   });
 
   afterEach(() => {
-    localStorage.clear();
+    try {
+      localStorage.clear();
+    } catch (e) {
+      // Handle storage quota exceeded or other localStorage errors
+      console.warn('localStorage.clear() failed:', e);
+    }
     // Clean up any theme classes and attributes
     body.className = body.className.replace(/theme-\w+/g, '');
     documentElement.removeAttribute('data-theme');
@@ -350,11 +360,21 @@ describe('ThemeService', () => {
     });
 
     it('should handle localStorage errors gracefully', () => {
+      // Clear localStorage first to prevent quota issues
+      try {
+        localStorage.clear();
+      } catch (e) {
+        // Ignore clear errors
+      }
+      
       // Mock localStorage to throw an error
-      spyOn(localStorage, 'setItem').and.throwError('Storage quota exceeded');
+      const setItemSpy = spyOn(localStorage, 'setItem').and.throwError('Storage quota exceeded');
       
       expect(() => service.switchTheme('dark')).not.toThrow();
       expect(service.currentTheme().id).toBe('dark');
+      
+      // Restore localStorage after test
+      setItemSpy.and.callThrough();
     });
 
     it('should handle missing document elements gracefully', () => {

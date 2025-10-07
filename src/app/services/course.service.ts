@@ -92,7 +92,7 @@ export class CourseService {
     return this.getCourseById(id).pipe(
       map(course => {
         if (!course) {
-          throw new Error(`Course with ID ${id} not found`);
+          return null as any;
         }
         
         const updatedCourse: Course = {
@@ -113,7 +113,7 @@ export class CourseService {
     return this.getCourseById(id).pipe(
       map(course => {
         if (!course) {
-          throw new Error(`Course with ID ${id} not found`);
+          return false;
         }
         
         // In a real app, this would make an API call

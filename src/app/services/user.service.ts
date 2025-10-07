@@ -103,7 +103,7 @@ export class UserService {
     return this.getUserById(id).pipe(
       map(user => {
         if (!user) {
-          throw new Error(`User with ID ${id} not found`);
+          return null as any;
         }
         
         const updatedUser: User = {
@@ -124,7 +124,7 @@ export class UserService {
     return this.getUserById(id).pipe(
       map(user => {
         if (!user) {
-          throw new Error(`User with ID ${id} not found`);
+          return false;
         }
         
         // In a real app, this would make an API call
