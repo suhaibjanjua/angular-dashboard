@@ -334,61 +334,8 @@
 
 .notification-indicators {
   display: flex;
-  gap: 8px;
+  gap: 16px;
   flex-wrap: wrap;
-
-  .type-chip {
-    height: 28px;
-    background: #f0f0f0;
-    color: var(--color-text-secondary);
-    font-size: 12px;
-
-    mat-icon {
-      color: var(--color-text-secondary) !important;
-      font-size: 16px !important;
-      width: 16px !important;
-      height: 16px !important;
-    }
-  }
-
-  .status-chip {
-    height: 28px;
-    font-size: 12px;
-    font-weight: 500;
-
-    &.status-unread {
-      background: #e8e3ff;
-      color: #6c4bb6;
-
-      mat-icon {
-        color: #6c4bb6 !important;
-      }
-    }
-
-    &.status-read {
-      background: #e8f5e8;
-      color: #4caf50;
-
-      mat-icon {
-        color: #4caf50 !important;
-      }
-    }
-
-    &.status-archived {
-      background: #f0f0f0;
-      color: var(--color-text-secondary);
-
-      mat-icon {
-        color: var(--color-text-secondary) !important;
-      }
-    }
-
-    mat-icon {
-      font-size: 16px !important;
-      width: 16px !important;
-      height: 16px !important;
-    }
-  }
 }
 
 // Notification Actions
@@ -483,7 +430,6 @@
   .notification-indicators {
     gap: 6px;
 
-    .type-chip,
     .status-chip {
       height: 24px;
       font-size: 11px;

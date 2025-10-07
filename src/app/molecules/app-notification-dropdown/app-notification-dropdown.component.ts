@@ -1,32 +1,36 @@
 import { Component, OnInit, OnDestroy, Output, EventEmitter } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { NgFor, NgIf, TitleCasePipe } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { MatChipsModule } from '@angular/material/chips';
 import { Router } from '@angular/router';
 import { Subject, takeUntil } from 'rxjs';
-import { 
-  Notification, 
-  NotificationPriority, 
+import {
+  Notification,
+  NotificationPriority,
   NotificationType,
   NotificationStatus,
-  NotificationPriorityColors 
+  NotificationPriorityColors
 } from '../../models/notification.models';
 import { NotificationService } from '../../services/notification.service';
 import { NotificationUtilsService } from '../../services/notification-utils.service';
+import { AppChipSetComponent } from '../app-chip-set/app-chip-set.component';
+import { NotificationPriorityMetaPipe } from '../../pipes/notification-priority-meta.pipe';
 
 @Component({
   selector: 'app-notification-dropdown',
   standalone: true,
   imports: [
-    CommonModule,
     MatIconModule,
     MatButtonModule,
     MatDividerModule,
     MatProgressSpinnerModule,
-    MatChipsModule
+    AppChipSetComponent,
+    NotificationPriorityMetaPipe,
+    NgIf,
+    NgFor,
+    TitleCasePipe
   ],
   template: `
     <div class="notification-dropdown" *ngIf="isOpen">
@@ -72,15 +76,7 @@ import { NotificationUtilsService } from '../../services/notification-utils.serv
               <p class="notification-message">{{ notification.message }}</p>
               <div class="notification-meta">
                 <span class="notification-time">{{ utils.formatTimestamp(notification.timestamp) }}</span>
-                <mat-chip-set>
-                  <mat-chip 
-                    [style.background-color]="NotificationPriorityColors[notification.priority]"
-                    [style.color]="'white'"
-                    *ngIf="notification.priority === NotificationPriority.HIGH || notification.priority === NotificationPriority.URGENT">
-                    <mat-icon matChipAvatar>{{ utils.getPriorityIcon(notification.priority) }}</mat-icon>
-                    {{ notification.priority | titlecase }}
-                  </mat-chip>
-                </mat-chip-set>
+                <app-app-chip-set *ngIf="notification.priority === NotificationPriority.HIGH || notification.priority === NotificationPriority.URGENT" [chipSet]="[{value: (notification.priority | titlecase), bgClass: (notification.priority | notificationPriorityMeta).class, icon: (notification.priority | notificationPriorityMeta).icon, showIcon: true}]"></app-app-chip-set>
               </div>
             </div>
           </div>
@@ -122,25 +118,25 @@ import { NotificationUtilsService } from '../../services/notification-utils.serv
   styleUrls: ['./app-notification-dropdown.component.scss']
 })
 export class AppNotificationDropdownComponent implements OnInit, OnDestroy {
-  
+
   @Output() close = new EventEmitter<void>();
 
   notifications: Notification[] = [];
   loading = false;
   isOpen = true;
-  
+
   // Expose constants to template
   NotificationPriority = NotificationPriority;
   NotificationStatus = NotificationStatus;
   NotificationPriorityColors = NotificationPriorityColors;
-  
+
   private destroy$ = new Subject<void>();
 
   constructor(
     private notificationService: NotificationService,
     public utils: NotificationUtilsService,
     private router: Router
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     // Subscribe to notifications (limit to 10 for dropdown)
