@@ -71,6 +71,29 @@ export class FeatureService {
 
   toggleFeature(event: FeatureToggleEvent): Observable<boolean> {
     const categories = this.categoriesSubject.value;
+    
+    // Validate that the category exists
+    const category = categories.find(cat => cat.id === event.categoryId);
+    if (!category) {
+      console.log('Feature toggled:', event);
+      return of(false);
+    }
+    
+    // Validate that the feature exists
+    const feature = category.features.find(feat => 
+      event.isChild ? feat.id === event.parentId : feat.id === event.featureId
+    );
+    if (!feature) {
+      console.log('Feature toggled:', event);
+      return of(false);
+    }
+    
+    // If it's a child feature, validate the child exists
+    if (event.isChild && (!feature.children || !feature.children.find(child => child.id === event.featureId))) {
+      console.log('Feature toggled:', event);
+      return of(false);
+    }
+    
     const updatedCategories = categories.map(category => {
       if (category.id === event.categoryId) {
         const updatedFeatures = category.features.map(feature => {
