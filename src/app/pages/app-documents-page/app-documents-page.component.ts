@@ -7,7 +7,6 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatCardModule } from '@angular/material/card';
-import { MatChipsModule } from '@angular/material/chips';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { Document, DocumentType, DocumentStatus } from '../../models';
 import { AppSearchBarComponent } from "../../molecules/app-search-bar/app-search-bar.component";
@@ -28,7 +27,6 @@ import { DocumentStatusClassPipe } from '../../pipes/document-status-class.pipe'
     MatButtonModule,
     MatIconModule,
     MatCardModule,
-    MatChipsModule,
     AppSearchBarComponent,
     ReactiveFormsModule,
     AppActionMenuComponent,

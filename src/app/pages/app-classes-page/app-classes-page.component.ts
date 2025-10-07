@@ -4,7 +4,6 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
-import { MatChipsModule } from '@angular/material/chips';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { ClassData, ClassStatus, ClassStatusColorMap } from '../../models';
 import { ActionMenuItem } from '../../models/action.menu.model';
@@ -20,7 +19,6 @@ import { AppChipSetComponent } from '../../molecules/app-chip-set/app-chip-set.c
     MatIconModule,
     MatTableModule,
     MatPaginatorModule,
-    MatChipsModule,
     MatTooltipModule,
     AppActionMenuComponent,
     AppChipSetComponent
