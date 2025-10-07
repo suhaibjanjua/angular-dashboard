@@ -6,15 +6,17 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatCardModule } from '@angular/material/card';
-import { MatChipsModule } from '@angular/material/chips';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { User, UserStatus, UserRole, UserStatusCssClassMap, UserRoleCssClassMap, StatusIconMap } from '../../models';
+import { User, UserStatus, UserRole } from '../../models';
 import { AppSearchBarComponent } from '../../molecules/app-search-bar/app-search-bar.component';
 import { debounceTime, distinctUntilChanged, Subject, takeUntil } from 'rxjs';
 import { AppUserAvatarComponent } from '../../atoms/app-user-avatar/app-user-avatar.component';
 import { ActionMenuItem } from '../../models/action.menu.model';
 import { AppActionMenuComponent } from '../../molecules/app-action-menu/app-action-menu.component';
-import { NgClass, NgIf } from '@angular/common';
+import { NgIf } from '@angular/common';
+import { AppChipSetComponent } from '../../molecules/app-chip-set/app-chip-set.component';
+import { UserStatusMetaPipe } from '../../pipes/user-status-meta.pipe';
+import { UserRoleClassPipe } from '../../pipes/user-role-class.pipe';
 
 @Component({
   selector: 'app-users-page',
@@ -27,13 +29,14 @@ import { NgClass, NgIf } from '@angular/common';
     MatButtonModule,
     MatIconModule,
     MatCardModule,
-    MatChipsModule,
     AppSearchBarComponent,
     ReactiveFormsModule,
     AppUserAvatarComponent,
     AppActionMenuComponent,
-    NgClass,
-    NgIf
+    NgIf,
+    AppChipSetComponent,
+    UserStatusMetaPipe,
+    UserRoleClassPipe
   ],
   template: `
     <div class="page-container">
@@ -90,9 +93,7 @@ import { NgClass, NgIf } from '@angular/common';
               <ng-container matColumnDef="role">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header>Role</th>
                 <td mat-cell *matCellDef="let user">
-                  <mat-chip-set>
-                    <mat-chip [ngClass]="getRoleClass(user.role)">{{user.role}}</mat-chip>
-                  </mat-chip-set>
+                  <app-app-chip-set [chipSet]="[{value: user.role, bgClass: (user.role | userRoleClass)}]"></app-app-chip-set>
                 </td>
               </ng-container>
 
@@ -100,12 +101,7 @@ import { NgClass, NgIf } from '@angular/common';
               <ng-container matColumnDef="status">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header>Status</th>
                 <td mat-cell *matCellDef="let user">
-                  <mat-chip-set>
-                    <mat-chip [ngClass]="getStatusClass(user.status)">
-                      <mat-icon matChipAvatar>{{getStatusIcon(user.status)}}</mat-icon>
-                      {{user.status}}
-                    </mat-chip>
-                  </mat-chip-set>
+                  <app-app-chip-set [chipSet]="[{value: user.status, showIcon: true, icon: (user.status | userStatusMeta).icon, bgClass: (user.status | userStatusMeta).class}]"></app-app-chip-set>
                 </td>
               </ng-container>
 
@@ -305,18 +301,6 @@ export class AppUsersPageComponent implements OnInit, OnDestroy {
   exportUsers() {
     console.log('Export users');
     // Export functionality
-  }
-
-  getRoleClass(role: UserRole): string {
-    return UserRoleCssClassMap[role] || 'role-default';
-  }
-
-  getStatusClass(status: UserStatus): string {
-    return UserStatusCssClassMap[status] || 'status-default';
-  }
-
-  getStatusIcon(status: UserStatus): string {
-    return StatusIconMap[status] || 'help';
   }
 
   formatDate(date: string): string {
