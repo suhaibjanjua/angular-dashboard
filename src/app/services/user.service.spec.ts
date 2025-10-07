@@ -275,6 +275,9 @@ describe('UserService', () => {
         // Service should still create user but may normalize data
         expect(user).toBeDefined();
       });
+
+      const req = httpMock.expectOne('/assets/demo-data/users.json');
+      req.flush(mockApiResponse);
     });
 
     it('should handle duplicate email validation', () => {
@@ -291,6 +294,9 @@ describe('UserService', () => {
       service.createUser(duplicateEmailUser).subscribe(user => {
         expect(user).toBeDefined();
       });
+
+      const req = httpMock.expectOne('/assets/demo-data/users.json');
+      req.flush(mockApiResponse);
     });
 
     it('should sanitize user input data', () => {
@@ -308,6 +314,9 @@ describe('UserService', () => {
         expect(user).toBeDefined();
         // Service should handle special characters appropriately
       });
+
+      const req = httpMock.expectOne('/assets/demo-data/users.json');
+      req.flush(mockApiResponse);
     });
 
     it('should enforce proper data types', () => {
@@ -328,6 +337,9 @@ describe('UserService', () => {
         expect(user.role).toBe(UserRole.ADMIN);
         expect(user.status).toBe(UserStatus.ACTIVE);
       });
+
+      const req = httpMock.expectOne('/assets/demo-data/users.json');
+      req.flush(mockApiResponse);
     });
   });
 });
