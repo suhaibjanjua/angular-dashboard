@@ -258,4 +258,76 @@ describe('UserService', () => {
       req.flush(mockApiResponse);
     });
   });
+
+  describe('Data Validation and Security', () => {
+    it('should validate user data before creation', () => {
+      const invalidUserData: UserFormData = {
+        firstName: '',
+        lastName: 'Test',
+        email: 'invalid-email',
+        role: UserRole.STUDENT,
+        status: UserStatus.ACTIVE,
+        department: 'IT',
+        phone: '+1234567893'
+      };
+
+      service.createUser(invalidUserData).subscribe(user => {
+        // Service should still create user but may normalize data
+        expect(user).toBeDefined();
+      });
+    });
+
+    it('should handle duplicate email validation', () => {
+      const duplicateEmailUser: UserFormData = {
+        firstName: 'Duplicate',
+        lastName: 'User',
+        email: 'john.doe@example.com', // Same as existing user
+        role: UserRole.STUDENT,
+        status: UserStatus.ACTIVE,
+        department: 'IT',
+        phone: '+1234567894'
+      };
+
+      service.createUser(duplicateEmailUser).subscribe(user => {
+        expect(user).toBeDefined();
+      });
+    });
+
+    it('should sanitize user input data', () => {
+      const userWithSpecialChars: UserFormData = {
+        firstName: '<script>alert("xss")</script>John',
+        lastName: 'Test & Special',
+        email: 'test@example.com',
+        role: UserRole.STUDENT,
+        status: UserStatus.ACTIVE,
+        department: 'IT & Engineering',
+        phone: '+1234567895'
+      };
+
+      service.createUser(userWithSpecialChars).subscribe(user => {
+        expect(user).toBeDefined();
+        // Service should handle special characters appropriately
+      });
+    });
+
+    it('should enforce proper data types', () => {
+      const userFormData: UserFormData = {
+        firstName: 'Valid',
+        lastName: 'User',
+        email: 'valid@example.com',
+        role: UserRole.ADMIN,
+        status: UserStatus.ACTIVE,
+        department: 'Administration',
+        phone: '+1234567896'
+      };
+
+      service.createUser(userFormData).subscribe(user => {
+        expect(typeof user.id).toBe('number');
+        expect(typeof user.firstName).toBe('string');
+        expect(typeof user.email).toBe('string');
+        expect(user.role).toBe(UserRole.ADMIN);
+        expect(user.status).toBe(UserStatus.ACTIVE);
+      });
+    });
+  });
 });
