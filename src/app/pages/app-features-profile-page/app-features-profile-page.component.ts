@@ -189,7 +189,11 @@ export class AppFeaturesProfilePageComponent implements OnInit, OnDestroy {
         link.download = `feature-configuration-${new Date().toISOString().split('T')[0]}.json`;
         document.body.appendChild(link);
         link.click();
-        document.body.removeChild(link);
+        
+        // Check if the element is still in the DOM before removing
+        if (link.parentNode === document.body) {
+          document.body.removeChild(link);
+        }
         window.URL.revokeObjectURL(url);
 
         this.snackBar.open('Configuration exported successfully', 'Close', {
