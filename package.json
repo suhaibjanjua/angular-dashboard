@@ -1,6 +1,6 @@
 {
   "name": "angular-dashboard",
-  "version": "3.0.0",
+  "version": "3.1.0",
   "description": "Modern Angular 19 dashboard application with comprehensive analytics, user management, and data visualization features. Built with Material Design, TypeScript, and Chart.js for enterprise-grade dashboard solutions.",
   "author": "Suhaib Janjua <suhaib.janjua@gmail.com>",
   "license": "MIT",
