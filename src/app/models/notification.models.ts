@@ -135,11 +135,31 @@ export const NotificationTypeLabels = {
   [NotificationType.ANNOUNCEMENT]: 'Announcement'
 } as const;
 
+export const NotificationTypeIcon = {
+  [NotificationType.SYSTEM]: 'settings',
+  [NotificationType.USER]: 'person',
+  [NotificationType.COURSE]: 'school',
+  [NotificationType.ASSIGNMENT]: 'assignment',
+  [NotificationType.MESSAGE]: 'mail',
+  [NotificationType.MEETING]: 'videocam',
+  [NotificationType.SECURITY]: 'security',
+  [NotificationType.UPDATE]: 'system_update',
+  [NotificationType.REMINDER]: 'schedule',
+  [NotificationType.ANNOUNCEMENT]: 'campaign'
+} as const;
+
 export const NotificationPriorityLabels = {
   [NotificationPriority.LOW]: 'Low',
   [NotificationPriority.MEDIUM]: 'Medium',
   [NotificationPriority.HIGH]: 'High',
   [NotificationPriority.URGENT]: 'Urgent'
+} as const;
+
+export const NotificationPriorityLabelIcons = {
+  [NotificationPriority.LOW]: 'low_priority',
+  [NotificationPriority.MEDIUM]: 'priority_high',
+  [NotificationPriority.HIGH]: 'priority_high',
+  [NotificationPriority.URGENT]: 'warning'
 } as const;
 
 export const NotificationPriorityColors = {
@@ -148,3 +168,18 @@ export const NotificationPriorityColors = {
   [NotificationPriority.HIGH]: '#f44336',
   [NotificationPriority.URGENT]: '#e91e63'
 } as const;
+
+export const NotificationPriorityClass = {
+  [NotificationPriority.LOW]: 'priority-low',
+  [NotificationPriority.MEDIUM]: 'priority-medium',
+  [NotificationPriority.HIGH]: 'priority-high',
+  [NotificationPriority.URGENT]: 'priority-urgent'
+} as const;
+
+export const NotificationPriorityIcon = {
+  [NotificationPriority.URGENT]: 'priority_high',
+  [NotificationPriority.HIGH]: 'error',
+  [NotificationPriority.MEDIUM]: 'warning',
+  [NotificationPriority.LOW]: 'info'
+} as const;
+

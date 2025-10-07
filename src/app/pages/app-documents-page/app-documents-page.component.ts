@@ -7,13 +7,14 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatCardModule } from '@angular/material/card';
-import { MatChipsModule } from '@angular/material/chips';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { Document, DocumentType, DocumentStatus } from '../../models';
 import { AppSearchBarComponent } from "../../molecules/app-search-bar/app-search-bar.component";
 import { Subject, debounceTime, distinctUntilChanged, takeUntil } from 'rxjs';
 import { ActionMenuItem } from '../../models/action.menu.model';
 import { AppActionMenuComponent } from '../../molecules/app-action-menu/app-action-menu.component';
+import { AppChipSetComponent } from '../../molecules/app-chip-set/app-chip-set.component';
+import { DocumentStatusClassPipe } from '../../pipes/document-status-class.pipe';
 
 @Component({
   selector: 'app-documents-page',
@@ -26,12 +27,13 @@ import { AppActionMenuComponent } from '../../molecules/app-action-menu/app-acti
     MatButtonModule,
     MatIconModule,
     MatCardModule,
-    MatChipsModule,
     AppSearchBarComponent,
     ReactiveFormsModule,
     AppActionMenuComponent,
     NgClass,
-    NgIf
+    NgIf,
+    AppChipSetComponent,
+    DocumentStatusClassPipe
 ],
   template: `
     <div class="page-container">
@@ -92,9 +94,7 @@ import { AppActionMenuComponent } from '../../molecules/app-action-menu/app-acti
               <ng-container matColumnDef="status">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header>Status</th>
                 <td mat-cell *matCellDef="let doc">
-                  <mat-chip-set>
-                    <mat-chip [ngClass]="getStatusClass(doc.status)">{{doc.status}}</mat-chip>
-                  </mat-chip-set>
+                  <app-app-chip-set [chipSet]="[{value: doc.status, bgClass: (doc.status | documentStatusClass)}]"></app-app-chip-set>
                 </td>
               </ng-container>
 
@@ -280,15 +280,6 @@ export class AppDocumentsPageComponent implements OnInit {
 
   getFileTypeClass(type: string): string {
     return `file-type-${type.toLowerCase()}`;
-  }
-
-  getStatusClass(status: string): string {
-    const statusClasses: { [key: string]: string } = {
-      'Published': 'status-published',
-      'Draft': 'status-draft',
-      'Archived': 'status-archived'
-    };
-    return statusClasses[status] || 'status-default';
   }
 
   formatFileSize(bytes: number): string {

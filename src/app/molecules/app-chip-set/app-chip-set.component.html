@@ -1,0 +1,6 @@
+<mat-chip-set id="app-chip-set">
+    <mat-chip *ngFor="let chip of chips()" [ngClass]="chip.bgClass">
+        <mat-icon *ngIf="chip.showIcon" matChipAvatar>{{ chip.icon }}</mat-icon>
+        {{ chip.value }}
+    </mat-chip>
+</mat-chip-set>

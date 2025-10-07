@@ -4,12 +4,12 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
-import { MatChipsModule } from '@angular/material/chips';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatMenuModule } from '@angular/material/menu';
 import { Report, ReportStatus, ReportType, ReportCategory, ExportFormat, ReportStatusColorMap, ReportTypeColorMap, ReportCategoryColorMap, ReportFormatIconMap } from '../../models';
 import { ActionMenuItem } from '../../models/action.menu.model';
 import { AppActionMenuComponent } from '../../molecules/app-action-menu/app-action-menu.component';
+import { AppChipSetComponent } from '../../molecules/app-chip-set/app-chip-set.component';
 
 @Component({
   selector: 'app-reports-page',
@@ -20,10 +20,10 @@ import { AppActionMenuComponent } from '../../molecules/app-action-menu/app-acti
     MatIconModule,
     MatTableModule,
     MatPaginatorModule,
-    MatChipsModule,
     MatTooltipModule,
     MatMenuModule,
-    AppActionMenuComponent
+    AppActionMenuComponent,
+    AppChipSetComponent
   ],
   template: `
     <div class="page-container">
@@ -71,9 +71,7 @@ import { AppActionMenuComponent } from '../../molecules/app-action-menu/app-acti
                   <div class="report-info">
                     <strong>{{report.title}}</strong>
                     <div class="report-type">
-                      <mat-chip [color]="getTypeColor(report.type)" selected size="small">
-                        {{report.type}}
-                      </mat-chip>
+                      <app-app-chip-set [chipSet]="[{value: report.type}]"></app-app-chip-set>
                     </div>
                   </div>
                 </td>
@@ -83,9 +81,7 @@ import { AppActionMenuComponent } from '../../molecules/app-action-menu/app-acti
               <ng-container matColumnDef="category">
                 <th mat-header-cell *matHeaderCellDef>Category</th>
                 <td mat-cell *matCellDef="let report">
-                  <mat-chip [color]="getCategoryColor(report.category)" selected size="small">
-                    {{report.category}}
-                  </mat-chip>
+                  <app-app-chip-set [chipSet]="[{value: report.category}]"></app-app-chip-set>
                 </td>
               </ng-container>
 
@@ -122,9 +118,7 @@ import { AppActionMenuComponent } from '../../molecules/app-action-menu/app-acti
               <ng-container matColumnDef="status">
                 <th mat-header-cell *matHeaderCellDef>Status</th>
                 <td mat-cell *matCellDef="let report">
-                  <mat-chip [color]="getStatusColor(report.status)" selected>
-                    {{report.status}}
-                  </mat-chip>
+                  <app-app-chip-set [chipSet]="[{value: report.status}]"></app-app-chip-set>
                 </td>
               </ng-container>
 

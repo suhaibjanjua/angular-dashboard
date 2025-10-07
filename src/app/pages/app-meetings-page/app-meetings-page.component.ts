@@ -4,12 +4,12 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
-import { MatChipsModule } from '@angular/material/chips';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatBadgeModule } from '@angular/material/badge';
 import { MeetingData, MeetingType, MeetingStatus } from '../../models';
 import { ActionMenuItem } from '../../models/action.menu.model';
 import { AppActionMenuComponent } from '../../molecules/app-action-menu/app-action-menu.component';
+import { AppChipSetComponent } from '../../molecules/app-chip-set/app-chip-set.component';
 
 @Component({
   selector: 'app-meetings-page',
@@ -20,10 +20,10 @@ import { AppActionMenuComponent } from '../../molecules/app-action-menu/app-acti
     MatIconModule,
     MatTableModule,
     MatPaginatorModule,
-    MatChipsModule,
     MatTooltipModule,
     MatBadgeModule,
-    AppActionMenuComponent
+    AppActionMenuComponent,
+    AppChipSetComponent
   ],
   template: `
     <div class="page-container">
@@ -53,9 +53,7 @@ import { AppActionMenuComponent } from '../../molecules/app-action-menu/app-acti
                   <div class="meeting-info">
                     <strong>{{meeting.title}}</strong>
                     <div class="meeting-type">
-                      <mat-chip [color]="getTypeColor(meeting.type)" selected size="small">
-                        {{meeting.type}}
-                      </mat-chip>
+                      <app-app-chip-set [chipSet]="[{value: meeting.type}]"></app-app-chip-set>
                     </div>
                   </div>
                 </td>
@@ -108,9 +106,7 @@ import { AppActionMenuComponent } from '../../molecules/app-action-menu/app-acti
               <ng-container matColumnDef="status">
                 <th mat-header-cell *matHeaderCellDef>Status</th>
                 <td mat-cell *matCellDef="let meeting">
-                  <mat-chip [color]="getStatusColor(meeting.status)" selected>
-                    {{meeting.status}}
-                  </mat-chip>
+                  <app-app-chip-set [chipSet]="[{value: meeting.status}]"></app-app-chip-set>
                 </td>
               </ng-container>
 

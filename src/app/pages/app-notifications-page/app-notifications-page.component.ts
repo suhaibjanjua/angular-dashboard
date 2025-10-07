@@ -1,9 +1,8 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { NgFor, NgIf, TitleCasePipe } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
-import { MatChipsModule } from '@angular/material/chips';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -26,17 +25,18 @@ import {
   NotificationPriorityColors 
 } from '../../models/notification.models';
 import { NotificationService } from '../../services/notification.service';
+import { NotificationPriorityMetaPipe } from '../../pipes/notification-priority-meta.pipe';
+import { AppChipSetComponent } from '../../molecules/app-chip-set/app-chip-set.component';
+import { NotificationTypeMetaPipe } from '../../pipes/notification-type-meta.pipe';
 
 @Component({
   selector: 'app-notifications-page',
   standalone: true,
   imports: [
-    CommonModule,
     FormsModule,
     MatCardModule,
     MatIconModule,
     MatButtonModule,
-    MatChipsModule,
     MatInputModule,
     MatSelectModule,
     MatFormFieldModule,
@@ -44,7 +44,13 @@ import { NotificationService } from '../../services/notification.service';
     MatProgressSpinnerModule,
     MatTooltipModule,
     MatDividerModule,
-    AppHeaderTitleComponent
+    AppHeaderTitleComponent,
+    NotificationPriorityMetaPipe,
+    AppChipSetComponent,
+    NotificationTypeMetaPipe,
+    TitleCasePipe,
+    NgIf,
+    NgFor
   ],
   templateUrl: './app-notifications-page.component.html',
   styleUrls: ['./app-notifications-page.component.scss']
@@ -224,44 +230,6 @@ export class AppNotificationsPageComponent implements OnInit, OnDestroy {
 
   private resetPagination(): void {
     this.pageIndex = 0;
-  }
-
-  // Helper methods for template
-  getNotificationIcon(notification: Notification): string {
-    return notification.icon || this.getTypeIcon(notification.type);
-  }
-
-  getNotificationColor(notification: Notification | { type: NotificationType, priority: NotificationPriority }): string {
-    if ('iconColor' in notification) {
-      return notification.iconColor || NotificationPriorityColors[notification.priority];
-    }
-    return NotificationPriorityColors[notification.priority];
-  }
-
-  getTypeIcon(type: NotificationType): string {
-    const iconMap: { [key in NotificationType]: string } = {
-      [NotificationType.SYSTEM]: 'settings',
-      [NotificationType.USER]: 'person',
-      [NotificationType.COURSE]: 'school',
-      [NotificationType.ASSIGNMENT]: 'assignment',
-      [NotificationType.MESSAGE]: 'mail',
-      [NotificationType.MEETING]: 'videocam',
-      [NotificationType.SECURITY]: 'security',
-      [NotificationType.UPDATE]: 'system_update',
-      [NotificationType.REMINDER]: 'schedule',
-      [NotificationType.ANNOUNCEMENT]: 'campaign'
-    };
-    return iconMap[type] || 'notifications';
-  }
-
-  getPriorityIcon(priority: NotificationPriority): string {
-    const iconMap: { [key in NotificationPriority]: string } = {
-      [NotificationPriority.LOW]: 'low_priority',
-      [NotificationPriority.MEDIUM]: 'priority_high',
-      [NotificationPriority.HIGH]: 'priority_high',
-      [NotificationPriority.URGENT]: 'warning'
-    };
-    return iconMap[priority];
   }
 
   getTypeLabel(type: NotificationType): string {

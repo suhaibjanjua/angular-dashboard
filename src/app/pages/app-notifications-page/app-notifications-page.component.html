@@ -1,5 +1,4 @@
-<app-header-title 
-  title="Notifications" 
+<app-header-title title="Notifications"
   subtitle="Manage your notifications and stay updated with the latest activities">
 </app-header-title>
 
@@ -12,23 +11,16 @@
         Filter Notifications
       </mat-card-title>
     </mat-card-header>
-    
+
     <mat-card-content>
       <div class="filters-grid">
         <!-- Search -->
         <mat-form-field appearance="outline" class="search-field">
           <mat-label>Search notifications...</mat-label>
           <mat-icon matPrefix>search</mat-icon>
-          <input 
-            matInput 
-            [value]="searchQuery"
-            (input)="onSearchInput($event)"
+          <input matInput [value]="searchQuery" (input)="onSearchInput($event)"
             placeholder="Search by title, message, or user">
-          <button 
-            *ngIf="searchQuery" 
-            matSuffix 
-            mat-icon-button 
-            (click)="onSearchChange('')">
+          <button *ngIf="searchQuery" matSuffix mat-icon-button (click)="onSearchChange('')">
             <mat-icon>clear</mat-icon>
           </button>
         </mat-form-field>
@@ -36,17 +28,12 @@
         <!-- Type Filter -->
         <mat-form-field appearance="outline">
           <mat-label>Notification Types</mat-label>
-          <mat-select 
-            multiple 
-            [value]="selectedTypes" 
-            (selectionChange)="onTypeFilterChange($event.value)">
-            <mat-option 
-              *ngFor="let type of Object.values(NotificationType)" 
-              [value]="type">
-              <mat-icon [style.color]="getNotificationColor({type: type, priority: NotificationPriority.MEDIUM})">
-                {{ getTypeIcon(type) }}
+          <mat-select multiple [value]="selectedTypes" (selectionChange)="onTypeFilterChange($event.value)">
+            <mat-option *ngFor="let type of Object.values(NotificationType)" [value]="type">
+              <mat-icon [style.color]="(NotificationPriority.MEDIUM | notificationPriorityMeta).color">
+                {{ (type | notificationTypeMeta).icon }}
               </mat-icon>
-              {{ getTypeLabel(type) }}
+              {{ (type | notificationTypeMeta).label }}
             </mat-option>
           </mat-select>
         </mat-form-field>
@@ -54,17 +41,12 @@
         <!-- Priority Filter -->
         <mat-form-field appearance="outline">
           <mat-label>Priority</mat-label>
-          <mat-select 
-            multiple 
-            [value]="selectedPriorities" 
-            (selectionChange)="onPriorityFilterChange($event.value)">
-            <mat-option 
-              *ngFor="let priority of Object.values(NotificationPriority)" 
-              [value]="priority">
-              <mat-icon [style.color]="getPriorityColor(priority)">
-                {{ getPriorityIcon(priority) }}
+          <mat-select multiple [value]="selectedPriorities" (selectionChange)="onPriorityFilterChange($event.value)">
+            <mat-option *ngFor="let priority of Object.values(NotificationPriority)" [value]="priority">
+              <mat-icon [style.color]="(priority | notificationPriorityMeta).color">
+                {{ (priority | notificationPriorityMeta).labelIcon}}
               </mat-icon>
-              {{ getPriorityLabel(priority) }}
+              {{ (priority | notificationPriorityMeta).label}}
             </mat-option>
           </mat-select>
         </mat-form-field>
@@ -72,10 +54,7 @@
         <!-- Status Filter -->
         <mat-form-field appearance="outline">
           <mat-label>Status</mat-label>
-          <mat-select 
-            multiple 
-            [value]="selectedStatuses" 
-            (selectionChange)="onStatusFilterChange($event.value)">
+          <mat-select multiple [value]="selectedStatuses" (selectionChange)="onStatusFilterChange($event.value)">
             <mat-option value="unread">
               <mat-icon style="color: #6c4bb6;">fiber_manual_record</mat-icon>
               Unread
@@ -94,21 +73,15 @@
 
       <!-- Filter Actions -->
       <div class="filter-actions">
-        <button 
-          mat-button 
-          (click)="clearFilters()"
+        <button mat-button (click)="clearFilters()"
           [disabled]="!searchQuery && selectedTypes.length === 0 && selectedPriorities.length === 0 && selectedStatuses.length === 0">
           <mat-icon>clear_all</mat-icon>
           Clear Filters
         </button>
-        
+
         <div class="spacer"></div>
-        
-        <button 
-          mat-raised-button 
-          color="primary" 
-          (click)="markAllAsRead()"
-          [disabled]="loading">
+
+        <button mat-raised-button color="primary" (click)="markAllAsRead()" [disabled]="loading">
           <mat-icon>done_all</mat-icon>
           Mark All Read
         </button>
@@ -144,13 +117,16 @@
         <div class="no-results-content">
           <mat-icon>notifications_none</mat-icon>
           <h3>No notifications found</h3>
-          <p *ngIf="searchQuery || selectedTypes.length > 0 || selectedPriorities.length > 0 || selectedStatuses.length > 0">
+          <p
+            *ngIf="searchQuery || selectedTypes.length > 0 || selectedPriorities.length > 0 || selectedStatuses.length > 0">
             Try adjusting your filters to see more results.
           </p>
-          <p *ngIf="!searchQuery && selectedTypes.length === 0 && selectedPriorities.length === 0 && selectedStatuses.length === 0">
+          <p
+            *ngIf="!searchQuery && selectedTypes.length === 0 && selectedPriorities.length === 0 && selectedStatuses.length === 0">
             You don't have any notifications yet.
           </p>
-          <button mat-button (click)="clearFilters()" *ngIf="searchQuery || selectedTypes.length > 0 || selectedPriorities.length > 0 || selectedStatuses.length > 0">
+          <button mat-button (click)="clearFilters()"
+            *ngIf="searchQuery || selectedTypes.length > 0 || selectedPriorities.length > 0 || selectedStatuses.length > 0">
             <mat-icon>refresh</mat-icon>
             Clear Filters
           </button>
@@ -159,19 +135,17 @@
     </mat-card>
 
     <!-- Notification Items -->
-    <mat-card 
-      *ngFor="let notification of paginatedNotifications; trackBy: trackByNotificationId"
-      class="notification-card"
-      [class.unread]="notification.status === NotificationStatus.UNREAD"
+    <mat-card *ngFor="let notification of paginatedNotifications; trackBy: trackByNotificationId"
+      class="notification-card" [class.unread]="notification.status === NotificationStatus.UNREAD"
       [class.high-priority]="notification.priority === NotificationPriority.HIGH || notification.priority === NotificationPriority.URGENT"
       (click)="onNotificationClick(notification)">
-      
+
       <mat-card-content>
         <div class="notification-content">
           <!-- Icon -->
           <div class="notification-icon">
-            <mat-icon [style.color]="getNotificationColor(notification)">
-              {{ getNotificationIcon(notification) }}
+            <mat-icon [style.color]="notification.iconColor || (notification.priority| notificationPriorityMeta).color">
+              {{ notification.icon ||(notification.type | notificationTypeMeta).icon }}
             </mat-icon>
           </div>
 
@@ -181,14 +155,9 @@
               <h3 class="notification-title">{{ notification.title }}</h3>
               <div class="notification-meta">
                 <span class="notification-time">{{ formatTimestamp(notification.timestamp) }}</span>
-                <mat-chip 
-                  class="priority-chip"
-                  [style.background-color]="getPriorityColor(notification.priority)"
-                  [style.color]="'white'"
-                  *ngIf="notification.priority === NotificationPriority.HIGH || notification.priority === NotificationPriority.URGENT">
-                  <mat-icon matChipAvatar>{{ getPriorityIcon(notification.priority) }}</mat-icon>
-                  {{ getPriorityLabel(notification.priority) }}
-                </mat-chip>
+                <app-app-chip-set
+                  *ngIf="notification.priority === NotificationPriority.HIGH || notification.priority === NotificationPriority.URGENT"
+                  [chipSet]="[{value: (notification.priority | titlecase), bgClass: (notification.priority | notificationPriorityMeta).class, icon: (notification.priority | notificationPriorityMeta).icon, showIcon: true}]"></app-app-chip-set>
               </div>
             </div>
 
@@ -207,48 +176,28 @@
 
             <!-- Type and Status Indicators -->
             <div class="notification-indicators">
-              <mat-chip class="type-chip">
-                <mat-icon matChipAvatar>{{ getTypeIcon(notification.type) }}</mat-icon>
-                {{ getTypeLabel(notification.type) }}
-              </mat-chip>
-              
-              <mat-chip 
-                class="status-chip"
-                [class.status-unread]="notification.status === NotificationStatus.UNREAD"
-                [class.status-read]="notification.status === NotificationStatus.READ"
-                [class.status-archived]="notification.status === NotificationStatus.ARCHIVED">
-                <mat-icon matChipAvatar *ngIf="notification.status === NotificationStatus.UNREAD">fiber_manual_record</mat-icon>
-                <mat-icon matChipAvatar *ngIf="notification.status === NotificationStatus.READ">check_circle</mat-icon>
-                <mat-icon matChipAvatar *ngIf="notification.status === NotificationStatus.ARCHIVED">archive</mat-icon>
-                {{ notification.status | titlecase }}
-              </mat-chip>
+              <app-app-chip-set
+                [chipSet]="[{value: (notification.type | notificationTypeMeta).label, icon: (notification.type | notificationTypeMeta).icon, showIcon: true, bgClass: 'notification-type-chip'}]"></app-app-chip-set>
+            
+              <app-app-chip-set
+                [chipSet]="[{value: (notification.status | titlecase), icon: (notification.status === NotificationStatus.UNREAD ? 'fiber_manual_record' : (notification.status === NotificationStatus.READ ? 'check_circle' : 'archive')), showIcon: true, bgClass: (notification.status === NotificationStatus.UNREAD ? 'status-unread' : (notification.status === NotificationStatus.READ ? 'status-read' : 'status-archived'))}]"></app-app-chip-set>
             </div>
           </div>
 
           <!-- Actions -->
           <div class="notification-actions">
-            <button 
-              *ngIf="notification.status === NotificationStatus.UNREAD"
-              mat-icon-button 
-              matTooltip="Mark as read"
-              (click)="markAsRead(notification, $event)"
-              class="action-button read-button">
+            <button *ngIf="notification.status === NotificationStatus.UNREAD" mat-icon-button matTooltip="Mark as read"
+              (click)="markAsRead(notification, $event)" class="action-button read-button">
               <mat-icon>done</mat-icon>
             </button>
-            
-            <button 
-              *ngIf="notification.status !== NotificationStatus.ARCHIVED"
-              mat-icon-button 
-              matTooltip="Archive notification"
-              (click)="archiveNotification(notification, $event)"
+
+            <button *ngIf="notification.status !== NotificationStatus.ARCHIVED" mat-icon-button
+              matTooltip="Archive notification" (click)="archiveNotification(notification, $event)"
               class="action-button archive-button">
               <mat-icon>archive</mat-icon>
             </button>
-            
-            <button 
-              mat-icon-button 
-              matTooltip="Delete notification"
-              (click)="deleteNotification(notification, $event)"
+
+            <button mat-icon-button matTooltip="Delete notification" (click)="deleteNotification(notification, $event)"
               class="action-button delete-button">
               <mat-icon>delete</mat-icon>
             </button>
@@ -259,14 +208,8 @@
   </div>
 
   <!-- Pagination -->
-  <mat-paginator
-    *ngIf="!loading && totalCount > 0"
-    [length]="totalCount"
-    [pageSize]="pageSize"
-    [pageIndex]="pageIndex"
-    [pageSizeOptions]="pageSizeOptions"
-    [showFirstLastButtons]="true"
-    (page)="onPageChange($event)"
+  <mat-paginator *ngIf="!loading && totalCount > 0" [length]="totalCount" [pageSize]="pageSize" [pageIndex]="pageIndex"
+    [pageSizeOptions]="pageSizeOptions" [showFirstLastButtons]="true" (page)="onPageChange($event)"
     class="notifications-paginator">
   </mat-paginator>
 </div>
