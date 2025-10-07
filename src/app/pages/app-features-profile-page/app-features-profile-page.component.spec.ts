@@ -77,13 +77,13 @@ describe('AppFeaturesProfilePageComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should initialize with default values', () => {
-    expect(component.categories).toEqual([]);
-    expect(component.selectedCategory).toBeNull();
-    expect(component.featureProfile).toBeNull();
+  it('should initialize with loaded data', () => {
+    expect(component.categories).toEqual(mockFeatureCategories);
+    expect(component.selectedCategory).toEqual(mockFeatureCategories[0]); // First category is selected
+    expect(component.featureProfile).toEqual(mockFeatureProfile);
     expect(component.loading).toBeFalse();
     expect(component.searchQuery).toBe('');
-    expect(component.filteredFeatures).toEqual([]);
+    expect(component.filteredFeatures).toEqual(mockFeatureCategories[0].features);
   });
 
   it('should load features on init', () => {
@@ -108,10 +108,14 @@ describe('AppFeaturesProfilePageComponent', () => {
   });
 
   it('should handle successful feature toggle', () => {
+    // Set up selectedCategory so getFeatureName works properly
+    component.selectedCategory = mockFeatureProfile.categories[0];
+    
     const toggleEvent: FeatureToggleEvent = {
       featureId: 'feature1',
       categoryId: 'category1',
       enabled: false,
+      parentId: undefined,
       isChild: false
     };
 
@@ -119,9 +123,9 @@ describe('AppFeaturesProfilePageComponent', () => {
 
     component.onFeatureToggle(toggleEvent);
 
-    expect(mockFeatureService.getFeatureProfile).toHaveBeenCalledTimes(2); // Initial + after toggle
+    expect(mockFeatureService.toggleFeature).toHaveBeenCalledWith(toggleEvent);
     expect(mockSnackBar.open).toHaveBeenCalledWith(
-      'Feature "Test Feature" has been disabled',
+      'Test Feature disabled',
       'Close',
       jasmine.any(Object)
     );

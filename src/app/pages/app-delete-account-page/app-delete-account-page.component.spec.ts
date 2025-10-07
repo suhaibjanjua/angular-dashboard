@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { of } from 'rxjs';
 import { AppDeleteAccountPageComponent, AppDeleteAccountConfirmationDialogComponent } from './app-delete-account-page.component';
 
@@ -18,7 +18,7 @@ describe('AppDeleteAccountPageComponent', () => {
     dialogSpy.open.and.returnValue(mockDialogRef);
 
     await TestBed.configureTestingModule({
-      imports: [AppDeleteAccountPageComponent, NoopAnimationsModule],
+      imports: [AppDeleteAccountPageComponent, NoopAnimationsModule, MatDialogModule],
       providers: [
         { provide: MatDialog, useValue: dialogSpy }
       ]

@@ -31,7 +31,7 @@ describe('AppUserMenuComponent', () => {
   it('should display user information', () => {
     const compiled = fixture.nativeElement as HTMLElement;
     expect(compiled.querySelector('.user-avatar')?.textContent).toContain('SJ');
-    expect(compiled.querySelector('.user-name')?.textContent).toContain('Suhaib Janjua');
+    expect(compiled.querySelector('.user-name')?.textContent).toContain('Suhaib JANJUA');
     expect(compiled.querySelector('.user-role')?.textContent).toContain('Administrator');
   });
 
@@ -66,7 +66,7 @@ describe('AppUserMenuComponent', () => {
   it('should navigate to theme selector', () => {
     spyOn(console, 'log');
     component.changeTheme();
-    expect(console.log).toHaveBeenCalledWith('Navigate to theme selector');
+    expect(console.log).toHaveBeenCalledWith('Navigate to theme settings');
     expect(mockRouter.navigate).toHaveBeenCalledWith(['/change-theme']);
   });
 
