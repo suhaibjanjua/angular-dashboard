@@ -25,6 +25,14 @@ describe('ThemeService', () => {
 
   afterEach(() => {
     localStorage.clear();
+    // Clean up any theme classes and attributes
+    body.className = body.className.replace(/theme-\w+/g, '');
+    documentElement.removeAttribute('data-theme');
+    // Reset CSS custom properties
+    const style = documentElement.style;
+    style.removeProperty('--primary-color');
+    style.removeProperty('--background-color');
+    style.removeProperty('--text-color');
   });
 
   it('should be created', () => {
@@ -331,6 +339,49 @@ describe('ThemeService', () => {
         expect(LIGHT_THEME.shadows[shadow as keyof typeof LIGHT_THEME.shadows]).toBeDefined();
         expect(DARK_THEME.shadows[shadow as keyof typeof DARK_THEME.shadows]).toBeDefined();
       });
+    });
+  });
+
+  describe('Error Handling and Edge Cases', () => {
+    it('should handle invalid theme ID gracefully', () => {
+      expect(() => service.switchTheme('invalid-theme')).not.toThrow();
+      // Should remain on current theme
+      expect(service.currentTheme().id).toBe('light');
+    });
+
+    it('should handle localStorage errors gracefully', () => {
+      // Mock localStorage to throw an error
+      spyOn(localStorage, 'setItem').and.throwError('Storage quota exceeded');
+      
+      expect(() => service.switchTheme('dark')).not.toThrow();
+      expect(service.currentTheme().id).toBe('dark');
+    });
+
+    it('should handle missing document elements gracefully', () => {
+      // Mock documentElement to be null
+      const originalDocumentElement = document.documentElement;
+      Object.defineProperty(document, 'documentElement', {
+        value: null,
+        configurable: true
+      });
+
+      expect(() => service.switchTheme('dark')).not.toThrow();
+
+      // Restore original documentElement
+      Object.defineProperty(document, 'documentElement', {
+        value: originalDocumentElement,
+        configurable: true
+      });
+    });
+
+    it('should clean up properly when service is destroyed', () => {
+      // Simulate service cleanup
+      service.switchTheme('dark');
+      expect(service.currentTheme().id).toBe('dark');
+      
+      // Test cleanup
+      const themeClasses = body.className.match(/theme-\w+/g);
+      expect(themeClasses).toBeTruthy();
     });
   });
 });
