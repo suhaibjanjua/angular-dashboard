@@ -1,0 +1,12 @@
+<button [matMenuTriggerFor]="hasMenu ? menuId : null" class="user-button">
+    <div class="user-info">
+        <div [class]="avatarSize">
+            <app-user-avatar [src]="avatar" [fullName]="fullName" />
+        </div>
+        <div class="user-details">
+            <span class="user-name">{{ fullName }}</span>
+            <span class="user-role">{{ roleOrEmail }}</span>
+        </div>
+        <mat-icon class="dropdown-icon" *ngIf="hasMenu">keyboard_arrow_down</mat-icon>
+    </div>
+</button>

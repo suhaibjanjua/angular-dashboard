@@ -1,31 +1,19 @@
 import { Component, inject } from '@angular/core';
 import { MatMenuModule } from '@angular/material/menu';
-import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDividerModule } from '@angular/material/divider';
 import { Router } from '@angular/router';
 import { LoggedInUserService } from '../../services/logged-in-user.service';
-import { AppUserAvatarComponent } from '../../atoms/app-user-avatar/app-user-avatar.component';
 import { AppThemeSwitcherComponent } from '../../atoms/app-theme-switcher/app-theme-switcher.component';
+import { AppUserInfoCardComponent } from '../app-user-info-card/app-user-info-card.component';
 
 @Component({
   selector: 'app-user-menu',
   standalone: true,
-  imports: [MatMenuModule, MatButtonModule, MatIconModule, MatDividerModule, AppUserAvatarComponent, AppThemeSwitcherComponent],
+  imports: [MatMenuModule, MatIconModule, MatDividerModule, AppThemeSwitcherComponent, AppUserInfoCardComponent],
   template: `
     <div class="user-menu">
-      <button mat-button [matMenuTriggerFor]="userMenu" class="user-button">
-        <div class="user-info">
-          <div class="user-avatar">
-            <app-user-avatar [src]="loggedInUserService.image()" [fullName]="loggedInUserService.fullName()" />
-          </div>
-          <div class="user-details">
-            <span class="user-name">{{loggedInUserService.fullName()}}</span>
-            <span class="user-role">Administrator</span>
-          </div>
-          <mat-icon class="dropdown-icon">keyboard_arrow_down</mat-icon>
-        </div>
-      </button>
+      <app-app-user-info-card [fullName]="loggedInUserService.fullName()" [avatar]="loggedInUserService.image()" [roleOrEmail]="'Administrator'" [menuId]="userMenu" />
       
       <mat-menu #userMenu="matMenu" class="user-dropdown">
         <button mat-menu-item (click)="navigateToProfile()">
@@ -55,7 +43,8 @@ import { AppThemeSwitcherComponent } from '../../atoms/app-theme-switcher/app-th
           <span>Theme Settings</span>
         </button>
         
-        <mat-divider></mat-divider>        <button mat-menu-item (click)="deleteAccount()" class="danger-item">
+        <mat-divider></mat-divider>        
+        <button mat-menu-item (click)="deleteAccount()" class="danger-item">
           <mat-icon>delete_forever</mat-icon>
           <span>Delete Your Account</span>
         </button>

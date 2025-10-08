@@ -120,33 +120,6 @@
       }
     }
     
-    .user-info {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      
-      .user-avatar {
-        width: 40px;
-        height: 40px;
-        font-size: 14px;
-      }
-      
-      .user-details {
-        .user-name {
-          font-weight: 600;
-          color: var(--color-text);
-          font-size: 14px;
-          line-height: 1.2;
-        }
-        
-        .user-email {
-          color: var(--color-text-secondary);
-          font-size: 12px;
-          line-height: 1.2;
-        }
-      }
-    }
-    
     .action-buttons {
       display: flex;
       align-items: center;

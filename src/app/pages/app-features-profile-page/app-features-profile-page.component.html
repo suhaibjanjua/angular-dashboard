@@ -35,18 +35,11 @@
     <mat-card class="stat-card actions">
       <mat-card-content>
         <div class="action-buttons">
-          <button 
-            mat-raised-button 
-            color="primary" 
-            (click)="onExportConfiguration()"
-            matTooltip="Export current feature configuration">
+          <button mat-stroked-button (click)="onExportConfiguration()" matTooltip="Export current feature configuration">
             <mat-icon>file_download</mat-icon>
             Export
           </button>
-          <button 
-            mat-raised-button 
-            (click)="onImportConfiguration()"
-            matTooltip="Import feature configuration from file">
+          <button mat-stroked-button (click)="onImportConfiguration()" matTooltip="Import feature configuration from file">
             <mat-icon>file_upload</mat-icon>
             Import
           </button>

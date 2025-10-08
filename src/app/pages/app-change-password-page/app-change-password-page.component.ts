@@ -102,18 +102,14 @@ import { FormsModule, ReactiveFormsModule, FormBuilder, FormGroup, Validators } 
             </form>
           </mat-card-content>
           <mat-card-actions align="end">
-            <button mat-button color="accent" (click)="cancel()">
+            <button mat-stroked-button (click)="cancel()">
               <mat-icon>cancel</mat-icon>
               Cancel
             </button>
-            <button 
-              mat-raised-button 
-              color="primary" 
-              [disabled]="passwordForm.invalid"
-              (click)="changePassword()">
-              <mat-icon>save</mat-icon>
-              Update Password
-            </button>
+            <button mat-flat-button color="primary" (click)="changePassword()">
+                <mat-icon>save</mat-icon>
+                Update Password
+              </button>
           </mat-card-actions>
         </mat-card>
 

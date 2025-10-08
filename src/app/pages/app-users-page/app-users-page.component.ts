@@ -10,13 +10,13 @@ import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { User, UserStatus, UserRole } from '../../models';
 import { AppSearchBarComponent } from '../../molecules/app-search-bar/app-search-bar.component';
 import { debounceTime, distinctUntilChanged, Subject, takeUntil } from 'rxjs';
-import { AppUserAvatarComponent } from '../../atoms/app-user-avatar/app-user-avatar.component';
 import { ActionMenuItem } from '../../models/action.menu.model';
 import { AppActionMenuComponent } from '../../molecules/app-action-menu/app-action-menu.component';
 import { NgIf } from '@angular/common';
 import { AppChipSetComponent } from '../../molecules/app-chip-set/app-chip-set.component';
 import { UserStatusMetaPipe } from '../../pipes/user-status-meta.pipe';
 import { UserRoleClassPipe } from '../../pipes/user-role-class.pipe';
+import { AppUserInfoCardComponent } from '../../molecules/app-user-info-card/app-user-info-card.component';
 
 @Component({
   selector: 'app-users-page',
@@ -31,12 +31,12 @@ import { UserRoleClassPipe } from '../../pipes/user-role-class.pipe';
     MatCardModule,
     AppSearchBarComponent,
     ReactiveFormsModule,
-    AppUserAvatarComponent,
     AppActionMenuComponent,
     NgIf,
     AppChipSetComponent,
     UserStatusMetaPipe,
-    UserRoleClassPipe
+    UserRoleClassPipe,
+    AppUserInfoCardComponent
   ],
   template: `
     <div class="page-container">
@@ -77,15 +77,7 @@ import { UserRoleClassPipe } from '../../pipes/user-role-class.pipe';
               <ng-container matColumnDef="name">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header>Name</th>
                 <td mat-cell *matCellDef="let user">
-                  <div class="user-info">
-                    <div class="user-avatar">
-                      <app-user-avatar [src]="user.avatar" [fullName]="user.firstName + ' ' + user.lastName" />
-                    </div>
-                    <div class="user-details">
-                      <div class="user-name">{{user.firstName}} {{user.lastName}}</div>
-                      <div class="user-email">{{user.email}}</div>
-                    </div>
-                  </div>
+                  <app-app-user-info-card [fullName]="user.firstName + ' ' + user.lastName" [avatar]="user.avatar" [roleOrEmail]="user.email" [avatarSize]="'user-avatar-40'" />
                 </td>
               </ng-container>
 
