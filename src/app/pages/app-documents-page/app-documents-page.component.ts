@@ -15,6 +15,7 @@ import { ActionMenuItem } from '../../models/action.menu.model';
 import { AppActionMenuComponent } from '../../molecules/app-action-menu/app-action-menu.component';
 import { AppChipSetComponent } from '../../molecules/app-chip-set/app-chip-set.component';
 import { DocumentStatusClassPipe } from '../../pipes/document-status-class.pipe';
+import { AppPageHeaderCardComponent } from '../../molecules/app-page-header-card/app-page-header-card.component';
 
 @Component({
   selector: 'app-documents-page',
@@ -33,14 +34,12 @@ import { DocumentStatusClassPipe } from '../../pipes/document-status-class.pipe'
     NgClass,
     NgIf,
     AppChipSetComponent,
-    DocumentStatusClassPipe
+    DocumentStatusClassPipe,
+    AppPageHeaderCardComponent
 ],
   template: `
     <div class="page-container">
-      <div class="page-header">
-        <h1 class="page-title">Documents</h1>
-        <p class="page-subtitle">Manage course materials and learning resources</p>
-      </div>
+      <app-page-header-card [title]="'Documents'" [subtitle]="'Manage course materials and learning resources'"></app-page-header-card>
 
       <mat-card class="content-card">
         <mat-card-header>
