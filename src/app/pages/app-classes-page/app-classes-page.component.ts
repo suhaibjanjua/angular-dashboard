@@ -9,6 +9,7 @@ import { ClassData, ClassStatus, ClassStatusColorMap } from '../../models';
 import { ActionMenuItem } from '../../models/action.menu.model';
 import { AppActionMenuComponent } from '../../molecules/app-action-menu/app-action-menu.component';
 import { AppChipSetComponent } from '../../molecules/app-chip-set/app-chip-set.component';
+import { AppPageHeaderCardComponent } from '../../molecules/app-page-header-card/app-page-header-card.component';
 
 @Component({
   selector: 'app-classes-page',
@@ -21,24 +22,19 @@ import { AppChipSetComponent } from '../../molecules/app-chip-set/app-chip-set.c
     MatPaginatorModule,
     MatTooltipModule,
     AppActionMenuComponent,
-    AppChipSetComponent
+    AppChipSetComponent,
+    AppPageHeaderCardComponent
   ],
   template: `
     <div class="page-container">
-      <div class="page-header">
-        <div class="header-content">
-          <div>
-            <h1 class="page-title">Classes</h1>
-            <p class="page-subtitle">Manage class schedules and sessions</p>
-          </div>
-          <div class="header-actions">
-            <button mat-flat-button color="primary">
-              <mat-icon>add</mat-icon>
-              Schedule Class
-            </button>
-          </div>
+      <app-page-header-card [title]="'Classes'" [subtitle]="'Manage class schedules and sessions'" [hasActions]="true">
+        <div header-actions>
+          <button mat-flat-button color="primary">
+            <mat-icon>add</mat-icon>
+            Schedule Class
+          </button>
         </div>
-      </div>
+      </app-page-header-card>
 
       <mat-card class="content-card">
         <mat-card-content>
