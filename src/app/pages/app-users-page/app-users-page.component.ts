@@ -77,7 +77,7 @@ import { AppUserInfoCardComponent } from '../../molecules/app-user-info-card/app
               <ng-container matColumnDef="name">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header>Name</th>
                 <td mat-cell *matCellDef="let user">
-                  <app-app-user-info-card [fullName]="user.firstName + ' ' + user.lastName" [avatar]="user.avatar" [roleOrEmail]="user.email" [avatarSize]="'user-avatar-40'" />
+                  <app-user-info-card [fullName]="user.firstName + ' ' + user.lastName" [avatar]="user.avatar" [roleOrEmail]="user.email" [avatarSize]="'user-avatar-40'" />
                 </td>
               </ng-container>
 

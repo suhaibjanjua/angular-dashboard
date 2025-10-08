@@ -13,7 +13,7 @@ import { AppUserInfoCardComponent } from '../app-user-info-card/app-user-info-ca
   imports: [MatMenuModule, MatIconModule, MatDividerModule, AppThemeSwitcherComponent, AppUserInfoCardComponent],
   template: `
     <div class="user-menu">
-      <app-app-user-info-card [fullName]="loggedInUserService.fullName()" [avatar]="loggedInUserService.image()" [roleOrEmail]="'Administrator'" [menuId]="userMenu" />
+      <app-user-info-card [fullName]="loggedInUserService.fullName()" [avatar]="loggedInUserService.image()" [roleOrEmail]="'Administrator'" [menuId]="userMenu" />
       
       <mat-menu #userMenu="matMenu" class="user-dropdown">
         <button mat-menu-item (click)="navigateToProfile()">
