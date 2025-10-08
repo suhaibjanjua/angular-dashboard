@@ -10,6 +10,7 @@ import { Report, ReportStatus, ReportType, ReportCategory, ExportFormat, ReportS
 import { ActionMenuItem } from '../../models/action.menu.model';
 import { AppActionMenuComponent } from '../../molecules/app-action-menu/app-action-menu.component';
 import { AppChipSetComponent } from '../../molecules/app-chip-set/app-chip-set.component';
+import { AppPageHeaderCardComponent } from '../../molecules/app-page-header-card/app-page-header-card.component';
 
 @Component({
   selector: 'app-reports-page',
@@ -23,42 +24,37 @@ import { AppChipSetComponent } from '../../molecules/app-chip-set/app-chip-set.c
     MatTooltipModule,
     MatMenuModule,
     AppActionMenuComponent,
-    AppChipSetComponent
+    AppChipSetComponent,
+    AppPageHeaderCardComponent
   ],
   template: `
     <div class="page-container">
-      <div class="page-header">
-        <div class="header-content">
-          <div>
-            <h1 class="page-title">Reports</h1>
-            <p class="page-subtitle">Generate and manage system reports</p>
-          </div>
-          <div class="header-actions">
-            <button mat-flat-button color="primary" [matMenuTriggerFor]="newReportMenu">
-              <mat-icon>add</mat-icon>
-              Generate Report
+      <app-page-header-card [title]="'Reports'" [subtitle]="'Generate and manage system reports'" [hasActions]="true">
+        <div header-actions>
+          <button mat-flat-button color="primary" [matMenuTriggerFor]="newReportMenu">
+            <mat-icon>add</mat-icon>
+            Generate Report
+          </button>
+          <mat-menu #newReportMenu="matMenu" class="reports-dropdown">
+            <button mat-menu-item>
+              <mat-icon>school</mat-icon>
+              <span>Academic Report</span>
             </button>
-            <mat-menu #newReportMenu="matMenu" class="reports-dropdown">
-              <button mat-menu-item>
-                <mat-icon>school</mat-icon>
-                <span>Academic Report</span>
-              </button>
-              <button mat-menu-item>
-                <mat-icon>event_available</mat-icon>
-                <span>Attendance Report</span>
-              </button>
-              <button mat-menu-item>
-                <mat-icon>assessment</mat-icon>
-                <span>Performance Report</span>
-              </button>
-              <button mat-menu-item>
-                <mat-icon>analytics</mat-icon>
-                <span>Analytics Report</span>
-              </button>
-            </mat-menu>
-          </div>
+            <button mat-menu-item>
+              <mat-icon>event_available</mat-icon>
+              <span>Attendance Report</span>
+            </button>
+            <button mat-menu-item>
+              <mat-icon>assessment</mat-icon>
+              <span>Performance Report</span>
+            </button>
+            <button mat-menu-item>
+              <mat-icon>analytics</mat-icon>
+              <span>Analytics Report</span>
+            </button>
+          </mat-menu>
         </div>
-      </div>
+      </app-page-header-card>
 
       <mat-card class="content-card">
         <mat-card-content>
