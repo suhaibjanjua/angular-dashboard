@@ -2,7 +2,7 @@ import { NgIf } from '@angular/common';
 import { Component, Input } from '@angular/core';
 
 @Component({
-  selector: 'app-app-page-header-card',
+  selector: 'app-page-header-card',
   imports: [NgIf],
   templateUrl: './app-page-header-card.component.html',
   styleUrl: './app-page-header-card.component.scss'

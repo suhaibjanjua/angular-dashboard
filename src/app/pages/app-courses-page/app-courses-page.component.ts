@@ -21,6 +21,7 @@ import {
 import { ActionMenuItem } from '../../models/action.menu.model';
 import { AppActionMenuComponent } from '../../molecules/app-action-menu/app-action-menu.component';
 import { AppChipSetComponent } from '../../molecules/app-chip-set/app-chip-set.component';
+import { AppPageHeaderCardComponent } from '../../molecules/app-page-header-card/app-page-header-card.component';
 
 @Component({
   selector: 'app-courses-page',
@@ -37,24 +38,19 @@ import { AppChipSetComponent } from '../../molecules/app-chip-set/app-chip-set.c
     MatProgressSpinnerModule,
     AppActionMenuComponent,
     NgIf,
-    AppChipSetComponent
+    AppChipSetComponent,
+    AppPageHeaderCardComponent
   ],
   template: `
     <div class="page-container">
-      <div class="page-header">
-        <div class="header-content">
-          <div>
-            <h1 class="page-title">Courses</h1>
-            <p class="page-subtitle">Manage course curriculum and content</p>
-          </div>
-          <div class="header-actions">
-            <button mat-flat-button color="primary" (click)="createNewCourse()">
-              <mat-icon>add</mat-icon>
-              Create Course
-            </button>
-          </div>
+      <app-page-header-card [title]="'Courses'" [subtitle]="'Manage course curriculum and content'" [hasActions]="true">
+        <div header-actions>
+          <button mat-flat-button color="primary" (click)="createNewCourse()">
+            <mat-icon>add</mat-icon>
+            Create Course
+          </button>
         </div>
-      </div>
+      </app-page-header-card>
 
       <mat-card class="content-card">
         <mat-card-content>
