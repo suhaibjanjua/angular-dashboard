@@ -17,6 +17,7 @@ import { AppChipSetComponent } from '../../molecules/app-chip-set/app-chip-set.c
 import { UserStatusMetaPipe } from '../../pipes/user-status-meta.pipe';
 import { UserRoleClassPipe } from '../../pipes/user-role-class.pipe';
 import { AppUserInfoCardComponent } from '../../molecules/app-user-info-card/app-user-info-card.component';
+import { AppPageHeaderCardComponent } from '../../molecules/app-page-header-card/app-page-header-card.component';
 
 @Component({
   selector: 'app-users-page',
@@ -36,14 +37,12 @@ import { AppUserInfoCardComponent } from '../../molecules/app-user-info-card/app
     AppChipSetComponent,
     UserStatusMetaPipe,
     UserRoleClassPipe,
-    AppUserInfoCardComponent
+    AppUserInfoCardComponent,
+    AppPageHeaderCardComponent
   ],
   template: `
     <div class="page-container">
-      <div class="page-header">
-        <h1 class="page-title">Users</h1>
-        <p class="page-subtitle">Manage system users and their permissions</p>
-      </div>
+      <app-page-header-card [title]="'Users'" [subtitle]="'Manage system users and their permissions'"></app-page-header-card>
 
       <mat-card class="content-card">
         <mat-card-header>
