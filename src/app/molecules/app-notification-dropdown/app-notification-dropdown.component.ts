@@ -76,7 +76,7 @@ import { NotificationPriorityMetaPipe } from '../../pipes/notification-priority-
               <p class="notification-message">{{ notification.message }}</p>
               <div class="notification-meta">
                 <span class="notification-time">{{ utils.formatTimestamp(notification.timestamp) }}</span>
-                <app-app-chip-set *ngIf="notification.priority === NotificationPriority.HIGH || notification.priority === NotificationPriority.URGENT" [chipSet]="[{value: (notification.priority | titlecase), bgClass: (notification.priority | notificationPriorityMeta).class, icon: (notification.priority | notificationPriorityMeta).icon, showIcon: true}]"></app-app-chip-set>
+                <app-chip-set *ngIf="notification.priority === NotificationPriority.HIGH || notification.priority === NotificationPriority.URGENT" [chipSet]="[{value: (notification.priority | titlecase), bgClass: (notification.priority | notificationPriorityMeta).class, icon: (notification.priority | notificationPriorityMeta).icon, showIcon: true}]"></app-chip-set>
               </div>
             </div>
           </div>

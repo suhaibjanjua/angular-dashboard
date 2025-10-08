@@ -8,7 +8,7 @@ import { MatTooltip } from '@angular/material/tooltip';
 import { MatButtonModule } from '@angular/material/button';
 
 @Component({
-  selector: 'app-app-action-menu',
+  selector: 'app-action-menu',
   standalone: true,
   imports: [MatIconModule, MatButtonModule, MatMenuModule, MatDividerModule, MatTooltip, NgClass, NgFor, NgIf],
   templateUrl: './app-action-menu.component.html',

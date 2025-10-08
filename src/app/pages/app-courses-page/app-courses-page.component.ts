@@ -82,7 +82,7 @@ import { AppPageHeaderCardComponent } from '../../molecules/app-page-header-card
               <ng-container matColumnDef="category">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header>Category</th>
                 <td mat-cell *matCellDef="let course">
-                  <app-app-chip-set [chipSet]="[{value: course.category}]"></app-app-chip-set>
+                  <app-chip-set [chipSet]="[{value: course.category}]"></app-chip-set>
                 </td>
               </ng-container>
 
@@ -143,7 +143,7 @@ import { AppPageHeaderCardComponent } from '../../molecules/app-page-header-card
               <ng-container matColumnDef="status">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header>Status</th>
                 <td mat-cell *matCellDef="let course">
-                  <app-app-chip-set [chipSet]="[{value: course.status}]"></app-app-chip-set>
+                  <app-chip-set [chipSet]="[{value: course.status}]"></app-chip-set>
                 </td>
               </ng-container>
 
@@ -151,7 +151,7 @@ import { AppPageHeaderCardComponent } from '../../molecules/app-page-header-card
               <ng-container matColumnDef="actions">
                 <th mat-header-cell *matHeaderCellDef>Actions</th>
                 <td mat-cell *matCellDef="let course">
-                  <app-app-action-menu [actions]="getCoursesActions(course)"></app-app-action-menu>
+                  <app-action-menu [actions]="getCoursesActions(course)"></app-action-menu>
                 </td>
               </ng-container>
 

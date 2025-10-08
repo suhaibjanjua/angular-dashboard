@@ -71,7 +71,7 @@ import { AppChipSetComponent } from '../../molecules/app-chip-set/app-chip-set.c
                   <div class="report-info">
                     <strong>{{report.title}}</strong>
                     <div class="report-type">
-                      <app-app-chip-set [chipSet]="[{value: report.type}]"></app-app-chip-set>
+                      <app-chip-set [chipSet]="[{value: report.type}]"></app-chip-set>
                     </div>
                   </div>
                 </td>
@@ -81,7 +81,7 @@ import { AppChipSetComponent } from '../../molecules/app-chip-set/app-chip-set.c
               <ng-container matColumnDef="category">
                 <th mat-header-cell *matHeaderCellDef>Category</th>
                 <td mat-cell *matCellDef="let report">
-                  <app-app-chip-set [chipSet]="[{value: report.category}]"></app-app-chip-set>
+                  <app-chip-set [chipSet]="[{value: report.category}]"></app-chip-set>
                 </td>
               </ng-container>
 
@@ -118,7 +118,7 @@ import { AppChipSetComponent } from '../../molecules/app-chip-set/app-chip-set.c
               <ng-container matColumnDef="status">
                 <th mat-header-cell *matHeaderCellDef>Status</th>
                 <td mat-cell *matCellDef="let report">
-                  <app-app-chip-set [chipSet]="[{value: report.status}]"></app-app-chip-set>
+                  <app-chip-set [chipSet]="[{value: report.status}]"></app-chip-set>
                 </td>
               </ng-container>
 
@@ -137,7 +137,7 @@ import { AppChipSetComponent } from '../../molecules/app-chip-set/app-chip-set.c
               <ng-container matColumnDef="actions">
                 <th mat-header-cell *matHeaderCellDef>Actions</th>
                 <td mat-cell *matCellDef="let report">
-                  <app-app-action-menu [actions]="getReportsActions(report)"></app-app-action-menu>
+                  <app-action-menu [actions]="getReportsActions(report)"></app-action-menu>
                 </td>
               </ng-container>
 

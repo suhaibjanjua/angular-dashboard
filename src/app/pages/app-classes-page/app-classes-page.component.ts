@@ -96,7 +96,7 @@ import { AppChipSetComponent } from '../../molecules/app-chip-set/app-chip-set.c
               <ng-container matColumnDef="status">
                 <th mat-header-cell *matHeaderCellDef>Status</th>
                 <td mat-cell *matCellDef="let class">
-                  <app-app-chip-set [chipSet]="[{value: class.status}]"></app-app-chip-set>
+                  <app-chip-set [chipSet]="[{value: class.status}]"></app-chip-set>
                 </td>
               </ng-container>
 
@@ -104,7 +104,7 @@ import { AppChipSetComponent } from '../../molecules/app-chip-set/app-chip-set.c
               <ng-container matColumnDef="actions">
                 <th mat-header-cell *matHeaderCellDef>Actions</th>
                 <td mat-cell *matCellDef="let class">
-                  <app-app-action-menu [actions]="getCoursesActions(class)"></app-app-action-menu>
+                  <app-action-menu [actions]="getCoursesActions(class)"></app-action-menu>
                 </td>
               </ng-container>
 

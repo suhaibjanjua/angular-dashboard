@@ -94,7 +94,7 @@ import { DocumentStatusClassPipe } from '../../pipes/document-status-class.pipe'
               <ng-container matColumnDef="status">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header>Status</th>
                 <td mat-cell *matCellDef="let doc">
-                  <app-app-chip-set [chipSet]="[{value: doc.status, bgClass: (doc.status | documentStatusClass)}]"></app-app-chip-set>
+                  <app-chip-set [chipSet]="[{value: doc.status, bgClass: (doc.status | documentStatusClass)}]"></app-chip-set>
                 </td>
               </ng-container>
 
@@ -108,7 +108,7 @@ import { DocumentStatusClassPipe } from '../../pipes/document-status-class.pipe'
               <ng-container matColumnDef="actions">
                 <th mat-header-cell *matHeaderCellDef>Actions</th>
                 <td mat-cell *matCellDef="let doc">
-                  <app-app-action-menu [actions]="getDocumentsActions(doc)"></app-app-action-menu>
+                  <app-action-menu [actions]="getDocumentsActions(doc)"></app-action-menu>
                 </td>
               </ng-container>
 

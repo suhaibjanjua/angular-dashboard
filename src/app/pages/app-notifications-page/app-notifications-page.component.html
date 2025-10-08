@@ -155,9 +155,9 @@
               <h3 class="notification-title">{{ notification.title }}</h3>
               <div class="notification-meta">
                 <span class="notification-time">{{ formatTimestamp(notification.timestamp) }}</span>
-                <app-app-chip-set
+                <app-chip-set
                   *ngIf="notification.priority === NotificationPriority.HIGH || notification.priority === NotificationPriority.URGENT"
-                  [chipSet]="[{value: (notification.priority | titlecase), bgClass: (notification.priority | notificationPriorityMeta).class, icon: (notification.priority | notificationPriorityMeta).icon, showIcon: true}]"></app-app-chip-set>
+                  [chipSet]="[{value: (notification.priority | titlecase), bgClass: (notification.priority | notificationPriorityMeta).class, icon: (notification.priority | notificationPriorityMeta).icon, showIcon: true}]"></app-chip-set>
               </div>
             </div>
 
@@ -176,11 +176,11 @@
 
             <!-- Type and Status Indicators -->
             <div class="notification-indicators">
-              <app-app-chip-set
-                [chipSet]="[{value: (notification.type | notificationTypeMeta).label, icon: (notification.type | notificationTypeMeta).icon, showIcon: true, bgClass: 'notification-type-chip'}]"></app-app-chip-set>
+              <app-chip-set
+                [chipSet]="[{value: (notification.type | notificationTypeMeta).label, icon: (notification.type | notificationTypeMeta).icon, showIcon: true, bgClass: 'notification-type-chip'}]"></app-chip-set>
             
-              <app-app-chip-set
-                [chipSet]="[{value: (notification.status | titlecase), icon: (notification.status === NotificationStatus.UNREAD ? 'fiber_manual_record' : (notification.status === NotificationStatus.READ ? 'check_circle' : 'archive')), showIcon: true, bgClass: (notification.status === NotificationStatus.UNREAD ? 'status-unread' : (notification.status === NotificationStatus.READ ? 'status-read' : 'status-archived'))}]"></app-app-chip-set>
+              <app-chip-set
+                [chipSet]="[{value: (notification.status | titlecase), icon: (notification.status === NotificationStatus.UNREAD ? 'fiber_manual_record' : (notification.status === NotificationStatus.READ ? 'check_circle' : 'archive')), showIcon: true, bgClass: (notification.status === NotificationStatus.UNREAD ? 'status-unread' : (notification.status === NotificationStatus.READ ? 'status-read' : 'status-archived'))}]"></app-chip-set>
             </div>
           </div>
 

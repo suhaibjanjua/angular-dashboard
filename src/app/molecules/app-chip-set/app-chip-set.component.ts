@@ -11,7 +11,7 @@ interface ChipConfig {
 }
 
 @Component({
-  selector: 'app-app-chip-set',
+  selector: 'app-chip-set',
   standalone: true,
   imports: [MatChipsModule, MatIconModule, NgFor, NgIf, NgClass],
   templateUrl: './app-chip-set.component.html',

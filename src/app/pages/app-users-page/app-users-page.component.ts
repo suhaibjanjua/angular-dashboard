@@ -85,7 +85,7 @@ import { AppUserInfoCardComponent } from '../../molecules/app-user-info-card/app
               <ng-container matColumnDef="role">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header>Role</th>
                 <td mat-cell *matCellDef="let user">
-                  <app-app-chip-set [chipSet]="[{value: user.role, bgClass: (user.role | userRoleClass)}]"></app-app-chip-set>
+                  <app-chip-set [chipSet]="[{value: user.role, bgClass: (user.role | userRoleClass)}]"></app-chip-set>
                 </td>
               </ng-container>
 
@@ -93,7 +93,7 @@ import { AppUserInfoCardComponent } from '../../molecules/app-user-info-card/app
               <ng-container matColumnDef="status">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header>Status</th>
                 <td mat-cell *matCellDef="let user">
-                  <app-app-chip-set [chipSet]="[{value: user.status, showIcon: true, icon: (user.status | userStatusMeta).icon, bgClass: (user.status | userStatusMeta).class}]"></app-app-chip-set>
+                  <app-chip-set [chipSet]="[{value: user.status, showIcon: true, icon: (user.status | userStatusMeta).icon, bgClass: (user.status | userStatusMeta).class}]"></app-chip-set>
                 </td>
               </ng-container>
 
@@ -107,7 +107,7 @@ import { AppUserInfoCardComponent } from '../../molecules/app-user-info-card/app
               <ng-container matColumnDef="actions">
                 <th mat-header-cell *matHeaderCellDef>Actions</th>
                 <td mat-cell *matCellDef="let user">
-                  <app-app-action-menu [actions]="getUserActions(user)"></app-app-action-menu>
+                  <app-action-menu [actions]="getUserActions(user)"></app-action-menu>
                 </td>
               </ng-container>
 

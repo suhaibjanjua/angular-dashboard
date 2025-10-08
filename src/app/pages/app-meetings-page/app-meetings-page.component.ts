@@ -53,7 +53,7 @@ import { AppChipSetComponent } from '../../molecules/app-chip-set/app-chip-set.c
                   <div class="meeting-info">
                     <strong>{{meeting.title}}</strong>
                     <div class="meeting-type">
-                      <app-app-chip-set [chipSet]="[{value: meeting.type}]"></app-app-chip-set>
+                      <app-chip-set [chipSet]="[{value: meeting.type}]"></app-chip-set>
                     </div>
                   </div>
                 </td>
@@ -106,7 +106,7 @@ import { AppChipSetComponent } from '../../molecules/app-chip-set/app-chip-set.c
               <ng-container matColumnDef="status">
                 <th mat-header-cell *matHeaderCellDef>Status</th>
                 <td mat-cell *matCellDef="let meeting">
-                  <app-app-chip-set [chipSet]="[{value: meeting.status}]"></app-app-chip-set>
+                  <app-chip-set [chipSet]="[{value: meeting.status}]"></app-chip-set>
                 </td>
               </ng-container>
 
@@ -114,7 +114,7 @@ import { AppChipSetComponent } from '../../molecules/app-chip-set/app-chip-set.c
               <ng-container matColumnDef="actions">
                 <th mat-header-cell *matHeaderCellDef>Actions</th>
                 <td mat-cell *matCellDef="let meeting">
-                  <app-app-action-menu [actions]="getMeetingActions(meeting)"></app-app-action-menu>
+                  <app-action-menu [actions]="getMeetingActions(meeting)"></app-action-menu>
                 </td>
               </ng-container>
 
