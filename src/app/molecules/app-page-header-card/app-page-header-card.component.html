@@ -1,0 +1,12 @@
+<!-- page-header.component.html -->
+<div class="page-header">
+  <div class="header-content">
+    <div>
+      <h1 class="page-title">{{ title }}</h1>
+      <p class="page-subtitle" *ngIf="subtitle">{{ subtitle }}</p>
+    </div>
+    <div class="header-actions" *ngIf="hasActions">
+      <ng-content select="[header-actions]"></ng-content>
+    </div>
+  </div>
+</div>
