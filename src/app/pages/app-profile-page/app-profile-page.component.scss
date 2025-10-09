@@ -2,28 +2,6 @@
   padding: 24px;
   background: var(--color-background);
 
-  .page-header {
-    background: var(--color-surface);
-    padding: 24px;
-    border-radius: 12px;
-    margin-bottom: 24px;
-    box-shadow: var(--shadow-md);
-    border: 1px solid var(--color-border);
-    
-    h1 {
-      font-size: 24px;
-      font-weight: 600;
-      color: var(--color-text);
-      margin: 0 0 8px 0;
-    }
-    
-    .page-subtitle {
-      font-size: 14px;
-      color: var(--color-text-secondary);
-      margin: 0;
-    }
-  }
-
   .profile-content {
     display: grid;
     grid-template-columns: 2fr 1fr;
@@ -106,20 +84,6 @@
       @media (max-width: 600px) {
         flex-direction: row;
         justify-content: center;
-      }
-    }
-  }
-
-  button {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    
-    &[color="primary"] {
-      background-color: var(--color-primary);
-      
-      &:hover {
-        background-color: var(--color-primary-dark);
       }
     }
   }

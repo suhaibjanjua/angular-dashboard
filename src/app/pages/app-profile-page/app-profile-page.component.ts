@@ -10,12 +10,12 @@ import { ImageUploadDialogComponent } from '../../dialogs/image-upload-dialog/im
 import { AppUserAvatarComponent } from '../../atoms/app-user-avatar/app-user-avatar.component';
 import { LoggedInUserService } from '../../services/logged-in-user.service';
 import { AppButtonComponent } from '../../atoms/app-button/app-button.component';
+import { AppPageHeaderCardComponent } from '../../molecules/app-page-header-card/app-page-header-card.component';
 
 @Component({
   selector: 'app-profile-page',
   standalone: true,
   imports: [
-    CommonModule,
     MatCardModule,
     MatIconModule,
     MatFormFieldModule,
@@ -23,14 +23,12 @@ import { AppButtonComponent } from '../../atoms/app-button/app-button.component'
     FormsModule,
     ReactiveFormsModule,
     AppUserAvatarComponent,
-    AppButtonComponent
+    AppButtonComponent,
+    AppPageHeaderCardComponent
   ],
   template: `
     <div class="profile-page">
-      <div class="page-header">
-        <h1>My Profile</h1>
-        <p class="page-subtitle">Manage your personal information and account settings</p>
-      </div>
+      <app-page-header-card [title]="'My Profile'" [subtitle]="'Manage your personal information and account settings'"></app-page-header-card>
 
       <div class="profile-content">
         <mat-card class="profile-card">
