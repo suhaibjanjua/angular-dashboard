@@ -6,6 +6,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AppPageHeaderCardComponent } from '../../molecules/app-page-header-card/app-page-header-card.component';
+import { AppButtonComponent } from '../../atoms/app-button/app-button.component';
 
 @Component({
   selector: 'app-change-password-page',
@@ -18,14 +20,13 @@ import { FormsModule, ReactiveFormsModule, FormBuilder, FormGroup, Validators } 
     MatFormFieldModule,
     MatInputModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    AppPageHeaderCardComponent,
+    AppButtonComponent
   ],
   template: `
     <div class="change-password-page">
-      <div class="page-header">
-        <h1>Change Password</h1>
-        <p class="page-subtitle">Update your account password for enhanced security</p>
-      </div>
+      <app-page-header-card [title]="'Change Password'" [subtitle]="'Update your account password for enhanced security'"></app-page-header-card>
 
       <div class="password-content">
         <mat-card class="password-card">
@@ -102,14 +103,8 @@ import { FormsModule, ReactiveFormsModule, FormBuilder, FormGroup, Validators } 
             </form>
           </mat-card-content>
           <mat-card-actions align="end">
-            <button mat-stroked-button (click)="cancel()">
-              <mat-icon>cancel</mat-icon>
-              Cancel
-            </button>
-            <button mat-flat-button color="primary" (click)="changePassword()">
-                <mat-icon>save</mat-icon>
-                Update Password
-              </button>
+            <app-button label="Cancel" color="primary" type="button" (click)="cancel()" variant="stroked" icon="cancel"></app-button>
+            <app-button label="Update Password" color="primary" type="submit" (click)="changePassword()" variant="flat" icon="save"></app-button>
           </mat-card-actions>
         </mat-card>
 
