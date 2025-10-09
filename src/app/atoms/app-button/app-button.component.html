@@ -1,1 +1,28 @@
-<button class="app-btn" (click)="$event.stopPropagation(); buttonClick.emit()">{{ label }}</button>
+<ng-container [ngSwitch]="variant">
+    <button *ngSwitchCase="'flat'" mat-flat-button [attr.type]="type" [disabled]="disabled || loading" [color]="color"
+        mat-button>
+        <mat-icon *ngIf="icon && !loading">{{ icon }}</mat-icon>
+        <mat-progress-spinner *ngIf="loading" diameter="20" mode="indeterminate" color="accent"></mat-progress-spinner>
+        <span *ngIf="!loading">{{ label }}</span>
+    </button>
+
+    <button *ngSwitchCase="'raised'" mat-raised-button [attr.type]="type" [disabled]="disabled || loading"
+        [color]="color" mat-button>
+        <mat-icon *ngIf="icon && !loading">{{ icon }}</mat-icon>
+        <mat-progress-spinner *ngIf="loading" diameter="20" mode="indeterminate" color="accent"></mat-progress-spinner>
+        <span *ngIf="!loading">{{ label }}</span>
+    </button>
+
+    <button *ngSwitchCase="'stroked'" mat-stroked-button [attr.type]="type" [disabled]="disabled || loading"
+        [color]="color" mat-button>
+        <mat-icon *ngIf="icon && !loading">{{ icon }}</mat-icon>
+        <mat-progress-spinner *ngIf="loading" diameter="20" mode="indeterminate" color="accent"></mat-progress-spinner>
+        <span *ngIf="!loading">{{ label }}</span>
+    </button>
+
+    <button *ngSwitchDefault mat-button [attr.type]="type" [disabled]="disabled || loading" [color]="color">
+        <mat-icon *ngIf="icon && !loading">{{ icon }}</mat-icon>
+        <mat-progress-spinner *ngIf="loading" diameter="20" mode="indeterminate" color="accent"></mat-progress-spinner>
+        <span *ngIf="!loading">{{ label }}</span>
+    </button>
+</ng-container>
