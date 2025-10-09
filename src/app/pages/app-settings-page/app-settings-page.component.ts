@@ -1,25 +1,23 @@
 import { Component } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
-import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatSelectModule } from '@angular/material/select';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { AppButtonComponent } from '../../atoms/app-button/app-button.component';
 
 @Component({
   selector: 'app-settings-page',
   standalone: true,
   imports: [
-    CommonModule,
     MatCardModule,
-    MatButtonModule,
     MatIconModule,
     MatSlideToggleModule,
     MatSelectModule,
     MatFormFieldModule,
-    FormsModule
+    FormsModule,
+    AppButtonComponent
   ],
   template: `
     <div class="settings-page">
@@ -153,24 +151,15 @@ import { FormsModule } from '@angular/forms';
                 <h3>Data Export</h3>
                 <p>Download your data</p>
               </div>
-              <button mat-raised-button color="accent" (click)="exportData()">
-                <mat-icon>download</mat-icon>
-                Export Data
-              </button>
+              <app-button label="Export Data" color="primary" type="button" (click)="exportData()" variant="raised" icon="download"></app-button>
             </div>
           </mat-card-content>
         </mat-card>
       </div>
 
       <div class="settings-actions">
-        <button mat-button color="accent" (click)="resetToDefaults()">
-          <mat-icon>restore</mat-icon>
-          Reset to Defaults
-        </button>
-        <button mat-raised-button color="primary" (click)="saveSettings()">
-          <mat-icon>save</mat-icon>
-          Save Settings
-        </button>
+        <app-button label="Reset to Defaults" color="primary" type="button" (click)="resetToDefaults()" variant="stroked" icon="restore"></app-button>
+        <app-button label="Save Settings" color="primary" type="button" (click)="saveSettings()" variant="flat" icon="save"></app-button>
       </div>
     </div>
   `,

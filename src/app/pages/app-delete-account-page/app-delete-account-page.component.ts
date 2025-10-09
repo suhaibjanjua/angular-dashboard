@@ -1,24 +1,23 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
-import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-import { MatDialogModule, MatDialog } from '@angular/material/dialog';
+import { MatDialogModule, MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { AppButtonComponent } from '../../atoms/app-button/app-button.component';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-delete-account-confirmation-dialog',
   standalone: true,
   imports: [
-    CommonModule,
     MatDialogModule,
-    MatButtonModule,
     MatIconModule,
     MatInputModule,
     MatFormFieldModule,
-    FormsModule
+    FormsModule,
+    AppButtonComponent
   ],
   template: `
     <div class="delete-confirmation-dialog">
@@ -46,14 +45,8 @@ import { FormsModule } from '@angular/forms';
         </mat-form-field>
       </mat-dialog-content>
       <mat-dialog-actions>
-        <button mat-button (click)="onCancel()">
-          <mat-icon>close</mat-icon>
-          Cancel
-        </button>
-        <button mat-raised-button color="warn" [disabled]="confirmationText !== 'DELETE'" (click)="onConfirm()">
-          <mat-icon>delete_forever</mat-icon>
-          Delete Account
-        </button>
+        <app-button label="Cancel" color="primary" type="button" (click)="onCancel()" variant="basic" icon="close"></app-button>
+        <app-button label="Delete Account" color="warn" type="submit" (click)="onConfirm()" variant="raised" icon="delete_forever" [disabled]="confirmationText !== 'DELETE'"></app-button>
       </mat-dialog-actions>
     </div>
   `,
@@ -112,16 +105,19 @@ import { FormsModule } from '@angular/forms';
   `]
 })
 export class AppDeleteAccountConfirmationDialogComponent {
+  private readonly dialogRef = inject(MatDialogRef<AppDeleteAccountConfirmationDialogComponent>);
   confirmationText = '';
 
   onCancel(): void {
     // Close dialog without action
+    this.dialogRef.close();
   }
 
   onConfirm(): void {
     if (this.confirmationText === 'DELETE') {
       // Proceed with account deletion
       console.log('Account deletion confirmed');
+      this.dialogRef.close();
     }
   }
 }
@@ -130,11 +126,11 @@ export class AppDeleteAccountConfirmationDialogComponent {
   selector: 'app-delete-account-page',
   standalone: true,
   imports: [
-    CommonModule,
+    RouterLink,
     MatCardModule,
-    MatButtonModule,
     MatIconModule,
-    MatDialogModule
+    MatDialogModule,
+    AppButtonComponent
   ],
   template: `
     <div class="delete-account-page">
@@ -219,9 +215,7 @@ export class AppDeleteAccountConfirmationDialogComponent {
                   <div>
                     <h4>Deactivate Account</h4>
                     <p>Temporarily disable your account while keeping your data safe</p>
-                    <button mat-stroked-button color="primary" (click)="deactivateAccount()">
-                      Deactivate Instead
-                    </button>
+                    <app-button class="deactivate-button" label="Deactivate Instead" color="primary" type="button" (click)="deactivateAccount()" variant="stroked"></app-button>
                   </div>
                 </div>
                 <div class="alternative-item">
@@ -229,9 +223,7 @@ export class AppDeleteAccountConfirmationDialogComponent {
                   <div>
                     <h4>Export Data</h4>
                     <p>Download a copy of your data before deletion</p>
-                    <button mat-stroked-button color="primary" (click)="exportData()">
-                      Export Data
-                    </button>
+                    <app-button class="export-button" label="Export Data" color="primary" type="button" (click)="exportData()" variant="stroked"></app-button>
                   </div>
                 </div>
               </div>
@@ -271,14 +263,8 @@ export class AppDeleteAccountConfirmationDialogComponent {
             </div>
           </mat-card-content>
           <mat-card-actions class="deletion-actions">
-            <button mat-button routerLink="/settings" color="accent">
-              <mat-icon>arrow_back</mat-icon>
-              Go Back to Settings
-            </button>
-            <button mat-raised-button color="warn" (click)="openDeleteConfirmation()">
-              <mat-icon>delete_forever</mat-icon>
-              Delete My Account
-            </button>
+            <app-button label="Go Back to Settings" color="accent" type="button" variant="basic" icon="arrow_back" routerLink="/settings"></app-button>
+            <app-button label="Delete My Account" color="warn" type="button" (click)="openDeleteConfirmation()" variant="raised" icon="delete_forever"></app-button>
           </mat-card-actions>
         </mat-card>
       </div>

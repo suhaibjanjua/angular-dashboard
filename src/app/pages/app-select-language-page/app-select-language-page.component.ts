@@ -1,23 +1,24 @@
 import { Component } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
-import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSelectModule } from '@angular/material/select';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { CommonModule } from '@angular/common';
+import { NgFor, NgIf } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { AppButtonComponent } from '../../atoms/app-button/app-button.component';
 
 @Component({
   selector: 'app-select-language-page',
   standalone: true,
   imports: [
-    CommonModule,
     MatCardModule,
-    MatButtonModule,
     MatIconModule,
     MatSelectModule,
     MatFormFieldModule,
-    FormsModule
+    FormsModule,
+    NgIf,
+    NgFor,
+    AppButtonComponent
   ],
   template: `
     <div class="language-page">
@@ -69,14 +70,8 @@ import { FormsModule } from '@angular/forms';
             </div>
           </mat-card-content>
           <mat-card-actions class="language-actions">
-            <button mat-button color="accent" (click)="resetLanguage()" [disabled]="selectedLanguage === currentLanguage">
-              <mat-icon>restore</mat-icon>
-              Reset
-            </button>
-            <button mat-raised-button color="primary" (click)="applyLanguage()" [disabled]="selectedLanguage === currentLanguage">
-              <mat-icon>check</mat-icon>
-              Apply Language
-            </button>
+            <app-button label="Reset" color="primary" type="button" (click)="resetLanguage()" variant="stroked" icon="restore" [disabled]="selectedLanguage === currentLanguage"></app-button>
+            <app-button label="Apply Language" color="primary" type="button" (click)="applyLanguage()" variant="flat" icon="check" [disabled]="selectedLanguage === currentLanguage"></app-button>
           </mat-card-actions>
         </mat-card>
 

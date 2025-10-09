@@ -180,10 +180,14 @@
                 line-height: 1.3;
               }
 
-              button {
-                font-size: 0.875rem;
-                height: 36px;
-                text-transform: none;
+              .deactivate-button {
+                max-width: 180px;
+                display: block;
+              }
+
+              .export-button {
+                max-width: 135px;
+                display: block;
               }
             }
           }
