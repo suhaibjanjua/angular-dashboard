@@ -1,7 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgIf } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
-import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule, MatPaginator, PageEvent } from '@angular/material/paginator';
@@ -22,13 +21,13 @@ import { ActionMenuItem } from '../../models/action.menu.model';
 import { AppActionMenuComponent } from '../../molecules/app-action-menu/app-action-menu.component';
 import { AppChipSetComponent } from '../../molecules/app-chip-set/app-chip-set.component';
 import { AppPageHeaderCardComponent } from '../../molecules/app-page-header-card/app-page-header-card.component';
+import { AppButtonComponent } from '../../atoms/app-button/app-button.component';
 
 @Component({
   selector: 'app-courses-page',
   standalone: true,
   imports: [
     MatCardModule,
-    MatButtonModule,
     MatIconModule,
     MatTableModule,
     MatPaginatorModule,
@@ -39,16 +38,14 @@ import { AppPageHeaderCardComponent } from '../../molecules/app-page-header-card
     AppActionMenuComponent,
     NgIf,
     AppChipSetComponent,
-    AppPageHeaderCardComponent
+    AppPageHeaderCardComponent,
+    AppButtonComponent
   ],
   template: `
     <div class="page-container">
       <app-page-header-card [title]="'Courses'" [subtitle]="'Manage course curriculum and content'" [hasActions]="true">
         <div header-actions>
-          <button mat-flat-button color="primary" (click)="createNewCourse()">
-            <mat-icon>add</mat-icon>
-            Create Course
-          </button>
+          <app-button label="Create Course" color="primary" type="button" variant="flat" icon="add"></app-button>
         </div>
       </app-page-header-card>
 

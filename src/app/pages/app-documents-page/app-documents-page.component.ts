@@ -16,6 +16,7 @@ import { AppActionMenuComponent } from '../../molecules/app-action-menu/app-acti
 import { AppChipSetComponent } from '../../molecules/app-chip-set/app-chip-set.component';
 import { DocumentStatusClassPipe } from '../../pipes/document-status-class.pipe';
 import { AppPageHeaderCardComponent } from '../../molecules/app-page-header-card/app-page-header-card.component';
+import { AppButtonComponent } from '../../atoms/app-button/app-button.component';
 
 @Component({
   selector: 'app-documents-page',
@@ -35,7 +36,8 @@ import { AppPageHeaderCardComponent } from '../../molecules/app-page-header-card
     NgIf,
     AppChipSetComponent,
     DocumentStatusClassPipe,
-    AppPageHeaderCardComponent
+    AppPageHeaderCardComponent,
+    AppButtonComponent
 ],
   template: `
     <div class="page-container">
@@ -53,14 +55,8 @@ import { AppPageHeaderCardComponent } from '../../molecules/app-page-header-card
             </form>
             
             <div class="action-buttons">
-              <button mat-flat-button color="primary" (click)="uploadDocument()">
-                <mat-icon>upload</mat-icon>
-                Upload Document
-              </button>
-              <button mat-stroked-button (click)="exportDocuments()">
-                <mat-icon>file_download</mat-icon>
-                Export List
-              </button>
+              <app-button label="Upload Document" color="primary" type="button" variant="flat" icon="upload" (click)="uploadDocument()"></app-button>
+              <app-button label="Export List" color="primary" type="button" variant="stroked" icon="file_download" (click)="exportDocuments()"></app-button>
             </div>
           </div>
         </mat-card-header>

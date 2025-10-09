@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
-import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
@@ -10,29 +9,27 @@ import { ActionMenuItem } from '../../models/action.menu.model';
 import { AppActionMenuComponent } from '../../molecules/app-action-menu/app-action-menu.component';
 import { AppChipSetComponent } from '../../molecules/app-chip-set/app-chip-set.component';
 import { AppPageHeaderCardComponent } from '../../molecules/app-page-header-card/app-page-header-card.component';
+import { AppButtonComponent } from '../../atoms/app-button/app-button.component';
 
 @Component({
   selector: 'app-classes-page',
   standalone: true,
   imports: [
     MatCardModule, 
-    MatButtonModule, 
     MatIconModule,
     MatTableModule,
     MatPaginatorModule,
     MatTooltipModule,
     AppActionMenuComponent,
     AppChipSetComponent,
-    AppPageHeaderCardComponent
+    AppPageHeaderCardComponent,
+    AppButtonComponent
   ],
   template: `
     <div class="page-container">
       <app-page-header-card [title]="'Classes'" [subtitle]="'Manage class schedules and sessions'" [hasActions]="true">
         <div header-actions>
-          <button mat-flat-button color="primary">
-            <mat-icon>add</mat-icon>
-            Schedule Class
-          </button>
+          <app-button label="Schedule Class" color="primary" type="button" variant="flat" icon="add"></app-button>
         </div>
       </app-page-header-card>
 

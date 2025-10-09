@@ -73,18 +73,11 @@
 
       <!-- Filter Actions -->
       <div class="filter-actions">
-        <button mat-button (click)="clearFilters()"
-          [disabled]="!searchQuery && selectedTypes.length === 0 && selectedPriorities.length === 0 && selectedStatuses.length === 0">
-          <mat-icon>clear_all</mat-icon>
-          Clear Filters
-        </button>
+        <app-button (click)="clearFilters()" label="Clear Filters" color="primary" type="button" variant="basic" icon="clear_all" [disabled]="!searchQuery && selectedTypes.length === 0 && selectedPriorities.length === 0 && selectedStatuses.length === 0"></app-button>
 
         <div class="spacer"></div>
 
-        <button mat-raised-button color="primary" (click)="markAllAsRead()" [disabled]="loading">
-          <mat-icon>done_all</mat-icon>
-          Mark All Read
-        </button>
+        <app-button (click)="markAllAsRead()" label="Mark All Read" color="primary" type="button" variant="raised" icon="done_all"></app-button>
       </div>
     </mat-card-content>
   </mat-card>
@@ -125,11 +118,7 @@
             *ngIf="!searchQuery && selectedTypes.length === 0 && selectedPriorities.length === 0 && selectedStatuses.length === 0">
             You don't have any notifications yet.
           </p>
-          <button mat-button (click)="clearFilters()"
-            *ngIf="searchQuery || selectedTypes.length > 0 || selectedPriorities.length > 0 || selectedStatuses.length > 0">
-            <mat-icon>refresh</mat-icon>
-            Clear Filters
-          </button>
+          <app-button *ngIf="searchQuery || selectedTypes.length > 0 || selectedPriorities.length > 0 || selectedStatuses.length > 0" label="Clear Filters" color="primary" type="button" variant="basic" icon="refresh" (click)="clearFilters()"></app-button>
         </div>
       </mat-card-content>
     </mat-card>

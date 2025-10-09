@@ -215,7 +215,7 @@ export class AppDeleteAccountConfirmationDialogComponent {
                   <div>
                     <h4>Deactivate Account</h4>
                     <p>Temporarily disable your account while keeping your data safe</p>
-                    <app-button class="deactivate-button" label="Deactivate Instead" color="primary" type="button" (click)="deactivateAccount()" variant="stroked"></app-button>
+                    <app-button label="Deactivate Instead" color="primary" type="button" (click)="deactivateAccount()" variant="stroked"></app-button>
                   </div>
                 </div>
                 <div class="alternative-item">
@@ -223,7 +223,7 @@ export class AppDeleteAccountConfirmationDialogComponent {
                   <div>
                     <h4>Export Data</h4>
                     <p>Download a copy of your data before deletion</p>
-                    <app-button class="export-button" label="Export Data" color="primary" type="button" (click)="exportData()" variant="stroked"></app-button>
+                    <app-button label="Export Data" color="primary" type="button" (click)="exportData()" variant="stroked"></app-button>
                   </div>
                 </div>
               </div>

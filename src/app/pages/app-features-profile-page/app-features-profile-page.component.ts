@@ -2,7 +2,6 @@ import { Component, OnInit, OnDestroy, inject } from '@angular/core';
 import { NgFor, NgIf } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
-import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
@@ -22,6 +21,7 @@ import {
 } from '../../models/feature.models';
 import { FeatureService } from '../../services/feature.service';
 import { AppSearchBarComponent } from '../../molecules/app-search-bar/app-search-bar.component';
+import { AppButtonComponent } from '../../atoms/app-button/app-button.component';
 
 @Component({
   selector: 'app-features-profile-page',
@@ -29,7 +29,6 @@ import { AppSearchBarComponent } from '../../molecules/app-search-bar/app-search
   imports: [
     MatCardModule,
     MatIconModule,
-    MatButtonModule,
     MatInputModule,
     MatFormFieldModule,
     MatProgressSpinnerModule,
@@ -42,7 +41,8 @@ import { AppSearchBarComponent } from '../../molecules/app-search-bar/app-search
     AppSearchBarComponent,
     ReactiveFormsModule,
     NgIf,
-    NgFor
+    NgFor,
+    AppButtonComponent
   ],
   templateUrl: './app-features-profile-page.component.html',
   styleUrls: ['./app-features-profile-page.component.scss']

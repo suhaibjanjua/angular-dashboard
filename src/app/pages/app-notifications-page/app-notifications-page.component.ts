@@ -28,6 +28,7 @@ import { NotificationService } from '../../services/notification.service';
 import { NotificationPriorityMetaPipe } from '../../pipes/notification-priority-meta.pipe';
 import { AppChipSetComponent } from '../../molecules/app-chip-set/app-chip-set.component';
 import { NotificationTypeMetaPipe } from '../../pipes/notification-type-meta.pipe';
+import { AppButtonComponent } from '../../atoms/app-button/app-button.component';
 
 @Component({
   selector: 'app-notifications-page',
@@ -50,7 +51,8 @@ import { NotificationTypeMetaPipe } from '../../pipes/notification-type-meta.pip
     NotificationTypeMetaPipe,
     TitleCasePipe,
     NgIf,
-    NgFor
+    NgFor,
+    AppButtonComponent
   ],
   templateUrl: './app-notifications-page.component.html',
   styleUrls: ['./app-notifications-page.component.scss']

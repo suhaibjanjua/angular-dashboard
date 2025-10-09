@@ -35,14 +35,8 @@
     <mat-card class="stat-card actions">
       <mat-card-content>
         <div class="action-buttons">
-          <button mat-stroked-button (click)="onExportConfiguration()" matTooltip="Export current feature configuration">
-            <mat-icon>file_download</mat-icon>
-            Export
-          </button>
-          <button mat-stroked-button (click)="onImportConfiguration()" matTooltip="Import feature configuration from file">
-            <mat-icon>file_upload</mat-icon>
-            Import
-          </button>
+          <app-button label="Export" color="primary" type="button" variant="stroked" icon="file_download" (click)="onExportConfiguration()"></app-button>
+          <app-button label="Import" color="primary" type="button" variant="stroked" icon="file_upload" (click)="onImportConfiguration()"></app-button>
         </div>
       </mat-card-content>
     </mat-card>
@@ -95,10 +89,7 @@
           <mat-icon>search_off</mat-icon>
           <h3>No features found</h3>
           <p>Try adjusting your search terms or browse different categories.</p>
-          <button mat-button (click)="clearSearch()">
-            <mat-icon>refresh</mat-icon>
-            Clear Search
-          </button>
+          <app-button label="Clear Search" color="primary" type="button" variant="basic" icon="refresh" (click)="clearSearch()"></app-button>
         </div>
 
         <!-- Feature Items -->

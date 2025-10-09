@@ -3,7 +3,6 @@ import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { MatInputModule } from '@angular/material/input';
-import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatCardModule } from '@angular/material/card';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
@@ -18,6 +17,7 @@ import { UserStatusMetaPipe } from '../../pipes/user-status-meta.pipe';
 import { UserRoleClassPipe } from '../../pipes/user-role-class.pipe';
 import { AppUserInfoCardComponent } from '../../molecules/app-user-info-card/app-user-info-card.component';
 import { AppPageHeaderCardComponent } from '../../molecules/app-page-header-card/app-page-header-card.component';
+import { AppButtonComponent } from '../../atoms/app-button/app-button.component';
 
 @Component({
   selector: 'app-users-page',
@@ -27,7 +27,6 @@ import { AppPageHeaderCardComponent } from '../../molecules/app-page-header-card
     MatPaginatorModule,
     MatSortModule,
     MatInputModule,
-    MatButtonModule,
     MatIconModule,
     MatCardModule,
     AppSearchBarComponent,
@@ -38,7 +37,8 @@ import { AppPageHeaderCardComponent } from '../../molecules/app-page-header-card
     UserStatusMetaPipe,
     UserRoleClassPipe,
     AppUserInfoCardComponent,
-    AppPageHeaderCardComponent
+    AppPageHeaderCardComponent,
+    AppButtonComponent
   ],
   template: `
     <div class="page-container">
@@ -56,14 +56,8 @@ import { AppPageHeaderCardComponent } from '../../molecules/app-page-header-card
             </form>
             
             <div class="action-buttons">
-              <button mat-flat-button color="primary" (click)="addUser()">
-                <mat-icon>add</mat-icon>
-                Add User
-              </button>
-              <button mat-stroked-button (click)="exportUsers()">
-                <mat-icon>file_download</mat-icon>
-                Export
-              </button>
+              <app-button label="Add User" color="primary" type="button" variant="flat" icon="add" (click)="addUser()"></app-button>
+              <app-button label="Export" color="primary" type="button" variant="stroked" icon="file_download" (click)="exportUsers()"></app-button>
             </div>
           </div>
         </mat-card-header>

@@ -6,21 +6,19 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import { DashboardService } from '../../services/dashboard.service';
 import { TimeRange, TimeRangeLabels } from '../../models/widget.models';
+import { AppButtonComponent } from '../../atoms/app-button/app-button.component';
 
 @Component({
   selector: 'app-time-range-filter',
   standalone: true,
-  imports: [NgForOf, MatSelectModule, MatButtonModule, MatIconModule, MatMenuModule],
+  imports: [NgForOf, MatSelectModule, MatButtonModule, MatIconModule, MatMenuModule, AppButtonComponent],
   template: `<div class="time-range-filter">
     <mat-select [(value)]="selectedTimeRange" placeholder="Time Range">
       <mat-option *ngFor="let option of timeRangeOptions" [value]="option.value">
         {{ option.label }}
       </mat-option>
     </mat-select>
-    <button mat-raised-button color="primary" [matMenuTriggerFor]="exportMenu">
-      <mat-icon>file_download</mat-icon>
-      Export
-    </button>
+    <app-button label="Export" color="primary" type="button" variant="raised" icon="file_download" [matMenuTriggerFor]="exportMenu"></app-button>
     <mat-menu #exportMenu="matMenu">
       <button mat-menu-item (click)="exportData('csv')">
         <mat-icon>description</mat-icon>

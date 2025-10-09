@@ -21,15 +21,8 @@
                     <input type="file" accept="image/png, image/jpeg" hidden (change)="handleFileInput($event)"
                         #avatarUploadInput />
 
-                    <button mat-stroked-button color="primary" (click)="avatarUploadInput.click()">
-                        <mat-icon>file_upload</mat-icon>
-                        Upload a photo
-                    </button>
-
-                    <button mat-flat-button color="accent" (click)="startCamera()">
-                        <mat-icon>photo_camera</mat-icon>
-                        Take a selfie
-                    </button>
+                    <app-button label="Upload a photo" color="primary" type="button" (click)="avatarUploadInput.click()" variant="stroked" icon="file_upload"></app-button>
+                    <app-button label="Take a selfie" color="primary" type="button" (click)="startCamera()" variant="flat" icon="photo_camera"></app-button>
                 </div>
             </mat-card-content>
         </mat-card>

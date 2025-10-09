@@ -11,6 +11,7 @@ import { ActionMenuItem } from '../../models/action.menu.model';
 import { AppActionMenuComponent } from '../../molecules/app-action-menu/app-action-menu.component';
 import { AppChipSetComponent } from '../../molecules/app-chip-set/app-chip-set.component';
 import { AppPageHeaderCardComponent } from '../../molecules/app-page-header-card/app-page-header-card.component';
+import { AppButtonComponent } from '../../atoms/app-button/app-button.component';
 
 @Component({
   selector: 'app-reports-page',
@@ -25,16 +26,14 @@ import { AppPageHeaderCardComponent } from '../../molecules/app-page-header-card
     MatMenuModule,
     AppActionMenuComponent,
     AppChipSetComponent,
-    AppPageHeaderCardComponent
+    AppPageHeaderCardComponent,
+    AppButtonComponent
   ],
   template: `
     <div class="page-container">
       <app-page-header-card [title]="'Reports'" [subtitle]="'Generate and manage system reports'" [hasActions]="true">
         <div header-actions>
-          <button mat-flat-button color="primary" [matMenuTriggerFor]="newReportMenu">
-            <mat-icon>add</mat-icon>
-            Generate Report
-          </button>
+          <app-button label="Generate Report" color="primary" type="button" variant="flat" icon="add" [matMenuTriggerFor]="newReportMenu"></app-button>
           <mat-menu #newReportMenu="matMenu" class="reports-dropdown">
             <button mat-menu-item>
               <mat-icon>school</mat-icon>

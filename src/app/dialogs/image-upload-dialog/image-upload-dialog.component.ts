@@ -7,10 +7,11 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { ImageCropperComponent, ImageCroppedEvent, LoadedImage } from 'ngx-image-cropper';
+import { AppButtonComponent } from '../../atoms/app-button/app-button.component';
 
 @Component({
   selector: 'app-image-upload-dialog',
-  imports: [MatProgressSpinnerModule, MatTooltipModule, MatCardModule, MatDialogModule, MatIconModule, MatButtonModule, NgIf, ImageCropperComponent],
+  imports: [MatProgressSpinnerModule, MatTooltipModule, MatCardModule, MatDialogModule, MatIconModule, MatButtonModule, NgIf, ImageCropperComponent, AppButtonComponent],
   templateUrl: './image-upload-dialog.component.html',
   styleUrl: './image-upload-dialog.component.scss'
 })

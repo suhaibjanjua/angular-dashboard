@@ -17,6 +17,7 @@ import { NotificationService } from '../../services/notification.service';
 import { NotificationUtilsService } from '../../services/notification-utils.service';
 import { AppChipSetComponent } from '../app-chip-set/app-chip-set.component';
 import { NotificationPriorityMetaPipe } from '../../pipes/notification-priority-meta.pipe';
+import { AppButtonComponent } from '../../atoms/app-button/app-button.component';
 
 @Component({
   selector: 'app-notification-dropdown',
@@ -30,7 +31,8 @@ import { NotificationPriorityMetaPipe } from '../../pipes/notification-priority-
     NotificationPriorityMetaPipe,
     NgIf,
     NgFor,
-    TitleCasePipe
+    TitleCasePipe,
+    AppButtonComponent
   ],
   template: `
     <div class="notification-dropdown" *ngIf="isOpen">
@@ -108,10 +110,7 @@ import { NotificationPriorityMetaPipe } from '../../pipes/notification-priority-
 
       <!-- Footer -->
       <div class="notification-footer" *ngIf="notifications.length > 0">
-        <button mat-button (click)="viewAllNotifications()" class="view-all-btn">
-          <mat-icon>open_in_new</mat-icon>
-          View All Notifications
-        </button>
+        <app-button label="View All Notifications" color="primary" type="button" (click)="viewAllNotifications()" variant="basic" icon="open_in_new"></app-button>
       </div>
     </div>
   `,
