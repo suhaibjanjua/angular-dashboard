@@ -1,6 +1,5 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
-import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -10,6 +9,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { ImageUploadDialogComponent } from '../../dialogs/image-upload-dialog/image-upload-dialog.component';
 import { AppUserAvatarComponent } from '../../atoms/app-user-avatar/app-user-avatar.component';
 import { LoggedInUserService } from '../../services/logged-in-user.service';
+import { AppButtonComponent } from '../../atoms/app-button/app-button.component';
 
 @Component({
   selector: 'app-profile-page',
@@ -17,13 +17,13 @@ import { LoggedInUserService } from '../../services/logged-in-user.service';
   imports: [
     CommonModule,
     MatCardModule,
-    MatButtonModule,
     MatIconModule,
     MatFormFieldModule,
     MatInputModule,
     FormsModule,
     ReactiveFormsModule,
-    AppUserAvatarComponent
+    AppUserAvatarComponent,
+    AppButtonComponent
   ],
   template: `
     <div class="profile-page">
@@ -68,14 +68,8 @@ import { LoggedInUserService } from '../../services/logged-in-user.service';
             </div>
           </mat-card-content>
           <mat-card-actions align="end">
-            <button mat-stroked-button (click)="cancel()">
-              <mat-icon>cancel</mat-icon>
-              Cancel
-            </button>
-            <button mat-flat-button color="primary" (click)="saveProfile()">
-              <mat-icon>save</mat-icon>
-              Save Changes
-            </button>
+            <app-button label="Cancel" color="primary" type="button" (click)="cancel()" variant="stroked" icon="cancel"></app-button>
+            <app-button label="Save Changes" color="primary" type="button" (click)="saveProfile()" variant="flat" icon="save"></app-button>
           </mat-card-actions>
         </mat-card>
 
@@ -93,14 +87,8 @@ import { LoggedInUserService } from '../../services/logged-in-user.service';
               </div>
 
               <div class="avatar-actions">
-                <button mat-flat-button color="primary" (click)="uploadAvatar()">
-                  <mat-icon>upload</mat-icon>
-                  Upload New Photo
-                </button>
-                <button mat-stroked-button color="warn" (click)="removeAvatar()">
-                  <mat-icon>delete</mat-icon>
-                  Remove Photo
-                </button>
+                <app-button label="Upload New Photo" color="primary" type="button" (click)="uploadAvatar()" variant="flat" icon="upload"></app-button>
+                <app-button label="Remove Photo" color="primary" type="button" (click)="removeAvatar()" variant="stroked" icon="delete"></app-button>
               </div>
             </div>
           </mat-card-content>
