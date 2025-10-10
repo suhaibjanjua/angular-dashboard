@@ -107,19 +107,17 @@
     <!-- No Results -->
     <mat-card *ngIf="!loading && paginatedNotifications.length === 0" class="no-results-card">
       <mat-card-content>
-        <div class="no-results-content">
-          <mat-icon>notifications_none</mat-icon>
-          <h3>No notifications found</h3>
-          <p
-            *ngIf="searchQuery || selectedTypes.length > 0 || selectedPriorities.length > 0 || selectedStatuses.length > 0">
-            Try adjusting your filters to see more results.
-          </p>
-          <p
-            *ngIf="!searchQuery && selectedTypes.length === 0 && selectedPriorities.length === 0 && selectedStatuses.length === 0">
-            You don't have any notifications yet.
-          </p>
-          <app-button *ngIf="searchQuery || selectedTypes.length > 0 || selectedPriorities.length > 0 || selectedStatuses.length > 0" label="Clear Filters" color="primary" type="button" variant="basic" icon="refresh" (click)="clearFilters()"></app-button>
-        </div>
+
+        <app-empty-state icon="notifications_none" title="No notifications found" [hasActions]="true"
+          [subtitle]="!searchQuery && selectedTypes.length === 0 && selectedPriorities.length === 0 && selectedStatuses.length === 0 ? 'You don\'t have any notifications yet.' : 'Try adjusting your filters to see more results.'">
+          
+          <app-button search-actions
+            *ngIf="searchQuery || selectedTypes.length > 0 || selectedPriorities.length > 0 || selectedStatuses.length > 0"
+            label="Clear Filters" color="primary" type="button" variant="basic" icon="refresh"
+            (click)="clearFilters()"></app-button>
+
+        </app-empty-state>
+        
       </mat-card-content>
     </mat-card>
 

@@ -22,6 +22,7 @@ import {
 import { FeatureService } from '../../services/feature.service';
 import { AppSearchBarComponent } from '../../molecules/app-search-bar/app-search-bar.component';
 import { AppButtonComponent } from '../../atoms/app-button/app-button.component';
+import { AppEmptyStateComponent } from '../../atoms/app-empty-state/app-empty-state.component';
 
 @Component({
   selector: 'app-features-profile-page',
@@ -42,7 +43,8 @@ import { AppButtonComponent } from '../../atoms/app-button/app-button.component'
     ReactiveFormsModule,
     NgIf,
     NgFor,
-    AppButtonComponent
+    AppButtonComponent,
+    AppEmptyStateComponent
   ],
   templateUrl: './app-features-profile-page.component.html',
   styleUrls: ['./app-features-profile-page.component.scss']

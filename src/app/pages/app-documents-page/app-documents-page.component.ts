@@ -4,7 +4,6 @@ import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { MatInputModule } from '@angular/material/input';
-import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatCardModule } from '@angular/material/card';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
@@ -17,6 +16,7 @@ import { AppChipSetComponent } from '../../molecules/app-chip-set/app-chip-set.c
 import { DocumentStatusClassPipe } from '../../pipes/document-status-class.pipe';
 import { AppPageHeaderCardComponent } from '../../molecules/app-page-header-card/app-page-header-card.component';
 import { AppButtonComponent } from '../../atoms/app-button/app-button.component';
+import { AppEmptyStateComponent } from '../../atoms/app-empty-state/app-empty-state.component';
 
 @Component({
   selector: 'app-documents-page',
@@ -26,7 +26,6 @@ import { AppButtonComponent } from '../../atoms/app-button/app-button.component'
     MatPaginatorModule,
     MatSortModule,
     MatInputModule,
-    MatButtonModule,
     MatIconModule,
     MatCardModule,
     AppSearchBarComponent,
@@ -37,7 +36,8 @@ import { AppButtonComponent } from '../../atoms/app-button/app-button.component'
     AppChipSetComponent,
     DocumentStatusClassPipe,
     AppPageHeaderCardComponent,
-    AppButtonComponent
+    AppButtonComponent,
+    AppEmptyStateComponent
 ],
   template: `
     <div class="page-container">
@@ -111,11 +111,7 @@ import { AppButtonComponent } from '../../atoms/app-button/app-button.component'
               <tr mat-row *matRowDef="let row; columns: displayedColumns;" class="table-row"></tr>
             </table>
 
-            <div class="no-data" *ngIf="filteredDocuments.length === 0">
-              <mat-icon>description</mat-icon>
-              <h3>No documents found</h3>
-              <p>Upload your first document to get started.</p>
-            </div>
+            <app-empty-state *ngIf="filteredDocuments.length === 0" icon="description" title="No documents found" subtitle="Upload your first document to get started."></app-empty-state>
           </div>
 
           <mat-paginator 

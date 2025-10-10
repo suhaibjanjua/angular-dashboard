@@ -11,4 +11,5 @@ export class AppEmptyStateComponent {
   @Input() icon: string = 'info';
   @Input() title: string = 'No data available';
   @Input() subtitle: string = '';
+  @Input() hasActions = false;
 }

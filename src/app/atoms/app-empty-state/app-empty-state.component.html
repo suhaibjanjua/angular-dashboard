@@ -2,4 +2,7 @@
     <mat-icon>{{icon}}</mat-icon>
     <h3>{{ title }}</h3>
     <p>{{ subtitle }}</p>
+    @if(hasActions) {
+    <ng-content select="[search-actions]"></ng-content>
+    }
 </div>

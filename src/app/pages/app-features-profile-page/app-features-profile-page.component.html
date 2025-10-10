@@ -85,12 +85,11 @@
       <!-- Features List -->
       <div class="features-list" *ngIf="selectedCategory && !loading">
         <!-- No Results -->
-        <div class="no-results" *ngIf="filteredFeatures.length === 0 && searchQuery">
-          <mat-icon>search_off</mat-icon>
-          <h3>No features found</h3>
-          <p>Try adjusting your search terms or browse different categories.</p>
-          <app-button label="Clear Search" color="primary" type="button" variant="basic" icon="refresh" (click)="clearSearch()"></app-button>
-        </div>
+        <app-empty-state class="no-results" *ngIf="filteredFeatures.length === 0 && searchQuery" icon="search_off" title="No features found"
+          [hasActions]="true" subtitle="Try adjusting your search terms or browse different categories.">
+          <app-button search-actions label="Clear Search" color="primary" type="button" variant="basic" icon="refresh"
+            (click)="clearSearch()"></app-button>
+        </app-empty-state>
 
         <!-- Feature Items -->
         <app-feature-toggle

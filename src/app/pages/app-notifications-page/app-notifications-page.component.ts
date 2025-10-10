@@ -29,6 +29,7 @@ import { NotificationPriorityMetaPipe } from '../../pipes/notification-priority-
 import { AppChipSetComponent } from '../../molecules/app-chip-set/app-chip-set.component';
 import { NotificationTypeMetaPipe } from '../../pipes/notification-type-meta.pipe';
 import { AppButtonComponent } from '../../atoms/app-button/app-button.component';
+import { AppEmptyStateComponent } from '../../atoms/app-empty-state/app-empty-state.component';
 
 @Component({
   selector: 'app-notifications-page',
@@ -52,7 +53,8 @@ import { AppButtonComponent } from '../../atoms/app-button/app-button.component'
     TitleCasePipe,
     NgIf,
     NgFor,
-    AppButtonComponent
+    AppButtonComponent,
+    AppEmptyStateComponent
   ],
   templateUrl: './app-notifications-page.component.html',
   styleUrls: ['./app-notifications-page.component.scss']
