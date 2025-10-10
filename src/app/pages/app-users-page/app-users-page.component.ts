@@ -3,7 +3,6 @@ import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { MatInputModule } from '@angular/material/input';
-import { MatIconModule } from '@angular/material/icon';
 import { MatCardModule } from '@angular/material/card';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { User, UserStatus, UserRole } from '../../models';
@@ -18,6 +17,7 @@ import { UserRoleClassPipe } from '../../pipes/user-role-class.pipe';
 import { AppUserInfoCardComponent } from '../../molecules/app-user-info-card/app-user-info-card.component';
 import { AppPageHeaderCardComponent } from '../../molecules/app-page-header-card/app-page-header-card.component';
 import { AppButtonComponent } from '../../atoms/app-button/app-button.component';
+import { AppEmptyStateComponent } from '../../atoms/app-empty-state/app-empty-state.component';
 
 @Component({
   selector: 'app-users-page',
@@ -27,7 +27,6 @@ import { AppButtonComponent } from '../../atoms/app-button/app-button.component'
     MatPaginatorModule,
     MatSortModule,
     MatInputModule,
-    MatIconModule,
     MatCardModule,
     AppSearchBarComponent,
     ReactiveFormsModule,
@@ -38,7 +37,8 @@ import { AppButtonComponent } from '../../atoms/app-button/app-button.component'
     UserRoleClassPipe,
     AppUserInfoCardComponent,
     AppPageHeaderCardComponent,
-    AppButtonComponent
+    AppButtonComponent,
+    AppEmptyStateComponent
   ],
   template: `
     <div class="page-container">
@@ -110,11 +110,7 @@ import { AppButtonComponent } from '../../atoms/app-button/app-button.component'
                   class="table-row"></tr>
             </table>
 
-            <div class="no-data" *ngIf="filteredUsers.length === 0">
-              <mat-icon>person_off</mat-icon>
-              <h3>No users found</h3>
-              <p>Try adjusting your search criteria or add a new user.</p>
-            </div>
+            <app-empty-state *ngIf="filteredUsers.length === 0" icon="person_off" title="No users found" subtitle="Try adjusting your search criteria or add a new user."></app-empty-state>
           </div>
 
           <mat-paginator 

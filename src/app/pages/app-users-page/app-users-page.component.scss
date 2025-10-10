@@ -89,31 +89,6 @@
   }
 }
 
-.no-data {
-  text-align: center;
-  padding: 48px 24px;
-  color: var(--color-text-secondary);
-  
-  mat-icon {
-    font-size: 48px;
-    width: 48px;
-    height: 48px;
-    margin-bottom: 16px;
-    color: #ccc;
-  }
-  
-  h3 {
-    margin: 0 0 8px 0;
-    font-size: 18px;
-    font-weight: 500;
-  }
-  
-  p {
-    margin: 0;
-    font-size: 14px;
-  }
-}
-
 @media (max-width: 768px) {
   .page-container {
     padding: 16px;
