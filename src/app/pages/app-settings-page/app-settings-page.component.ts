@@ -151,7 +151,7 @@ import { AppButtonComponent } from '../../atoms/app-button/app-button.component'
                 <h3>Data Export</h3>
                 <p>Download your data</p>
               </div>
-              <app-button label="Export Data" color="primary" type="button" (click)="exportData()" variant="raised" icon="download"></app-button>
+              <app-button label="Export Data" color="primary" type="button" (click)="exportData()" variant="stroked" icon="download"></app-button>
             </div>
           </mat-card-content>
         </mat-card>

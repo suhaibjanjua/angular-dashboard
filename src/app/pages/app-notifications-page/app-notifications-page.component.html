@@ -56,7 +56,7 @@
           <mat-label>Status</mat-label>
           <mat-select multiple [value]="selectedStatuses" (selectionChange)="onStatusFilterChange($event.value)">
             <mat-option value="unread">
-              <mat-icon style="color: #6c4bb6;">fiber_manual_record</mat-icon>
+              <mat-icon style="color: var(--color-primary);">fiber_manual_record</mat-icon>
               Unread
             </mat-option>
             <mat-option value="read">
@@ -77,7 +77,7 @@
 
         <div class="spacer"></div>
 
-        <app-button (click)="markAllAsRead()" label="Mark All Read" color="primary" type="button" variant="raised" icon="done_all"></app-button>
+        <app-button (click)="markAllAsRead()" label="Mark All Read" color="primary" type="button" variant="stroked" icon="done_all"></app-button>
       </div>
     </mat-card-content>
   </mat-card>

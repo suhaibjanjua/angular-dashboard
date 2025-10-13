@@ -11,6 +11,6 @@ import { CommonModule } from '@angular/common';
 export class AppLinkComponent {
   @Input() href: string = '#';
   @Input() label: string = '';
-  @Input() color: string = '#6c4bb6';
+  @Input() color: string = 'var(--color-primary)';
   @Input() underline: boolean = false;
 }

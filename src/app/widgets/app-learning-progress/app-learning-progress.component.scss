@@ -17,7 +17,7 @@
       color: var(--color-text);
       
       .progress-badge {
-        background: linear-gradient(135deg, #6c4bb6, #8e44ad);
+        background: linear-gradient(135deg, var(--color-primary), #8e44ad);
         color: white;
         padding: 4px 12px;
         border-radius: 12px;
@@ -44,13 +44,13 @@
         padding: 12px;
         background-color: #FFFFFF;
         border-radius: 8px;
-        border-left: 3px solid #6c4bb6;
+        border-left: 3px solid var(--color-primary);
         
         mat-icon {
           font-size: 24px;
           width: 24px;
           height: 24px;
-          color: #6c4bb6;
+          color: var(--color-primary);
           margin-right: 12px;
         }
         
@@ -219,7 +219,7 @@
           font-size: 16px;
           width: 16px;
           height: 16px;
-          color: #6c4bb6;
+          color: var(--color-primary);
           margin-right: 8px;
         }
         

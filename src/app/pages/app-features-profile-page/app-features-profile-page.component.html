@@ -96,7 +96,7 @@
           *ngFor="let feature of filteredFeatures; trackBy: trackByFeatureId"
           [feature]="feature"
           [categoryId]="selectedCategory.id"
-          [iconColor]="'#6c4bb6'"
+          [iconColor]="'var(--color-primary)'"
           (toggle)="onFeatureToggle($event)">
         </app-feature-toggle>
       </div>

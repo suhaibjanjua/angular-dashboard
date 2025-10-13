@@ -39,7 +39,7 @@
     }
 
     &.actions {
-      border-left: 4px solid #6c4bb6;
+      border-left: 4px solid var(--color-primary);
       justify-content: center;
 
       .action-buttons {
@@ -354,11 +354,11 @@
   }
 
   .mat-mdc-form-field-focus .mat-mdc-form-field-outline-thick {
-    color: #6c4bb6;
+    color: var(--color-primary);
   }
 
   .mat-mdc-raised-button.mat-primary {
-    --mdc-filled-button-container-color: #6c4bb6;
+    --mdc-filled-button-container-color: var(--color-primary);
   }
 
   .mat-mdc-raised-button.mat-accent {

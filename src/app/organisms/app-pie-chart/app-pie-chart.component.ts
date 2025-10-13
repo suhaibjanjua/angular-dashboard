@@ -35,7 +35,7 @@ export class AppPieChartComponent {
     datasets: [
       {
         data: [65, 35],
-        backgroundColor: ['#6c4bb6', '#9c7ce8'],
+        backgroundColor: ['#6750a0', '#9c7ce8'],
         borderWidth: 2,
         borderColor: '#ffffff',
         hoverBorderWidth: 3,

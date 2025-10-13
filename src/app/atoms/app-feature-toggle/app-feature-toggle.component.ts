@@ -113,7 +113,7 @@ export class AppFeatureToggleComponent {
   @Input() feature!: Feature;
   @Input() categoryId!: string;
   @Input() disabled = false;
-  @Input() iconColor = '#6c4bb6';
+  @Input() iconColor = 'var(--color-primary)';
   
   @Output() toggle = new EventEmitter<FeatureToggleEvent>();
   

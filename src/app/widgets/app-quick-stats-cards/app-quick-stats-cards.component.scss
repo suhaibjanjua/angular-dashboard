@@ -39,7 +39,7 @@
           height: 32px;
           margin-bottom: 8px;
           
-          &.primary { color: #6c4bb6; }
+          &.primary { color: var(--color-primary); }
           &.success { color: #4caf50; }
           &.info { color: #2196f3; }
           &.warning { color: #ff9800; }

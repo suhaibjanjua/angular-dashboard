@@ -23,7 +23,7 @@
         transition: color 0.2s ease;
         
         &:hover {
-          color: #6c4bb6;
+          color: var(--color-primary);
         }
       }
     }

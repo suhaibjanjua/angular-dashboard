@@ -37,7 +37,7 @@ export class AppDeviceAnalyticsComponent {
   public doughnutChartType: ChartType = 'doughnut';
   
   deviceStats = [
-    { name: 'Desktop', percentage: 45, color: '#6c4bb6' },
+    { name: 'Desktop', percentage: 45, color: '#6750a0' },
     { name: 'Mobile', percentage: 35, color: '#9c7ce8' },
     { name: 'Tablet', percentage: 20, color: '#c9b3f5' }
   ];

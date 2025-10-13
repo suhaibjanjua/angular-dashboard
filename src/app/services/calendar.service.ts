@@ -73,7 +73,7 @@ export class CalendarService {
       // height: '100vh',       // Responsive height (optional)
       // contentHeight: 600,    // Fixed content height (optional)
       // aspectRatio: 1.5,      // Width/height ratio (optional)
-      eventColor: '#6c4bb6',    // Default event background color
+      eventColor: 'var(--color-primary)',    // Default event background color
       eventTextColor: '#fff',   // Default event text color
 
       // 🧠 Interactivity

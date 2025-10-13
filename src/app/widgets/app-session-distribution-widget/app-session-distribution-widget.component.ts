@@ -42,7 +42,7 @@ export class AppSessionDistributionWidgetComponent {
     labels: ['Live Classes', 'Recorded Sessions', 'Breakout Rooms', 'One-on-One'],
     datasets: [{
       data: [45, 35, 15, 5],
-      backgroundColor: ['#6c4bb6', '#9c7ce8', '#c9b3f5', '#e6d7f5']
+      backgroundColor: ['#6750a0', '#9c7ce8', '#c9b3f5', '#e6d7f5']
     }]
   };
 

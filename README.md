@@ -163,7 +163,7 @@ src/
 The project uses Angular Material theming. Customize colors in `src/styles.scss`:
 
 ```scss
-$primary-color: #6c4bb6;        // Purple Primary
+$primary-color: #6750a0;        // Purple Primary
 $secondary-color: #ffffff;      // Pure white
 $accent-color: #FFFFFF;         // White background
 $background-color: #FFFFFF;     // White background

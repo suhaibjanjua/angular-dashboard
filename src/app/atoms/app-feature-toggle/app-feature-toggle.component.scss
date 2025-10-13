@@ -75,8 +75,8 @@
       margin-left: 16px;
       
       ::ng-deep .mat-mdc-slide-toggle {
-        --mdc-switch-selected-track-color: #6c4bb6;
-        --mdc-switch-selected-handle-color: #6c4bb6;
+        --mdc-switch-selected-track-color: var(--color-primary);
+        --mdc-switch-selected-handle-color: var(--color-primary);
         --mdc-switch-unselected-track-color: #e0e0e0;
         --mdc-switch-unselected-handle-color: #fff;
       }
@@ -180,8 +180,8 @@
       align-items: center;
       
       ::ng-deep .mat-mdc-slide-toggle {
-        --mdc-switch-selected-track-color: #6c4bb6;
-        --mdc-switch-selected-handle-color: #6c4bb6;
+        --mdc-switch-selected-track-color: var(--color-primary);
+        --mdc-switch-selected-handle-color: var(--color-primary);
         --mdc-switch-unselected-track-color: #e0e0e0;
         --mdc-switch-unselected-handle-color: #fff;
       }
@@ -298,8 +298,8 @@
           align-items: center;
           
           ::ng-deep .mat-mdc-slide-toggle {
-            --mdc-switch-selected-track-color: #6c4bb6;
-            --mdc-switch-selected-handle-color: #6c4bb6;
+            --mdc-switch-selected-track-color: var(--color-primary);
+            --mdc-switch-selected-handle-color: var(--color-primary);
             --mdc-switch-unselected-track-color: #e0e0e0;
             --mdc-switch-unselected-handle-color: #fff;
             transform: scale(0.85);

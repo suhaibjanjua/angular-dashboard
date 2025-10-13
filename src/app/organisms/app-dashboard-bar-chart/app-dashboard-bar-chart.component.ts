@@ -41,7 +41,7 @@ export class AppDashboardBarChartComponent {
     datasets: [
       {
         data: [100, 100, 100, 100],
-        backgroundColor: ['#6c4bb6', '#e0e0e0', '#6c4bb6', '#e0e0e0'],
+        backgroundColor: ['#6750a0', '#e0e0e0', '#6750a0', '#e0e0e0'],
         borderRadius: 6,
         barPercentage: 0.5,
         categoryPercentage: 0.7

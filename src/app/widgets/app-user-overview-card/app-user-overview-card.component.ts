@@ -27,7 +27,7 @@ export class AppUserOverviewCardComponent {
     datasets: [{
       label: 'User Count',
       data: [120, 400, 25],
-      backgroundColor: ['#6c4bb6', '#9c7ce8', '#c9b3f5']
+      backgroundColor: ['#6750a0', '#9c7ce8', '#c9b3f5']
     }]
   };
   public barChartOptions: ChartConfiguration['options'] = {

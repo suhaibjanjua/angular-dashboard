@@ -53,7 +53,7 @@ export class AppStackedBarChartComponent {
       {
         label: 'Teachers',
         data: [45, 52, 48, 61, 55, 67],
-        backgroundColor: '#6c4bb6',
+        backgroundColor: '#6750a0',
         borderRadius: 4,
         barPercentage: 0.6,
         categoryPercentage: 0.8

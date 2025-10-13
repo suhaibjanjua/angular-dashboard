@@ -75,7 +75,7 @@
           }
           
           .feature-count {
-            background: #6c4bb6;
+            background: var(--color-primary);
             color: white;
           }
         }
@@ -187,7 +187,7 @@
 
 // Badge styling
 ::ng-deep .mat-badge-content {
-  background: #6c4bb6 !important;
+  background: var(--color-primary) !important;
   color: white !important;
   font-size: 10px !important;
   font-weight: 600 !important;

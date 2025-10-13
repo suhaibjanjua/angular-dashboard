@@ -214,18 +214,18 @@
         margin: 0 !important;
 
         mat-icon {
-            color: #6c4bb6 !important;
+            color: var(--color-primary) !important;
             font-size: 16px !important;
             width: 16px !important;
             height: 16px !important;
         }
 
         .mat-mdc-chip-action-label {
-            color: #6c4bb6 !important;
+            color: var(--color-primary) !important;
         }
 
         .mdc-evolution-chip__action--primary::before {
-            border-color: #6c4bb6 !important;
+            border-color: var(--color-primary) !important;
         }
     }
 

@@ -18,7 +18,7 @@ import { AppButtonComponent } from '../../atoms/app-button/app-button.component'
         {{ option.label }}
       </mat-option>
     </mat-select>
-    <app-button label="Export" color="primary" type="button" variant="raised" icon="file_download" [matMenuTriggerFor]="exportMenu"></app-button>
+    <app-button label="Export" color="primary" type="button" variant="stroked" icon="file_download" [matMenuTriggerFor]="exportMenu"></app-button>
     <mat-menu #exportMenu="matMenu">
       <button mat-menu-item (click)="exportData('csv')">
         <mat-icon>description</mat-icon>

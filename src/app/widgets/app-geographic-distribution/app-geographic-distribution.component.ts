@@ -47,7 +47,7 @@ export class AppGeographicDistributionComponent {
     labels: this.regions.map(r => r.name),
     datasets: [{
       data: this.regions.map(r => r.users),
-      backgroundColor: ['#6c4bb6', '#9c7ce8', '#c9b3f5', '#e6d7f5', '#f3f0f8']
+      backgroundColor: ['#6750a0', '#9c7ce8', '#c9b3f5', '#e6d7f5', '#f3f0f8']
     }]
   };
 

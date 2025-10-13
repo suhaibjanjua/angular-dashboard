@@ -43,7 +43,7 @@ export class AppPeakUsageTimesComponent {
     datasets: [{
       label: 'Concurrent Users',
       data: [45, 120, 200, 285, 342, 310, 95, 60],
-      backgroundColor: '#6c4bb6',
+      backgroundColor: '#6750a0',
       borderRadius: 4
     }]
   };

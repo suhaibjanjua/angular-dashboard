@@ -44,7 +44,7 @@ export const LIGHT_THEME: Theme = {
   displayName: 'Light Theme',
   description: 'Clean and bright interface for day-time usage',
   colors: {
-    primary: '#6c4bb6',
+    primary: '#6750a0',
     primaryDark: '#5c3f9d',
     primaryLight: '#8b5cf6',
     primarySubtle: '#f3f0ff',
@@ -63,7 +63,7 @@ export const LIGHT_THEME: Theme = {
     borderDark: '#cbd5e1',
     sidebar: '#2d3748',
     sidebarHover: '#4a5568',
-    sidebarActive: '#6c4bb6',
+    sidebarActive: '#6750a0',
     success: '#10b981',
     warning: '#f59e0b',
     error: '#ef4444',

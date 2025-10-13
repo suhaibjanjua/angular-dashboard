@@ -68,8 +68,8 @@
 
 .sidebar-menu li.active {
   background: rgba(108, 75, 182, 0.15); // Light purple background for active
-  color: #6c4bb6; // Purple text for active
-  border-left: 3px solid #6c4bb6;
+  color: var(--color-primary); // Purple text for active
+  border-left: 3px solid var(--color-primary);
 }
 
 .sidebar-menu li:hover:not(.active) {

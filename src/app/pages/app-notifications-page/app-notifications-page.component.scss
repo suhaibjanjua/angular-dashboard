@@ -27,7 +27,7 @@
       color: var(--color-text);
 
       mat-icon {
-        color: #6c4bb6;
+        color: var(--color-primary);
       }
     }
   }
@@ -152,7 +152,7 @@
   }
 
   &.unread {
-    border-left: 4px solid #6c4bb6;
+    border-left: 4px solid var(--color-primary);
     background: #f8f7ff;
 
     &::before {
@@ -162,7 +162,7 @@
       top: 20px;
       width: 8px;
       height: 8px;
-      background-color: #6c4bb6;
+      background-color: var(--color-primary);
       border-radius: 50%;
       z-index: 1;
     }
@@ -286,7 +286,7 @@
     display: flex;
     align-items: center;
     gap: 4px;
-    color: #6c4bb6;
+    color: var(--color-primary);
     font-weight: 500;
 
     mat-icon {

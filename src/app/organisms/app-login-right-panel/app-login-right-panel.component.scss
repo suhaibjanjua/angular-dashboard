@@ -20,7 +20,7 @@
   border: none;
   background: transparent;
   font-size: 13px;
-  color: #6c4bb6;
+  color: var(--color-primary);
   font-family: 'Open Sans', sans-serif;
   cursor: pointer;
 }
@@ -32,6 +32,6 @@
   font-family: 'Open Sans', sans-serif;
 }
 .copyright a {
-  color: #6c4bb6;
+  color: var(--color-primary);
   text-decoration: underline;
 }

@@ -1,13 +1,60 @@
 @use '@angular/material' as mat;
+@include mat.core();
 
 // Import Google Fonts
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700&display=swap');
 @import url('https://fonts.googleapis.com/icon?family=Material+Icons');
 
+// Define custom purple palette
+$myapp-custom-purple: mat.m2-define-palette((
+  50: #f3edf7,
+  100: #e5dff0,
+  200: #d7d1e9,
+  300: #c9c3e2,
+  400: #bbb5db,
+  500: #6750a0, // ← main color
+  600: #5e489a,
+  700: #544092,
+  800: #4a388a,
+  900: #402f82,
+  A100: #d0bcff,
+  A200: #b69df8,
+  A400: #6750a0, // ← override accent
+  A700: #4f378b,
+  contrast: (
+    500: white,
+    600: white,
+    700: white,
+    800: white,
+    900: white,
+    A100: black,
+    A200: white,
+    A400: white,
+    A700: white,
+  )
+));
+
+// Apply custom palette
+$myapp-theme-primary: mat.m2-define-palette($myapp-custom-purple, A400, A100, A700);
+$myapp-theme-accent: mat.m2-define-palette($myapp-custom-purple);
+$myapp-theme-warn: mat.m2-define-palette(mat.$m2-red-palette);
+
+$myapp-theme: mat.m2-define-light-theme((
+  color: (
+    primary: $myapp-theme-primary,
+    accent: $myapp-theme-accent,
+    warn: $myapp-theme-warn,
+  )
+));
+
+// Apply theme
+@include mat.all-component-themes($myapp-theme);
+
+
 // CSS Custom Properties (Theme Variables)
 :root {
   // Default (Light) Theme Colors
-  --color-primary: #6c4bb6;
+  --color-primary: #6750a0;
   --color-primary-light: #8b5cf6;
   --color-primary-dark: #5b21b6;
   --color-primary-subtle: #f3f0ff;
@@ -29,7 +76,7 @@
   
   --color-sidebar: #2d3748;
   --color-sidebar-hover: #4a5568;
-  --color-sidebar-active: #6c4bb6;
+  --color-sidebar-active: #6750a0;
   
   --color-border: #e2e8f0;
   --color-border-light: #f1f5f9;

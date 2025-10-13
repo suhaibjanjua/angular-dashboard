@@ -314,7 +314,7 @@ describe('ThemeService', () => {
     it('should have correct light theme properties', () => {
       expect(LIGHT_THEME.id).toBe('light');
       expect(LIGHT_THEME.displayName).toBe('Light Theme');
-      expect(LIGHT_THEME.colors.primary).toBe('#6c4bb6');
+      expect(LIGHT_THEME.colors.primary).toBe('#6750a0');
       expect(LIGHT_THEME.colors.background).toBe('#ffffff');
       expect(LIGHT_THEME.colors.text).toBe('#1a202c');
     });

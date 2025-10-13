@@ -54,7 +54,7 @@ describe('AppFeatureToggleComponent', () => {
     component.feature = mockFeature;
     component.categoryId = 'test-category';
     component.disabled = false;
-    component.iconColor = '#6c4bb6';
+    component.iconColor = 'var(--color-primary)';
     
     fixture.detectChanges();
   });

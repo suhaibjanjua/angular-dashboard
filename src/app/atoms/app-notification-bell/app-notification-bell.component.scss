@@ -16,7 +16,7 @@
     transition: all 0.3s ease;
     
     &.has-notifications {
-      color: #6c4bb6;
+      color: var(--color-primary);
       animation: pulse 2s infinite;
     }
   }

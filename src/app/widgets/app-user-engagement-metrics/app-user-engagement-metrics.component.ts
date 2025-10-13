@@ -33,9 +33,9 @@ export class AppUserEngagementMetricsComponent {
     datasets: [{
       label: 'Current Week',
       data: [85, 78, 65, 90, 88, 82],
-      borderColor: '#6c4bb6',
+      borderColor: '#6750a0',
       backgroundColor: 'rgba(108, 75, 182, 0.2)',
-      pointBackgroundColor: '#6c4bb6'
+      pointBackgroundColor: '#6750a0'
     }]
   };
 
