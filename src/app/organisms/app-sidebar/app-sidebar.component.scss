@@ -72,7 +72,7 @@
   border-left: 3px solid var(--color-primary);
 }
 
-.sidebar-menu li:hover:not(.active) {
+.sidebar-menu li:hover:not(.active):not(.static-item) {
   background: rgba(108, 75, 182, 0.08); // Light purple hover
 }
 
@@ -86,10 +86,26 @@
   justify-content: center;
 }
 
+.menu-svg {
+  width: 32px;
+  height: 32px;
+  margin-right: 16px;
+  font-size: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .sidebar.collapsed .menu-icon {
   margin: 0 auto;
   display: block;
   font-size: 24px;
+  color: #fff !important;
+}
+
+.sidebar.collapsed .menu-svg {
+  margin: 0 auto;
+  display: block;
   color: #fff !important;
 }
 

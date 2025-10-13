@@ -1,13 +1,16 @@
 .logo-title {
   display: flex;
   align-items: center;
-}
 
-.brand-tagline {
-  margin-left: 12px;
-  font-size: 1.2rem;
-  font-weight: 700;
-  color: #212121;
-  letter-spacing: 1px;
-  text-transform: uppercase;
+  app-logo {
+    margin-right: 12px;
+  }
+
+  .brand-tagline {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #212121;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
 }

@@ -1,6 +1,12 @@
 <nav class="sidebar" [class.collapsed]="collapsed">
   <!-- Sidebar header removed: logo and collapse button now in top header -->
   <ul class="sidebar-menu">
+    <li class="static-item" routerLink="/dashboard">
+      <svg class="menu-svg">
+        <use xlink:href="assets/icons/app-sprite.svg#angular_logo"></use>
+      </svg>
+      <span *ngIf="!collapsed" class="menu-label">Angular Dashboard</span>
+    </li>
     <li *ngFor="let item of menu" [routerLink]="item.route" routerLinkActive="active">
       <mat-icon class="menu-icon">{{ item.icon }}</mat-icon>
       <span *ngIf="!collapsed" class="menu-label">{{ item.label }}</span>

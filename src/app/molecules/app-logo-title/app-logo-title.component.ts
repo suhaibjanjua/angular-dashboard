@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { AppLogoComponent } from '../../atoms/app-logo/app-logo.component';
 
 @Component({
@@ -8,4 +8,7 @@ import { AppLogoComponent } from '../../atoms/app-logo/app-logo.component';
   templateUrl: './app-logo-title.component.html',
   styleUrls: ['./app-logo-title.component.scss']
 })
-export class AppLogoTitleComponent {}
+export class AppLogoTitleComponent {
+  @Input({ required: true }) brandName!: string;
+  @Input() showLogo: boolean = false;
+}
