@@ -63,8 +63,9 @@ $myapp-theme: mat.m2-define-light-theme((
   --color-accent: #8b5cf6;
   
   --color-background: #ffffff;
-  --color-surface: #f8fafc;
-  --color-surface-hover: #f1f5f9;
+  --color-surface: #ffffff;
+  --color-surface-hover: rgba(0, 0, 0, 0.04);
+  // --color-surface-hover: #f1f5f9;
   --color-surface-selected: #e2e8f0;
   --color-surface-disabled: #f1f5f9;
   --color-hover: #f1f5f9;
@@ -108,7 +109,8 @@ $myapp-theme: mat.m2-define-light-theme((
   
   --color-background: #202123;
   --color-surface: #2E3033;
-  --color-surface-hover: #36373B;
+  --color-surface-hover: rgba(255, 255, 255, 0.08);
+  // --color-surface-hover: #36373B;
   --color-surface-selected: #36373B;
   --color-surface-disabled: #404040;
   --color-hover: #36373B;

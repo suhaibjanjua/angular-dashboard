@@ -93,7 +93,7 @@
       transition: background-color 0.2s ease;
       
       &:hover {
-        background: #f9f9f9;
+        background: var(--color-surface-hover);
       }
       
       .mat-mdc-cell {
@@ -109,7 +109,7 @@
       transition: background-color 0.2s ease;
       
       &:hover {
-        background: #f9f9f9 !important;
+        background: var(--color-surface-hover) !important;
       }
     }
   }
