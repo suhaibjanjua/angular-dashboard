@@ -41,9 +41,9 @@ import { ThemeService, Theme } from '../../services/theme.service';
 
       <!-- Submenu with all available themes -->
       <mat-menu #themeMenu="matMenu" class="theme-submenu" panelClass="theme-submenu-panel">
-        <div class="theme-header">
+        <!-- <div class="theme-header">
           <span class="theme-title">Choose Theme</span>
-        </div>
+        </div> -->
         
         <button 
           *ngFor="let theme of themeService.availableThemes"
